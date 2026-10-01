@@ -13,26 +13,33 @@
     font-family:Tahoma,Arial,sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:#080808;
     color:#fff;
 }
+
+/* HEADER */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
     height:72px;
-    background:#0c0c0c;
+    background:rgba(10,10,10,.96);
     border-bottom:1px solid #242424;
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 5%;
+    backdrop-filter:blur(10px);
 }
 
 .logo{
-    color:#ff1b1b;
+    color:#ff2020;
     font-size:25px;
     font-weight:900;
     letter-spacing:1px;
@@ -57,37 +64,38 @@ nav a:hover{
 .cart-btn{
     background:#151515;
     border:1px solid #333;
-    color:#fff;
+    color:white;
     padding:11px 17px;
     border-radius:8px;
     cursor:pointer;
+    transition:.2s;
 }
 
 .cart-btn:hover{
-    border-color:#ff1e1e;
+    border-color:#ff2020;
 }
 
 /* HERO */
 
 .hero{
-    min-height:350px;
+    min-height:360px;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    background:
-    radial-gradient(circle at center,rgba(255,20,20,.18),transparent 45%),
-    #080808;
     padding:60px 20px;
+    background:
+        radial-gradient(circle at center,rgba(255,20,20,.18),transparent 42%),
+        #080808;
 }
 
 .hero h1{
-    font-size:48px;
+    font-size:50px;
     margin-bottom:15px;
 }
 
 .hero h1 span{
-    color:#ff1d1d;
+    color:#ff2020;
 }
 
 .hero p{
@@ -98,8 +106,8 @@ nav a:hover{
 .hero-btn{
     display:inline-block;
     margin-top:25px;
-    background:#e91414;
-    color:#fff;
+    background:#e71919;
+    color:white;
     padding:14px 30px;
     border-radius:8px;
     text-decoration:none;
@@ -112,7 +120,7 @@ nav a:hover{
     transform:translateY(-2px);
 }
 
-/* CATEGORY */
+/* GENERAL */
 
 .section{
     width:90%;
@@ -129,9 +137,12 @@ nav a:hover{
     color:#ff2020;
 }
 
+/* CATEGORY */
+
 .categories{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    grid-template-columns:
+        repeat(auto-fit,minmax(145px,1fr));
     gap:14px;
 }
 
@@ -146,7 +157,7 @@ nav a:hover{
 }
 
 .category:hover{
-    border-color:#e51b1b;
+    border-color:#ff2020;
     transform:translateY(-4px);
     box-shadow:0 0 20px rgba(255,0,0,.12);
 }
@@ -158,18 +169,18 @@ nav a:hover{
 }
 
 .category .icon{
-    font-size:32px;
+    font-size:30px;
     margin-bottom:12px;
 }
 
 .category h3{
-    font-size:15px;
+    font-size:14px;
 }
 
 /* WEAPONS */
 
 .weapon-box{
-    margin-top:30px;
+    margin-top:35px;
 }
 
 .weapon-title{
@@ -190,7 +201,8 @@ nav a:hover{
 
 .weapons{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+    grid-template-columns:
+        repeat(auto-fill,minmax(145px,1fr));
     gap:12px;
 }
 
@@ -205,12 +217,12 @@ nav a:hover{
 }
 
 .weapon:hover{
-    border-color:#e51c1c;
+    border-color:#ff2020;
     transform:translateY(-3px);
 }
 
 .weapon.active{
-    border-color:#ff1c1c;
+    border-color:#ff2020;
     background:#190909;
 }
 
@@ -245,16 +257,21 @@ nav a:hover{
     outline:none;
 }
 
+.filters input{
+    min-width:240px;
+}
+
 .filters input:focus,
 .filters select:focus{
-    border-color:#e21b1b;
+    border-color:#ff2020;
 }
 
 /* PRODUCTS */
 
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    grid-template-columns:
+        repeat(auto-fill,minmax(230px,1fr));
     gap:18px;
 }
 
@@ -268,7 +285,7 @@ nav a:hover{
 
 .product:hover{
     transform:translateY(-5px);
-    border-color:#d91b1b;
+    border-color:#df1c1c;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
@@ -293,7 +310,7 @@ nav a:hover{
 
 .product-info h3{
     font-size:15px;
-    margin-bottom:10px;
+    margin-bottom:9px;
 }
 
 .wear{
@@ -322,6 +339,7 @@ nav a:hover{
     border-radius:7px;
     padding:10px;
     cursor:pointer;
+    font-weight:bold;
 }
 
 .buy:hover{
@@ -332,7 +350,7 @@ nav a:hover{
     width:42px;
     border:1px solid #333;
     background:#151515;
-    color:#fff;
+    color:white;
     border-radius:7px;
     cursor:pointer;
 }
@@ -342,7 +360,7 @@ nav a:hover{
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.82);
+    background:rgba(0,0,0,.84);
     display:none;
     align-items:center;
     justify-content:center;
@@ -357,6 +375,8 @@ nav a:hover{
 .modal-box{
     width:100%;
     max-width:550px;
+    max-height:90vh;
+    overflow:auto;
     background:#111;
     border:1px solid #333;
     border-radius:14px;
@@ -367,10 +387,14 @@ nav a:hover{
 .close{
     position:absolute;
     left:18px;
-    top:15px;
-    font-size:25px;
+    top:12px;
+    font-size:28px;
     color:#aaa;
     cursor:pointer;
+}
+
+.close:hover{
+    color:#fff;
 }
 
 .modal-img{
@@ -410,6 +434,10 @@ nav a:hover{
     color:white;
     cursor:pointer;
     font-weight:bold;
+}
+
+.full-btn:hover{
+    background:#ff2929;
 }
 
 /* CART */
@@ -480,7 +508,7 @@ footer strong{
     }
 
     .hero h1{
-        font-size:34px;
+        font-size:36px;
     }
 
     .section{
@@ -499,15 +527,24 @@ footer strong{
     .weapons{
         grid-template-columns:repeat(2,1fr);
     }
+
+    .filters input{
+        width:100%;
+        min-width:0;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
-    <div class="logo">WIZYY SHOP</div>
+    <div class="logo">
+        WIZYY SHOP
+    </div>
 
     <nav>
         <a href="#home">خانه</a>
@@ -516,11 +553,14 @@ footer strong{
     </nav>
 
     <button class="cart-btn" onclick="openCart()">
-        سبد خرید (<span id="cartCount">0</span>)
+        سبد خرید
+        (<span id="cartCount">0</span>)
     </button>
 
 </header>
 
+
+<!-- HERO -->
 
 <section class="hero" id="home">
 
@@ -531,7 +571,7 @@ footer strong{
         </h1>
 
         <p>
-            فروش اسکین‌های CS2 با قیمت مناسب
+            فروش اسکین‌های CS2
         </p>
 
         <a href="#weapons" class="hero-btn">
@@ -543,71 +583,204 @@ footer strong{
 </section>
 
 
+<!-- WEAPON SELECTOR -->
+
 <section class="section" id="weapons">
 
     <div class="section-title">
         انتخاب <span>نوع سلاح</span>
     </div>
 
+
     <div class="categories">
 
-        <div class="category active" onclick="selectCategory('Pistols',this)">
-            <div class="icon">🔫</div>
-            <h3>Pistols</h3>
+        <!-- ALL -->
+
+        <div
+            class="category active"
+            onclick="showAllWeapons(this)"
+        >
+
+            <div class="icon">
+                ★
+            </div>
+
+            <h3>
+                All Skins
+            </h3>
+
         </div>
 
-        <div class="category" onclick="selectCategory('Rifles',this)">
-            <div class="icon">🔫</div>
-            <h3>Rifles</h3>
+
+        <!-- PISTOLS -->
+
+        <div
+            class="category"
+            onclick="selectCategory('Pistols',this)"
+        >
+
+            <div class="icon">
+                🔫
+            </div>
+
+            <h3>
+                Pistols
+            </h3>
+
         </div>
 
-        <div class="category" onclick="selectCategory('SMGs',this)">
-            <div class="icon">⚡</div>
-            <h3>SMGs</h3>
+
+        <!-- RIFLES -->
+
+        <div
+            class="category"
+            onclick="selectCategory('Rifles',this)"
+        >
+
+            <div class="icon">
+                🔫
+            </div>
+
+            <h3>
+                Rifles
+            </h3>
+
         </div>
 
-        <div class="category" onclick="selectCategory('Snipers',this)">
-            <div class="icon">🎯</div>
-            <h3>Snipers</h3>
+
+        <!-- SMG -->
+
+        <div
+            class="category"
+            onclick="selectCategory('SMGs',this)"
+        >
+
+            <div class="icon">
+                ⚡
+            </div>
+
+            <h3>
+                SMGs
+            </h3>
+
         </div>
 
-        <div class="category" onclick="selectCategory('Shotguns',this)">
-            <div class="icon">💥</div>
-            <h3>Shotguns</h3>
+
+        <!-- SNIPERS -->
+
+        <div
+            class="category"
+            onclick="selectCategory('Snipers',this)"
+        >
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Snipers
+            </h3>
+
         </div>
 
-        <div class="category" onclick="selectCategory('Machineguns',this)">
-            <div class="icon">⚙</div>
-            <h3>Machineguns</h3>
+
+        <!-- SHOTGUNS -->
+
+        <div
+            class="category"
+            onclick="selectCategory('Shotguns',this)"
+        >
+
+            <div class="icon">
+                💥
+            </div>
+
+            <h3>
+                Shotguns
+            </h3>
+
         </div>
 
-        <div class="category" onclick="selectCategory('Knives',this)">
-            <div class="icon">🔪</div>
-            <h3>Knives</h3>
+
+        <!-- MACHINEGUNS -->
+
+        <div
+            class="category"
+            onclick="selectCategory('Machineguns',this)"
+        >
+
+            <div class="icon">
+                ⚙
+            </div>
+
+            <h3>
+                Machineguns
+            </h3>
+
+        </div>
+
+
+        <!-- KNIVES -->
+
+        <div
+            class="category"
+            onclick="selectCategory('Knives',this)"
+        >
+
+            <div class="icon">
+                🔪
+            </div>
+
+            <h3>
+                Knives
+            </h3>
+
         </div>
 
     </div>
 
 
+    <!-- WEAPON MODELS -->
+
     <div class="weapon-box">
 
         <div class="weapon-title">
-            <h2 id="categoryTitle">Pistols</h2>
-            <span>یک گان را انتخاب کن</span>
+
+            <h2 id="categoryTitle">
+                همه اسکین‌ها
+            </h2>
+
+            <span>
+                انتخاب یک گان برای فیلتر
+            </span>
+
         </div>
 
-        <div class="weapons" id="weaponList"></div>
+        <div
+            class="weapons"
+            id="weaponList"
+        ></div>
 
     </div>
 
 </section>
 
 
+<!-- SHOP -->
+
 <section class="section" id="shop">
 
     <div class="section-title">
-        اسکین‌های <span id="selectedWeaponText">Desert Eagle</span>
+
+        اسکین‌ها:
+        <span id="selectedWeaponText">
+            همه اسکین‌ها
+        </span>
+
     </div>
+
+
+    <!-- FILTERS -->
 
     <div class="filters">
 
@@ -618,59 +791,147 @@ footer strong{
             oninput="renderProducts()"
         >
 
-        <select id="wearFilter" onchange="renderProducts()">
 
-            <option value="all">همه Wear ها</option>
-            <option value="Factory New">Factory New</option>
-            <option value="Minimal Wear">Minimal Wear</option>
-            <option value="Field-Tested">Field-Tested</option>
-            <option value="Well-Worn">Well-Worn</option>
-            <option value="Battle-Scarred">Battle-Scarred</option>
+        <select
+            id="wearFilter"
+            onchange="renderProducts()"
+        >
+
+            <option value="all">
+                همه Wear ها
+            </option>
+
+            <option value="Factory New">
+                Factory New
+            </option>
+
+            <option value="Minimal Wear">
+                Minimal Wear
+            </option>
+
+            <option value="Field-Tested">
+                Field-Tested
+            </option>
+
+            <option value="Well-Worn">
+                Well-Worn
+            </option>
+
+            <option value="Battle-Scarred">
+                Battle-Scarred
+            </option>
 
         </select>
 
-        <select id="sortFilter" onchange="renderProducts()">
 
-            <option value="default">مرتب‌سازی</option>
-            <option value="low">ارزان‌ترین</option>
-            <option value="high">گران‌ترین</option>
+        <select
+            id="sortFilter"
+            onchange="renderProducts()"
+        >
+
+            <option value="default">
+                مرتب‌سازی
+            </option>
+
+            <option value="low">
+                ارزان‌ترین
+            </option>
+
+            <option value="high">
+                گران‌ترین
+            </option>
 
         </select>
 
     </div>
 
-    <div class="products" id="products"></div>
+
+    <!-- PRODUCTS -->
+
+    <div
+        class="products"
+        id="products"
+    ></div>
 
 </section>
 
 
 <!-- PRODUCT MODAL -->
 
-<div class="modal" id="productModal">
+<div
+    class="modal"
+    id="productModal"
+>
 
     <div class="modal-box">
 
-        <div class="close" onclick="closeModal('productModal')">×</div>
+        <div
+            class="close"
+            onclick="closeModal('productModal')"
+        >
+            ×
+        </div>
 
-        <img id="modalImg" class="modal-img">
+
+        <img
+            id="modalImg"
+            class="modal-img"
+        >
+
 
         <h2 id="modalName"></h2>
 
-        <div id="modalWear" class="wear"></div>
 
-        <div id="modalPrice" class="modal-price"></div>
+        <div
+            id="modalWeapon"
+            class="wear"
+        ></div>
 
-        <select class="modal-select" id="modalWearSelect">
 
-            <option>Factory New</option>
-            <option>Minimal Wear</option>
-            <option>Field-Tested</option>
-            <option>Well-Worn</option>
-            <option>Battle-Scarred</option>
+        <div
+            id="modalWear"
+            class="wear"
+        ></div>
+
+
+        <div
+            id="modalPrice"
+            class="modal-price"
+        ></div>
+
+
+        <select
+            class="modal-select"
+            id="modalWearSelect"
+        >
+
+            <option>
+                Factory New
+            </option>
+
+            <option>
+                Minimal Wear
+            </option>
+
+            <option>
+                Field-Tested
+            </option>
+
+            <option>
+                Well-Worn
+            </option>
+
+            <option>
+                Battle-Scarred
+            </option>
 
         </select>
 
-        <button class="full-btn" onclick="addFromModal()">
+
+        <button
+            class="full-btn"
+            onclick="addFromModal()"
+        >
             افزودن به سبد خرید
         </button>
 
@@ -681,23 +942,46 @@ footer strong{
 
 <!-- CART MODAL -->
 
-<div class="modal" id="cartModal">
+<div
+    class="modal"
+    id="cartModal"
+>
 
     <div class="modal-box">
 
-        <div class="close" onclick="closeModal('cartModal')">×</div>
+        <div
+            class="close"
+            onclick="closeModal('cartModal')"
+        >
+            ×
+        </div>
 
-        <h2>سبد خرید</h2>
+
+        <h2>
+            سبد خرید
+        </h2>
+
 
         <div id="cartItems"></div>
 
+
         <div class="total">
+
             مجموع:
-            <span id="cartTotal">0</span>
+
+            <span id="cartTotal">
+                0
+            </span>
+
             تومان
+
         </div>
 
-        <button class="full-btn" onclick="finalizeOrder()">
+
+        <button
+            class="full-btn"
+            onclick="finalizeOrder()"
+        >
             نهایی کردن سفارش
         </button>
 
@@ -706,10 +990,15 @@ footer strong{
 </div>
 
 
+<!-- FOOTER -->
+
 <footer>
 
     <p>
-        © 2026 <strong>WIZYY SHOP</strong>
+        © 2026
+        <strong>
+            WIZYY SHOP
+        </strong>
     </p>
 
     <p style="margin-top:10px">
@@ -721,9 +1010,9 @@ footer strong{
 
 <script>
 
-/* =========================
+/* =====================================
    WEAPONS
-========================= */
+===================================== */
 
 const weapons = {
 
@@ -969,43 +1258,11 @@ const weapons = {
 };
 
 
-/* =========================
+/* =====================================
    PRODUCTS
-========================= */
+===================================== */
 
 const products = [
-
-    {
-        name:"Desert Eagle | Printstream",
-        weapon:"Desert Eagle",
-        wear:"Field-Tested",
-        price:60000,
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
-    },
-
-    {
-        name:"Desert Eagle | Code Red",
-        weapon:"Desert Eagle",
-        wear:"Minimal Wear",
-        price:95000,
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
-    },
-
-    {
-        name:"USP-S | Printstream",
-        weapon:"USP-S",
-        wear:"Factory New",
-        price:300000,
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/61"
-    },
-
-    {
-        name:"Glock-18 | Water Elemental",
-        weapon:"Glock-18",
-        wear:"Minimal Wear",
-        price:95000,
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/4"
-    },
 
     {
         name:"AK-47 | Redline",
@@ -1024,6 +1281,15 @@ const products = [
     },
 
     {
+        name:"AK-47 | Neon Rider",
+        weapon:"AK-47",
+        wear:"Minimal Wear",
+        price:450000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+    },
+
+
+    {
         name:"M4A4 | Temukau",
         weapon:"M4A4",
         wear:"Minimal Wear",
@@ -1032,12 +1298,65 @@ const products = [
     },
 
     {
+        name:"M4A4 | Desolate Space",
+        weapon:"M4A4",
+        wear:"Field-Tested",
+        price:140000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/16"
+    },
+
+
+    {
         name:"M4A1-S | Printstream",
         weapon:"M4A1-S",
         wear:"Minimal Wear",
         price:480000,
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/60"
     },
+
+
+    {
+        name:"Desert Eagle | Printstream",
+        weapon:"Desert Eagle",
+        wear:"Field-Tested",
+        price:60000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
+    },
+
+    {
+        name:"Desert Eagle | Code Red",
+        weapon:"Desert Eagle",
+        wear:"Minimal Wear",
+        price:95000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
+    },
+
+
+    {
+        name:"USP-S | Printstream",
+        weapon:"USP-S",
+        wear:"Factory New",
+        price:300000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/61"
+    },
+
+    {
+        name:"USP-S | Cortex",
+        weapon:"USP-S",
+        wear:"Field-Tested",
+        price:110000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/61"
+    },
+
+
+    {
+        name:"Glock-18 | Water Elemental",
+        weapon:"Glock-18",
+        wear:"Minimal Wear",
+        price:95000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/4"
+    },
+
 
     {
         name:"AWP | Asiimov",
@@ -1055,6 +1374,7 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/9"
     },
 
+
     {
         name:"MP9 | Starlight Protector",
         weapon:"MP9",
@@ -1062,6 +1382,15 @@ const products = [
         price:70000,
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/34"
     },
+
+    {
+        name:"MAC-10 | Neon Rider",
+        weapon:"MAC-10",
+        wear:"Field-Tested",
+        price:80000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/17"
+    },
+
 
     {
         name:"Karambit | Doppler",
@@ -1082,145 +1411,334 @@ const products = [
 ];
 
 
-/* =========================
+/* =====================================
    VARIABLES
-========================= */
+===================================== */
 
-let currentCategory = "Pistols";
-let selectedWeapon = "Desert Eagle";
+let currentCategory = "all";
+
+let selectedWeapon = "all";
+
 let cart = [];
+
 let currentProduct = null;
 
 
-/* =========================
-   CATEGORY
-========================= */
+/* =====================================
+   SHOW ALL
+===================================== */
 
-function selectCategory(category, element){
+function showAllWeapons(element){
 
-    currentCategory = category;
+    currentCategory = "all";
 
-    document.querySelectorAll(".category")
-        .forEach(x => x.classList.remove("active"));
+    selectedWeapon = "all";
+
+
+    document
+        .querySelectorAll(".category")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
+
 
     element.classList.add("active");
 
-    document.getElementById("categoryTitle").textContent = category;
 
-    renderWeapons(category);
-}
+    document.getElementById(
+        "categoryTitle"
+    ).textContent = "همه اسکین‌ها";
 
 
-/* =========================
-   WEAPONS
-========================= */
+    document.getElementById(
+        "selectedWeaponText"
+    ).textContent = "همه اسکین‌ها";
 
-function renderWeapons(category){
 
-    const list = document.getElementById("weaponList");
-
-    list.innerHTML = "";
-
-    weapons[category].forEach((weapon,index)=>{
-
-        const div = document.createElement("div");
-
-        div.className =
-            "weapon " +
-            (index === 0 ? "active" : "");
-
-        div.innerHTML = `
-
-            <img src="${weapon.image}" alt="${weapon.name}">
-
-            <div class="weapon-name">
-                ${weapon.name}
-            </div>
-
-        `;
-
-        div.onclick = function(){
-
-            document.querySelectorAll(".weapon")
-                .forEach(x => x.classList.remove("active"));
-
-            div.classList.add("active");
-
-            selectedWeapon = weapon.name;
-
-            document.getElementById("selectedWeaponText")
-                .textContent = weapon.name;
-
-            renderProducts();
-
-            document.getElementById("shop")
-                .scrollIntoView({
-                    behavior:"smooth"
-                });
-        };
-
-        list.appendChild(div);
-
-    });
-
-    selectedWeapon = weapons[category][0].name;
-
-    document.getElementById("selectedWeaponText")
-        .textContent = selectedWeapon;
+    renderWeapons("all");
 
     renderProducts();
 }
 
 
-/* =========================
-   PRODUCTS
-========================= */
+/* =====================================
+   SELECT CATEGORY
+===================================== */
+
+function selectCategory(category,element){
+
+    currentCategory = category;
+
+
+    document
+        .querySelectorAll(".category")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
+
+
+    element.classList.add("active");
+
+
+    document.getElementById(
+        "categoryTitle"
+    ).textContent = category;
+
+
+    renderWeapons(category);
+}
+
+
+/* =====================================
+   RENDER WEAPONS
+===================================== */
+
+function renderWeapons(category){
+
+    const list =
+        document.getElementById(
+            "weaponList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if(category === "all"){
+
+        list.innerHTML = `
+
+            <div
+                class="weapon active"
+                onclick="selectAllWeapon(this)"
+            >
+
+                <div style="
+                    font-size:35px;
+                    padding:18px;
+                ">
+                    ★
+                </div>
+
+                <div class="weapon-name">
+                    همه گان‌ها
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    weapons[category].forEach(
+        (weapon,index)=>{
+
+            const div =
+                document.createElement("div");
+
+
+            div.className =
+                "weapon";
+
+
+            div.innerHTML = `
+
+                <img
+                    src="${weapon.image}"
+                    alt="${weapon.name}"
+                >
+
+                <div class="weapon-name">
+                    ${weapon.name}
+                </div>
+
+            `;
+
+
+            div.onclick = function(){
+
+                document
+                    .querySelectorAll(".weapon")
+                    .forEach(x =>
+                        x.classList.remove("active")
+                    );
+
+
+                div.classList.add("active");
+
+
+                selectedWeapon =
+                    weapon.name;
+
+
+                document.getElementById(
+                    "selectedWeaponText"
+                ).textContent =
+                    weapon.name;
+
+
+                renderProducts();
+
+
+                document.getElementById(
+                    "shop"
+                ).scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            };
+
+
+            list.appendChild(div);
+
+        }
+    );
+
+
+    /*
+      وقتی فقط دسته انتخاب شده،
+      همه گان‌های آن دسته نمایش داده می‌شوند.
+    */
+
+    selectedWeapon = "category";
+
+
+    renderProducts();
+}
+
+
+/* =====================================
+   ALL WEAPONS BUTTON
+===================================== */
+
+function selectAllWeapon(element){
+
+    selectedWeapon = "all";
+
+
+    document
+        .querySelectorAll(".weapon")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
+
+
+    element.classList.add("active");
+
+
+    document.getElementById(
+        "selectedWeaponText"
+    ).textContent = "همه اسکین‌ها";
+
+
+    renderProducts();
+}
+
+
+/* =====================================
+   RENDER PRODUCTS
+===================================== */
 
 function renderProducts(){
 
     const container =
-        document.getElementById("products");
+        document.getElementById(
+            "products"
+        );
+
 
     const search =
-        document.getElementById("search").value
-        .toLowerCase();
+        document.getElementById(
+            "search"
+        ).value.toLowerCase();
+
 
     const wear =
-        document.getElementById("wearFilter").value;
+        document.getElementById(
+            "wearFilter"
+        ).value;
+
 
     const sort =
-        document.getElementById("sortFilter").value;
+        document.getElementById(
+            "sortFilter"
+        ).value;
 
 
-    let result = products.filter(product => {
+    let result =
+        products.filter(product=>{
 
-        const weaponMatch =
-            product.weapon === selectedWeapon;
+            let weaponMatch = true;
 
-        const searchMatch =
-            product.name.toLowerCase()
-            .includes(search);
 
-        const wearMatch =
-            wear === "all" ||
-            product.wear === wear;
+            if(selectedWeapon === "all"){
 
-        return weaponMatch &&
-               searchMatch &&
-               wearMatch;
+                weaponMatch = true;
 
-    });
+            }
 
+            else if(selectedWeapon === "category"){
+
+                const categoryWeapons =
+                    weapons[currentCategory]
+                    .map(x => x.name);
+
+                weaponMatch =
+                    categoryWeapons.includes(
+                        product.weapon
+                    );
+
+            }
+
+            else{
+
+                weaponMatch =
+                    product.weapon ===
+                    selectedWeapon;
+
+            }
+
+
+            const searchMatch =
+                product.name
+                .toLowerCase()
+                .includes(search);
+
+
+            const wearMatch =
+                wear === "all" ||
+                product.wear === wear;
+
+
+            return (
+                weaponMatch &&
+                searchMatch &&
+                wearMatch
+            );
+
+        });
+
+
+    /* SORT */
 
     if(sort === "low"){
 
-        result.sort((a,b)=>a.price-b.price);
+        result.sort(
+            (a,b)=>
+                a.price-b.price
+        );
 
     }
 
+
     if(sort === "high"){
 
-        result.sort((a,b)=>b.price-a.price);
+        result.sort(
+            (a,b)=>
+                b.price-a.price
+        );
 
     }
 
@@ -1239,7 +1757,7 @@ function renderProducts(){
                 color:#777;
             ">
 
-                برای این گان هنوز اسکینی ثبت نشده.
+                اسکینی برای نمایش پیدا نشد.
 
             </div>
 
@@ -1252,9 +1770,14 @@ function renderProducts(){
     result.forEach(product=>{
 
         const card =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        card.className = "product";
+
+        card.className =
+            "product";
+
 
         card.innerHTML = `
 
@@ -1267,20 +1790,31 @@ function renderProducts(){
 
             </div>
 
+
             <div class="product-info">
 
                 <h3>
                     ${product.name}
                 </h3>
 
+
                 <div class="wear">
+
+                    ${product.weapon}
+                    |
                     ${product.wear}
+
                 </div>
 
+
                 <div class="price">
+
                     ${product.price.toLocaleString("fa-IR")}
+
                     تومان
+
                 </div>
+
 
                 <div class="product-actions">
 
@@ -1290,6 +1824,7 @@ function renderProducts(){
                     >
                         مشاهده و خرید
                     </button>
+
 
                     <button
                         class="favorite"
@@ -1304,6 +1839,7 @@ function renderProducts(){
 
         `;
 
+
         container.appendChild(card);
 
     });
@@ -1311,72 +1847,123 @@ function renderProducts(){
 }
 
 
-/* =========================
+/* =====================================
    PRODUCT MODAL
-========================= */
+===================================== */
 
 function openProduct(name){
 
     currentProduct =
-        products.find(x => x.name === name);
+        products.find(
+            x => x.name === name
+        );
+
 
     if(!currentProduct) return;
 
-    document.getElementById("modalImg").src =
+
+    document.getElementById(
+        "modalImg"
+    ).src =
         currentProduct.image;
 
-    document.getElementById("modalName").textContent =
+
+    document.getElementById(
+        "modalName"
+    ).textContent =
         currentProduct.name;
 
-    document.getElementById("modalWear").textContent =
+
+    document.getElementById(
+        "modalWeapon"
+    ).textContent =
+        "Weapon: " +
+        currentProduct.weapon;
+
+
+    document.getElementById(
+        "modalWear"
+    ).textContent =
+        "Wear: " +
         currentProduct.wear;
 
-    document.getElementById("modalPrice").textContent =
-        currentProduct.price.toLocaleString("fa-IR")
-        + " تومان";
 
-    document.getElementById("modalWearSelect").value =
+    document.getElementById(
+        "modalPrice"
+    ).textContent =
+        currentProduct.price
+        .toLocaleString("fa-IR")
+        +
+        " تومان";
+
+
+    document.getElementById(
+        "modalWearSelect"
+    ).value =
         currentProduct.wear;
 
-    document.getElementById("productModal")
-        .classList.add("show");
+
+    document.getElementById(
+        "productModal"
+    ).classList.add("show");
 
 }
 
 
 function addFromModal(){
 
-    if(!currentProduct) return;
+    if(!currentProduct)
+        return;
 
-    addToCart(currentProduct.name);
 
-    closeModal("productModal");
+    addToCart(
+        currentProduct.name
+    );
+
+
+    closeModal(
+        "productModal"
+    );
 
 }
 
 
-/* =========================
+/* =====================================
    CART
-========================= */
+===================================== */
 
 function addToCart(name){
 
     const product =
-        products.find(x => x.name === name);
+        products.find(
+            x => x.name === name
+        );
 
-    if(!product) return;
+
+    if(!product)
+        return;
+
 
     cart.push(product);
 
+
     updateCart();
+
+
+    alert(
+        product.name +
+        " به سبد خرید اضافه شد."
+    );
 
 }
 
 
 function updateCart(){
 
-    document.getElementById("cartCount")
-        .textContent = cart.length;
+    document.getElementById(
+        "cartCount"
+    ).textContent =
+        cart.length;
 
 }
 
@@ -1384,9 +1971,13 @@ function updateCart(){
 function openCart(){
 
     const container =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
+
 
     container.innerHTML = "";
+
 
     let total = 0;
 
@@ -1408,56 +1999,86 @@ function openCart(){
     }
 
 
-    cart.forEach((product,index)=>{
+    cart.forEach(
+        (product,index)=>{
 
-        total += product.price;
+            total += product.price;
 
-        const item =
-            document.createElement("div");
 
-        item.className = "cart-item";
+            const item =
+                document.createElement(
+                    "div"
+                );
 
-        item.innerHTML = `
 
-            <img src="${product.image}">
+            item.className =
+                "cart-item";
 
-            <div class="cart-item-info">
 
-                <div>
-                    ${product.name}
+            item.innerHTML = `
+
+                <img
+                    src="${product.image}"
+                >
+
+
+                <div
+                    class="cart-item-info"
+                >
+
+                    <div>
+                        ${product.name}
+                    </div>
+
+
+                    <small
+                        style="color:#888"
+                    >
+                        ${product.wear}
+                    </small>
+
+
+                    <div
+                        style="
+                        color:#ff2222;
+                        margin-top:5px;
+                        "
+                    >
+
+                        ${product.price.toLocaleString("fa-IR")}
+
+                        تومان
+
+                    </div>
+
                 </div>
 
-                <small style="color:#888">
-                    ${product.wear}
-                </small>
 
-                <div style="color:#ff2222;margin-top:5px">
-                    ${product.price.toLocaleString("fa-IR")}
-                    تومان
-                </div>
+                <button
+                    class="remove"
+                    onclick="removeCart(${index})"
+                >
+                    حذف
+                </button>
 
-            </div>
-
-            <button
-                class="remove"
-                onclick="removeCart(${index})"
-            >
-                حذف
-            </button>
-
-        `;
-
-        container.appendChild(item);
-
-    });
+            `;
 
 
-    document.getElementById("cartTotal")
-        .textContent =
+            container.appendChild(item);
+
+        }
+    );
+
+
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
         total.toLocaleString("fa-IR");
 
-    document.getElementById("cartModal")
-        .classList.add("show");
+
+    document.getElementById(
+        "cartModal"
+    ).classList.add("show");
 
 }
 
@@ -1473,15 +2094,17 @@ function removeCart(index){
 }
 
 
-/* =========================
-   TELEGRAM ORDER
-========================= */
+/* =====================================
+   TELEGRAM
+===================================== */
 
 function finalizeOrder(){
 
     if(cart.length === 0){
 
-        alert("سبد خرید خالی است.");
+        alert(
+            "سبد خرید خالی است."
+        );
 
         return;
     }
@@ -1494,31 +2117,41 @@ function finalizeOrder(){
     let total = 0;
 
 
-    cart.forEach((product,index)=>{
+    cart.forEach(
+        (product,index)=>{
 
-        total += product.price;
+            total +=
+                product.price;
 
-        message +=
-            `${index+1}. ${product.name} | ${product.wear} | ${product.price.toLocaleString()} تومان%0A`;
 
-    });
+            message +=
+
+                `${index+1}. ` +
+                `${product.name} | ` +
+                `${product.wear} | ` +
+                `${product.price.toLocaleString()} تومان%0A`;
+
+        }
+    );
 
 
     message +=
-        `%0Aمجموع: ${total.toLocaleString()} تومان`;
+        `%0Aمجموع: ` +
+        `${total.toLocaleString()} تومان`;
 
 
     window.open(
-        "https://t.me/WizyyShop?text=" + message,
+        "https://t.me/WizyyShop?text=" +
+        message,
         "_blank"
     );
 
 }
 
 
-/* =========================
-   MODAL
-========================= */
+/* =====================================
+   MODALS
+===================================== */
 
 function closeModal(id){
 
@@ -1528,22 +2161,37 @@ function closeModal(id){
 }
 
 
-window.onclick = function(event){
+window.onclick =
+function(event){
 
-    if(event.target.classList.contains("modal")){
+    if(
+        event.target.classList
+        .contains("modal")
+    ){
 
-        event.target.classList.remove("show");
+        event.target
+            .classList
+            .remove("show");
 
     }
 
 };
 
 
-/* =========================
+/* =====================================
    START
-========================= */
+===================================== */
 
-renderWeapons("Pistols");
+/*
+   مهم:
+   سایت از اول همه اسکین‌ها را نشان می‌دهد.
+*/
+
+selectedWeapon = "all";
+
+currentCategory = "all";
+
+renderProducts();
 
 </script>
 
