@@ -1596,31 +1596,158 @@ footer{
 
 
 /* =========================================================
+   PROFILE SYSTEM
+========================================================= */
+function escapeHtml(value){
+    return String(value == null ? "" : value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function getCurrentProfile(){
+    try{
+        return JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)) || null;
+    }catch(e){ return null; }
+}
+
+function getProfiles(){
+    try{
+        return JSON.parse(localStorage.getItem(PROFILES_STORAGE_KEY)) || [];
+    }catch(e){ return []; }
+}
+
+function saveProfiles(profiles){
+    localStorage.setItem(PROFILES_STORAGE_KEY,JSON.stringify(profiles));
+}
+
+function isProfileComplete(){
+    const profile=getCurrentProfile();
+    return !!(
+        profile &&
+        profile.name &&
+        profile.name.trim() &&
+        profile.tradeLink &&
+        /^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(profile.tradeLink)
+    );
+}
+
+function generateCaptcha(){
+    const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    currentCaptcha="";
+    for(let i=0;i<5;i++) currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
+    const box=document.getElementById("captchaBox");
+    if(box) box.textContent=currentCaptcha;
+}
+
+function openProfile(){
+    const profile=getCurrentProfile();
+    document.getElementById("profileName").value=profile?.name || "";
+    document.getElementById("profileTradeLink").value=profile?.tradeLink || "";
+    document.getElementById("profilePhone").value=profile?.phone || "";
+    document.getElementById("profileTelegram").value=profile?.telegram || "";
+    profileImageData=profile?.image || DEFAULT_AVATAR;
+    document.getElementById("profileAvatarPreview").src=profileImageData;
+    document.getElementById("profileError").textContent="";
+    document.getElementById("captchaInput").value="";
+    generateCaptcha();
+    document.getElementById("profileModal").classList.add("show");
+}
+
+function closeProfile(){
+    document.getElementById("profileModal").classList.remove("show");
+}
+
+function closeProfileOutside(event){
+    if(event.target.id==="profileModal") closeProfile();
+}
+
+function closeProfileRequired(){
+    document.getElementById("profileRequiredModal").classList.remove("show");
+}
+
+function showProfileRequired(){
+    document.getElementById("profileRequiredModal").classList.add("show");
+}
+
+function previewProfileImage(event){
+    const file=event.target.files && event.target.files[0];
+    if(!file) return;
+    if(file.size > 2*1024*1024){
+        document.getElementById("profileError").textContent="Profile picture must be 2MB or smaller.";
+        event.target.value="";
+        return;
+    }
+    const reader=new FileReader();
+    reader.onload=function(){
+        profileImageData=reader.result;
+        document.getElementById("profileAvatarPreview").src=profileImageData;
+        document.getElementById("profileError").textContent="";
+    };
+    reader.readAsDataURL(file);
+}
+
+function saveProfile(){
+    const name=document.getElementById("profileName").value.trim();
+    const tradeLink=document.getElementById("profileTradeLink").value.trim();
+    const phone=document.getElementById("profilePhone").value.trim();
+    const telegram=document.getElementById("profileTelegram").value.trim();
+    const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
+    const error=document.getElementById("profileError");
+
+    if(!name){ error.textContent="Please enter your name."; return; }
+    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
+        error.textContent="Please enter a valid Steam Trade Link."; return;
+    }
+    if(captcha!==currentCaptcha){
+        error.textContent="Captcha is incorrect.";
+        generateCaptcha();
+        document.getElementById("captchaInput").value="";
+        return;
+    }
+
+    const old=getCurrentProfile();
+    const profile={
+        id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
+        name:name,
+        tradeLink:tradeLink,
+        phone:phone,
+        telegram:telegram,
+        image:profileImageData || DEFAULT_AVATAR,
+        createdAt:old?.createdAt || new Date().toLocaleString("en-US"),
+        updatedAt:new Date().toLocaleString("en-US")
+    };
+
+    localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
+    const profiles=getProfiles();
+    const idx=profiles.findIndex(x=>x.id===profile.id);
+    if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
+    saveProfiles(profiles);
+    updateHeaderAvatar();
+    closeProfile();
+}
+
+function updateHeaderAvatar(){
+    const img=document.getElementById("headerAvatar");
+    if(img) img.src=(getCurrentProfile()?.image || DEFAULT_AVATAR);
+}
+
+function registerLogoClick(){
+    logoClickCount++;
+    clearTimeout(logoClickTimer);
+    logoClickTimer=setTimeout(function(){logoClickCount=0;},900);
+    if(logoClickCount>=5){
+        logoClickCount=0;
+        openAdminLogin();
+    }
+}
+
+/* =========================================================
    ADMIN PANEL
 ========================================================= */
 
-.admin-button{
-    position:absolute;
-    left:0;
-    top:50%;
-    transform:translateY(-50%);
-    background:#151515;
-    color:#aaa;
-    border:1px solid #3c3c3c;
-    padding:11px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:1px;
-    transition:.2s;
-}
-.admin-button:hover{
-    color:#fff;
-    background:#e00000;
-    border-color:#ff3333;
-    box-shadow:0 0 18px rgba(224,0,0,.22);
-}
 
 .admin-login-box{
     max-width:430px;
@@ -1816,6 +1943,61 @@ footer{
         grid-template-columns:1fr;
     }
 }
+
+
+.profile-button{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#151515;
+    color:#ddd;
+    border:1px solid #3c3c3c;
+    padding:7px 11px 7px 7px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    transition:.2s;
+}
+.profile-button img{
+    width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #555;
+}
+.profile-button:hover{background:#e00000;border-color:#ff3333;color:#fff;}
+.profile-form{display:grid;gap:10px;}
+.profile-field{display:grid;gap:6px;}
+.profile-field label{font-size:10px;color:#888;letter-spacing:1px;font-weight:bold;}
+.profile-field input{width:100%;height:44px;background:#111;color:#fff;border:1px solid #3c3c3c;border-radius:8px;padding:0 13px;outline:none;}
+.profile-field input:focus{border-color:#e00000;box-shadow:0 0 0 2px rgba(224,0,0,.08);}
+.profile-help{font-size:10px;color:#777;line-height:1.6;}
+.profile-avatar-row{display:flex;align-items:center;gap:14px;}
+.profile-avatar-preview{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #444;background:#111;}
+.profile-file{font-size:10px;color:#aaa;}
+.captcha-row{display:flex;gap:8px;align-items:center;}
+.captcha-box{min-width:130px;height:44px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#252525 0,#252525 5px,#171717 5px,#171717 10px);border:1px solid #555;border-radius:8px;color:#fff;font-weight:1000;letter-spacing:5px;font-size:17px;text-decoration:line-through;}
+.captcha-refresh{height:44px;padding:0 12px;background:#222;color:#ddd;border:1px solid #444;border-radius:8px;cursor:pointer;font-weight:bold;}
+.profile-error{min-height:18px;color:#ff4444;font-size:11px;font-weight:bold;}
+.profile-required-box{text-align:center;padding:10px 0 2px;}
+.profile-required-icon{width:72px;height:72px;border:4px solid #e00000;border-radius:50%;margin:0 auto 16px;position:relative;box-shadow:0 0 25px rgba(224,0,0,.2);animation:profilePop .25s ease;}
+.profile-required-icon:before,.profile-required-icon:after{content:"";position:absolute;left:31px;top:14px;width:4px;height:38px;background:#e00000;border-radius:4px;transform:rotate(45deg);}
+.profile-required-icon:after{transform:rotate(-45deg);}
+@keyframes profilePop{from{transform:scale(.65);opacity:.2}to{transform:scale(1);opacity:1}}
+.profile-required-title{font-size:18px;font-weight:1000;color:#fff;letter-spacing:1px;}
+.profile-required-text{font-size:11px;color:#888;margin:8px 0 18px;}
+.admin-profiles-title{font-size:12px;color:#888;letter-spacing:2px;margin:22px 0 10px;font-weight:900;}
+.admin-profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:18px;}
+.admin-profile-card{display:flex;gap:12px;background:#151515;border:1px solid #303030;border-radius:9px;padding:12px;}
+.admin-profile-card img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid #555;background:#0b0b0b;flex:0 0 auto;}
+.admin-profile-name{font-weight:900;margin-bottom:6px;}
+.admin-profile-line{font-size:10px;color:#aaa;line-height:1.7;word-break:break-word;}
+.admin-profile-line b{color:#777;}
+.admin-profile-date{font-size:9px;color:#666;margin-top:5px;}
+.admin-order-profile{margin:10px 0;padding:10px;background:#101010;border:1px solid #292929;border-radius:7px;font-size:10px;color:#aaa;line-height:1.8;}
+@media(max-width:700px){.profile-button{position:relative;right:auto;top:auto;transform:none;padding:5px 7px;font-size:8px}.profile-button img{width:25px;height:25px}.cart-button{position:relative;left:auto;top:auto;transform:none;padding:8px 10px;font-size:9px}.header-inner{justify-content:space-between}.logo-area{text-align:center}.admin-profiles{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -2400,6 +2582,69 @@ footer{
         <h2>PROFILE REQUIRED</h2>
         <p>Please complete your profile before ordering a skin.</p>
         <button class="profile-required-btn" onclick="closeProfileRequired();openProfile();">COMPLETE PROFILE</button>
+    </div>
+</div>
+
+<!-- =========================================================
+     PROFILE REQUIRED
+========================================================= -->
+<div id="profileRequiredModal" class="modal">
+    <div class="modal-content" style="max-width:430px;">
+        <div class="profile-required-box">
+            <div class="profile-required-icon"></div>
+            <div class="profile-required-title">PROFILE REQUIRED</div>
+            <div class="profile-required-text">PLEASE COMPLETE YOUR PROFILE</div>
+            <button class="finalize" onclick="closeProfileRequired();openProfile();">COMPLETE PROFILE</button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================
+     PROFILE MODAL
+========================================================= -->
+<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
+    <div class="modal-content" style="max-width:520px;">
+        <div class="modal-header">
+            <h2>YOUR PROFILE</h2>
+            <button class="close" onclick="closeProfile()">×</button>
+        </div>
+        <div class="profile-form">
+            <div class="profile-avatar-row">
+                <img id="profileAvatarPreview" class="profile-avatar-preview" src="" alt="Profile">
+                <div>
+                    <div style="font-weight:bold;margin-bottom:7px;">Profile Picture</div>
+                    <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
+                    <div class="profile-help">Optional. A default avatar is used if you do not choose one.</div>
+                </div>
+            </div>
+            <div class="profile-field">
+                <label>NAME *</label>
+                <input id="profileName" type="text" placeholder="Your name">
+            </div>
+            <div class="profile-field">
+                <label>STEAM TRADE LINK *</label>
+                <input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=...">
+                <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
+            </div>
+            <div class="profile-field">
+                <label>PHONE (OPTIONAL)</label>
+                <input id="profilePhone" type="text" placeholder="Phone number">
+            </div>
+            <div class="profile-field">
+                <label>TELEGRAM ID (OPTIONAL)</label>
+                <input id="profileTelegram" type="text" placeholder="@username">
+            </div>
+            <div class="profile-field">
+                <label>CAPTCHA *</label>
+                <div class="captcha-row">
+                    <div id="captchaBox" class="captcha-box">-----</div>
+                    <button class="captcha-refresh" type="button" onclick="generateCaptcha()">REFRESH</button>
+                </div>
+                <input id="captchaInput" type="text" placeholder="Enter captcha">
+            </div>
+            <div id="profileError" class="profile-error"></div>
+            <button class="finalize" onclick="saveProfile()">SAVE PROFILE</button>
+        </div>
     </div>
 </div>
 
@@ -3513,7 +3758,7 @@ function saveProfile(){
     const error=document.getElementById("profileError");
 
     if(!name){ error.textContent="Please enter your name."; return; }
-    if(!/^https?:\\/\\/steamcommunity\\.com\\/tradeoffer\\/new\\/\\?/i.test(tradeLink)){
+    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
         error.textContent="Please enter a valid Steam Trade Link."; return;
     }
     if(captcha!==currentCaptcha){
@@ -4178,7 +4423,43 @@ function renderAdminProfiles(){
     });
 }
 
+function renderAdminProfiles(){
+    const container=document.getElementById("adminProfiles");
+    if(!container) return;
+    const profiles=getProfiles();
+    container.innerHTML="";
+    if(profiles.length===0){
+        container.innerHTML='<div class="admin-empty">No customer profiles saved on this browser yet.</div>';
+        return;
+    }
+    profiles.forEach(function(profile){
+        const card=document.createElement("div");
+        card.className="admin-profile-card";
+        card.innerHTML=`
+            <img src="${profile.image || DEFAULT_AVATAR}" alt="Profile">
+            <div>
+                <div class="admin-profile-name">${escapeHtml(profile.name || "Unnamed")}</div>
+                <div class="admin-profile-line"><b>Trade:</b> ${escapeHtml(profile.tradeLink || "-")}</div>
+                <div class="admin-profile-line"><b>Phone:</b> ${escapeHtml(profile.phone || "-")}</div>
+                <div class="admin-profile-line"><b>Telegram:</b> ${escapeHtml(profile.telegram || "-")}</div>
+                <div class="admin-profile-date">Updated: ${escapeHtml(profile.updatedAt || profile.createdAt || "-")}</div>
+            </div>`;
+        container.appendChild(card);
+    });
+}
+
+function clearAllProfiles(){
+    const profiles=getProfiles();
+    if(!profiles.length) return;
+    if(!confirm("Delete ALL customer profiles? This cannot be undone.")) return;
+    localStorage.removeItem(PROFILES_STORAGE_KEY);
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+    updateHeaderAvatar();
+    renderAdminPanel();
+}
+
 function renderAdminPanel(){
+    renderAdminProfiles();
     const orders = getOrders();
 
     const paidOrders =
@@ -4247,6 +4528,14 @@ function renderAdminPanel(){
                 ${itemText}
             </div>
 
+            ${order.profile ? `
+            <div class="admin-order-profile">
+                <div><b>CUSTOMER:</b> ${escapeHtml(order.profile.name || "-")}</div>
+                <div><b>TRADE:</b> ${escapeHtml(order.profile.tradeLink || "-")}</div>
+                <div><b>PHONE:</b> ${escapeHtml(order.profile.phone || "-")}</div>
+                <div><b>TELEGRAM:</b> ${escapeHtml(order.profile.telegram || "-")}</div>
+            </div>` : ""}
+
             <div class="admin-order-total">
                 ${formatPrice(order.total)}
             </div>
@@ -4310,6 +4599,7 @@ document
     );
 
 
+updateHeaderAvatar();
 renderProducts();
 
 updateCart();
