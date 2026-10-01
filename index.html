@@ -3,20 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WIZZY SKIN - CS2 Skin Store</title>
+<title>WIZZY SHOP - CS2 Skin Store</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#070707;
-    color:#fff;
+    color:#f5f5f5;
     min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #303030 0%,
+            #171717 24%,
+            #0c0c0c 55%,
+            #070707 100%
+        );
 }
 
 body::before{
@@ -24,22 +41,42 @@ body::before{
     position:fixed;
     inset:0;
     pointer-events:none;
+
     background:
-        radial-gradient(circle at 50% 0%,rgba(210,0,0,.18),transparent 32%),
-        radial-gradient(circle at 0% 100%,rgba(140,0,0,.08),transparent 30%);
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.035),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(220,0,0,.045),
+            transparent 25%
+        );
+
     z-index:-1;
 }
 
-/* ================= HEADER ================= */
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
+
     height:82px;
-    background:rgba(6,6,6,.95);
-    border-bottom:1px solid #260707;
-    backdrop-filter:blur(14px);
+
+    background:rgba(18,18,18,.94);
+
+    border-bottom:1px solid #3b3b3b;
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.35);
 }
 
 .header-inner{
@@ -47,11 +84,16 @@ header{
     max-width:1450px;
     height:100%;
     margin:auto;
+
     position:relative;
+
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
+
+/* HEADER LOGO */
 
 .logo-area{
     text-align:center;
@@ -61,119 +103,173 @@ header{
     font-size:29px;
     font-weight:1000;
     letter-spacing:5px;
-    color:#fff;
+
+    color:#f5f5f5;
+
     text-shadow:
-        0 0 8px rgba(255,0,0,.45),
-        0 0 25px rgba(255,0,0,.18);
+        0 0 15px rgba(255,255,255,.08);
 }
 
 .logo span{
     color:#e00000;
+
+    text-shadow:
+        0 0 10px rgba(224,0,0,.5);
 }
 
 .subtitle{
     margin-top:4px;
+
     font-size:11px;
     color:#999;
+
     letter-spacing:1px;
 }
+
+
+/* CART BUTTON */
 
 .cart-button{
     position:absolute;
     right:0;
     top:50%;
+
     transform:translateY(-50%);
-    background:#110909;
-    border:1px solid #500d0d;
+
+    background:#1b1b1b;
+
+    border:1px solid #444;
+
     color:#fff;
+
     padding:11px 17px;
+
     border-radius:8px;
+
     cursor:pointer;
+
     transition:.2s;
+
     font-weight:bold;
 }
 
 .cart-button:hover{
     background:#e00000;
-    border-color:#e00000;
+    border-color:#ff3333;
+
+    box-shadow:
+        0 0 18px rgba(224,0,0,.25);
 }
 
 .cart-count{
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
+
     min-width:20px;
     height:20px;
+
     margin-left:7px;
+
     background:#e00000;
+
     border-radius:50%;
+
     font-size:11px;
 }
 
-/* ================= MAIN ================= */
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 main{
     width:95%;
     max-width:1450px;
-    margin:32px auto 60px;
+
+    margin:32px auto 65px;
 }
 
-/* ================= WIZZY SKIN HERO ================= */
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
     text-align:center;
-    margin:10px auto 38px;
-    padding:15px 10px 8px;
+
+    margin:8px auto 38px;
+
+    padding:15px 10px 10px;
 }
 
 .hero-logo{
     position:relative;
-    display:inline-block;
-    font-size:clamp(48px,8vw,105px);
-    font-weight:1000;
-    letter-spacing:8px;
-    line-height:1;
-    color:#fff;
-    text-transform:uppercase;
-    text-shadow:
-        0 0 8px rgba(255,0,0,.85),
-        0 0 22px rgba(255,0,0,.65),
-        0 0 45px rgba(190,0,0,.38);
-}
 
-.hero-logo::before{
-    content:"";
-    position:absolute;
-    left:8%;
-    right:8%;
-    bottom:-10px;
-    height:3px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #e00000,
-        #ff2222,
-        #e00000,
-        transparent
-    );
-    box-shadow:
-        0 0 10px #e00000,
-        0 0 25px rgba(220,0,0,.55);
+    display:inline-block;
+
+    font-size:clamp(48px,8vw,105px);
+
+    font-weight:1000;
+
+    letter-spacing:8px;
+
+    line-height:1;
+
+    color:#f5f5f5;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,.12),
+        0 0 30px rgba(255,255,255,.05);
 }
 
 .hero-logo span{
     color:#e00000;
+
     text-shadow:
-        0 0 8px rgba(255,0,0,.9),
-        0 0 22px rgba(255,0,0,.75),
-        0 0 45px rgba(200,0,0,.5);
+        0 0 10px rgba(255,0,0,.75),
+        0 0 30px rgba(220,0,0,.35),
+        0 0 55px rgba(220,0,0,.15);
+}
+
+.hero-logo::before{
+    content:"";
+
+    position:absolute;
+
+    left:7%;
+    right:7%;
+
+    bottom:-13px;
+
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #777,
+            #e00000,
+            #777,
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px rgba(224,0,0,.4);
 }
 
 .hero-text{
-    margin-top:28px;
-    color:#aaa;
+    margin-top:30px;
+
+    color:#bdbdbd;
+
     font-size:15px;
+
     font-weight:bold;
+
     letter-spacing:1.5px;
 }
 
@@ -183,132 +279,216 @@ main{
 
 .hero-line{
     width:90px;
+
     height:2px;
+
     margin:15px auto 0;
-    background:#b00000;
-    box-shadow:0 0 12px rgba(220,0,0,.6);
+
+    background:#555;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.08);
 }
 
-/* ================= CONTROLS ================= */
+
+/* =========================================================
+   CONTROLS
+========================================================= */
 
 .controls{
     display:flex;
+
     gap:12px;
+
     flex-wrap:wrap;
+
     margin-bottom:25px;
 }
 
 .search{
     flex:1;
+
     min-width:240px;
 }
 
 .search input,
 select{
     width:100%;
+
     height:46px;
-    background:#101010;
-    color:#fff;
-    border:1px solid #2d2d2d;
+
+    background:#171717;
+
+    color:#f5f5f5;
+
+    border:1px solid #3c3c3c;
+
     border-radius:8px;
+
     padding:0 15px;
+
     outline:none;
+
+    transition:.2s;
+}
+
+.search input::placeholder{
+    color:#777;
 }
 
 .search input:focus,
 select:focus{
-    border-color:#b00000;
-    box-shadow:0 0 0 2px rgba(176,0,0,.12);
+    border-color:#777;
+
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.035);
 }
 
 .filter-box{
     width:190px;
 }
 
-/* ================= PRICE RANGE ================= */
+
+/* =========================================================
+   PRICE RANGE
+========================================================= */
 
 .price-filter{
     width:100%;
-    background:#101010;
-    border:1px solid #292929;
-    border-radius:9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1a1a1a,
+            #111
+        );
+
+    border:1px solid #353535;
+
+    border-radius:10px;
+
     padding:14px 17px 18px;
+
     margin-bottom:25px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.2);
 }
 
 .price-filter-top{
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     margin-bottom:14px;
+
     font-size:11px;
+
     font-weight:bold;
+
     color:#aaa;
 }
 
 #priceRangeText{
     color:#e00000;
+
     font-size:11px;
 }
 
 .range-container{
     position:relative;
+
     width:100%;
+
     height:25px;
 }
 
 .range-track,
 .range-progress{
     position:absolute;
+
     top:10px;
     left:0;
+
     width:100%;
     height:5px;
+
     border-radius:10px;
 }
 
 .range-track{
-    background:#292929;
+    background:#373737;
 }
 
 .range-progress{
-    background:#d00000;
-    box-shadow:0 0 8px rgba(220,0,0,.45);
+    background:
+        linear-gradient(
+            90deg,
+            #8b0000,
+            #e00000
+        );
+
+    box-shadow:
+        0 0 8px rgba(220,0,0,.4);
 }
 
 .range-container input[type="range"]{
     position:absolute;
+
     width:100%;
     height:5px;
+
     top:10px;
     left:0;
+
     margin:0;
+
     pointer-events:none;
+
     appearance:none;
+
     background:none;
+
     outline:none;
 }
 
 .range-container input[type="range"]::-webkit-slider-thumb{
     appearance:none;
+
     width:18px;
     height:18px;
+
     border-radius:50%;
+
     background:#e00000;
-    border:3px solid #0b0b0b;
-    box-shadow:0 0 0 1px #e00000;
+
+    border:3px solid #111;
+
+    box-shadow:
+        0 0 0 1px #e00000;
+
     cursor:pointer;
+
     pointer-events:auto;
 }
 
 .range-container input[type="range"]::-moz-range-thumb{
     width:18px;
     height:18px;
+
     border-radius:50%;
+
     background:#e00000;
-    border:3px solid #0b0b0b;
-    box-shadow:0 0 0 1px #e00000;
+
+    border:3px solid #111;
+
+    box-shadow:
+        0 0 0 1px #e00000;
+
     cursor:pointer;
+
     pointer-events:auto;
 }
 
@@ -320,151 +500,249 @@ select:focus{
     background:transparent;
 }
 
-/* ================= CATEGORY ================= */
+
+/* =========================================================
+   CATEGORY
+========================================================= */
 
 .section-title{
     font-size:13px;
-    color:#777;
+
+    color:#858585;
+
     letter-spacing:2px;
+
     margin-bottom:12px;
+
     text-transform:uppercase;
 }
 
 .categories{
     display:flex;
+
     gap:9px;
+
     flex-wrap:wrap;
+
     margin-bottom:20px;
 }
 
 .category{
-    background:#101010;
-    color:#bbb;
-    border:1px solid #282828;
+    background:#181818;
+
+    color:#bdbdbd;
+
+    border:1px solid #3b3b3b;
+
     padding:11px 17px;
+
     border-radius:7px;
+
     cursor:pointer;
+
     font-size:12px;
+
     font-weight:bold;
+
     letter-spacing:.5px;
+
     transition:.2s;
 }
 
 .category:hover{
-    border-color:#9d0000;
+    background:#222;
+
+    border-color:#777;
+
     color:#fff;
 }
 
 .category.active{
-    background:#b00000;
-    border-color:#e00000;
+    background:#e00000;
+
+    border-color:#ff3333;
+
     color:#fff;
-    box-shadow:0 0 18px rgba(220,0,0,.16);
+
+    box-shadow:
+        0 0 18px rgba(220,0,0,.2);
 }
 
-/* ================= WEAPON BOX ================= */
+
+/* =========================================================
+   WEAPON BOX
+========================================================= */
 
 .weapon-box{
     display:none;
-    background:#0d0d0d;
-    border:1px solid #292929;
+
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #111
+        );
+
+    border:1px solid #353535;
+
     border-radius:10px;
+
     padding:18px;
+
     margin-bottom:28px;
 }
 
 .weapon-box.show{
     display:block;
+
     animation:fadeDown .2s ease;
 }
 
 @keyframes fadeDown{
+
     from{
         opacity:0;
         transform:translateY(-5px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
 .weapon-title{
-    color:#777;
+    color:#888;
+
     font-size:11px;
+
     letter-spacing:2px;
+
     margin-bottom:13px;
 }
 
 .weapon-list{
     display:flex;
+
     flex-wrap:wrap;
+
     gap:8px;
 }
 
 .weapon{
     padding:9px 13px;
+
     border-radius:6px;
-    border:1px solid #292929;
+
+    border:1px solid #383838;
+
     background:#151515;
+
     color:#aaa;
+
     cursor:pointer;
+
     font-size:11px;
+
     font-weight:bold;
+
     transition:.18s;
 }
 
 .weapon:hover{
     color:#fff;
-    border-color:#850000;
+
+    border-color:#777;
+
+    background:#202020;
 }
 
 .weapon.active{
-    background:#9d0000;
+    background:#a80000;
+
     border-color:#e00000;
+
     color:#fff;
 }
 
-/* ================= PRODUCTS ================= */
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(235px,1fr)
+        );
+
     gap:18px;
 }
 
 .product{
-    background:#101010;
-    border:1px solid #252525;
+    background:
+        linear-gradient(
+            145deg,
+            #1a1a1a,
+            #101010
+        );
+
+    border:1px solid #333;
+
     border-radius:12px;
+
     overflow:hidden;
+
     transition:.25s;
+
     position:relative;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.22);
 }
 
 .product:hover{
-    transform:translateY(-4px);
-    border-color:#720000;
-    box-shadow:0 12px 35px rgba(0,0,0,.45);
+    transform:translateY(-5px);
+
+    border-color:#777;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.5),
+        0 0 20px rgba(224,0,0,.08);
 }
 
 .product-image{
     height:185px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
-    background:radial-gradient(
-        circle,
-        #191919 0%,
-        #0b0b0b 70%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            #282828 0%,
+            #161616 45%,
+            #0b0b0b 100%
+        );
+
     overflow:hidden;
+
+    border-bottom:1px solid #292929;
 }
 
 .product-image img{
     width:90%;
     height:90%;
+
     object-fit:contain;
+
     transition:.3s;
 }
 
@@ -478,66 +756,103 @@ select:focus{
 
 .product-name{
     font-size:15px;
+
     font-weight:800;
+
     margin-bottom:7px;
 }
 
 .product-weapon{
     color:#777;
+
     font-size:11px;
+
     margin-bottom:15px;
 }
 
 .product-bottom{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:8px;
 }
 
 .price{
-    color:#e30000;
+    color:#e00000;
+
     font-size:15px;
+
     font-weight:900;
 }
 
 .buy-button{
     border:0;
-    background:#c40000;
+
+    background:#d00000;
+
     color:#fff;
+
     padding:9px 14px;
+
     border-radius:6px;
+
     cursor:pointer;
+
     font-weight:bold;
+
     font-size:11px;
+
     transition:.2s;
 }
 
 .buy-button:hover{
     background:#f00000;
+
     transform:scale(1.03);
+
+    box-shadow:
+        0 0 15px rgba(224,0,0,.2);
 }
 
 .empty{
     grid-column:1/-1;
+
     text-align:center;
+
     padding:70px 20px;
+
     color:#666;
-    border:1px dashed #2a2a2a;
+
+    border:1px dashed #3b3b3b;
+
     border-radius:10px;
 }
 
-/* ================= MODALS ================= */
+
+/* =========================================================
+   MODALS
+========================================================= */
 
 .modal{
     display:none;
+
     position:fixed;
+
     inset:0;
+
     z-index:3000;
+
     background:rgba(0,0,0,.78);
-    backdrop-filter:blur(8px);
+
+    backdrop-filter:blur(9px);
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
 }
 
@@ -547,30 +862,49 @@ select:focus{
 
 .modal-content{
     width:100%;
+
     max-width:570px;
-    background:#0d0d0d;
-    border:1px solid #450000;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1b1b,
+            #0d0d0d
+        );
+
+    border:1px solid #444;
+
     border-radius:14px;
+
     padding:25px;
-    box-shadow:0 25px 70px rgba(0,0,0,.65);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65);
+
     animation:modalIn .2s ease;
 }
 
 @keyframes modalIn{
+
     from{
         opacity:0;
         transform:scale(.96);
     }
+
     to{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 .modal-header{
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     margin-bottom:20px;
 }
 
@@ -581,46 +915,75 @@ select:focus{
 .close{
     width:34px;
     height:34px;
+
     border-radius:7px;
-    border:1px solid #333;
-    background:#161616;
+
+    border:1px solid #444;
+
+    background:#171717;
+
     color:#aaa;
+
     cursor:pointer;
+
     font-size:20px;
 }
 
 .close:hover{
     color:#fff;
-    background:#b00000;
+
+    background:#e00000;
+
+    border-color:#e00000;
 }
 
 .modal-image{
     height:230px;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
-    background:#080808;
+
+    background:
+        radial-gradient(
+            circle,
+            #252525,
+            #090909
+        );
+
     border-radius:10px;
+
     margin-bottom:20px;
 }
 
 .modal-image img{
     max-width:90%;
     max-height:90%;
+
     object-fit:contain;
 }
 
 .modal-details{
     display:grid;
+
     gap:10px;
+
     margin-bottom:20px;
 }
 
 .detail-row{
     display:flex;
+
     justify-content:space-between;
+
     padding:11px;
-    background:#141414;
+
+    background:#181818;
+
+    border:1px solid #292929;
+
     border-radius:6px;
 }
 
@@ -634,56 +997,85 @@ select:focus{
 
 .modal-actions{
     display:flex;
+
     gap:10px;
 }
 
 .modal-actions button{
     flex:1;
+
     padding:13px;
+
     border-radius:7px;
-    border:0;
+
     cursor:pointer;
+
     font-weight:bold;
 }
 
 .add-cart{
-    background:#a80000;
+    background:#d00000;
+
     color:#fff;
+
+    border:0;
 }
 
 .add-cart:hover{
-    background:#e00000;
+    background:#f00000;
 }
 
 .cancel{
     background:#1b1b1b;
+
     color:#aaa;
-    border:1px solid #333!important;
+
+    border:1px solid #444!important;
 }
 
-/* ================= CART ================= */
+.cancel:hover{
+    color:#fff;
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
 
 .cart-items{
     max-height:350px;
+
     overflow:auto;
+
     margin-bottom:20px;
 }
 
 .cart-item{
     display:flex;
+
     align-items:center;
+
     gap:12px;
-    background:#151515;
+
+    background:#171717;
+
+    border:1px solid #292929;
+
     padding:10px;
+
     border-radius:8px;
+
     margin-bottom:8px;
 }
 
 .cart-item img{
     width:70px;
     height:55px;
+
     object-fit:contain;
+
     background:#0b0b0b;
+
     border-radius:5px;
 }
 
@@ -693,72 +1085,115 @@ select:focus{
 
 .cart-item-name{
     font-weight:bold;
+
     font-size:13px;
 }
 
 .cart-item-price{
     color:#e00000;
+
     font-size:12px;
+
     margin-top:4px;
 }
 
 .remove-item{
-    background:#270909;
-    border:1px solid #550d0d;
+    background:#242424;
+
+    border:1px solid #444;
+
     color:#e00000;
+
     padding:7px 9px;
+
     border-radius:5px;
+
     cursor:pointer;
 }
 
 .remove-item:hover{
     background:#e00000;
+
     color:#fff;
+
+    border-color:#e00000;
 }
 
 .cart-total{
     display:flex;
+
     justify-content:space-between;
+
     font-size:18px;
+
     font-weight:bold;
+
     padding:15px 0;
-    border-top:1px solid #292929;
+
+    border-top:1px solid #353535;
 }
 
 .finalize{
     width:100%;
+
     padding:14px;
+
     border:0;
+
     border-radius:7px;
+
     background:#e00000;
+
     color:#fff;
+
     font-weight:900;
+
     cursor:pointer;
 }
 
 .finalize:hover{
     background:#ff1111;
+
+    box-shadow:
+        0 0 18px rgba(224,0,0,.2);
 }
 
 .empty-cart{
     text-align:center;
+
     color:#666;
+
     padding:45px 10px;
 }
 
-/* ================= FOOTER ================= */
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
-    border-top:1px solid #1e1e1e;
-    background:#070707;
-    padding:35px 20px;
+    border-top:1px solid #333;
+
+    background:
+        linear-gradient(
+            180deg,
+            #111,
+            #080808
+        );
+
+    padding:38px 20px;
+
     text-align:center;
 }
 
 .footer-logo{
     font-size:20px;
+
     font-weight:900;
+
     letter-spacing:3px;
+
+    color:#fff;
 }
 
 .footer-logo span{
@@ -767,16 +1202,23 @@ footer{
 
 .footer-text{
     margin-top:8px;
+
     color:#777;
+
     font-size:12px;
 }
 
 .telegram{
     display:inline-block;
+
     margin-top:16px;
+
     color:#d00000;
+
     text-decoration:none;
+
     font-size:13px;
+
     font-weight:bold;
 }
 
@@ -784,7 +1226,33 @@ footer{
     color:#ff2222;
 }
 
-/* ================= MOBILE ================= */
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0b0b0b;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#444;
+
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#e00000;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:700px){
 
@@ -830,7 +1298,12 @@ footer{
     }
 
     .products{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+
         gap:10px;
     }
 
@@ -866,13 +1339,53 @@ footer{
     #priceRangeText{
         font-size:10px;
     }
+
 }
+
+
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
+
+@media(max-width:430px){
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .hero-logo{
+        font-size:39px;
+    }
+
+    .cart-button{
+        position:relative;
+
+        right:auto;
+        top:auto;
+
+        transform:none;
+    }
+
+    .header-inner{
+        justify-content:space-between;
+    }
+
+    .logo-area{
+        text-align:left;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header>
 
@@ -881,7 +1394,7 @@ footer{
         <div class="logo-area">
 
             <div class="logo">
-                WIZZY <span>SHOP</span>
+                <span>WIZZY</span> SHOP
             </div>
 
             <div class="subtitle">
@@ -890,15 +1403,21 @@ footer{
 
         </div>
 
+
         <button
             class="cart-button"
             onclick="openCart()"
         >
+
             CART
+
             <span
                 class="cart-count"
                 id="cartCount"
-            >0</span>
+            >
+                0
+            </span>
+
         </button>
 
     </div>
@@ -906,16 +1425,20 @@ footer{
 </header>
 
 
-<!-- ================= MAIN ================= -->
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main>
 
-    <!-- BIG LOGO -->
+
+    <!-- HERO -->
 
     <section class="hero">
 
         <div class="hero-logo">
-            WIZZY <span>SKIN</span>
+            <span>WIZZY</span> SKIN
         </div>
 
         <div class="hero-text">
@@ -925,6 +1448,7 @@ footer{
         <div class="hero-line"></div>
 
     </section>
+
 
 
     <!-- SEARCH -->
@@ -981,7 +1505,8 @@ footer{
     </div>
 
 
-    <!-- PRICE RANGE -->
+
+    <!-- PRICE -->
 
     <div class="price-filter">
 
@@ -1007,6 +1532,7 @@ footer{
                 id="rangeProgress"
             ></div>
 
+
             <input
                 type="range"
                 id="minPrice"
@@ -1016,6 +1542,7 @@ footer{
                 value="0"
                 oninput="updatePriceRange()"
             >
+
 
             <input
                 type="range"
@@ -1030,6 +1557,7 @@ footer{
         </div>
 
     </div>
+
 
 
     <!-- CATEGORIES -->
@@ -1048,12 +1576,14 @@ footer{
             PISTOLS
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Rifles',this)"
         >
             RIFLES
         </button>
+
 
         <button
             class="category"
@@ -1062,12 +1592,14 @@ footer{
             SMGs
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Snipers',this)"
         >
             SNIPERS
         </button>
+
 
         <button
             class="category"
@@ -1076,6 +1608,7 @@ footer{
             SHOTGUNS
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Machineguns',this)"
@@ -1083,12 +1616,14 @@ footer{
             MACHINEGUNS
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Knives',this)"
         >
             KNIVES
         </button>
+
 
         <button
             class="category"
@@ -1100,7 +1635,8 @@ footer{
     </div>
 
 
-    <!-- WEAPONS -->
+
+    <!-- WEAPON SELECTOR -->
 
     <div
         id="weaponBox"
@@ -1114,12 +1650,14 @@ footer{
             WEAPONS
         </div>
 
+
         <div
             id="weaponList"
             class="weapon-list"
         ></div>
 
     </div>
+
 
 
     <!-- PRODUCTS -->
@@ -1132,17 +1670,22 @@ footer{
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer>
 
     <div class="footer-logo">
-        WIZZY <span>SKIN</span>
+        <span>WIZZY</span> SHOP
     </div>
+
 
     <div class="footer-text">
         فروشگاه تخصصی اسکین‌های CS2
     </div>
+
 
     <a
         class="telegram"
@@ -1155,7 +1698,10 @@ footer{
 </footer>
 
 
-<!-- ================= PRODUCT MODAL ================= -->
+
+<!-- =========================================================
+     PRODUCT MODAL
+========================================================= -->
 
 <div
     id="productModal"
@@ -1165,11 +1711,13 @@ footer{
 
     <div class="modal-content">
 
+
         <div class="modal-header">
 
             <h2 id="modalName">
                 Product
             </h2>
+
 
             <button
                 class="close"
@@ -1179,6 +1727,7 @@ footer{
             </button>
 
         </div>
+
 
         <div class="modal-image">
 
@@ -1190,7 +1739,9 @@ footer{
 
         </div>
 
+
         <div class="modal-details">
+
 
             <div class="detail-row">
 
@@ -1205,6 +1756,7 @@ footer{
 
             </div>
 
+
             <div class="detail-row">
 
                 <span class="detail-label">
@@ -1218,6 +1770,7 @@ footer{
 
             </div>
 
+
             <div class="detail-row">
 
                 <span class="detail-label">
@@ -1230,6 +1783,7 @@ footer{
                 ></span>
 
             </div>
+
 
             <div class="detail-row">
 
@@ -1246,6 +1800,7 @@ footer{
 
         </div>
 
+
         <div class="modal-actions">
 
             <button
@@ -1254,6 +1809,7 @@ footer{
             >
                 ADD TO CART
             </button>
+
 
             <button
                 class="cancel"
@@ -1269,7 +1825,10 @@ footer{
 </div>
 
 
-<!-- ================= CART MODAL ================= -->
+
+<!-- =========================================================
+     CART MODAL
+========================================================= -->
 
 <div
     id="cartModal"
@@ -1279,11 +1838,13 @@ footer{
 
     <div class="modal-content">
 
+
         <div class="modal-header">
 
             <h2>
                 YOUR CART
             </h2>
+
 
             <button
                 class="close"
@@ -1294,16 +1855,19 @@ footer{
 
         </div>
 
+
         <div
             id="cartItems"
             class="cart-items"
         ></div>
+
 
         <div class="cart-total">
 
             <span>
                 TOTAL
             </span>
+
 
             <span
                 id="cartTotal"
@@ -1313,6 +1877,7 @@ footer{
             </span>
 
         </div>
+
 
         <button
             class="finalize"
@@ -1326,17 +1891,25 @@ footer{
 </div>
 
 
+
 <script>
 
-/* ================= STATE ================= */
+/* =========================================================
+   STATE
+========================================================= */
 
 let selectedWeapons = [];
+
 let currentCategory = null;
+
 let currentProduct = null;
+
 let cart = [];
 
 
-/* ================= CATEGORY DATA ================= */
+/* =========================================================
+   CATEGORY DATA
+========================================================= */
 
 const categoryData = {
 
@@ -1415,7 +1988,9 @@ const categoryData = {
 };
 
 
-/* ================= PRODUCTS ================= */
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 const products = [
 
@@ -1426,7 +2001,7 @@ const products = [
         category:"Rifles",
         wear:"Field-Tested",
         price:153000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AK-47+REDLINE"
+        image:"https://placehold.co/700x450/171717/e00000?text=AK-47+REDLINE"
     },
 
     {
@@ -1436,7 +2011,7 @@ const products = [
         category:"Rifles",
         wear:"Field-Tested",
         price:60000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AK-47+SLATE"
+        image:"https://placehold.co/700x450/171717/e00000?text=AK-47+SLATE"
     },
 
     {
@@ -1446,7 +2021,7 @@ const products = [
         category:"Rifles",
         wear:"Minimal Wear",
         price:210000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AK-47+NEON+RIDER"
+        image:"https://placehold.co/700x450/171717/e00000?text=AK-47+NEON+RIDER"
     },
 
     {
@@ -1456,7 +2031,7 @@ const products = [
         category:"Rifles",
         wear:"Minimal Wear",
         price:180000,
-        image:"https://placehold.co/700x450/090909/e00000?text=M4A4+TEMUKAU"
+        image:"https://placehold.co/700x450/171717/e00000?text=M4A4+TEMUKAU"
     },
 
     {
@@ -1466,7 +2041,7 @@ const products = [
         category:"Rifles",
         wear:"Field-Tested",
         price:95000,
-        image:"https://placehold.co/700x450/090909/e00000?text=M4A4+DESOLATE+SPACE"
+        image:"https://placehold.co/700x450/171717/e00000?text=M4A4+DESOLATE+SPACE"
     },
 
     {
@@ -1476,7 +2051,7 @@ const products = [
         category:"Rifles",
         wear:"Field-Tested",
         price:420000,
-        image:"https://placehold.co/700x450/090909/e00000?text=M4A1-S+PRINTSTREAM"
+        image:"https://placehold.co/700x450/171717/e00000?text=M4A1-S+PRINTSTREAM"
     },
 
     {
@@ -1486,7 +2061,7 @@ const products = [
         category:"Pistols",
         wear:"Minimal Wear",
         price:250000,
-        image:"https://placehold.co/700x450/090909/e00000?text=DEAGLE+PRINTSTREAM"
+        image:"https://placehold.co/700x450/171717/e00000?text=DEAGLE+PRINTSTREAM"
     },
 
     {
@@ -1496,7 +2071,7 @@ const products = [
         category:"Pistols",
         wear:"Field-Tested",
         price:140000,
-        image:"https://placehold.co/700x450/090909/e00000?text=DEAGLE+CODE+RED"
+        image:"https://placehold.co/700x450/171717/e00000?text=DEAGLE+CODE+RED"
     },
 
     {
@@ -1506,7 +2081,7 @@ const products = [
         category:"Pistols",
         wear:"Field-Tested",
         price:180000,
-        image:"https://placehold.co/700x450/090909/e00000?text=USP-S+PRINTSTREAM"
+        image:"https://placehold.co/700x450/171717/e00000?text=USP-S+PRINTSTREAM"
     },
 
     {
@@ -1516,7 +2091,7 @@ const products = [
         category:"Pistols",
         wear:"Field-Tested",
         price:85000,
-        image:"https://placehold.co/700x450/090909/e00000?text=USP-S+CORTEX"
+        image:"https://placehold.co/700x450/171717/e00000?text=USP-S+CORTEX"
     },
 
     {
@@ -1526,7 +2101,7 @@ const products = [
         category:"Pistols",
         wear:"Field-Tested",
         price:70000,
-        image:"https://placehold.co/700x450/090909/e00000?text=GLOCK-18+WATER+ELEMENTAL"
+        image:"https://placehold.co/700x450/171717/e00000?text=GLOCK-18+WATER+ELEMENTAL"
     },
 
     {
@@ -1536,7 +2111,7 @@ const products = [
         category:"Snipers",
         wear:"Field-Tested",
         price:650000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AWP+ASIIMOV"
+        image:"https://placehold.co/700x450/171717/e00000?text=AWP+ASIIMOV"
     },
 
     {
@@ -1546,7 +2121,7 @@ const products = [
         category:"Snipers",
         wear:"Field-Tested",
         price:300000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AWP+WILDFIRE"
+        image:"https://placehold.co/700x450/171717/e00000?text=AWP+WILDFIRE"
     },
 
     {
@@ -1556,7 +2131,7 @@ const products = [
         category:"SMGs",
         wear:"Field-Tested",
         price:90000,
-        image:"https://placehold.co/700x450/090909/e00000?text=MP9+STARLIGHT+PROTECTOR"
+        image:"https://placehold.co/700x450/171717/e00000?text=MP9+STARLIGHT+PROTECTOR"
     },
 
     {
@@ -1566,7 +2141,7 @@ const products = [
         category:"SMGs",
         wear:"Minimal Wear",
         price:110000,
-        image:"https://placehold.co/700x450/090909/e00000?text=MAC-10+NEON+RIDER"
+        image:"https://placehold.co/700x450/171717/e00000?text=MAC-10+NEON+RIDER"
     },
 
     {
@@ -1576,7 +2151,7 @@ const products = [
         category:"Knives",
         wear:"Factory New",
         price:4500000,
-        image:"https://placehold.co/700x450/090909/e00000?text=KARAMBIT+DOPPLER"
+        image:"https://placehold.co/700x450/171717/e00000?text=KARAMBIT+DOPPLER"
     },
 
     {
@@ -1586,7 +2161,7 @@ const products = [
         category:"Knives",
         wear:"Factory New",
         price:5200000,
-        image:"https://placehold.co/700x450/090909/e00000?text=BUTTERFLY+DOPPLER"
+        image:"https://placehold.co/700x450/171717/e00000?text=BUTTERFLY+DOPPLER"
     },
 
     {
@@ -1596,7 +2171,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:75000,
-        image:"https://placehold.co/700x450/090909/e00000?text=MUSIC+KIT"
+        image:"https://placehold.co/700x450/171717/e00000?text=MUSIC+KIT"
     },
 
     {
@@ -1606,7 +2181,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:95000,
-        image:"https://placehold.co/700x450/090909/e00000?text=MUSIC+KIT"
+        image:"https://placehold.co/700x450/171717/e00000?text=MUSIC+KIT"
     },
 
     {
@@ -1616,7 +2191,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:450000,
-        image:"https://placehold.co/700x450/090909/e00000?text=STICKER"
+        image:"https://placehold.co/700x450/171717/e00000?text=STICKER"
     },
 
     {
@@ -1626,7 +2201,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:320000,
-        image:"https://placehold.co/700x450/090909/e00000?text=STICKER"
+        image:"https://placehold.co/700x450/171717/e00000?text=STICKER"
     },
 
     {
@@ -1636,7 +2211,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:180000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AGENT"
+        image:"https://placehold.co/700x450/171717/e00000?text=AGENT"
     },
 
     {
@@ -1646,7 +2221,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:125000,
-        image:"https://placehold.co/700x450/090909/e00000?text=AGENT"
+        image:"https://placehold.co/700x450/171717/e00000?text=AGENT"
     },
 
     {
@@ -1656,7 +2231,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:45000,
-        image:"https://placehold.co/700x450/090909/e00000?text=CASE"
+        image:"https://placehold.co/700x450/171717/e00000?text=CASE"
     },
 
     {
@@ -1666,7 +2241,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:35000,
-        image:"https://placehold.co/700x450/090909/e00000?text=CASE"
+        image:"https://placehold.co/700x450/171717/e00000?text=CASE"
     },
 
     {
@@ -1676,7 +2251,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:85000,
-        image:"https://placehold.co/700x450/090909/e00000?text=CHARM"
+        image:"https://placehold.co/700x450/171717/e00000?text=CHARM"
     },
 
     {
@@ -1686,7 +2261,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:120000,
-        image:"https://placehold.co/700x450/090909/e00000?text=CHARM"
+        image:"https://placehold.co/700x450/171717/e00000?text=CHARM"
     },
 
     {
@@ -1696,7 +2271,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:60000,
-        image:"https://placehold.co/700x450/090909/e00000?text=PIN"
+        image:"https://placehold.co/700x450/171717/e00000?text=PIN"
     },
 
     {
@@ -1706,7 +2281,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:55000,
-        image:"https://placehold.co/700x450/090909/e00000?text=PIN"
+        image:"https://placehold.co/700x450/171717/e00000?text=PIN"
     },
 
     {
@@ -1716,7 +2291,7 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:25000,
-        image:"https://placehold.co/700x450/090909/e00000?text=GRAFFITI"
+        image:"https://placehold.co/700x450/171717/e00000?text=GRAFFITI"
     },
 
     {
@@ -1726,21 +2301,28 @@ const products = [
         category:"Accessories",
         wear:"Factory New",
         price:30000,
-        image:"https://placehold.co/700x450/090909/e00000?text=GRAFFITI"
+        image:"https://placehold.co/700x450/171717/e00000?text=GRAFFITI"
     }
 
 ];
 
 
-/* ================= PRICE ================= */
+/* =========================================================
+   FORMAT PRICE
+========================================================= */
 
 function formatPrice(price){
 
     return new Intl.NumberFormat("en-US")
-        .format(price) + " Toman";
+        .format(price)
+        + " Toman";
 
 }
 
+
+/* =========================================================
+   PRICE RANGE
+========================================================= */
 
 function updatePriceRange(){
 
@@ -1749,6 +2331,7 @@ function updatePriceRange(){
 
     const maxSlider =
         document.getElementById("maxPrice");
+
 
     let min =
         Number(minSlider.value);
@@ -1762,11 +2345,13 @@ function updatePriceRange(){
         if(document.activeElement === minSlider){
 
             max = min;
+
             maxSlider.value = max;
 
         }else{
 
             min = max;
+
             minSlider.value = min;
 
         }
@@ -1776,6 +2361,7 @@ function updatePriceRange(){
 
     const maxLimit =
         Number(maxSlider.max);
+
 
     const minPercent =
         (min / maxLimit) * 100;
@@ -1791,6 +2377,7 @@ function updatePriceRange(){
     progress.style.left =
         minPercent + "%";
 
+
     progress.style.width =
         (maxPercent - minPercent) + "%";
 
@@ -1798,9 +2385,9 @@ function updatePriceRange(){
     document.getElementById(
         "priceRangeText"
     ).textContent =
-        formatPrice(min) +
-        " - " +
-        formatPrice(max);
+        formatPrice(min)
+        + " - "
+        + formatPrice(max);
 
 
     renderProducts();
@@ -1808,7 +2395,9 @@ function updatePriceRange(){
 }
 
 
-/* ================= WEAPONS ================= */
+/* =========================================================
+   RENDER WEAPONS
+========================================================= */
 
 function renderWeapons(){
 
@@ -1827,23 +2416,33 @@ function renderWeapons(){
         const button =
             document.createElement("button");
 
-        button.className = "weapon";
 
-        button.textContent = item;
+        button.className =
+            "weapon";
 
 
-        if(selectedWeapons.includes(item)){
+        button.textContent =
+            item;
+
+
+        if(
+            selectedWeapons.includes(item)
+        ){
 
             button.classList.add("active");
 
         }
 
 
-        button.onclick = function(){
+        button.onclick =
+            function(){
 
-            selectWeapon(item,button);
+                selectWeapon(
+                    item,
+                    button
+                );
 
-        };
+            };
 
 
         list.appendChild(button);
@@ -1853,11 +2452,18 @@ function renderWeapons(){
 }
 
 
-/* ================= CATEGORY ================= */
+/* =========================================================
+   SELECT CATEGORY
+========================================================= */
 
-function selectCategory(category,element){
+function selectCategory(
+    category,
+    element
+){
 
-    if(currentCategory === category){
+    if(
+        currentCategory === category
+    ){
 
         currentCategory = null;
 
@@ -1868,7 +2474,9 @@ function selectCategory(category,element){
             .querySelectorAll(".category")
             .forEach(item => {
 
-                item.classList.remove("active");
+                item.classList.remove(
+                    "active"
+                );
 
             });
 
@@ -1885,7 +2493,9 @@ function selectCategory(category,element){
     }
 
 
-    currentCategory = category;
+    currentCategory =
+        category;
+
 
     selectedWeapons = [];
 
@@ -1894,12 +2504,16 @@ function selectCategory(category,element){
         .querySelectorAll(".category")
         .forEach(item => {
 
-            item.classList.remove("active");
+            item.classList.remove(
+                "active"
+            );
 
         });
 
 
-    element.classList.add("active");
+    element.classList.add(
+        "active"
+    );
 
 
     document
@@ -1910,9 +2524,13 @@ function selectCategory(category,element){
     document.getElementById(
         "weaponTitle"
     ).textContent =
+
         category === "Accessories"
+
         ? "ACCESSORIES"
-        : category.toUpperCase() + " WEAPONS";
+
+        : category.toUpperCase()
+          + " WEAPONS";
 
 
     renderWeapons();
@@ -1922,25 +2540,41 @@ function selectCategory(category,element){
 }
 
 
-/* ================= WEAPON SELECT ================= */
+/* =========================================================
+   SELECT WEAPON
+========================================================= */
 
-function selectWeapon(weapon,element){
+function selectWeapon(
+    weapon,
+    element
+){
 
     const index =
-        selectedWeapons.indexOf(weapon);
+        selectedWeapons.indexOf(
+            weapon
+        );
 
 
     if(index !== -1){
 
-        selectedWeapons.splice(index,1);
+        selectedWeapons.splice(
+            index,
+            1
+        );
 
-        element.classList.remove("active");
+        element.classList.remove(
+            "active"
+        );
 
     }else{
 
-        selectedWeapons.push(weapon);
+        selectedWeapons.push(
+            weapon
+        );
 
-        element.classList.add("active");
+        element.classList.add(
+            "active"
+        );
 
     }
 
@@ -1950,105 +2584,156 @@ function selectWeapon(weapon,element){
 }
 
 
-/* ================= PRODUCTS ================= */
+/* =========================================================
+   RENDER PRODUCTS
+========================================================= */
 
 function renderProducts(){
 
     const container =
-        document.getElementById("products");
+        document.getElementById(
+            "products"
+        );
+
 
     container.innerHTML = "";
 
 
     const search =
-        document.getElementById("search")
+        document.getElementById(
+            "search"
+        )
         .value
         .toLowerCase()
         .trim();
 
 
     const wear =
-        document.getElementById("wearFilter")
-        .value;
+        document.getElementById(
+            "wearFilter"
+        ).value;
 
 
     const minPrice =
         Number(
-            document.getElementById("minPrice").value
+            document.getElementById(
+                "minPrice"
+            ).value
         );
 
 
     const maxPrice =
         Number(
-            document.getElementById("maxPrice").value
+            document.getElementById(
+                "maxPrice"
+            ).value
         );
 
 
     const filtered =
-        products.filter(product => {
-
-            const searchMatch =
-                product.name
-                    .toLowerCase()
-                    .includes(search)
-                ||
-                product.weapon
-                    .toLowerCase()
-                    .includes(search);
+        products.filter(
+            product => {
 
 
-            const wearMatch =
-                wear === "all" ||
-                product.wear === wear;
+                const searchMatch =
+
+                    product.name
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    product.weapon
+                        .toLowerCase()
+                        .includes(search);
 
 
-            const priceMatch =
-                product.price >= minPrice &&
-                product.price <= maxPrice;
+                const wearMatch =
+
+                    wear === "all"
+
+                    ||
+
+                    product.wear === wear;
 
 
-            let categoryMatch = true;
+                const priceMatch =
 
-            if(currentCategory !== null){
+                    product.price >= minPrice
 
-                categoryMatch =
-                    product.category === currentCategory;
+                    &&
+
+                    product.price <= maxPrice;
+
+
+                let categoryMatch =
+                    true;
+
+
+                if(
+                    currentCategory !== null
+                ){
+
+                    categoryMatch =
+                        product.category
+                        ===
+                        currentCategory;
+
+                }
+
+
+                let weaponMatch =
+                    true;
+
+
+                if(
+                    currentCategory !== null
+                    &&
+                    selectedWeapons.length > 0
+                ){
+
+                    weaponMatch =
+                        selectedWeapons.includes(
+                            product.weapon
+                        );
+
+                }
+
+
+                return (
+
+                    searchMatch
+
+                    &&
+
+                    wearMatch
+
+                    &&
+
+                    priceMatch
+
+                    &&
+
+                    categoryMatch
+
+                    &&
+
+                    weaponMatch
+
+                );
 
             }
-
-
-            let weaponMatch = true;
-
-            if(
-                currentCategory !== null &&
-                selectedWeapons.length > 0
-            ){
-
-                weaponMatch =
-                    selectedWeapons.includes(
-                        product.weapon
-                    );
-
-            }
-
-
-            return (
-                searchMatch &&
-                wearMatch &&
-                priceMatch &&
-                categoryMatch &&
-                weaponMatch
-            );
-
-        });
+        );
 
 
     if(filtered.length === 0){
 
         container.innerHTML = `
+
             <div class="empty">
                 No skins found.
             </div>
+
         `;
 
         return;
@@ -2056,76 +2741,96 @@ function renderProducts(){
     }
 
 
-    filtered.forEach(product => {
-
-        const card =
-            document.createElement("div");
-
-        card.className = "product";
+    filtered.forEach(
+        product => {
 
 
-        card.innerHTML = `
-
-            <div class="product-image">
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
-                >
-
-            </div>
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-            <div class="product-info">
+            card.className =
+                "product";
 
-                <div class="product-name">
-                    ${product.name}
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        loading="lazy"
+                    >
+
                 </div>
 
 
-                <div class="product-weapon">
-                    ${product.weapon}
-                    •
-                    ${product.wear}
-                </div>
+                <div class="product-info">
 
-
-                <div class="product-bottom">
-
-                    <div class="price">
-                        ${formatPrice(product.price)}
+                    <div class="product-name">
+                        ${product.name}
                     </div>
 
 
-                    <button
-                        class="buy-button"
-                        onclick="openProduct(${product.id})"
-                    >
-                        BUY
-                    </button>
+                    <div class="product-weapon">
+
+                        ${product.weapon}
+
+                        •
+
+                        ${product.wear}
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="price">
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </div>
+
+
+                        <button
+                            class="buy-button"
+                            onclick="openProduct(${product.id})"
+                        >
+                            BUY
+                        </button>
+
+                    </div>
 
                 </div>
 
-            </div>
-
-        `;
+            `;
 
 
-        container.appendChild(card);
+            container.appendChild(
+                card
+            );
 
-    });
+        }
+    );
 
 }
 
 
-/* ================= PRODUCT MODAL ================= */
+/* =========================================================
+   PRODUCT MODAL
+========================================================= */
 
 function openProduct(id){
 
     currentProduct =
         products.find(
-            product => product.id === id
+            product =>
+                product.id === id
         );
 
 
@@ -2173,11 +2878,15 @@ function openProduct(id){
     document.getElementById(
         "modalPrice"
     ).textContent =
-        formatPrice(currentProduct.price);
+        formatPrice(
+            currentProduct.price
+        );
 
 
     document
-        .getElementById("productModal")
+        .getElementById(
+            "productModal"
+        )
         .classList.add("show");
 
 }
@@ -2186,15 +2895,25 @@ function openProduct(id){
 function closeProduct(){
 
     document
-        .getElementById("productModal")
-        .classList.remove("show");
+        .getElementById(
+            "productModal"
+        )
+        .classList.remove(
+            "show"
+        );
 
 }
 
 
-function closeModalOutside(event){
+function closeModalOutside(
+    event
+){
 
-    if(event.target.id === "productModal"){
+    if(
+        event.target.id
+        ===
+        "productModal"
+    ){
 
         closeProduct();
 
@@ -2203,7 +2922,9 @@ function closeModalOutside(event){
 }
 
 
-/* ================= CART ================= */
+/* =========================================================
+   CART
+========================================================= */
 
 function addToCart(){
 
@@ -2212,7 +2933,10 @@ function addToCart(){
     }
 
 
-    cart.push(currentProduct);
+    cart.push(
+        currentProduct
+    );
+
 
     updateCart();
 
@@ -2237,7 +2961,10 @@ function updateCart(){
 function renderCart(){
 
     const container =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
+
 
     container.innerHTML = "";
 
@@ -2245,9 +2972,11 @@ function renderCart(){
     if(cart.length === 0){
 
         container.innerHTML = `
+
             <div class="empty-cart">
                 Your cart is empty.
             </div>
+
         `;
 
 
@@ -2265,52 +2994,68 @@ function renderCart(){
     let total = 0;
 
 
-    cart.forEach((product,index) => {
-
-        total += product.price;
-
-
-        const item =
-            document.createElement("div");
-
-        item.className = "cart-item";
+    cart.forEach(
+        (product,index) => {
 
 
-        item.innerHTML = `
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-            >
+            total +=
+                product.price;
 
 
-            <div class="cart-item-info">
+            const item =
+                document.createElement(
+                    "div"
+                );
 
-                <div class="cart-item-name">
-                    ${product.name}
+
+            item.className =
+                "cart-item";
+
+
+            item.innerHTML = `
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+
+                <div class="cart-item-info">
+
+                    <div class="cart-item-name">
+
+                        ${product.name}
+
+                    </div>
+
+
+                    <div class="cart-item-price">
+
+                        ${formatPrice(
+                            product.price
+                        )}
+
+                    </div>
+
                 </div>
 
 
-                <div class="cart-item-price">
-                    ${formatPrice(product.price)}
-                </div>
+                <button
+                    class="remove-item"
+                    onclick="removeFromCart(${index})"
+                >
+                    REMOVE
+                </button>
 
-            </div>
-
-
-            <button
-                class="remove-item"
-                onclick="removeFromCart(${index})"
-            >
-                REMOVE
-            </button>
-
-        `;
+            `;
 
 
-        container.appendChild(item);
+            container.appendChild(
+                item
+            );
 
-    });
+        }
+    );
 
 
     document.getElementById(
@@ -2323,7 +3068,11 @@ function renderCart(){
 
 function removeFromCart(index){
 
-    cart.splice(index,1);
+    cart.splice(
+        index,
+        1
+    );
+
 
     updateCart();
 
@@ -2334,9 +3083,14 @@ function openCart(){
 
     renderCart();
 
+
     document
-        .getElementById("cartModal")
-        .classList.add("show");
+        .getElementById(
+            "cartModal"
+        )
+        .classList.add(
+            "show"
+        );
 
 }
 
@@ -2344,15 +3098,25 @@ function openCart(){
 function closeCart(){
 
     document
-        .getElementById("cartModal")
-        .classList.remove("show");
+        .getElementById(
+            "cartModal"
+        )
+        .classList.remove(
+            "show"
+        );
 
 }
 
 
-function closeCartOutside(event){
+function closeCartOutside(
+    event
+){
 
-    if(event.target.id === "cartModal"){
+    if(
+        event.target.id
+        ===
+        "cartModal"
+    ){
 
         closeCart();
 
@@ -2361,13 +3125,17 @@ function closeCartOutside(event){
 }
 
 
-/* ================= TELEGRAM ================= */
+/* =========================================================
+   TELEGRAM
+========================================================= */
 
 function finalizeOrder(){
 
     if(cart.length === 0){
 
-        alert("Your cart is empty.");
+        alert(
+            "Your cart is empty."
+        );
 
         return;
 
@@ -2375,30 +3143,48 @@ function finalizeOrder(){
 
 
     let message =
-        "WIZZY SKIN ORDER\n\n";
+        "WIZZY SHOP ORDER\n\n";
 
 
     let total = 0;
 
 
-    cart.forEach((product,index) => {
+    cart.forEach(
+        (product,index) => {
 
-        total += product.price;
+
+            total +=
+                product.price;
 
 
-        message +=
-            `${index + 1}. ${product.name} - ${formatPrice(product.price)}\n`;
+            message +=
 
-    });
+                `${index + 1}. `
+                +
+                `${product.name} - `
+                +
+                `${formatPrice(
+                    product.price
+                )}\n`;
+
+        }
+    );
 
 
     message +=
-        `\nTOTAL: ${formatPrice(total)}`;
+
+        `\nTOTAL: `
+        +
+        formatPrice(total);
 
 
     const telegram =
-        "https://t.me/WizyyShop?text=" +
-        encodeURIComponent(message);
+
+        "https://t.me/WizyyShop?text="
+        +
+        encodeURIComponent(
+            message
+        );
 
 
     window.open(
@@ -2409,11 +3195,17 @@ function finalizeOrder(){
 }
 
 
-/* ================= START ================= */
+/* =========================================================
+   START
+========================================================= */
 
 document
-    .getElementById("weaponBox")
-    .classList.remove("show");
+    .getElementById(
+        "weaponBox"
+    )
+    .classList.remove(
+        "show"
+    );
 
 
 renderProducts();
