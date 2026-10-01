@@ -2,385 +2,970 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>WIZZY SHOP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WIZZY SHOP - CS2 Skin Store</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
-:root{
-    --bg:#070707;
-    --panel:#101010;
-    --panel2:#151515;
-    --border:#292929;
-    --red:#e00000;
-    --red2:#ff3030;
-    --white:#fff;
-    --gray:#999;
-    --silver:#cfcfcf;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:
-        radial-gradient(circle at 50% -10%,#250000 0,#070707 38%),
-        #070707;
-    color:#fff;
     font-family:Arial,Helvetica,sans-serif;
+    color:#f5f5f5;
     min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #303030 0%,
+            #171717 24%,
+            #0c0c0c 55%,
+            #070707 100%
+        );
 }
 
-button,
-input,
-select{
-    font-family:inherit;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.035),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(220,0,0,.045),
+            transparent 25%
+        );
+
+    z-index:-1;
 }
 
-button{
-    cursor:pointer;
-}
 
-.hidden{
-    display:none!important;
-}
-
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
     position:sticky;
     top:0;
-    z-index:100;
-    height:72px;
-    background:rgba(5,5,5,.95);
-    border-bottom:1px solid #252525;
-    backdrop-filter:blur(15px);
+    z-index:1000;
+
+    height:82px;
+
+    background:rgba(18,18,18,.94);
+
+    border-bottom:1px solid #3b3b3b;
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.35);
+}
+
+.header-inner{
+    width:95%;
+    max-width:1450px;
+    height:100%;
+    margin:auto;
+
+    position:relative;
+
     display:flex;
     align-items:center;
     justify-content:center;
 }
 
-.header-logo{
-    font-size:27px;
-    font-weight:900;
-    letter-spacing:3px;
-    cursor:pointer;
-    user-select:none;
+
+/* HEADER LOGO */
+
+.logo-area{
+    text-align:center;
 }
 
-.header-logo .red{
-    color:var(--red);
+.logo{
+    font-size:29px;
+    font-weight:1000;
+    letter-spacing:5px;
+
+    color:#f5f5f5;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.08);
 }
 
-.header-logo .white{
-    color:#fff;
+.logo span{
+    color:#e00000;
+
+    text-shadow:
+        0 0 10px rgba(224,0,0,.5);
 }
 
-.header-left{
-    position:absolute;
-    left:22px;
-    display:flex;
-    align-items:center;
-    gap:12px;
+.subtitle{
+    margin-top:4px;
+
+    font-size:11px;
+    color:#999;
+
+    letter-spacing:1px;
 }
 
-.profile-button{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    border:1px solid #444;
-    background:#161616;
-    overflow:hidden;
-    padding:0;
-}
 
-.profile-button img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+/* CART BUTTON */
 
 .cart-button{
     position:absolute;
-    right:22px;
-    background:#111;
+    left:0;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:#1b1b1b;
+
+    border:1px solid #444;
+
     color:#fff;
-    border:1px solid #333;
+
     padding:11px 17px;
-    border-radius:9px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
     transition:.2s;
+
+    font-weight:bold;
 }
 
 .cart-button:hover{
-    border-color:var(--red);
-    color:#ff4040;
+    background:#e00000;
+    border-color:#ff3333;
+
+    box-shadow:
+        0 0 18px rgba(224,0,0,.25);
 }
 
 .cart-count{
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
+
     min-width:20px;
     height:20px;
-    padding:0 5px;
-    margin-left:5px;
-    border-radius:20px;
-    background:var(--red);
+
+    margin-left:7px;
+
+    background:#e00000;
+
+    border-radius:50%;
+
     font-size:11px;
 }
 
-/* HERO */
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-button{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#151515;
+    color:#ddd;
+    border:1px solid #3c3c3c;
+    padding:7px 11px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    transition:.2s;
+}
+.profile-button:hover{
+    color:#fff;
+    background:#202020;
+    border-color:#e00000;
+    box-shadow:0 0 18px rgba(224,0,0,.18);
+}
+.profile-button img{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #555;
+    background:#202020;
+}
+
+.profile-box{
+    max-width:520px;
+}
+.profile-avatar-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:18px;
+}
+.profile-avatar-preview{
+    width:105px;
+    height:105px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #555;
+    box-shadow:0 0 25px rgba(224,0,0,.16);
+    background:#161616;
+}
+.profile-file{
+    width:100%;
+    margin-bottom:14px;
+    color:#aaa;
+    font-size:11px;
+}
+.profile-field{
+    margin-bottom:12px;
+}
+.profile-field label{
+    display:block;
+    color:#aaa;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+.profile-field input{
+    width:100%;
+    height:44px;
+    background:#151515;
+    color:#fff;
+    border:1px solid #3c3c3c;
+    border-radius:7px;
+    padding:0 12px;
+    outline:none;
+}
+.profile-field input:focus{
+    border-color:#e00000;
+}
+.captcha-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+.captcha-code{
+    min-width:125px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:7px;
+    border:1px dashed #666;
+    background:repeating-linear-gradient(135deg,#151515,#151515 7px,#202020 8px,#151515 15px);
+    color:#fff;
+    font-weight:1000;
+    letter-spacing:5px;
+    user-select:none;
+}
+.captcha-refresh{
+    height:44px;
+    padding:0 12px;
+    border:1px solid #444;
+    background:#202020;
+    color:#fff;
+    border-radius:7px;
+    cursor:pointer;
+}
+.profile-error{
+    min-height:18px;
+    color:#ff3333;
+    font-size:11px;
+    margin:6px 0 10px;
+}
+.profile-save{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:7px;
+    background:#d00000;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+.profile-save:hover{background:#f00000;}
+
+.profile-required-box{
+    max-width:430px;
+    text-align:center;
+    animation:profileRequiredIn .25s ease;
+}
+.profile-required-icon{
+    width:82px;
+    height:82px;
+    margin:0 auto 18px;
+    border:3px solid #e00000;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#e00000;
+    font-size:48px;
+    font-weight:300;
+    animation:profileX .55s ease;
+}
+.profile-required-box h2{margin-bottom:8px;}
+.profile-required-box p{color:#999;font-size:12px;line-height:1.7;margin-bottom:18px;}
+.profile-required-btn{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:7px;
+    background:#d00000;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+@keyframes profileRequiredIn{
+    from{opacity:0;transform:scale(.88) translateY(10px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
+}
+@keyframes profileX{
+    0%{transform:scale(.3) rotate(-25deg);opacity:0}
+    70%{transform:scale(1.12) rotate(5deg);opacity:1}
+    100%{transform:scale(1) rotate(0)}
+}
+
+/* ADMIN PROFILES */
+.admin-section-title{
+    margin:24px 0 12px;
+    color:#aaa;
+    font-size:12px;
+    letter-spacing:2px;
+    font-weight:900;
+}
+.admin-profiles{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:12px;
+    margin-bottom:22px;
+}
+.admin-profile-card{
+    background:#141414;
+    border:1px solid #303030;
+    border-radius:10px;
+    padding:13px;
+    display:grid;
+    grid-template-columns:58px 1fr;
+    gap:12px;
+}
+.admin-profile-card img{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #555;
+}
+.admin-profile-name{font-weight:900;margin-bottom:5px;}
+.admin-profile-line{font-size:10px;color:#999;word-break:break-all;margin-top:4px;}
+.admin-profile-line b{color:#ddd;}
+.admin-profile-date{font-size:9px;color:#666;margin-top:7px;}
+.admin-no-profiles{color:#666;border:1px dashed #333;padding:20px;text-align:center;border-radius:9px;}
+.admin-order-profile{
+    margin-top:10px;
+    padding:10px;
+    border:1px solid #292929;
+    border-radius:7px;
+    background:#111;
+    font-size:10px;
+    color:#aaa;
+}
+.admin-order-profile b{color:#eee;}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+    width:95%;
+    max-width:1450px;
+
+    margin:32px auto 65px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
     text-align:center;
-    padding:48px 20px 28px;
+
+    margin:8px auto 38px;
+
+    padding:15px 10px 10px;
 }
 
 .hero-logo{
-    font-size:65px;
-    font-weight:1000;
-    letter-spacing:8px;
-}
-
-.hero-logo .red{
-    color:var(--red);
-}
-
-.hero-logo .white{
-    color:#fff;
-}
-
-.hero-sub{
-    color:#aaa;
-    margin-top:10px;
-    font-size:14px;
-}
-
-.search-wrap{
-    max-width:720px;
-    margin:28px auto 0;
     position:relative;
+
+    display:inline-block;
+
+    font-size:clamp(48px,8vw,105px);
+
+    font-weight:1000;
+
+    letter-spacing:8px;
+
+    line-height:1;
+
+    color:#f5f5f5;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,.12),
+        0 0 30px rgba(255,255,255,.05);
+}
+
+.hero-logo span{
+    color:#e00000;
+
+    text-shadow:
+        0 0 10px rgba(255,0,0,.75),
+        0 0 30px rgba(220,0,0,.35),
+        0 0 55px rgba(220,0,0,.15);
+}
+
+.hero-logo::before{
+    content:"";
+
+    position:absolute;
+
+    left:7%;
+    right:7%;
+
+    bottom:-13px;
+
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #777,
+            #e00000,
+            #777,
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px rgba(224,0,0,.4);
+}
+
+.hero-text{
+    margin-top:30px;
+
+    color:#bdbdbd;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+}
+
+.hero-text strong{
+    color:#e00000;
+}
+
+.hero-line{
+    width:90px;
+
+    height:2px;
+
+    margin:15px auto 0;
+
+    background:#555;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls{
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
 }
 
 .search{
+    flex:1;
+
+    min-width:240px;
+}
+
+.search input,
+select{
     width:100%;
-    height:50px;
-    border-radius:12px;
-    background:#111;
-    border:1px solid #303030;
-    color:#fff;
-    padding:0 18px;
-    outline:none;
-    transition:.2s;
-}
 
-.search:focus{
-    border-color:var(--red);
-    box-shadow:0 0 20px rgba(220,0,0,.15);
-}
+    height:46px;
 
-/* CATEGORIES */
+    background:#171717;
 
-.categories{
-    max-width:1250px;
-    margin:auto;
-    padding:15px 20px 0;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:9px;
-}
+    color:#f5f5f5;
 
-.category{
-    border:1px solid #303030;
-    background:#101010;
-    color:#bbb;
+    border:1px solid #3c3c3c;
+
     border-radius:8px;
-    padding:11px 15px;
-    font-size:12px;
-    font-weight:bold;
+
+    padding:0 15px;
+
+    outline:none;
+
     transition:.2s;
 }
 
-.category:hover{
+.search input::placeholder{
+    color:#777;
+}
+
+.search input:focus,
+select:focus{
     border-color:#777;
-    color:#fff;
-}
 
-.category.active{
-    background:var(--red);
-    border-color:var(--red);
-    color:#fff;
-    box-shadow:0 0 18px rgba(220,0,0,.2);
-}
-
-/* WEAPONS */
-
-.weapons{
-    max-width:1250px;
-    margin:15px auto 0;
-    padding:0 20px;
-    display:none;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:7px;
-}
-
-.weapons.show{
-    display:flex;
-}
-
-.weapon{
-    border:1px solid #282828;
-    background:#0e0e0e;
-    color:#aaa;
-    padding:8px 12px;
-    border-radius:7px;
-    font-size:11px;
-    transition:.2s;
-}
-
-.weapon:hover{
-    color:#fff;
-    border-color:#777;
-}
-
-.weapon.selected{
-    color:#fff;
-    background:#b50000;
-    border-color:#e00000;
-}
-
-/* FILTER */
-
-.filter-area{
-    max-width:1250px;
-    margin:28px auto 10px;
-    padding:0 20px;
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.035);
 }
 
 .filter-box{
-    background:#0e0e0e;
-    border:1px solid #262626;
-    border-radius:12px;
-    padding:17px;
+    width:190px;
 }
 
-.filter-title{
-    font-size:11px;
-    color:#888;
-    margin-bottom:12px;
-    text-transform:uppercase;
-    letter-spacing:1px;
+
+/* =========================================================
+   PRICE RANGE
+========================================================= */
+
+.price-filter{
+    width:100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1a1a1a,
+            #111
+        );
+
+    border:1px solid #353535;
+
+    border-radius:10px;
+
+    padding:14px 17px 18px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.2);
 }
 
-.wear-buttons{
+.price-filter-top{
     display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-}
 
-.wear-button{
-    background:#151515;
-    color:#aaa;
-    border:1px solid #2d2d2d;
-    border-radius:7px;
-    padding:7px 10px;
-    font-size:11px;
-}
-
-.wear-button.active{
-    background:#262626;
-    color:#fff;
-    border-color:#aaa;
-}
-
-.price-row{
-    margin-top:18px;
-}
-
-.price-values{
-    display:flex;
     justify-content:space-between;
-    color:#bbb;
-    font-size:12px;
-    margin-bottom:10px;
+
+    align-items:center;
+
+    margin-bottom:14px;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    color:#aaa;
+}
+
+#priceRangeText{
+    color:#e00000;
+
+    font-size:11px;
 }
 
 .range-container{
     position:relative;
-    height:24px;
-}
 
-.range-container input{
-    position:absolute;
     width:100%;
-    top:7px;
+
+    height:25px;
+}
+
+.range-track,
+.range-progress{
+    position:absolute;
+
+    top:10px;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    border-radius:10px;
+}
+
+.range-track{
+    background:#373737;
+}
+
+.range-progress{
+    background:
+        linear-gradient(
+            90deg,
+            #8b0000,
+            #e00000
+        );
+
+    box-shadow:
+        0 0 8px rgba(220,0,0,.4);
+}
+
+.range-container input[type="range"]{
+    position:absolute;
+
+    width:100%;
+    height:5px;
+
+    top:10px;
+    left:0;
+
+    margin:0;
+
     pointer-events:none;
+
     appearance:none;
+
     background:none;
+
+    outline:none;
 }
 
-.range-container input::-webkit-slider-thumb{
+.range-container input[type="range"]::-webkit-slider-thumb{
     appearance:none;
-    pointer-events:auto;
-    width:17px;
-    height:17px;
+
+    width:18px;
+    height:18px;
+
     border-radius:50%;
-    background:var(--red);
-    border:2px solid #fff;
+
+    background:#e00000;
+
+    border:3px solid #111;
+
+    box-shadow:
+        0 0 0 1px #e00000;
+
+    cursor:pointer;
+
+    pointer-events:auto;
 }
 
-.range-container input::-moz-range-thumb{
-    pointer-events:auto;
-    width:15px;
-    height:15px;
+.range-container input[type="range"]::-moz-range-thumb{
+    width:18px;
+    height:18px;
+
     border-radius:50%;
-    background:var(--red);
-    border:2px solid #fff;
+
+    background:#e00000;
+
+    border:3px solid #111;
+
+    box-shadow:
+        0 0 0 1px #e00000;
+
+    cursor:pointer;
+
+    pointer-events:auto;
 }
 
-/* PRODUCTS */
+.range-container input[type="range"]::-webkit-slider-runnable-track{
+    background:transparent;
+}
+
+.range-container input[type="range"]::-moz-range-track{
+    background:transparent;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.section-title{
+    font-size:13px;
+
+    color:#858585;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+
+    text-transform:uppercase;
+}
+
+.categories{
+    display:flex;
+
+    gap:9px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:20px;
+}
+
+.category{
+    background:#181818;
+
+    color:#bdbdbd;
+
+    border:1px solid #3b3b3b;
+
+    padding:11px 17px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:.5px;
+
+    transition:.2s;
+}
+
+.category:hover{
+    background:#222;
+
+    border-color:#777;
+
+    color:#fff;
+}
+
+.category.active{
+    background:#e00000;
+
+    border-color:#ff3333;
+
+    color:#fff;
+
+    box-shadow:
+        0 0 18px rgba(220,0,0,.2);
+}
+
+
+/* =========================================================
+   WEAPON BOX
+========================================================= */
+
+.weapon-box{
+    display:none;
+
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #111
+        );
+
+    border:1px solid #353535;
+
+    border-radius:10px;
+
+    padding:18px;
+
+    margin-bottom:28px;
+}
+
+.weapon-box.show{
+    display:block;
+
+    animation:fadeDown .2s ease;
+}
+
+@keyframes fadeDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-5px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.weapon-title{
+    color:#888;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    margin-bottom:13px;
+}
+
+.weapon-list{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+}
+
+.weapon{
+    padding:9px 13px;
+
+    border-radius:6px;
+
+    border:1px solid #383838;
+
+    background:#151515;
+
+    color:#aaa;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    transition:.18s;
+}
+
+.weapon:hover{
+    color:#fff;
+
+    border-color:#777;
+
+    background:#202020;
+}
+
+.weapon.active{
+    background:#a80000;
+
+    border-color:#e00000;
+
+    color:#fff;
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 .products{
-    max-width:1250px;
-    margin:25px auto 70px;
-    padding:0 20px;
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
-    gap:16px;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(235px,1fr)
+        );
+
+    gap:18px;
 }
 
 .product{
-    background:linear-gradient(145deg,#151515,#0d0d0d);
-    border:1px solid #292929;
-    border-radius:13px;
+    background:
+        linear-gradient(
+            145deg,
+            #1a1a1a,
+            #101010
+        );
+
+    border:1px solid #333;
+
+    border-radius:12px;
+
     overflow:hidden;
-    transition:.22s;
+
+    transition:.25s;
+
+    position:relative;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.22);
 }
 
 .product:hover{
-    transform:translateY(-3px);
-    border-color:#555;
-    box-shadow:0 15px 35px rgba(0,0,0,.35);
+    transform:translateY(-5px);
+
+    border-color:#777;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.5),
+        0 0 20px rgba(224,0,0,.08);
 }
 
 .product-image{
-    height:175px;
-    background:#0b0b0b;
+    height:185px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #282828 0%,
+            #161616 45%,
+            #0b0b0b 100%
+        );
+
     overflow:hidden;
+
+    border-bottom:1px solid #292929;
 }
 
 .product-image img{
-    width:100%;
-    height:100%;
+    width:90%;
+    height:90%;
+
     object-fit:contain;
-    padding:16px;
+
+    transition:.3s;
+}
+
+.product:hover .product-image img{
+    transform:scale(1.06);
 }
 
 .product-info{
@@ -389,65 +974,103 @@ header{
 
 .product-name{
     font-size:15px;
-    font-weight:bold;
+
+    font-weight:800;
+
+    margin-bottom:7px;
 }
 
-.product-meta{
-    display:flex;
-    justify-content:space-between;
-    margin-top:9px;
-    color:#888;
+.product-weapon{
+    color:#777;
+
     font-size:11px;
-}
 
-.product-price{
-    margin-top:13px;
-    font-size:17px;
-    font-weight:bold;
-    color:#fff;
+    margin-bottom:15px;
 }
 
 .product-bottom{
-    margin-top:13px;
     display:flex;
-    gap:7px;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
 }
 
-.buy-button,
-.details-button{
-    flex:1;
-    border-radius:8px;
-    padding:10px 7px;
-    font-size:11px;
-    font-weight:bold;
+.price{
+    color:#e00000;
+
+    font-size:15px;
+
+    font-weight:900;
 }
 
 .buy-button{
-    background:var(--red);
+    border:0;
+
+    background:#d00000;
+
     color:#fff;
-    border:1px solid var(--red);
+
+    padding:9px 14px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    font-size:11px;
+
+    transition:.2s;
 }
 
 .buy-button:hover{
-    background:#ff1d1d;
+    background:#f00000;
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 15px rgba(224,0,0,.2);
 }
 
-.details-button{
-    background:#151515;
-    color:#bbb;
-    border:1px solid #333;
+.empty{
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    color:#666;
+
+    border:1px dashed #3b3b3b;
+
+    border-radius:10px;
 }
 
-/* MODAL */
+
+/* =========================================================
+   MODALS
+========================================================= */
 
 .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.78);
-    z-index:500;
     display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:3000;
+
+    background:rgba(0,0,0,.78);
+
+    backdrop-filter:blur(9px);
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
 }
 
@@ -455,493 +1078,451 @@ header{
     display:flex;
 }
 
-.modal-card{
-    width:min(620px,100%);
-    max-height:90vh;
-    overflow:auto;
-    background:#111;
-    border:1px solid #333;
-    border-radius:15px;
-    box-shadow:0 25px 80px #000;
-    padding:24px;
+.modal-content{
+    width:100%;
+
+    max-width:570px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1b1b,
+            #0d0d0d
+        );
+
+    border:1px solid #444;
+
+    border-radius:14px;
+
+    padding:25px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65);
+
+    animation:modalIn .2s ease;
 }
 
-.modal-title{
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+.modal-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.modal-header h2{
     font-size:20px;
-    font-weight:bold;
 }
 
-.modal-close{
-    float:right;
-    border:0;
-    background:none;
+.close{
+    width:34px;
+    height:34px;
+
+    border-radius:7px;
+
+    border:1px solid #444;
+
+    background:#171717;
+
     color:#aaa;
-    font-size:25px;
+
+    cursor:pointer;
+
+    font-size:20px;
 }
 
-.modal-close:hover{
+.close:hover{
     color:#fff;
+
+    background:#e00000;
+
+    border-color:#e00000;
 }
 
 .modal-image{
-    height:250px;
-    margin-top:15px;
-    background:#090909;
-    border-radius:10px;
+    height:230px;
+
     display:flex;
-    align-items:center;
+
     justify-content:center;
+
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #252525,
+            #090909
+        );
+
+    border-radius:10px;
+
+    margin-bottom:20px;
 }
 
 .modal-image img{
-    max-width:100%;
-    max-height:100%;
+    max-width:90%;
+    max-height:90%;
+
     object-fit:contain;
 }
 
-.field{
-    margin-top:15px;
+.modal-details{
+    display:grid;
+
+    gap:10px;
+
+    margin-bottom:20px;
 }
 
-.field label{
-    display:block;
-    color:#aaa;
-    font-size:11px;
-    margin-bottom:7px;
+.detail-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:11px;
+
+    background:#181818;
+
+    border:1px solid #292929;
+
+    border-radius:6px;
 }
 
-.field input,
-.field select{
-    width:100%;
-    height:43px;
-    border:1px solid #333;
-    background:#090909;
-    color:#fff;
-    border-radius:8px;
-    padding:0 12px;
-    outline:none;
+.detail-label{
+    color:#777;
 }
 
-.field input:focus,
-.field select:focus{
-    border-color:var(--red);
-}
-
-.modal-action{
-    margin-top:18px;
-    width:100%;
-    height:46px;
-    border:0;
-    border-radius:9px;
-    background:var(--red);
-    color:#fff;
+.detail-value{
     font-weight:bold;
 }
 
-.modal-action:hover{
-    background:#ff1d1d;
-}
-
-/* PROFILE */
-
-.profile-top{
-    text-align:center;
-}
-
-.profile-avatar{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #444;
-    background:#202020;
-}
-
-.profile-upload{
-    display:inline-block;
-    margin-top:10px;
-    color:#bbb;
-    font-size:11px;
-    cursor:pointer;
-}
-
-.profile-upload input{
-    display:none;
-}
-
-.captcha-row{
+.modal-actions{
     display:flex;
-    gap:8px;
+
+    gap:10px;
 }
 
-.captcha-box{
+.modal-actions button{
     flex:1;
-    height:43px;
-    border-radius:8px;
-    background:
-        repeating-linear-gradient(
-            135deg,
-            #181818 0,
-            #181818 5px,
-            #242424 5px,
-            #242424 10px
-        );
-    border:1px solid #444;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:21px;
-    font-weight:900;
-    letter-spacing:6px;
-    user-select:none;
-}
 
-.captcha-refresh{
-    width:95px;
-    border:1px solid #333;
-    background:#191919;
-    color:#bbb;
-    border-radius:8px;
-}
+    padding:13px;
 
-.error{
-    min-height:20px;
-    margin-top:10px;
-    color:#ff4141;
-    font-size:12px;
-}
+    border-radius:7px;
 
-/* PROFILE REQUIRED */
+    cursor:pointer;
 
-.required-icon{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    border:4px solid var(--red);
-    color:var(--red);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
     font-weight:bold;
-    margin:0 auto 20px;
-    animation:pulse .8s infinite alternate;
 }
 
-@keyframes pulse{
-    from{transform:scale(1)}
-    to{transform:scale(1.08)}
+.add-cart{
+    background:#d00000;
+
+    color:#fff;
+
+    border:0;
 }
 
-.required-content{
-    text-align:center;
+.add-cart:hover{
+    background:#f00000;
 }
 
-/* CART */
+.cancel{
+    background:#1b1b1b;
+
+    color:#aaa;
+
+    border:1px solid #444!important;
+}
+
+.cancel:hover{
+    color:#fff;
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
 
 .cart-items{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-    margin-top:18px;
+    max-height:350px;
+
+    overflow:auto;
+
+    margin-bottom:20px;
 }
 
 .cart-item{
     display:flex;
+
     align-items:center;
-    gap:10px;
-    background:#0b0b0b;
-    border:1px solid #272727;
-    border-radius:9px;
-    padding:9px;
+
+    gap:12px;
+
+    background:#171717;
+
+    border:1px solid #292929;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    margin-bottom:8px;
 }
 
 .cart-item img{
-    width:65px;
-    height:50px;
+    width:70px;
+    height:55px;
+
     object-fit:contain;
-    background:#080808;
-    border-radius:6px;
+
+    background:#0b0b0b;
+
+    border-radius:5px;
 }
 
-.cart-item-main{
+.cart-item-info{
     flex:1;
 }
 
 .cart-item-name{
-    font-size:12px;
     font-weight:bold;
+
+    font-size:13px;
 }
 
 .cart-item-price{
-    color:#999;
-    font-size:11px;
-    margin-top:5px;
+    color:#e00000;
+
+    font-size:12px;
+
+    margin-top:4px;
 }
 
-.remove-button{
-    border:0;
-    background:#240000;
-    color:#ff5555;
-    border-radius:6px;
-    padding:7px;
-    font-size:10px;
+.remove-item{
+    background:#242424;
+
+    border:1px solid #444;
+
+    color:#e00000;
+
+    padding:7px 9px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+}
+
+.remove-item:hover{
+    background:#e00000;
+
+    color:#fff;
+
+    border-color:#e00000;
 }
 
 .cart-total{
-    border-top:1px solid #292929;
-    margin-top:15px;
-    padding-top:15px;
     display:flex;
+
     justify-content:space-between;
+
+    font-size:18px;
+
     font-weight:bold;
+
+    padding:15px 0;
+
+    border-top:1px solid #353535;
 }
 
-/* ADMIN */
+.finalize{
+    width:100%;
 
-.admin-card{
-    width:min(1100px,100%);
-}
+    padding:14px;
 
-.admin-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:18px;
-}
+    border:0;
 
-.admin-stat{
-    background:#0a0a0a;
-    border:1px solid #292929;
-    border-radius:10px;
-    padding:17px;
-}
-
-.admin-stat-label{
-    color:#777;
-    font-size:10px;
-}
-
-.admin-stat-value{
-    margin-top:7px;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.admin-section{
-    margin-top:25px;
-}
-
-.admin-section-title{
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-.admin-orders{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.admin-order{
-    background:#0a0a0a;
-    border:1px solid #292929;
-    border-radius:10px;
-    padding:15px;
-}
-
-.admin-order-head{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.admin-order-id{
-    color:#ff4444;
-    font-weight:bold;
-}
-
-.admin-order-date{
-    color:#777;
-    font-size:10px;
-}
-
-.admin-order-items{
-    margin-top:12px;
-    color:#bbb;
-    font-size:11px;
-    line-height:1.8;
-}
-
-.admin-order-profile{
-    margin-top:12px;
-    padding:10px;
-    background:#101010;
     border-radius:7px;
-    color:#999;
-    font-size:11px;
-    line-height:1.8;
-}
 
-.admin-order-total{
-    margin-top:12px;
-    font-weight:bold;
-}
+    background:#e00000;
 
-.admin-order-actions{
-    margin-top:12px;
-    display:flex;
-    gap:8px;
-}
-
-.admin-status{
-    flex:1;
-    height:38px;
-    border:1px solid #333;
-    border-radius:7px;
-    background:#151515;
     color:#fff;
+
+    font-weight:900;
+
+    cursor:pointer;
 }
 
-.admin-delete,
-.admin-clear{
-    border:1px solid #500;
-    background:#240000;
-    color:#ff5555;
-    border-radius:7px;
-    padding:0 13px;
+.finalize:hover{
+    background:#ff1111;
+
+    box-shadow:
+        0 0 18px rgba(224,0,0,.2);
 }
 
-.admin-profile-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
-    gap:10px;
-}
-
-.admin-profile{
-    background:#0a0a0a;
-    border:1px solid #292929;
-    border-radius:10px;
-    padding:12px;
-    display:flex;
-    gap:12px;
-}
-
-.admin-profile img{
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.admin-profile-name{
-    font-weight:bold;
-}
-
-.admin-profile-info{
-    color:#999;
-    font-size:10px;
-    line-height:1.8;
-    margin-top:4px;
-    word-break:break-all;
-}
-
-.admin-bottom{
-    margin-top:20px;
-    display:flex;
-    justify-content:flex-end;
-    gap:8px;
-}
-
-.admin-empty{
-    color:#666;
+.empty-cart{
     text-align:center;
-    padding:25px;
-    border:1px dashed #292929;
-    border-radius:10px;
+
+    color:#666;
+
+    padding:45px 10px;
 }
 
-/* FOOTER */
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
-    border-top:1px solid #222;
-    padding:35px 20px;
+    border-top:1px solid #333;
+
+    background:
+        linear-gradient(
+            180deg,
+            #111,
+            #080808
+        );
+
+    padding:38px 20px;
+
     text-align:center;
+}
+
+.footer-logo{
+    font-size:20px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    color:#fff;
+}
+
+.footer-logo span{
+    color:#e00000;
+}
+
+.footer-text{
+    margin-top:8px;
+
     color:#777;
+
+    font-size:12px;
 }
 
-footer strong{
-    color:#fff;
+.telegram{
+    display:inline-block;
+
+    margin-top:16px;
+
+    color:#d00000;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    font-weight:bold;
 }
 
-.footer-red{
-    color:var(--red);
+.telegram:hover{
+    color:#ff2222;
 }
 
-/* TOAST */
 
-.toast{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:1000;
-    background:#151515;
-    border:1px solid #333;
-    color:#fff;
-    padding:13px 17px;
-    border-radius:9px;
-    opacity:0;
-    transform:translateY(20px);
-    pointer-events:none;
-    transition:.25s;
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:8px;
 }
 
-.toast.show{
-    opacity:1;
-    transform:translateY(0);
+::-webkit-scrollbar-track{
+    background:#0b0b0b;
 }
 
-/* MOBILE */
+::-webkit-scrollbar-thumb{
+    background:#444;
+
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#e00000;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:700px){
 
     header{
-        height:62px;
+        height:76px;
     }
 
-    .header-logo{
-        font-size:20px;
+    .logo{
+        font-size:22px;
+        letter-spacing:3px;
     }
 
-    .header-left{
-        left:10px;
+    .subtitle{
+        font-size:8px;
     }
 
     .cart-button{
-        right:10px;
-        padding:9px;
-        font-size:10px;
+        padding:8px 10px;
+        font-size:9px;
+    }
+
+    main{
+        width:92%;
     }
 
     .hero{
-        padding-top:35px;
+        margin-top:5px;
+        margin-bottom:28px;
     }
 
     .hero-logo{
-        font-size:42px;
-        letter-spacing:5px;
+        font-size:45px;
+        letter-spacing:3px;
     }
 
-    .admin-stats{
-        grid-template-columns:1fr;
+    .hero-text{
+        font-size:11px;
+        letter-spacing:.8px;
+    }
+
+    .filter-box{
+        width:100%;
     }
 
     .products{
-        grid-template-columns:repeat(2,1fr);
-        padding:0 10px;
-        gap:9px;
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+
+        gap:10px;
     }
 
     .product-image{
@@ -956,16 +1537,33 @@ footer strong{
         font-size:12px;
     }
 
-    .product-price{
-        font-size:13px;
-    }
-
-    .buy-button,
-    .details-button{
+    .product-weapon{
         font-size:9px;
     }
 
+    .price{
+        font-size:11px;
+    }
+
+    .buy-button{
+        padding:7px 9px;
+        font-size:9px;
+    }
+
+    .price-filter-top{
+        font-size:10px;
+    }
+
+    #priceRangeText{
+        font-size:10px;
+    }
+
 }
+
+
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
 
 @media(max-width:430px){
 
@@ -974,285 +1572,558 @@ footer strong{
     }
 
     .hero-logo{
-        font-size:35px;
+        font-size:39px;
+    }
+
+    .cart-button{
+        position:relative;
+
+        left:auto;
+        top:auto;
+
+        transform:none;
+    }
+
+    .header-inner{
+        justify-content:space-between;
+    }
+
+    .logo-area{
+        text-align:left;
     }
 
 }
+
+
+/* =========================================================
+   PROFILE SYSTEM
+========================================================= */
+function escapeHtml(value){
+    return String(value == null ? "" : value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function getCurrentProfile(){
+    try{
+        return JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)) || null;
+    }catch(e){ return null; }
+}
+
+function getProfiles(){
+    try{
+        return JSON.parse(localStorage.getItem(PROFILES_STORAGE_KEY)) || [];
+    }catch(e){ return []; }
+}
+
+function saveProfiles(profiles){
+    localStorage.setItem(PROFILES_STORAGE_KEY,JSON.stringify(profiles));
+}
+
+function isProfileComplete(){
+    const profile=getCurrentProfile();
+    return !!(
+        profile &&
+        profile.name &&
+        profile.name.trim() &&
+        profile.tradeLink &&
+        /^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(profile.tradeLink)
+    );
+}
+
+function generateCaptcha(){
+    const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    currentCaptcha="";
+    for(let i=0;i<5;i++) currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
+    const box=document.getElementById("captchaBox");
+    if(box) box.textContent=currentCaptcha;
+}
+
+function openProfile(){
+    const profile=getCurrentProfile();
+    document.getElementById("profileName").value=profile?.name || "";
+    document.getElementById("profileTradeLink").value=profile?.tradeLink || "";
+    document.getElementById("profilePhone").value=profile?.phone || "";
+    document.getElementById("profileTelegram").value=profile?.telegram || "";
+    profileImageData=profile?.image || DEFAULT_AVATAR;
+    document.getElementById("profileAvatarPreview").src=profileImageData;
+    document.getElementById("profileError").textContent="";
+    document.getElementById("captchaInput").value="";
+    generateCaptcha();
+    document.getElementById("profileModal").classList.add("show");
+}
+
+function closeProfile(){
+    document.getElementById("profileModal").classList.remove("show");
+}
+
+function closeProfileOutside(event){
+    if(event.target.id==="profileModal") closeProfile();
+}
+
+function closeProfileRequired(){
+    document.getElementById("profileRequiredModal").classList.remove("show");
+}
+
+function showProfileRequired(){
+    document.getElementById("profileRequiredModal").classList.add("show");
+}
+
+function previewProfileImage(event){
+    const file=event.target.files && event.target.files[0];
+    if(!file) return;
+    if(file.size > 2*1024*1024){
+        document.getElementById("profileError").textContent="Profile picture must be 2MB or smaller.";
+        event.target.value="";
+        return;
+    }
+    const reader=new FileReader();
+    reader.onload=function(){
+        profileImageData=reader.result;
+        document.getElementById("profileAvatarPreview").src=profileImageData;
+        document.getElementById("profileError").textContent="";
+    };
+    reader.readAsDataURL(file);
+}
+
+function saveProfile(){
+    const name=document.getElementById("profileName").value.trim();
+    const tradeLink=document.getElementById("profileTradeLink").value.trim();
+    const phone=document.getElementById("profilePhone").value.trim();
+    const telegram=document.getElementById("profileTelegram").value.trim();
+    const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
+    const error=document.getElementById("profileError");
+
+    if(!name){ error.textContent="Please enter your name."; return; }
+    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
+        error.textContent="Please enter a valid Steam Trade Link."; return;
+    }
+    if(captcha!==currentCaptcha){
+        error.textContent="Captcha is incorrect.";
+        generateCaptcha();
+        document.getElementById("captchaInput").value="";
+        return;
+    }
+
+    const old=getCurrentProfile();
+    const profile={
+        id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
+        name:name,
+        tradeLink:tradeLink,
+        phone:phone,
+        telegram:telegram,
+        image:profileImageData || DEFAULT_AVATAR,
+        createdAt:old?.createdAt || new Date().toLocaleString("en-US"),
+        updatedAt:new Date().toLocaleString("en-US")
+    };
+
+    localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
+    const profiles=getProfiles();
+    const idx=profiles.findIndex(x=>x.id===profile.id);
+    if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
+    saveProfiles(profiles);
+    updateHeaderAvatar();
+    closeProfile();
+}
+
+function updateHeaderAvatar(){
+    const img=document.getElementById("headerAvatar");
+    if(img) img.src=(getCurrentProfile()?.image || DEFAULT_AVATAR);
+}
+
+function registerLogoClick(){
+    logoClickCount++;
+    clearTimeout(logoClickTimer);
+    logoClickTimer=setTimeout(function(){logoClickCount=0;},900);
+    if(logoClickCount>=5){
+        logoClickCount=0;
+        openAdminLogin();
+    }
+}
+
+/* =========================================================
+   ADMIN PANEL
+========================================================= */
+
+
+.admin-login-box{
+    max-width:430px;
+}
+.admin-login-note{
+    color:#777;
+    font-size:11px;
+    line-height:1.7;
+    margin-bottom:14px;
+}
+.admin-password{
+    width:100%;
+    height:46px;
+    background:#111;
+    color:#fff;
+    border:1px solid #3c3c3c;
+    border-radius:8px;
+    padding:0 14px;
+    outline:none;
+    margin-bottom:10px;
+}
+.admin-password:focus{
+    border-color:#e00000;
+    box-shadow:0 0 0 2px rgba(224,0,0,.08);
+}
+.admin-error{
+    min-height:18px;
+    color:#ff3b3b;
+    font-size:11px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+.admin-enter{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:7px;
+    background:#e00000;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+.admin-enter:hover{
+    background:#ff1111;
+}
+
+.admin-panel{
+    width:100%;
+    max-width:1100px;
+    max-height:88vh;
+    overflow:auto;
+}
+.admin-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+.admin-topbar h2{
+    margin:0;
+}
+.admin-close-btn{
+    background:#171717;
+    border:1px solid #444;
+    color:#aaa;
+    padding:8px 12px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.admin-close-btn:hover{
+    color:#fff;
+    border-color:#e00000;
+}
+.admin-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:18px;
+}
+.admin-stat{
+    background:#151515;
+    border:1px solid #303030;
+    border-radius:9px;
+    padding:16px;
+}
+.admin-stat-label{
+    color:#777;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:7px;
+}
+.admin-stat-value{
+    color:#fff;
+    font-size:19px;
+    font-weight:900;
+}
+.admin-orders{
+    display:grid;
+    gap:10px;
+}
+.admin-order{
+    background:#151515;
+    border:1px solid #303030;
+    border-radius:9px;
+    padding:14px;
+}
+.admin-order-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+.admin-order-id{
+    font-weight:900;
+    color:#fff;
+}
+.admin-order-date{
+    color:#777;
+    font-size:10px;
+}
+.admin-order-items{
+    color:#bbb;
+    font-size:12px;
+    line-height:1.8;
+    margin-bottom:10px;
+}
+.admin-order-total{
+    color:#e00000;
+    font-size:14px;
+    font-weight:900;
+}
+.admin-order-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+.admin-status{
+    background:#101010;
+    color:#fff;
+    border:1px solid #444;
+    border-radius:6px;
+    padding:8px 10px;
+}
+.admin-delete{
+    background:#222;
+    color:#ff4444;
+    border:1px solid #444;
+    border-radius:6px;
+    padding:8px 10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.admin-delete:hover{
+    background:#e00000;
+    color:#fff;
+    border-color:#e00000;
+}
+.admin-clear{
+    background:#222;
+    color:#ff5555;
+    border:1px solid #4a4a4a;
+    border-radius:7px;
+    padding:10px 13px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.admin-clear:hover{
+    background:#e00000;
+    color:#fff;
+}
+.admin-empty{
+    text-align:center;
+    padding:45px 15px;
+    color:#666;
+    border:1px dashed #3b3b3b;
+    border-radius:9px;
+}
+@media(max-width:700px){
+    .admin-button{
+        position:relative;
+        left:auto;
+        top:auto;
+        transform:none;
+        padding:8px 10px;
+        font-size:9px;
+    }
+    .admin-stats{
+        grid-template-columns:1fr;
+    }
+}
+
+
+.profile-button{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#151515;
+    color:#ddd;
+    border:1px solid #3c3c3c;
+    padding:7px 11px 7px 7px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    transition:.2s;
+}
+.profile-button img{
+    width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #555;
+}
+.profile-button:hover{background:#e00000;border-color:#ff3333;color:#fff;}
+.profile-form{display:grid;gap:10px;}
+.profile-field{display:grid;gap:6px;}
+.profile-field label{font-size:10px;color:#888;letter-spacing:1px;font-weight:bold;}
+.profile-field input{width:100%;height:44px;background:#111;color:#fff;border:1px solid #3c3c3c;border-radius:8px;padding:0 13px;outline:none;}
+.profile-field input:focus{border-color:#e00000;box-shadow:0 0 0 2px rgba(224,0,0,.08);}
+.profile-help{font-size:10px;color:#777;line-height:1.6;}
+.profile-avatar-row{display:flex;align-items:center;gap:14px;}
+.profile-avatar-preview{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #444;background:#111;}
+.profile-file{font-size:10px;color:#aaa;}
+.captcha-row{display:flex;gap:8px;align-items:center;}
+.captcha-box{min-width:130px;height:44px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#252525 0,#252525 5px,#171717 5px,#171717 10px);border:1px solid #555;border-radius:8px;color:#fff;font-weight:1000;letter-spacing:5px;font-size:17px;text-decoration:line-through;}
+.captcha-refresh{height:44px;padding:0 12px;background:#222;color:#ddd;border:1px solid #444;border-radius:8px;cursor:pointer;font-weight:bold;}
+.profile-error{min-height:18px;color:#ff4444;font-size:11px;font-weight:bold;}
+.profile-required-box{text-align:center;padding:10px 0 2px;}
+.profile-required-icon{width:72px;height:72px;border:4px solid #e00000;border-radius:50%;margin:0 auto 16px;position:relative;box-shadow:0 0 25px rgba(224,0,0,.2);animation:profilePop .25s ease;}
+.profile-required-icon:before,.profile-required-icon:after{content:"";position:absolute;left:31px;top:14px;width:4px;height:38px;background:#e00000;border-radius:4px;transform:rotate(45deg);}
+.profile-required-icon:after{transform:rotate(-45deg);}
+@keyframes profilePop{from{transform:scale(.65);opacity:.2}to{transform:scale(1);opacity:1}}
+.profile-required-title{font-size:18px;font-weight:1000;color:#fff;letter-spacing:1px;}
+.profile-required-text{font-size:11px;color:#888;margin:8px 0 18px;}
+.admin-profiles-title{font-size:12px;color:#888;letter-spacing:2px;margin:22px 0 10px;font-weight:900;}
+.admin-profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:18px;}
+.admin-profile-card{display:flex;gap:12px;background:#151515;border:1px solid #303030;border-radius:9px;padding:12px;}
+.admin-profile-card img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid #555;background:#0b0b0b;flex:0 0 auto;}
+.admin-profile-name{font-weight:900;margin-bottom:6px;}
+.admin-profile-line{font-size:10px;color:#aaa;line-height:1.7;word-break:break-word;}
+.admin-profile-line b{color:#777;}
+.admin-profile-date{font-size:9px;color:#666;margin-top:5px;}
+.admin-order-profile{margin:10px 0;padding:10px;background:#101010;border:1px solid #292929;border-radius:7px;font-size:10px;color:#aaa;line-height:1.8;}
+@media(max-width:700px){.profile-button{position:relative;right:auto;top:auto;transform:none;padding:5px 7px;font-size:8px}.profile-button img{width:25px;height:25px}.cart-button{position:relative;left:auto;top:auto;transform:none;padding:8px 10px;font-size:9px}.header-inner{justify-content:space-between}.logo-area{text-align:center}.admin-profiles{grid-template-columns:1fr}}
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header>
 
-    <div class="header-left">
+    <div class="header-inner">
 
-        <button
-            class="profile-button"
-            onclick="openProfile()"
-            title="Profile">
+        <div class="logo-area">
 
-            <img
-                id="headerAvatar"
-                alt="Profile">
+            <div class="logo" onclick="registerLogoClick()" title="">
+                <span>WIZZY</span> SHOP
+            </div>
+
+            <div class="subtitle">
+                فروشگاه تخصصی اسکین‌های CS2
+            </div>
+
+        </div>
+
+
+
+<button
+            class="cart-button"
+            onclick="openCart()"
+        >
+
+            CART
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
 
         </button>
 
-    </div>
-
-
-    <div
-        class="header-logo"
-        onclick="registerLogoClick()">
-
-        <span class="red">WIZZY</span>
-        <span class="white">SHOP</span>
+        <button class="profile-button" onclick="openProfile()" title="PROFILE">
+            <img id="headerAvatar" alt="Profile">
+            <span>PROFILE</span>
+        </button>
 
     </div>
-
-
-    <button
-        class="cart-button"
-        onclick="openCart()">
-
-        CART
-        <span
-            id="cartCount"
-            class="cart-count">
-            0
-        </span>
-
-    </button>
 
 </header>
 
 
-<section class="hero">
 
-    <div class="hero-logo">
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-        <span class="red">WIZZY</span>
-        <span class="white">SKIN</span>
-
-    </div>
-
-    <div class="hero-sub">
-        فروشگاه تخصصی اسکین‌های CS2
-    </div>
-
-    <div class="hero-sub">
-        سرعت تحویل بالا و امن
-    </div>
+<main>
 
 
-    <div class="search-wrap">
+    <!-- HERO -->
 
-        <input
-            id="searchInput"
-            class="search"
-            type="text"
-            placeholder="Search skins..."
-            oninput="renderProducts()">
+    <section class="hero">
 
-    </div>
-
-</section>
-
-
-<section
-    id="categories"
-    class="categories">
-</section>
-
-
-<section
-    id="weapons"
-    class="weapons">
-</section>
-
-
-<section class="filter-area">
-
-    <div class="filter-box">
-
-        <div class="filter-title">
-            Wear
+        <div class="hero-logo">
+            <span>WIZZY</span> SKIN
         </div>
 
-        <div class="wear-buttons">
+        <div class="hero-text">
+            سرعت تحویل بالا و <strong>امن</strong>
+        </div>
 
-            <button
-                class="wear-button active"
-                data-wear="ALL"
-                onclick="setWear('ALL',this)">
-                ALL
-            </button>
+        <div class="hero-line"></div>
 
-            <button
-                class="wear-button"
-                data-wear="FN"
-                onclick="setWear('FN',this)">
-                Factory New
-            </button>
+    </section>
 
-            <button
-                class="wear-button"
-                data-wear="MW"
-                onclick="setWear('MW',this)">
-                Minimal Wear
-            </button>
 
-            <button
-                class="wear-button"
-                data-wear="FT"
-                onclick="setWear('FT',this)">
-                Field-Tested
-            </button>
 
-            <button
-                class="wear-button"
-                data-wear="WW"
-                onclick="setWear('WW',this)">
-                Well-Worn
-            </button>
+    <!-- SEARCH -->
 
-            <button
-                class="wear-button"
-                data-wear="BS"
-                onclick="setWear('BS',this)">
-                Battle-Scarred
-            </button>
+    <div class="controls">
+
+        <div class="search">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search skins, weapons or accessories..."
+                oninput="renderProducts()"
+            >
 
         </div>
 
 
-        <div class="price-row">
+        <div class="filter-box">
 
-            <div class="price-values">
+            <select
+                id="wearFilter"
+                onchange="renderProducts()"
+            >
 
-                <span id="minPriceText">
-                    0 Toman
-                </span>
+                <option value="all">
+                    All Wear
+                </option>
 
-                <span id="maxPriceText">
-                    0 Toman
-                </span>
-
-            </div>
-
-
-            <div class="range-container">
-
-                <input
-                    id="priceMin"
-                    type="range"
-                    min="0"
-                    max="5200000"
-                    value="0"
-                    oninput="priceChanged('min')">
-
-                <input
-                    id="priceMax"
-                    type="range"
-                    min="0"
-                    max="5200000"
-                    value="5200000"
-                    oninput="priceChanged('max')">
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<main
-    id="products"
-    class="products">
-</main>
-
-
-<footer>
-
-    <div>
-        <strong>
-            WIZZY
-        </strong>
-        <span class="footer-red">
-            SHOP
-        </span>
-    </div>
-
-    <div style="margin-top:8px">
-        فروشگاه تخصصی اسکین‌های CS2
-    </div>
-
-    <div style="margin-top:8px">
-        Telegram:
-        <span class="footer-red">
-            @AghoJavaad
-        </span>
-    </div>
-
-</footer>
-
-
-<!-- PRODUCT MODAL -->
-
-<div
-    id="productModal"
-    class="modal"
-    onclick="closeProductOutside(event)">
-
-    <div class="modal-card">
-
-        <button
-            class="modal-close"
-            onclick="closeProduct()">
-            ×
-        </button>
-
-        <div
-            id="productModalTitle"
-            class="modal-title">
-        </div>
-
-        <div class="modal-image">
-
-            <img
-                id="productModalImage"
-                alt="Skin">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                WEAR
-            </label>
-
-            <select id="productWear">
-
-                <option value="FN">
+                <option value="Factory New">
                     Factory New
                 </option>
 
-                <option value="MW">
+                <option value="Minimal Wear">
                     Minimal Wear
                 </option>
 
-                <option value="FT">
+                <option value="Field-Tested">
                     Field-Tested
                 </option>
 
-                <option value="WW">
+                <option value="Well-Worn">
                     Well-Worn
                 </option>
 
-                <option value="BS">
+                <option value="Battle-Scarred">
                     Battle-Scarred
                 </option>
 
@@ -1260,207 +2131,320 @@ footer strong{
 
         </div>
 
+    </div>
 
-        <div
-            id="productModalPrice"
-            style="margin-top:15px;font-size:20px;font-weight:bold">
+
+
+    <!-- PRICE -->
+
+    <div class="price-filter">
+
+        <div class="price-filter-top">
+
+            <span>
+                PRICE RANGE
+            </span>
+
+            <span id="priceRangeText">
+                0 Toman - 5,200,000 Toman
+            </span>
+
         </div>
 
 
+        <div class="range-container">
+
+            <div class="range-track"></div>
+
+            <div
+                class="range-progress"
+                id="rangeProgress"
+            ></div>
+
+
+            <input
+                type="range"
+                id="minPrice"
+                min="0"
+                max="5200000"
+                step="10000"
+                value="0"
+                oninput="updatePriceRange()"
+            >
+
+
+            <input
+                type="range"
+                id="maxPrice"
+                min="0"
+                max="5200000"
+                step="10000"
+                value="5200000"
+                oninput="updatePriceRange()"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CATEGORIES -->
+
+    <div class="section-title">
+        Categories
+    </div>
+
+
+    <div class="categories">
+
         <button
-            id="productAddButton"
-            class="modal-action">
-            ADD TO CART
+            class="category"
+            onclick="selectCategory('Pistols',this)"
+        >
+            PISTOLS
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('Rifles',this)"
+        >
+            RIFLES
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('SMGs',this)"
+        >
+            SMGs
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('Snipers',this)"
+        >
+            SNIPERS
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('Shotguns',this)"
+        >
+            SHOTGUNS
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('Machineguns',this)"
+        >
+            MACHINEGUNS
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('Knives',this)"
+        >
+            KNIVES
+        </button>
+
+
+        <button
+            class="category"
+            onclick="selectCategory('Accessories',this)"
+        >
+            ACCESSORIES
         </button>
 
     </div>
 
-</div>
 
 
-<!-- PROFILE MODAL -->
+    <!-- WEAPON SELECTOR -->
 
-<div
-    id="profileModal"
-    class="modal"
-    onclick="closeProfileOutside(event)">
+    <div
+        id="weaponBox"
+        class="weapon-box"
+    >
 
-    <div class="modal-card">
-
-        <button
-            class="modal-close"
-            onclick="closeProfile()">
-            ×
-        </button>
-
-        <div class="modal-title">
-            YOUR PROFILE
-        </div>
-
-
-        <div class="profile-top"
-             style="margin-top:20px">
-
-            <img
-                id="profileAvatarPreview"
-                class="profile-avatar"
-                alt="Profile">
-
-            <br>
-
-            <label class="profile-upload">
-
-                CHANGE PROFILE PICTURE
-
-                <input
-                    id="profileImage"
-                    type="file"
-                    accept="image/*"
-                    onchange="previewProfileImage(event)">
-
-            </label>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                NAME *
-            </label>
-
-            <input
-                id="profileName"
-                type="text"
-                placeholder="Your name">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                STEAM TRADE LINK *
-            </label>
-
-            <input
-                id="profileTradeLink"
-                type="text"
-                placeholder="https://steamcommunity.com/tradeoffer/new/?...">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                PHONE OPTIONAL
-            </label>
-
-            <input
-                id="profilePhone"
-                type="text"
-                placeholder="Phone number">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                TELEGRAM ID OPTIONAL
-            </label>
-
-            <input
-                id="profileTelegram"
-                type="text"
-                maxlength="32"
-                placeholder="@username">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                CAPTCHA *
-            </label>
-
-            <div class="captcha-row">
-
-                <div
-                    id="captchaBox"
-                    class="captcha-box">
-                </div>
-
-                <button
-                    type="button"
-                    class="captcha-refresh"
-                    onclick="generateCaptcha()">
-                    REFRESH
-                </button>
-
-            </div>
-
-
-            <input
-                id="captchaInput"
-                style="margin-top:8px"
-                type="text"
-                maxlength="6"
-                autocomplete="off"
-                placeholder="Enter CAPTCHA">
-
+        <div
+            id="weaponTitle"
+            class="weapon-title"
+        >
+            WEAPONS
         </div>
 
 
         <div
-            id="profileError"
-            class="error">
-        </div>
-
-
-        <button
-            class="modal-action"
-            onclick="saveProfile()">
-            SAVE PROFILE
-        </button>
+            id="weaponList"
+            class="weapon-list"
+        ></div>
 
     </div>
 
-</div>
 
 
-<!-- PROFILE REQUIRED -->
+    <!-- PRODUCTS -->
+
+    <div
+        id="products"
+        class="products"
+    ></div>
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        <span>WIZZY</span> SHOP
+    </div>
+
+
+    <div class="footer-text">
+        فروشگاه تخصصی اسکین‌های CS2
+    </div>
+
+
+    <a
+        class="telegram"
+        href="https://t.me/WizyyShop"
+        target="_blank"
+    >
+        Telegram: @WizyyShop
+    </a>
+
+</footer>
+
+
+
+<!-- =========================================================
+     PRODUCT MODAL
+========================================================= -->
 
 <div
-    id="profileRequiredModal"
+    id="productModal"
     class="modal"
-    onclick="closeProfileRequiredOutside(event)">
+    onclick="closeModalOutside(event)"
+>
 
-    <div class="modal-card">
+    <div class="modal-content">
 
-        <div class="required-content">
 
-            <div class="required-icon">
-                ×
-            </div>
+        <div class="modal-header">
 
-            <div
-                style="font-size:21px;font-weight:bold">
-                PROFILE REQUIRED
-            </div>
-
-            <div
-                style="margin-top:10px;color:#999;font-size:12px">
-                PLEASE COMPLETE YOUR PROFILE
-            </div>
+            <h2 id="modalName">
+                Product
+            </h2>
 
 
             <button
-                class="modal-action"
-                onclick="closeProfileRequired();openProfile()">
-                COMPLETE PROFILE
+                class="close"
+                onclick="closeProduct()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-image">
+
+            <img
+                id="modalImage"
+                src=""
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="modal-details">
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Item
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalItem"
+                ></span>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Type
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalType"
+                ></span>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Wear
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalWear"
+                ></span>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Price
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalPrice"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                ADD TO CART
+            </button>
+
+
+            <button
+                class="cancel"
+                onclick="closeProduct()"
+            >
+                CANCEL
             </button>
 
         </div>
@@ -1470,30 +2454,41 @@ footer strong{
 </div>
 
 
-<!-- CART MODAL -->
+
+<!-- =========================================================
+     CART MODAL
+========================================================= -->
 
 <div
     id="cartModal"
     class="modal"
-    onclick="closeCartOutside(event)">
+    onclick="closeCartOutside(event)"
+>
 
-    <div class="modal-card">
+    <div class="modal-content">
 
-        <button
-            class="modal-close"
-            onclick="closeCart()">
-            ×
-        </button>
 
-        <div class="modal-title">
-            YOUR CART
+        <div class="modal-header">
+
+            <h2>
+                YOUR CART
+            </h2>
+
+
+            <button
+                class="close"
+                onclick="closeCart()"
+            >
+                ×
+            </button>
+
         </div>
 
 
         <div
             id="cartItems"
-            class="cart-items">
-        </div>
+            class="cart-items"
+        ></div>
 
 
         <div class="cart-total">
@@ -1502,7 +2497,11 @@ footer strong{
                 TOTAL
             </span>
 
-            <span id="cartTotal">
+
+            <span
+                id="cartTotal"
+                style="color:#e00000"
+            >
                 0 Toman
             </span>
 
@@ -1510,8 +2509,9 @@ footer strong{
 
 
         <button
-            class="modal-action"
-            onclick="finalizeOrder()">
+            class="finalize"
+            onclick="finalizeOrder()"
+        >
             FINALIZE ORDER
         </button>
 
@@ -1520,208 +2520,265 @@ footer strong{
 </div>
 
 
-<!-- ADMIN LOGIN -->
-
-<div
-    id="adminLoginModal"
-    class="modal"
-    onclick="closeAdminLoginOutside(event)">
-
-    <div class="modal-card">
-
-        <button
-            class="modal-close"
-            onclick="closeAdminLogin()">
-            ×
-        </button>
-
-        <div class="modal-title">
-            ADMIN LOGIN
-        </div>
-<div class="field">
-
-    <label>
-        EMAIL
-    </label>
-
-    <input
-        id="adminEmail"
-        type="email"
-        autocomplete="email"
-        placeholder="ADMIN EMAIL"
-        onkeydown="if(event.key==='Enter')loginAdmin()">
-
-</div>
 
 
-<div class="field">
 
-    <label>
-        PASSWORD
-    </label>
-
-    <input
-        id="adminPassword"
-        type="password"
-        autocomplete="current-password"
-        placeholder="ADMIN PASSWORD"
-        onkeydown="if(event.key==='Enter')loginAdmin()">
-
-</div>
-
-       
-
-
-        <div
-            id="adminError"
-            class="error">
+<!-- =========================================================
+     PROFILE MODAL
+========================================================= -->
+<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
+    <div class="modal-content profile-box">
+        <div class="modal-header">
+            <h2>PROFILE</h2>
+            <button class="close" onclick="closeProfile()">×</button>
         </div>
 
+        <div class="profile-avatar-wrap">
+            <img id="profileAvatarPreview" class="profile-avatar-preview" alt="Profile preview">
+        </div>
 
-        <button
-            class="modal-action"
-            onclick="loginAdmin()">
-            LOGIN
-        </button>
+        <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
 
+        <div class="profile-field">
+            <label>NAME *</label>
+            <input id="profileName" type="text" maxlength="60" placeholder="Your name">
+        </div>
+
+        <div class="profile-field">
+            <label>STEAM TRADE LINK *</label>
+            <input id="profileTradeLink" type="url" placeholder="https://steamcommunity.com/tradeoffer/new/?..."></input>
+        </div>
+
+        <div class="profile-field">
+            <label>PHONE (OPTIONAL)</label>
+            <input id="profilePhone" type="tel" maxlength="30" placeholder="Phone number">
+        </div>
+
+        <div class="profile-field">
+            <label>TELEGRAM ID (OPTIONAL)</label>
+            <input id="profileTelegram" type="text" maxlength="50" placeholder="@username">
+        </div>
+
+        <div class="profile-field">
+            <label>CAPTCHA *</label>
+            <div class="captcha-row">
+                <div id="captchaCode" class="captcha-code"></div>
+                <button type="button" class="captcha-refresh" onclick="generateCaptcha()">NEW</button>
+                <input id="captchaInput" type="text" maxlength="6" placeholder="Enter code" autocomplete="off">
+            </div>
+        </div>
+
+        <div id="profileError" class="profile-error"></div>
+        <button class="profile-save" onclick="saveProfile()">SAVE PROFILE</button>
     </div>
+</div>
 
+<!-- =========================================================
+     PROFILE REQUIRED
+========================================================= -->
+<div id="profileRequiredModal" class="modal" onclick="closeProfileRequiredOutside(event)">
+    <div class="modal-content profile-required-box">
+        <div class="profile-required-icon">×</div>
+        <h2>PROFILE REQUIRED</h2>
+        <p>Please complete your profile before ordering a skin.</p>
+        <button class="profile-required-btn" onclick="closeProfileRequired();openProfile();">COMPLETE PROFILE</button>
+    </div>
+</div>
+
+<!-- =========================================================
+     PROFILE REQUIRED
+========================================================= -->
+<div id="profileRequiredModal" class="modal">
+    <div class="modal-content" style="max-width:430px;">
+        <div class="profile-required-box">
+            <div class="profile-required-icon"></div>
+            <div class="profile-required-title">PROFILE REQUIRED</div>
+            <div class="profile-required-text">PLEASE COMPLETE YOUR PROFILE</div>
+            <button class="finalize" onclick="closeProfileRequired();openProfile();">COMPLETE PROFILE</button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================
+     PROFILE MODAL
+========================================================= -->
+<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
+    <div class="modal-content" style="max-width:520px;">
+        <div class="modal-header">
+            <h2>YOUR PROFILE</h2>
+            <button class="close" onclick="closeProfile()">×</button>
+        </div>
+        <div class="profile-form">
+            <div class="profile-avatar-row">
+                <img id="profileAvatarPreview" class="profile-avatar-preview" src="" alt="Profile">
+                <div>
+                    <div style="font-weight:bold;margin-bottom:7px;">Profile Picture</div>
+                    <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
+                    <div class="profile-help">Optional. A default avatar is used if you do not choose one.</div>
+                </div>
+            </div>
+            <div class="profile-field">
+                <label>NAME *</label>
+                <input id="profileName" type="text" placeholder="Your name">
+            </div>
+            <div class="profile-field">
+                <label>STEAM TRADE LINK *</label>
+                <input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=...">
+                <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
+            </div>
+            <div class="profile-field">
+                <label>PHONE (OPTIONAL)</label>
+                <input id="profilePhone" type="text" placeholder="Phone number">
+            </div>
+            <div class="profile-field">
+                <label>TELEGRAM ID (OPTIONAL)</label>
+                <input id="profileTelegram" type="text" placeholder="@username">
+            </div>
+            <div class="profile-field">
+                <label>CAPTCHA *</label>
+                <div class="captcha-row">
+                    <div id="captchaBox" class="captcha-box">-----</div>
+                    <button class="captcha-refresh" type="button" onclick="generateCaptcha()">REFRESH</button>
+                </div>
+                <input id="captchaInput" type="text" placeholder="Enter captcha">
+            </div>
+            <div id="profileError" class="profile-error"></div>
+            <button class="finalize" onclick="saveProfile()">SAVE PROFILE</button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================
+     ADMIN LOGIN
+========================================================= -->
+
+<div id="adminLoginModal" class="modal" onclick="closeAdminLoginOutside(event)">
+    <div class="modal-content admin-login-box">
+        <div class="modal-header">
+            <h2>ADMIN LOGIN</h2>
+            <button class="close" onclick="closeAdminLogin()">×</button>
+        </div>
+
+        <div class="admin-login-note">
+            Sign in with the WIZZY SHOP administrator account.
+        </div>
+
+        <input
+            id="adminEmail"
+            class="admin-password"
+            type="email"
+            placeholder="Admin email"
+            autocomplete="username"
+            onkeydown="if(event.key==='Enter') loginAdmin()"
+        >
+
+        <input
+            id="adminPassword"
+            class="admin-password"
+            type="password"
+            placeholder="Admin password"
+            autocomplete="current-password"
+            onkeydown="if(event.key==='Enter') loginAdmin()"
+        >
+
+        <div id="adminError" class="admin-error"></div>
+
+        <button class="admin-enter" onclick="loginAdmin()">
+            ENTER ADMIN PANEL
+        </button>
+    </div>
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- =========================================================
+     ADMIN PANEL
+========================================================= -->
 
-<div
-    id="adminPanelModal"
-    class="modal"
-    onclick="closeAdminPanelOutside(event)">
+<div id="adminPanelModal" class="modal" onclick="closeAdminPanelOutside(event)">
+    <div class="modal-content admin-panel">
 
-    <div class="modal-card admin-card">
-
-        <button
-            class="modal-close"
-            onclick="closeAdminPanel()">
-            ×
-        </button>
-
-        <div class="modal-title">
-            WIZZY ADMIN PANEL
+        <div class="admin-topbar">
+            <h2>WIZZY ADMIN PANEL</h2>
+            <button class="admin-close-btn" onclick="closeAdminPanel()">CLOSE</button>
         </div>
-
 
         <div class="admin-stats">
+            <div class="admin-stat">
+                <div class="admin-stat-label">TOTAL ORDERS</div>
+                <div id="adminOrderCount" class="admin-stat-value">0</div>
+            </div>
 
             <div class="admin-stat">
-
-                <div class="admin-stat-label">
-                    TOTAL ORDERS
-                </div>
-
-                <div
-                    id="adminOrderCount"
-                    class="admin-stat-value">
-                    0
-                </div>
-
+                <div class="admin-stat-label">TOTAL SALES</div>
+                <div id="adminTotalSales" class="admin-stat-value">0 Toman</div>
             </div>
-
 
             <div class="admin-stat">
-
-                <div class="admin-stat-label">
-                    PAID ORDERS
-                </div>
-
-                <div
-                    id="adminPaidCount"
-                    class="admin-stat-value">
-                    0
-                </div>
-
+                <div class="admin-stat-label">PAID ORDERS</div>
+                <div id="adminPaidCount" class="admin-stat-value">0</div>
             </div>
-
-
-            <div class="admin-stat">
-
-                <div class="admin-stat-label">
-                    TOTAL SALES
-                </div>
-
-                <div
-                    id="adminTotalSales"
-                    class="admin-stat-value">
-                    0 Toman
-                </div>
-
-            </div>
-
         </div>
 
+        <div class="admin-section-title">CUSTOMER PROFILES</div>
+        <div id="adminProfiles" class="admin-profiles"></div>
 
-        <div class="admin-section">
-
-            <div class="admin-section-title">
-                CUSTOMER PROFILES
-            </div>
-
-            <div
-                id="adminProfiles"
-                class="admin-profile-list">
-            </div>
-
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
+            <button class="admin-clear" onclick="clearAllOrders()">CLEAR ALL ORDERS</button>
+            <button class="admin-clear" onclick="clearAllProfiles()" style="margin-left:8px;">CLEAR PROFILES</button>
         </div>
 
-
-        <div class="admin-section">
-
-            <div class="admin-section-title">
-                ORDERS
-            </div>
-
-            <div
-                id="adminOrders"
-                class="admin-orders">
-            </div>
-
-        </div>
-
-
-        <div class="admin-bottom">
-
-            <button
-                class="admin-clear"
-                onclick="clearAllProfiles()">
-                CLEAR PROFILES
-            </button>
-
-            <button
-                class="admin-clear"
-                onclick="clearAllOrders()">
-                CLEAR ORDERS
-            </button>
-
-        </div>
-
+        <div class="admin-section-title">ORDERS</div>
+        <div id="adminOrders" class="admin-orders"></div>
     </div>
-
 </div>
 
 
-<div
-    id="toast"
-    class="toast">
-</div>
-
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://gneadbhbblwzrakgtwzo.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WDOc16Rn11KCEcnqfE94qg_dAVrniSR";
+const wizzySupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+</script>
 <script>
 
 /* =========================================================
-   DATA
+   STATE
 ========================================================= */
 
-const categoriesData = {
+let selectedWeapons = [];
 
-    PISTOLS:[
+let currentCategory = null;
+
+let currentProduct = null;
+
+let cart = [];
+
+let currentCaptcha = "";
+let profileImageData = "";
+let logoClickCount = 0;
+let logoClickTimer = null;
+
+const PROFILE_STORAGE_KEY = "wizzy_shop_profile";
+const PROFILES_STORAGE_KEY = "wizzy_shop_profiles";
+const DEFAULT_AVATAR = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#343434"/><stop offset="1" stop-color="#0c0c0c"/></linearGradient></defs>
+<rect width="300" height="300" rx="150" fill="url(#g)"/>
+<circle cx="150" cy="108" r="55" fill="#777"/>
+<path d="M55 270c12-63 49-92 95-92s83 29 95 92" fill="#777"/>
+<path d="M68 88c15-43 45-66 82-66 42 0 72 23 82 66-24-18-47-25-82-25-34 0-58 7-82 25z" fill="#aaa"/>
+<circle cx="128" cy="112" r="6" fill="#151515"/><circle cx="172" cy="112" r="6" fill="#151515"/>
+<path d="M128 145c15 10 29 10 44 0" fill="none" stroke="#151515" stroke-width="6" stroke-linecap="round"/>
+</svg>`);
+
+
+/* =========================================================
+   CATEGORY DATA
+========================================================= */
+
+const categoryData = {
+
+    Pistols:[
         "Desert Eagle",
         "USP-S",
         "Glock-18",
@@ -1733,7 +2790,7 @@ const categoriesData = {
         "R8 Revolver"
     ],
 
-    RIFLES:[
+    Rifles:[
         "AK-47",
         "M4A4",
         "M4A1-S",
@@ -1753,26 +2810,26 @@ const categoriesData = {
         "PP-Bizon"
     ],
 
-    SNIPERS:[
+    Snipers:[
         "AWP",
         "SSG 08",
         "SCAR-20",
         "G3SG1"
     ],
 
-    SHOTGUNS:[
+    Shotguns:[
         "Nova",
         "XM1014",
         "MAG-7",
         "Sawed-Off"
     ],
 
-    MACHINEGUNS:[
+    Machineguns:[
         "M249",
         "Negev"
     ],
 
-    KNIVES:[
+    Knives:[
         "Karambit",
         "Butterfly Knife",
         "M9 Bayonet",
@@ -1783,7 +2840,7 @@ const categoriesData = {
         "Huntsman Knife"
     ],
 
-    ACCESSORIES:[
+    Accessories:[
         "Music Kits",
         "Stickers",
         "Agent",
@@ -1796,136 +2853,140 @@ const categoriesData = {
 };
 
 
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
 const products = [
 
     {
         id:1,
         name:"AK-47 Redline",
         weapon:"AK-47",
-        category:"RIFLES",
-        wear:"FT",
+        category:"Rifles",
+        wear:"Field-Tested",
         price:153000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=AK-47+Redline"
+        image:"https://placehold.co/700x450/171717/e00000?text=AK-47+REDLINE"
     },
 
     {
         id:2,
         name:"AK-47 Slate",
         weapon:"AK-47",
-        category:"RIFLES",
-        wear:"FT",
+        category:"Rifles",
+        wear:"Field-Tested",
         price:60000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=AK-47+Slate"
+        image:"https://placehold.co/700x450/171717/e00000?text=AK-47+SLATE"
     },
 
     {
         id:3,
         name:"AK-47 Neon Rider",
         weapon:"AK-47",
-        category:"RIFLES",
-        wear:"MW",
+        category:"Rifles",
+        wear:"Minimal Wear",
         price:210000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=AK-47+Neon+Rider"
+        image:"https://placehold.co/700x450/171717/e00000?text=AK-47+NEON+RIDER"
     },
 
     {
         id:4,
         name:"M4A4 Temukau",
         weapon:"M4A4",
-        category:"RIFLES",
-        wear:"MW",
+        category:"Rifles",
+        wear:"Minimal Wear",
         price:180000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=M4A4+Temukau"
+        image:"https://placehold.co/700x450/171717/e00000?text=M4A4+TEMUKAU"
     },
 
     {
         id:5,
         name:"M4A4 Desolate Space",
         weapon:"M4A4",
-        category:"RIFLES",
-        wear:"FT",
+        category:"Rifles",
+        wear:"Field-Tested",
         price:95000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=M4A4+Desolate+Space"
+        image:"https://placehold.co/700x450/171717/e00000?text=M4A4+DESOLATE+SPACE"
     },
 
     {
         id:6,
         name:"M4A1-S Printstream",
         weapon:"M4A1-S",
-        category:"RIFLES",
-        wear:"MW",
+        category:"Rifles",
+        wear:"Field-Tested",
         price:420000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=M4A1-S+Printstream"
+        image:"https://placehold.co/700x450/171717/e00000?text=M4A1-S+PRINTSTREAM"
     },
 
     {
         id:7,
         name:"Desert Eagle Printstream",
         weapon:"Desert Eagle",
-        category:"PISTOLS",
-        wear:"MW",
+        category:"Pistols",
+        wear:"Minimal Wear",
         price:250000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Deagle+Printstream"
+        image:"https://placehold.co/700x450/171717/e00000?text=DEAGLE+PRINTSTREAM"
     },
 
     {
         id:8,
         name:"Desert Eagle Code Red",
         weapon:"Desert Eagle",
-        category:"PISTOLS",
-        wear:"FT",
+        category:"Pistols",
+        wear:"Field-Tested",
         price:140000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Deagle+Code+Red"
+        image:"https://placehold.co/700x450/171717/e00000?text=DEAGLE+CODE+RED"
     },
 
     {
         id:9,
         name:"USP-S Printstream",
         weapon:"USP-S",
-        category:"PISTOLS",
-        wear:"FT",
+        category:"Pistols",
+        wear:"Field-Tested",
         price:180000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=USP-S+Printstream"
+        image:"https://placehold.co/700x450/171717/e00000?text=USP-S+PRINTSTREAM"
     },
 
     {
         id:10,
         name:"USP-S Cortex",
         weapon:"USP-S",
-        category:"PISTOLS",
-        wear:"FT",
+        category:"Pistols",
+        wear:"Field-Tested",
         price:85000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=USP-S+Cortex"
+        image:"https://placehold.co/700x450/171717/e00000?text=USP-S+CORTEX"
     },
 
     {
         id:11,
         name:"Glock-18 Water Elemental",
         weapon:"Glock-18",
-        category:"PISTOLS",
-        wear:"FT",
+        category:"Pistols",
+        wear:"Field-Tested",
         price:70000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Glock-18+Water+Elemental"
+        image:"https://placehold.co/700x450/171717/e00000?text=GLOCK-18+WATER+ELEMENTAL"
     },
 
     {
         id:12,
         name:"AWP Asiimov",
         weapon:"AWP",
-        category:"SNIPERS",
-        wear:"FT",
+        category:"Snipers",
+        wear:"Field-Tested",
         price:650000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=AWP+Asiimov"
+        image:"https://placehold.co/700x450/171717/e00000?text=AWP+ASIIMOV"
     },
 
     {
         id:13,
         name:"AWP Wildfire",
         weapon:"AWP",
-        category:"SNIPERS",
-        wear:"FT",
+        category:"Snipers",
+        wear:"Field-Tested",
         price:300000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=AWP+Wildfire"
+        image:"https://placehold.co/700x450/171717/e00000?text=AWP+WILDFIRE"
     },
 
     {
@@ -1933,9 +2994,9 @@ const products = [
         name:"MP9 Starlight Protector",
         weapon:"MP9",
         category:"SMGs",
-        wear:"FT",
+        wear:"Field-Tested",
         price:90000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=MP9+Starlight+Protector"
+        image:"https://placehold.co/700x450/171717/e00000?text=MP9+STARLIGHT+PROTECTOR"
     },
 
     {
@@ -1943,490 +3004,444 @@ const products = [
         name:"MAC-10 Neon Rider",
         weapon:"MAC-10",
         category:"SMGs",
-        wear:"MW",
+        wear:"Minimal Wear",
         price:110000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=MAC-10+Neon+Rider"
+        image:"https://placehold.co/700x450/171717/e00000?text=MAC-10+NEON+RIDER"
     },
 
     {
         id:16,
         name:"Karambit Doppler",
         weapon:"Karambit",
-        category:"KNIVES",
-        wear:"FN",
+        category:"Knives",
+        wear:"Factory New",
         price:4500000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Karambit+Doppler"
+        image:"https://placehold.co/700x450/171717/e00000?text=KARAMBIT+DOPPLER"
     },
 
     {
         id:17,
         name:"Butterfly Knife Doppler",
         weapon:"Butterfly Knife",
-        category:"KNIVES",
-        wear:"FN",
+        category:"Knives",
+        wear:"Factory New",
         price:5200000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Butterfly+Doppler"
+        image:"https://placehold.co/700x450/171717/e00000?text=BUTTERFLY+DOPPLER"
     },
 
     {
         id:18,
-        name:"The Verkkars",
+        name:"Music Kit | The Verkkars",
         weapon:"Music Kits",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:75000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Music+Kit"
+        image:"https://placehold.co/700x450/171717/e00000?text=MUSIC+KIT"
     },
 
     {
         id:19,
-        name:"Austin Wintory",
+        name:"Music Kit | Austin Wintory",
         weapon:"Music Kits",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:95000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Music+Kit"
+        image:"https://placehold.co/700x450/171717/e00000?text=MUSIC+KIT"
     },
 
     {
         id:20,
-        name:"Howling Dawn",
+        name:"Sticker | Howling Dawn",
         weapon:"Stickers",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:450000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Howling+Dawn"
+        image:"https://placehold.co/700x450/171717/e00000?text=STICKER"
     },
 
     {
         id:21,
-        name:"Crown",
+        name:"Sticker | Crown",
         weapon:"Stickers",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:320000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Crown+Sticker"
+        image:"https://placehold.co/700x450/171717/e00000?text=STICKER"
     },
 
     {
         id:22,
-        name:"Sir Bloody Miami Darryl",
+        name:"Agent | Sir Bloody Miami Darryl",
         weapon:"Agent",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:180000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Agent"
+        image:"https://placehold.co/700x450/171717/e00000?text=AGENT"
     },
 
     {
         id:23,
-        name:"Elite Trapper Solman",
+        name:"Agent | Elite Trapper Solman",
         weapon:"Agent",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:125000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Agent"
+        image:"https://placehold.co/700x450/171717/e00000?text=AGENT"
     },
 
     {
         id:24,
-        name:"Dreams & Nightmares Case",
+        name:"Case | Dreams & Nightmares",
         weapon:"Cases",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:45000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Case"
+        image:"https://placehold.co/700x450/171717/e00000?text=CASE"
     },
 
     {
         id:25,
-        name:"Kilowatt Case",
+        name:"Case | Kilowatt Case",
         weapon:"Cases",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:35000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Case"
+        image:"https://placehold.co/700x450/171717/e00000?text=CASE"
     },
 
     {
         id:26,
-        name:"Lil' Squirt",
+        name:"Charm | Lil' Squirt",
         weapon:"Charms",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:85000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Charm"
+        image:"https://placehold.co/700x450/171717/e00000?text=CHARM"
     },
 
     {
         id:27,
-        name:"Hot Howl",
+        name:"Charm | Hot Howl",
         weapon:"Charms",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:120000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Charm"
+        image:"https://placehold.co/700x450/171717/e00000?text=CHARM"
     },
 
     {
         id:28,
-        name:"Inferno 2",
+        name:"Pin | Inferno 2",
         weapon:"Pins",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:60000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Pin"
+        image:"https://placehold.co/700x450/171717/e00000?text=PIN"
     },
 
     {
         id:29,
-        name:"Guardian 3",
+        name:"Pin | Guardian 3",
         weapon:"Pins",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:55000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Pin"
+        image:"https://placehold.co/700x450/171717/e00000?text=PIN"
     },
 
     {
         id:30,
-        name:"Recoil",
+        name:"Graffiti | Recoil",
         weapon:"Graffiti",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:25000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Graffiti"
+        image:"https://placehold.co/700x450/171717/e00000?text=GRAFFITI"
     },
 
     {
         id:31,
-        name:"Rage",
+        name:"Graffiti | Rage",
         weapon:"Graffiti",
-        category:"ACCESSORIES",
-        wear:"",
+        category:"Accessories",
+        wear:"Factory New",
         price:30000,
-        image:"https://placehold.co/700x450/101010/ffffff?text=Graffiti"
+        image:"https://placehold.co/700x450/171717/e00000?text=GRAFFITI"
     }
 
 ];
 
 
 /* =========================================================
-   STATE
+   FORMAT PRICE
 ========================================================= */
 
-let selectedCategory = null;
-let selectedWeapons = [];
-let selectedWear = "ALL";
-let selectedMinPrice = 0;
-let selectedMaxPrice = 5200000;
-let cart = [];
-let currentProduct = null;
+function formatPrice(price){
 
-let currentCaptcha = "";
-let profileImageData = "";
-let logoClickCount = 0;
-let logoClickTimer = null;
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-const PROFILE_STORAGE_KEY =
-    "wizzy_shop_profile";
-
-const PROFILES_STORAGE_KEY =
-    "wizzy_shop_profiles";
-
-const ORDERS_STORAGE_KEY =
-    "wizzy_shop_orders";
-
-const ADMIN_PASSWORD =
-    "WIZZYCS2627K";
-
-const DEFAULT_AVATAR =
-    "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="300"
-             height="300">
-
-            <rect width="300"
-                  height="300"
-                  rx="150"
-                  fill="#202020"/>
-
-            <circle cx="150"
-                    cy="105"
-                    r="55"
-                    fill="#777"/>
-
-            <path d="M55 270
-                     C65 205 100 175 150 175
-                     C200 175 235 205 245 270"
-                  fill="#777"/>
-
-        </svg>
-    `);
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function formatPrice(value){
-
-    return Number(value || 0)
-        .toLocaleString("en-US")
+    return new Intl.NumberFormat("en-US")
+        .format(price)
         + " Toman";
 
 }
 
 
-function escapeHtml(value){
+/* =========================================================
+   PRICE RANGE
+========================================================= */
 
-    return String(
-        value == null ? "" : value
-    )
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function updatePriceRange(){
 
-}
+    const minSlider =
+        document.getElementById("minPrice");
+
+    const maxSlider =
+        document.getElementById("maxPrice");
 
 
-function toast(message){
+    let min =
+        Number(minSlider.value);
 
-    const el =
-        document.getElementById("toast");
+    let max =
+        Number(maxSlider.value);
 
-    if(!el) return;
 
-    el.textContent = message;
-    el.classList.add("show");
+    if(min > max){
 
-    setTimeout(function(){
+        if(document.activeElement === minSlider){
 
-        el.classList.remove("show");
+            max = min;
 
-    },2200);
+            maxSlider.value = max;
+
+        }else{
+
+            min = max;
+
+            minSlider.value = min;
+
+        }
+
+    }
+
+
+    const maxLimit =
+        Number(maxSlider.max);
+
+
+    const minPercent =
+        (min / maxLimit) * 100;
+
+    const maxPercent =
+        (max / maxLimit) * 100;
+
+
+    const progress =
+        document.getElementById("rangeProgress");
+
+
+    progress.style.left =
+        minPercent + "%";
+
+
+    progress.style.width =
+        (maxPercent - minPercent) + "%";
+
+
+    document.getElementById(
+        "priceRangeText"
+    ).textContent =
+        formatPrice(min)
+        + " - "
+        + formatPrice(max);
+
+
+    renderProducts();
 
 }
 
 
 /* =========================================================
-   CATEGORIES
+   RENDER WEAPONS
 ========================================================= */
 
-function renderCategories(){
+function renderWeapons(){
 
-    const container =
-        document.getElementById("categories");
+    const list =
+        document.getElementById("weaponList");
 
-    container.innerHTML = "";
+    list.innerHTML = "";
 
-    Object.keys(categoriesData)
-    .forEach(function(category){
+
+    const items =
+        categoryData[currentCategory] || [];
+
+
+    items.forEach(item => {
 
         const button =
             document.createElement("button");
 
-        button.className =
-            "category";
 
-        if(selectedCategory === category){
+        button.className =
+            "weapon";
+
+
+        button.textContent =
+            item;
+
+
+        if(
+            selectedWeapons.includes(item)
+        ){
 
             button.classList.add("active");
 
         }
 
-        button.textContent =
-            category;
 
         button.onclick =
             function(){
 
-                selectCategory(category);
+                selectWeapon(
+                    item,
+                    button
+                );
 
             };
 
-        container.appendChild(button);
+
+        list.appendChild(button);
 
     });
 
 }
 
 
-function selectCategory(category){
+/* =========================================================
+   SELECT CATEGORY
+========================================================= */
 
-    if(selectedCategory === category){
+function selectCategory(
+    category,
+    element
+){
 
-        selectedCategory = null;
+    if(
+        currentCategory === category
+    ){
+
+        currentCategory = null;
+
         selectedWeapons = [];
 
-        renderCategories();
-        renderWeapons();
+
+        document
+            .querySelectorAll(".category")
+            .forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+        document
+            .getElementById("weaponBox")
+            .classList.remove("show");
+
+
         renderProducts();
 
         return;
 
     }
 
-    selectedCategory = category;
+
+    currentCategory =
+        category;
+
+
     selectedWeapons = [];
 
-    renderCategories();
-    renderWeapons();
-    renderProducts();
-
-}
-
-
-function renderWeapons(){
-
-    const container =
-        document.getElementById("weapons");
-
-    container.innerHTML = "";
-
-    if(!selectedCategory){
-
-        container.classList.remove("show");
-
-        return;
-
-    }
-
-    container.classList.add("show");
-
-    categoriesData[selectedCategory]
-    .forEach(function(weapon){
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "weapon";
-
-        if(
-            selectedWeapons.includes(weapon)
-        ){
-
-            button.classList.add("selected");
-
-        }
-
-        button.textContent =
-            weapon;
-
-        button.onclick =
-            function(){
-
-                selectWeapon(weapon);
-
-            };
-
-        container.appendChild(button);
-
-    });
-
-}
-
-
-function selectWeapon(weapon){
-
-    const index =
-        selectedWeapons.indexOf(weapon);
-
-    if(index >= 0){
-
-        selectedWeapons.splice(index,1);
-
-    }else{
-
-        selectedWeapons.push(weapon);
-
-    }
-
-    renderWeapons();
-    renderProducts();
-
-}
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-function setWear(wear,button){
-
-    selectedWear = wear;
 
     document
-        .querySelectorAll(".wear-button")
-        .forEach(function(btn){
+        .querySelectorAll(".category")
+        .forEach(item => {
 
-            btn.classList.remove("active");
+            item.classList.remove(
+                "active"
+            );
 
         });
 
-    button.classList.add("active");
+
+    element.classList.add(
+        "active"
+    );
+
+
+    document
+        .getElementById("weaponBox")
+        .classList.add("show");
+
+
+    document.getElementById(
+        "weaponTitle"
+    ).textContent =
+
+        category === "Accessories"
+
+        ? "ACCESSORIES"
+
+        : category.toUpperCase()
+          + " WEAPONS";
+
+
+    renderWeapons();
 
     renderProducts();
 
 }
 
 
-function priceChanged(type){
+/* =========================================================
+   SELECT WEAPON
+========================================================= */
 
-    const min =
-        document.getElementById("priceMin");
+function selectWeapon(
+    weapon,
+    element
+){
 
-    const max =
-        document.getElementById("priceMax");
+    const index =
+        selectedWeapons.indexOf(
+            weapon
+        );
 
 
-    if(type === "min"){
+    if(index !== -1){
 
-        if(Number(min.value) > Number(max.value)){
+        selectedWeapons.splice(
+            index,
+            1
+        );
 
-            min.value =
-                max.value;
-
-        }
+        element.classList.remove(
+            "active"
+        );
 
     }else{
 
-        if(Number(max.value) < Number(min.value)){
+        selectedWeapons.push(
+            weapon
+        );
 
-            max.value =
-                min.value;
-
-        }
+        element.classList.add(
+            "active"
+        );
 
     }
-
-
-    selectedMinPrice =
-        Number(min.value);
-
-    selectedMaxPrice =
-        Number(max.value);
-
-
-    document.getElementById(
-        "minPriceText"
-    ).textContent =
-        formatPrice(selectedMinPrice);
-
-
-    document.getElementById(
-        "maxPriceText"
-    ).textContent =
-        formatPrice(selectedMaxPrice);
 
 
     renderProducts();
@@ -2435,101 +3450,8 @@ function priceChanged(type){
 
 
 /* =========================================================
-   PRODUCTS
+   RENDER PRODUCTS
 ========================================================= */
-
-function getFilteredProducts(){
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-    return products.filter(function(product){
-
-        if(selectedCategory){
-
-            if(
-                product.category !==
-                selectedCategory
-            ){
-
-                return false;
-
-            }
-
-        }
-
-
-        if(
-            selectedWeapons.length > 0
-        ){
-
-            if(
-                !selectedWeapons.includes(
-                    product.weapon
-                )
-            ){
-
-                return false;
-
-            }
-
-        }
-
-
-        if(
-            selectedWear !== "ALL" &&
-            product.wear !== selectedWear
-        ){
-
-            return false;
-
-        }
-
-
-        if(
-            product.price <
-            selectedMinPrice ||
-            product.price >
-            selectedMaxPrice
-        ){
-
-            return false;
-
-        }
-
-
-        if(search){
-
-            const text =
-                (
-                    product.name +
-                    " " +
-                    product.weapon +
-                    " " +
-                    product.category
-                )
-                .toLowerCase();
-
-            if(!text.includes(search)){
-
-                return false;
-
-            }
-
-        }
-
-
-        return true;
-
-    });
-
-}
-
 
 function renderProducts(){
 
@@ -2538,803 +3460,465 @@ function renderProducts(){
             "products"
         );
 
-    const list =
-        getFilteredProducts();
-
 
     container.innerHTML = "";
 
 
-    if(list.length === 0){
-
-        container.innerHTML =
-            `
-            <div style="
-                grid-column:1/-1;
-                text-align:center;
-                padding:70px 20px;
-                color:#666;
-            ">
-                NO SKINS FOUND
-            </div>
-            `;
-
-        return;
-
-    }
+    const search =
+        document.getElementById(
+            "search"
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
 
-    list.forEach(function(product){
-
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "product";
+    const wear =
+        document.getElementById(
+            "wearFilter"
+        ).value;
 
 
-        const wearName =
-            {
-                FN:"Factory New",
-                MW:"Minimal Wear",
-                FT:"Field-Tested",
-                WW:"Well-Worn",
-                BS:"Battle-Scarred"
-            }[product.wear] ||
-            "";
+    const minPrice =
+        Number(
+            document.getElementById(
+                "minPrice"
+            ).value
+        );
 
 
-        card.innerHTML = `
-
-            <div class="product-image">
-
-                <img
-                    src="${product.image}"
-                    alt="${escapeHtml(product.name)}"
-                    loading="lazy">
-
-            </div>
+    const maxPrice =
+        Number(
+            document.getElementById(
+                "maxPrice"
+            ).value
+        );
 
 
-            <div class="product-info">
-
-                <div class="product-name">
-                    ${escapeHtml(product.name)}
-                </div>
+    const filtered =
+        products.filter(
+            product => {
 
 
-                <div class="product-meta">
+                const searchMatch =
 
-                    <span>
-                        ${escapeHtml(product.weapon)}
-                    </span>
+                    product.name
+                        .toLowerCase()
+                        .includes(search)
 
-                    <span>
-                        ${escapeHtml(wearName)}
-                    </span>
+                    ||
 
-                </div>
-
-
-                <div class="product-price">
-                    ${formatPrice(product.price)}
-                </div>
+                    product.weapon
+                        .toLowerCase()
+                        .includes(search);
 
 
-                <div class="product-bottom">
+                const wearMatch =
 
-                    <button
-                        class="details-button"
-                        onclick="openProduct(${product.id})">
-                        VIEW
-                    </button>
+                    wear === "all"
 
-                    <button
-                        class="buy-button"
-                        onclick="buyProduct(${product.id})">
-                        BUY
-                    </button>
+                    ||
 
-                </div>
+                    product.wear === wear;
 
+
+                const priceMatch =
+
+                    product.price >= minPrice
+
+                    &&
+
+                    product.price <= maxPrice;
+
+
+                let categoryMatch =
+                    true;
+
+
+                if(
+                    currentCategory !== null
+                ){
+
+                    categoryMatch =
+                        product.category
+                        ===
+                        currentCategory;
+
+                }
+
+
+                let weaponMatch =
+                    true;
+
+
+                if(
+                    currentCategory !== null
+                    &&
+                    selectedWeapons.length > 0
+                ){
+
+                    weaponMatch =
+                        selectedWeapons.includes(
+                            product.weapon
+                        );
+
+                }
+
+
+                return (
+
+                    searchMatch
+
+                    &&
+
+                    wearMatch
+
+                    &&
+
+                    priceMatch
+
+                    &&
+
+                    categoryMatch
+
+                    &&
+
+                    weaponMatch
+
+                );
+
+            }
+        );
+
+
+    if(filtered.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+                No skins found.
             </div>
 
         `;
 
+        return;
 
-        container.appendChild(card);
+    }
 
-    });
+
+    filtered.forEach(
+        product => {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "product";
+
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        ${product.name}
+                    </div>
+
+
+                    <div class="product-weapon">
+
+                        ${product.weapon}
+
+                        •
+
+                        ${product.wear}
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="price">
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </div>
+
+
+                        <button
+                            class="buy-button"
+                            onclick="openProduct(${product.id})"
+                        >
+                            BUY
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
 
 }
 
 
+
 /* =========================================================
-   PROFILE
+   PROFILE SYSTEM
 ========================================================= */
 
 function getCurrentProfile(){
-
     try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                PROFILE_STORAGE_KEY
-            )
-        ) || null;
-
-    }catch(e){
-
-        return null;
-
-    }
-
+        return JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)) || null;
+    }catch(e){ return null; }
 }
-
 
 function getProfiles(){
-
     try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                PROFILES_STORAGE_KEY
-            )
-        ) || [];
-
-    }catch(e){
-
-        return [];
-
-    }
-
+        return JSON.parse(localStorage.getItem(PROFILES_STORAGE_KEY)) || [];
+    }catch(e){ return []; }
 }
 
-
-function saveProfiles(list){
-
-    localStorage.setItem(
-        PROFILES_STORAGE_KEY,
-        JSON.stringify(list)
-    );
-
+function saveProfiles(profiles){
+    localStorage.setItem(PROFILES_STORAGE_KEY,JSON.stringify(profiles));
 }
-
 
 function isProfileComplete(){
-
-    const profile =
-        getCurrentProfile();
-
-    if(!profile){
-        return false;
-    }
-
-    if(
-        !profile.name ||
-        !profile.name.trim()
-    ){
-
-        return false;
-
-    }
-
-
-    if(
-        !profile.tradeLink ||
-        !/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i
-        .test(profile.tradeLink)
-    ){
-
-        return false;
-
-    }
-
-    return true;
-
+    const p=getCurrentProfile();
+    return !!(p && p.name && p.tradeLink);
 }
 
-
-function normalizeTelegram(value){
-
-    value =
-        value.trim();
-
-    if(!value){
-
-        return "";
-
+function registerLogoClick(){
+    logoClickCount++;
+    clearTimeout(logoClickTimer);
+    logoClickTimer=setTimeout(function(){ logoClickCount=0; },900);
+    if(logoClickCount>=5){
+        logoClickCount=0;
+        openAdminLogin();
     }
-
-
-    value =
-        value
-        .replace(
-            /^https?:\/\/t\.me\//i,
-            ""
-        )
-        .replace(
-            /^https?:\/\/telegram\.me\//i,
-            ""
-        )
-        .replace(/^@/,"");
-
-
-    return "@" + value;
-
 }
-
-
-function isValidTelegram(value){
-
-    if(!value){
-
-        return true;
-
-    }
-
-
-    value =
-        value
-        .trim()
-        .replace(
-            /^https?:\/\/t\.me\//i,
-            ""
-        )
-        .replace(
-            /^https?:\/\/telegram\.me\//i,
-            ""
-        )
-        .replace(/^@/,"");
-
-
-    return /^[A-Za-z][A-Za-z0-9_]{4,31}$/
-        .test(value);
-
-}
-
-
-/* =========================================================
-   CAPTCHA
-========================================================= */
 
 function generateCaptcha(){
-
-    const chars =
-        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-    let code = "";
-
-    for(let i=0;i<6;i++){
-
-        code +=
-            chars[
-                Math.floor(
-                    Math.random() *
-                    chars.length
-                )
-            ];
-
-    }
-
-    currentCaptcha =
-        code;
-
-
-    const box =
-        document.getElementById(
-            "captchaBox"
-        );
-
-    if(box){
-
-        box.textContent =
-            code;
-
-    }
-
+    const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code="";
+    for(let i=0;i<6;i++) code+=chars[Math.floor(Math.random()*chars.length)];
+    currentCaptcha=code;
+    const el=document.getElementById("captchaCode");
+    if(el) el.textContent=code;
 }
-
-
-/* =========================================================
-   PROFILE OPEN
-========================================================= */
 
 function openProfile(){
-
-    const profile =
-        getCurrentProfile();
-
-
-    document.getElementById(
-        "profileName"
-    ).value =
-        profile?.name || "";
-
-
-    document.getElementById(
-        "profileTradeLink"
-    ).value =
-        profile?.tradeLink || "";
-
-
-    document.getElementById(
-        "profilePhone"
-    ).value =
-        profile?.phone || "";
-
-
-    document.getElementById(
-        "profileTelegram"
-    ).value =
-        profile?.telegram || "";
-
-
-    document.getElementById(
-        "captchaInput"
-    ).value =
-        "";
-
-
-    profileImageData =
-        profile?.image ||
-        DEFAULT_AVATAR;
-
-
-    document.getElementById(
-        "profileAvatarPreview"
-    ).src =
-        profileImageData;
-
-
-    document.getElementById(
-        "profileError"
-    ).textContent =
-        "";
-
-
+    const p=getCurrentProfile();
+    document.getElementById("profileError").textContent="";
+    document.getElementById("profileName").value=p?.name||"";
+    document.getElementById("profileTradeLink").value=p?.tradeLink||"";
+    document.getElementById("profilePhone").value=p?.phone||"";
+    document.getElementById("profileTelegram").value=p?.telegram||"";
+    profileImageData=p?.image||"";
+    document.getElementById("profileAvatarPreview").src=profileImageData||DEFAULT_AVATAR;
+    document.getElementById("profileImage").value="";
+    document.getElementById("captchaInput").value="";
     generateCaptcha();
-
-
-    document.getElementById(
-        "profileModal"
-    ).classList.add("show");
-
+    document.getElementById("profileModal").classList.add("show");
 }
-
 
 function closeProfile(){
-
-    document.getElementById(
-        "profileModal"
-    ).classList.remove("show");
-
+    document.getElementById("profileModal").classList.remove("show");
 }
-
 
 function closeProfileOutside(event){
-
-    if(
-        event.target.id ===
-        "profileModal"
-    ){
-
-        closeProfile();
-
-    }
-
+    if(event.target.id==="profileModal") closeProfile();
 }
-
 
 function previewProfileImage(event){
-
-    const file =
-        event.target.files?.[0];
-
-    if(!file){
-
-        return;
-
-    }
-
-
-    if(
-        file.size >
-        2 * 1024 * 1024
-    ){
-
-        document.getElementById(
-            "profileError"
-        ).textContent =
-            "Image must be smaller than 2MB.";
-
-        event.target.value = "";
-
-        return;
-
-    }
-
-
-    const reader =
-        new FileReader();
-
-
-    reader.onload =
-        function(){
-
-            profileImageData =
-                reader.result;
-
-            document.getElementById(
-                "profileAvatarPreview"
-            ).src =
-                profileImageData;
-
-        };
-
-
+    const file=event.target.files && event.target.files[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=function(e){
+        profileImageData=e.target.result;
+        document.getElementById("profileAvatarPreview").src=profileImageData;
+    };
     reader.readAsDataURL(file);
-
 }
 
-
-/* =========================================================
-   SAVE PROFILE
-========================================================= */
-
 function saveProfile(){
+    const name=document.getElementById("profileName").value.trim();
+    const tradeLink=document.getElementById("profileTradeLink").value.trim();
+    const phone=document.getElementById("profilePhone").value.trim();
+    const telegram=document.getElementById("profileTelegram").value.trim();
+    const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
+    const error=document.getElementById("profileError");
 
-    const error =
-        document.getElementById(
-            "profileError"
-        );
-
-
-    const name =
-        document.getElementById(
-            "profileName"
-        ).value.trim();
-
-
-    const tradeLink =
-        document.getElementById(
-            "profileTradeLink"
-        ).value.trim();
-
-
-    const phone =
-        document.getElementById(
-            "profilePhone"
-        ).value.trim();
-
-
-    let telegram =
-        document.getElementById(
-            "profileTelegram"
-        ).value.trim();
-
-
-    const captcha =
-        document.getElementById(
-            "captchaInput"
-        ).value
-        .trim()
-        .toUpperCase();
-
-
-    error.textContent = "";
-
-
-    if(!name){
-
-        error.textContent =
-            "Please enter your name.";
-
-        return;
-
+    if(!name){ error.textContent="Please enter your name."; return; }
+    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
+        error.textContent="Please enter a valid Steam Trade Link."; return;
     }
-
-
-    if(
-        !/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i
-        .test(tradeLink)
-    ){
-
-        error.textContent =
-            "Please enter a valid Steam Trade Link.";
-
-        return;
-
-    }
-
-
-    if(telegram){
-
-        if(
-            !isValidTelegram(telegram)
-        ){
-
-            error.textContent =
-                "Invalid Telegram ID. Example: @username";
-
-            return;
-
-        }
-
-        telegram =
-            normalizeTelegram(telegram);
-
-    }
-
-
-    if(!captcha){
-
-        error.textContent =
-            "Please enter the CAPTCHA.";
-
-        return;
-
-    }
-
-
-    if(
-        captcha !== currentCaptcha
-    ){
-
-        error.textContent =
-            "Invalid CAPTCHA.";
-
+    if(captcha!==currentCaptcha){
+        error.textContent="Captcha is incorrect.";
         generateCaptcha();
-
-        document.getElementById(
-            "captchaInput"
-        ).value = "";
-
+        document.getElementById("captchaInput").value="";
         return;
-
     }
 
-
-    const old =
-        getCurrentProfile();
-
-
-    const profile = {
-
-        id:
-            old?.id ||
-            "P-" +
-            Date.now()
-                .toString(36)
-                .toUpperCase(),
-
-        name:
-            name,
-
-        tradeLink:
-            tradeLink,
-
-        phone:
-            phone,
-
-        telegram:
-            telegram,
-
-        image:
-            profileImageData ||
-            DEFAULT_AVATAR,
-
-        createdAt:
-            old?.createdAt ||
-            new Date().toLocaleString(),
-
-        updatedAt:
-            new Date().toLocaleString()
-
+    const old=getCurrentProfile();
+    const profile={
+        id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
+        name:name,
+        tradeLink:tradeLink,
+        phone:phone,
+        telegram:telegram,
+        image:profileImageData||DEFAULT_AVATAR,
+        createdAt:old?.createdAt || new Date().toLocaleString("en-US"),
+        updatedAt:new Date().toLocaleString("en-US")
     };
 
+    localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
 
-    localStorage.setItem(
-        PROFILE_STORAGE_KEY,
-        JSON.stringify(profile)
-    );
-
-
-    const profiles =
-        getProfiles();
-
-
-    const index =
-        profiles.findIndex(
-            p => p.id === profile.id
-        );
-
-
-    if(index === -1){
-
-        profiles.unshift(profile);
-
-    }else{
-
-        profiles[index] =
-            profile;
-
-    }
-
-
+    const profiles=getProfiles();
+    const idx=profiles.findIndex(x=>x.id===profile.id);
+    if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
     saveProfiles(profiles);
 
     updateHeaderAvatar();
-
     closeProfile();
-
-    toast("PROFILE SAVED");
-
 }
-
 
 function updateHeaderAvatar(){
-
-    const profile =
-        getCurrentProfile();
-
-
-    document.getElementById(
-        "headerAvatar"
-    ).src =
-        profile?.image ||
-        DEFAULT_AVATAR;
-
+    const p=getCurrentProfile();
+    const img=document.getElementById("headerAvatar");
+    if(img) img.src=p?.image||DEFAULT_AVATAR;
 }
 
-
-/* =========================================================
-   PROFILE REQUIRED
-========================================================= */
-
-function showProfileRequired(){
-
-    document.getElementById(
-        "profileRequiredModal"
-    ).classList.add("show");
-
+function openProfileRequired(){
+    document.getElementById("profileRequiredModal").classList.add("show");
 }
-
-
 function closeProfileRequired(){
-
-    document.getElementById(
-        "profileRequiredModal"
-    ).classList.remove("show");
-
+    document.getElementById("profileRequiredModal").classList.remove("show");
 }
-
-
 function closeProfileRequiredOutside(event){
-
-    if(
-        event.target.id ===
-        "profileRequiredModal"
-    ){
-
-        closeProfileRequired();
-
-    }
-
+    if(event.target.id==="profileRequiredModal") closeProfileRequired();
 }
-
 
 /* =========================================================
-   PRODUCT
+   PRODUCT MODAL
 ========================================================= */
 
 function openProduct(id){
 
     if(!isProfileComplete()){
-
-        showProfileRequired();
-
+        openProfileRequired();
         return;
-
     }
-
-
-    const product =
-        products.find(
-            p => p.id === id
-        );
-
-
-    if(!product){
-
-        return;
-
-    }
-
 
     currentProduct =
-        product;
-
-
-    document.getElementById(
-        "productModalTitle"
-    ).textContent =
-        product.name;
-
-
-    document.getElementById(
-        "productModalImage"
-    ).src =
-        product.image;
-
-
-    document.getElementById(
-        "productModalPrice"
-    ).textContent =
-        formatPrice(product.price);
-
-
-    const wear =
-        document.getElementById(
-            "productWear"
+        products.find(
+            product =>
+                product.id === id
         );
 
 
-    if(product.wear){
-
-        wear.value =
-            product.wear;
-
-        wear.disabled =
-            false;
-
-    }else{
-
-        wear.value =
-            "FN";
-
-        wear.disabled =
-            true;
-
+    if(!currentProduct){
+        return;
     }
 
 
     document.getElementById(
-        "productModal"
-    ).classList.add("show");
+        "modalName"
+    ).textContent =
+        currentProduct.name;
 
 
     document.getElementById(
-        "productAddButton"
-    ).onclick =
-        function(){
+        "modalImage"
+    ).src =
+        currentProduct.image;
 
-            addToCart(
-                product.id,
-                wear.value
-            );
 
-        };
+    document.getElementById(
+        "modalImage"
+    ).alt =
+        currentProduct.name;
+
+
+    document.getElementById(
+        "modalItem"
+    ).textContent =
+        currentProduct.name;
+
+
+    document.getElementById(
+        "modalType"
+    ).textContent =
+        currentProduct.weapon;
+
+
+    document.getElementById(
+        "modalWear"
+    ).textContent =
+        currentProduct.wear;
+
+
+    document.getElementById(
+        "modalPrice"
+    ).textContent =
+        formatPrice(
+            currentProduct.price
+        );
+
+
+    document
+        .getElementById(
+            "productModal"
+        )
+        .classList.add("show");
 
 }
 
 
 function closeProduct(){
 
-    document.getElementById(
-        "productModal"
-    ).classList.remove("show");
-
-    currentProduct =
-        null;
+    document
+        .getElementById(
+            "productModal"
+        )
+        .classList.remove(
+            "show"
+        );
 
 }
 
 
-function closeProductOutside(event){
+function closeModalOutside(
+    event
+){
 
     if(
-        event.target.id ===
+        event.target.id
+        ===
         "productModal"
     ){
 
@@ -3345,100 +3929,25 @@ function closeProductOutside(event){
 }
 
 
-function buyProduct(id){
-
-    if(!isProfileComplete()){
-
-        showProfileRequired();
-
-        return;
-
-    }
-
-
-    openProduct(id);
-
-}
-
-
 /* =========================================================
    CART
 ========================================================= */
 
-function addToCart(id,wear){
+function addToCart(){
 
-    const product =
-        products.find(
-            p => p.id === id
-        );
-
-
-    if(!product){
-
+    if(!currentProduct){
         return;
-
     }
 
 
-    const existing =
-        cart.find(
-            item =>
-                item.id === id &&
-                item.wear === wear
-        );
-
-
-    if(existing){
-
-        toast("ALREADY IN CART");
-
-        return;
-
-    }
-
-
-    cart.push({
-
-        id:
-            id,
-
-        name:
-            product.name,
-
-        weapon:
-            product.weapon,
-
-        wear:
-            wear,
-
-        price:
-            product.price,
-
-        image:
-            product.image
-
-    });
+    cart.push(
+        currentProduct
+    );
 
 
     updateCart();
 
     closeProduct();
-
-    toast("ADDED TO CART");
-
-}
-
-
-function removeFromCart(index){
-
-    cart.splice(
-        index,
-        1
-    );
-
-    updateCart();
-
-    renderCart();
 
 }
 
@@ -3450,39 +3959,8 @@ function updateCart(){
     ).textContent =
         cart.length;
 
-}
-
-
-function openCart(){
 
     renderCart();
-
-    document.getElementById(
-        "cartModal"
-    ).classList.add("show");
-
-}
-
-
-function closeCart(){
-
-    document.getElementById(
-        "cartModal"
-    ).classList.remove("show");
-
-}
-
-
-function closeCartOutside(event){
-
-    if(
-        event.target.id ===
-        "cartModal"
-    ){
-
-        closeCart();
-
-    }
 
 }
 
@@ -3500,17 +3978,20 @@ function renderCart(){
 
     if(cart.length === 0){
 
-        container.innerHTML =
-            `
-            <div class="admin-empty">
-                CART IS EMPTY
+        container.innerHTML = `
+
+            <div class="empty-cart">
+                Your cart is empty.
             </div>
-            `;
+
+        `;
+
 
         document.getElementById(
             "cartTotal"
         ).textContent =
             "0 Toman";
+
 
         return;
 
@@ -3520,43 +4001,68 @@ function renderCart(){
     let total = 0;
 
 
-    cart.forEach(function(item,index){
-
-        total +=
-            Number(item.price);
+    cart.forEach(
+        (product,index) => {
 
 
-        container.innerHTML += `
+            total +=
+                product.price;
 
-            <div class="cart-item">
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "cart-item";
+
+
+            item.innerHTML = `
 
                 <img
-                    src="${item.image}"
-                    alt="${escapeHtml(item.name)}">
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
 
-                <div class="cart-item-main">
+
+                <div class="cart-item-info">
 
                     <div class="cart-item-name">
-                        ${escapeHtml(item.name)}
+
+                        ${product.name}
+
                     </div>
 
+
                     <div class="cart-item-price">
-                        ${formatPrice(item.price)}
+
+                        ${formatPrice(
+                            product.price
+                        )}
+
                     </div>
 
                 </div>
 
+
                 <button
-                    class="remove-button"
-                    onclick="removeFromCart(${index})">
+                    class="remove-item"
+                    onclick="removeFromCart(${index})"
+                >
                     REMOVE
                 </button>
 
-            </div>
+            `;
 
-        `;
 
-    });
+            container.appendChild(
+                item
+            );
+
+        }
+    );
 
 
     document.getElementById(
@@ -3567,271 +4073,175 @@ function renderCart(){
 }
 
 
-/* =========================================================
-   ORDERS
-========================================================= */
+function removeFromCart(index){
 
-function getOrders(){
+    cart.splice(
+        index,
+        1
+    );
 
-    try{
 
-        return JSON.parse(
-            localStorage.getItem(
-                ORDERS_STORAGE_KEY
-            )
-        ) || [];
+    updateCart();
 
-    }catch(e){
+}
 
-        return [];
+
+function openCart(){
+
+    renderCart();
+
+
+    document
+        .getElementById(
+            "cartModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+function closeCart(){
+
+    document
+        .getElementById(
+            "cartModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+function closeCartOutside(
+    event
+){
+
+    if(
+        event.target.id
+        ===
+        "cartModal"
+    ){
+
+        closeCart();
 
     }
 
 }
 
 
-function saveOrders(orders){
-
-    localStorage.setItem(
-        ORDERS_STORAGE_KEY,
-        JSON.stringify(orders)
-    );
-
-}
-
-
-function createOrder(){
-
-    const profile =
-        getCurrentProfile();
-
-
-    let total = 0;
-
-
-    const items =
-        cart.map(function(item){
-
-            total +=
-                Number(item.price);
-
-
-            return {
-
-                id:
-                    item.id,
-
-                name:
-                    item.name,
-
-                weapon:
-                    item.weapon,
-
-                wear:
-                    item.wear,
-
-                price:
-                    item.price
-
-            };
-
-        });
-
-
-    return {
-
-        id:
-            "WZ-" +
-            Date.now()
-                .toString(36)
-                .toUpperCase(),
-
-        createdAt:
-            new Date().toLocaleString(),
-
-        status:
-            "PENDING",
-
-        total:
-            total,
-
-        items:
-            items,
-
-        profile:
-            profile
-            ?
-            {
-                id:
-                    profile.id,
-
-                name:
-                    profile.name,
-
-                tradeLink:
-                    profile.tradeLink,
-
-                phone:
-                    profile.phone,
-
-                telegram:
-                    profile.telegram,
-
-                image:
-                    profile.image
-            }
-            :
-            null
-
-    };
-
-}
-
+/* =========================================================
+   TELEGRAM
+========================================================= */
 
 function finalizeOrder(){
 
     if(cart.length === 0){
 
-        toast("CART IS EMPTY");
-
-        return;
-
-    }
-
-
-    if(!isProfileComplete()){
-
-        closeCart();
-
-        showProfileRequired();
-
-        return;
-
-    }
-
-
-    const order =
-        createOrder();
-
-
-    const orders =
-        getOrders();
-
-
-    orders.unshift(order);
-
-    saveOrders(orders);
-
-
-    let message =
-        "WIZZY SHOP ORDER%0A%0A";
-
-
-    message +=
-        "Order: " +
-        encodeURIComponent(order.id) +
-        "%0A";
-
-
-    message +=
-        "Name: " +
-        encodeURIComponent(
-            order.profile.name
-        ) +
-        "%0A";
-
-
-    message +=
-        "Trade Link: " +
-        encodeURIComponent(
-            order.profile.tradeLink
-        ) +
-        "%0A";
-
-
-    if(order.profile.telegram){
-
-        message +=
-            "Telegram: " +
-            encodeURIComponent(
-                order.profile.telegram
-            ) +
-            "%0A";
-
-    }
-
-
-    message += "%0AITEMS:%0A";
-
-
-    order.items.forEach(function(item){
-
-        message +=
-            encodeURIComponent(
-                item.name
-            ) +
-            " - " +
-            encodeURIComponent(
-                formatPrice(item.price)
-            ) +
-            "%0A";
-
-    });
-
-
-    message +=
-        "%0ATOTAL: " +
-        encodeURIComponent(
-            formatPrice(order.total)
+        alert(
+            "Your cart is empty."
         );
 
+        return;
 
-    const telegramUrl =
-        "https://t.me/AghoJavaad?text=" +
-        message;
+    }
 
+    let message =
+        "WIZZY SHOP ORDER\n\n";
+
+    let total = 0;
+
+    cart.forEach(
+        (product,index) => {
+
+            total +=
+                product.price;
+
+            message +=
+
+                `${index + 1}. `
+                +
+                `${product.name} - `
+                +
+                `${formatPrice(
+                    product.price
+                )}\n`;
+
+        }
+    );
+
+    const profile=getCurrentProfile();
+
+    message +=
+        `\nCUSTOMER: ${profile?.name || "-"}`
+        + `\nTRADE LINK: ${profile?.tradeLink || "-"}`
+        + `\nTOTAL: `
+        + formatPrice(total);
+
+    /*
+       Save a local order before opening Telegram.
+       This will later be replaced by the real backend/ZarinPal flow.
+    */
+    createLocalOrder();
+
+    const telegram =
+
+        "https://t.me/WizyyShop?text="
+        +
+        encodeURIComponent(
+            message
+        );
 
     window.open(
-        telegramUrl,
+        telegram,
         "_blank"
     );
 
-
-    toast(
-        "ORDER CREATED: " +
-        order.id
-    );
-
-
-    cart = [];
-
-    updateCart();
-
-    renderCart();
-
 }
+
 
 
 /* =========================================================
-   ADMIN
+   ADMIN PANEL
 ========================================================= */
 
-function registerLogoClick(){
-    logoClickCount++;
-    clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){logoClickCount=0;},1000);
-    if(logoClickCount>=5){
-        logoClickCount=0;
-        openAdminLogin();
+const ADMIN_EMAIL = "wizzyshop1226@gmail.com";
+const ORDERS_STORAGE_KEY = "wizzy_shop_orders";
+
+async function ensureAdminSession(){
+    if(!window.wizzySupabase) return false;
+    const { data } = await wizzySupabase.auth.getSession();
+    return !!data?.session;
+}
+
+function getOrders(){
+    try{
+        return JSON.parse(
+            localStorage.getItem(ORDERS_STORAGE_KEY)
+        ) || [];
+    }catch(error){
+        return [];
     }
 }
 
+function saveOrders(orders){
+    localStorage.setItem(
+        ORDERS_STORAGE_KEY,
+        JSON.stringify(orders)
+    );
+}
+
 function openAdminLogin(){
-    document.getElementById("adminEmail").value="";
-    document.getElementById("adminPassword").value="";
-    document.getElementById("adminError").textContent="";
+    document.getElementById("adminError").textContent = "";
+    document.getElementById("adminEmail").value = ADMIN_EMAIL;
+    document.getElementById("adminPassword").value = "";
     document.getElementById("adminLoginModal").classList.add("show");
-    setTimeout(function(){document.getElementById("adminEmail").focus();},100);
+
+    setTimeout(function(){
+        document.getElementById("adminPassword").focus();
+    },100);
 }
 
 function closeAdminLogin(){
@@ -3839,65 +4249,51 @@ function closeAdminLogin(){
 }
 
 function closeAdminLoginOutside(event){
-    if(event.target.id==="adminLoginModal") closeAdminLogin();
+    if(event.target.id === "adminLoginModal"){
+        closeAdminLogin();
+    }
 }
 
 async function loginAdmin(){
-
-    const email =
-        document.getElementById("adminEmail").value.trim();
-
-    const password =
-        document.getElementById("adminPassword").value;
-
-    const errorBox =
-        document.getElementById("adminError");
+    const email = document.getElementById("adminEmail").value.trim().toLowerCase();
+    const password = document.getElementById("adminPassword").value;
+    const errorBox = document.getElementById("adminError");
 
     errorBox.textContent = "";
 
-    if(!email || !password){
-
-        errorBox.textContent =
-            "EMAIL AND PASSWORD ARE REQUIRED";
-
+    if(email !== ADMIN_EMAIL){
+        errorBox.textContent = "ADMIN ACCESS DENIED";
         return;
     }
 
-    if(typeof wizzySupabase === "undefined"){
-
-        errorBox.textContent =
-            "SUPABASE IS NOT CONNECTED";
-
+    if(!password){
+        errorBox.textContent = "ENTER YOUR PASSWORD";
         return;
     }
 
-    const { data, error } =
-        await wizzySupabase.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
-
-    if(error){
-
-        console.error(
-            "SUPABASE LOGIN ERROR:",
-            error
-        );
-
-        errorBox.textContent =
-            error.message || "UNKNOWN SUPABASE ERROR";
-
+    if(!window.wizzySupabase){
+        errorBox.textContent = "SUPABASE FAILED TO LOAD";
         return;
     }
 
-    console.log(
-        "ADMIN LOGIN SUCCESS:",
-        data.user?.email
-    );
+    const { data, error } = await wizzySupabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if(error || !data?.session){
+        console.error("WIZZY ADMIN LOGIN ERROR:", error);
+        errorBox.textContent = error?.message || "ADMIN ACCESS DENIED";
+        return;
+    }
 
     closeAdminLogin();
-
     openAdminPanel();
+}
+
+function openAdminPanel(){
+    renderAdminPanel();
+    document.getElementById("adminPanelModal").classList.add("show");
 }
 
 function closeAdminPanel(){
@@ -3905,136 +4301,356 @@ function closeAdminPanel(){
 }
 
 function closeAdminPanelOutside(event){
-    if(event.target.id==="adminPanelModal") closeAdminPanel();
-}
-
-/* =========================================================
-   ADMIN RENDER
-========================================================= */
-
-function renderAdminPanel(){
-    const orders=getOrders();
-    const profiles=getProfiles();
-    const paidOrders=orders.filter(function(order){return order.status==="PAID"||order.status==="DELIVERED";});
-    const sales=paidOrders.reduce(function(total,order){return total+Number(order.total||0);},0);
-    document.getElementById("adminOrderCount").textContent=orders.length;
-    document.getElementById("adminPaidCount").textContent=paidOrders.length;
-    document.getElementById("adminTotalSales").textContent=formatPrice(sales);
-    renderAdminProfiles(profiles);
-    renderAdminOrders(orders);
-}
-
-function renderAdminProfiles(profiles){
-    const container=document.getElementById("adminProfiles");
-    if(!profiles.length){
-        container.innerHTML='<div class="admin-empty">NO CUSTOMER PROFILES YET</div>';
-        return;
+    if(event.target.id === "adminPanelModal"){
+        closeAdminPanel();
     }
-    container.innerHTML=profiles.map(function(profile){
-        return '<div class="admin-profile">'+
-            '<img src="'+(profile.image||DEFAULT_AVATAR)+'" alt="Profile">'+
-            '<div><div class="admin-profile-name">'+escapeHtml(profile.name)+'</div>'+ 
-            '<div class="admin-profile-info">Trade: '+escapeHtml(profile.tradeLink)+'<br>'+
-            'Phone: '+escapeHtml(profile.phone||'-')+'<br>'+
-            'Telegram: '+escapeHtml(profile.telegram||'-')+'<br>'+ 
-            'Updated: '+escapeHtml(profile.updatedAt||'-')+'</div></div></div>';
-    }).join('');
 }
 
-function renderAdminOrders(orders){
-    const container=document.getElementById("adminOrders");
-    if(!orders.length){
-        container.innerHTML='<div class="admin-empty">NO ORDERS YET</div>';
-        return;
+function createLocalOrder(){
+    if(cart.length === 0){
+        return null;
     }
-    container.innerHTML=orders.map(function(order){
-        const itemHtml=(order.items||[]).map(function(item){
-            return '<div>'+escapeHtml(item.name)+' — '+formatPrice(item.price)+'</div>';
-        }).join('');
-        const p=order.profile;
-        return '<div class="admin-order">'+
-            '<div class="admin-order-head"><div class="admin-order-id">'+escapeHtml(order.id)+'</div>'+ 
-            '<div class="admin-order-date">'+escapeHtml(order.createdAt)+'</div></div>'+ 
-            '<div class="admin-order-items">'+itemHtml+'</div>'+ 
-            (p?'<div class="admin-order-profile"><b>CUSTOMER</b><br>Name: '+escapeHtml(p.name)+'<br>Trade: '+escapeHtml(p.tradeLink)+'<br>Telegram: '+escapeHtml(p.telegram||'-')+'<br>Phone: '+escapeHtml(p.phone||'-')+'</div>':'')+
-            '<div class="admin-order-total">TOTAL: '+formatPrice(order.total)+'</div>'+ 
-            '<div class="admin-order-actions"><select class="admin-status" onchange="changeOrderStatus(\''+order.id+'\',this.value)">'+
-            '<option value="PENDING" '+(order.status==='PENDING'?'selected':'')+'>PENDING</option>'+ 
-            '<option value="PAID" '+(order.status==='PAID'?'selected':'')+'>PAID</option>'+ 
-            '<option value="FAILED" '+(order.status==='FAILED'?'selected':'')+'>FAILED</option>'+ 
-            '<option value="DELIVERED" '+(order.status==='DELIVERED'?'selected':'')+'>DELIVERED</option></select>'+ 
-            '<button class="admin-delete" onclick="deleteOrder(\''+order.id+'\')">DELETE</button></div></div>';
-    }).join('');
-}
 
-function changeOrderStatus(id,status){
-    const orders=getOrders();
-    const order=orders.find(function(o){return o.id===id;});
-    if(!order)return;
-    order.status=status;
+    let total = 0;
+
+    const items = cart.map(function(product){
+        total += product.price;
+
+        return {
+            id: product.id,
+            name: product.name,
+            weapon: product.weapon,
+            wear: product.wear,
+            price: product.price
+        };
+    });
+
+    const profile=getCurrentProfile();
+
+    const order = {
+        id:
+            "WZ-" +
+            Date.now().toString(36).toUpperCase(),
+
+        createdAt:
+            new Date().toLocaleString("en-US"),
+
+        status:"PENDING",
+
+        total:total,
+
+        profile: profile ? {
+            id:profile.id,
+            name:profile.name,
+            tradeLink:profile.tradeLink,
+            phone:profile.phone,
+            telegram:profile.telegram,
+            image:profile.image
+        } : null,
+
+        items:items
+    };
+
+    const orders = getOrders();
+
+    orders.unshift(order);
+
     saveOrders(orders);
+
+    return order;
+}
+
+function updateOrderStatus(orderId,status){
+    const orders = getOrders();
+
+    const order = orders.find(function(item){
+        return item.id === orderId;
+    });
+
+    if(!order){
+        return;
+    }
+
+    order.status = status;
+
+    saveOrders(orders);
+
     renderAdminPanel();
 }
 
-function deleteOrder(id){
-    saveOrders(getOrders().filter(function(order){return order.id!==id;}));
+function deleteOrder(orderId){
+    const confirmed =
+        confirm("Delete this order?");
+
+    if(!confirmed){
+        return;
+    }
+
+    const orders =
+        getOrders().filter(function(order){
+            return order.id !== orderId;
+        });
+
+    saveOrders(orders);
+
     renderAdminPanel();
 }
 
 function clearAllOrders(){
-    if(!confirm("Delete all orders?"))return;
-    localStorage.removeItem(ORDERS_STORAGE_KEY);
+    const orders = getOrders();
+
+    if(orders.length === 0){
+        return;
+    }
+
+    const confirmed =
+        confirm(
+            "Delete ALL orders? This cannot be undone."
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+    localStorage.removeItem(
+        ORDERS_STORAGE_KEY
+    );
+
     renderAdminPanel();
 }
 
+
+function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>'"]/g,function(ch){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch];
+    });
+}
+
 function clearAllProfiles(){
-    if(!confirm("Delete all profiles?"))return;
+    const profiles=getProfiles();
+    if(profiles.length===0) return;
+    if(!confirm("Delete ALL saved profiles? This cannot be undone.")) return;
     localStorage.removeItem(PROFILES_STORAGE_KEY);
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+    renderAdminProfiles();
+    updateHeaderAvatar();
+}
+
+function renderAdminProfiles(){
+    const container=document.getElementById("adminProfiles");
+    if(!container) return;
+    const profiles=getProfiles();
+    container.innerHTML="";
+
+    if(profiles.length===0){
+        container.innerHTML='<div class="admin-no-profiles">No customer profiles saved on this browser yet.</div>';
+        return;
+    }
+
+    profiles.forEach(function(profile){
+        const card=document.createElement("div");
+        card.className="admin-profile-card";
+        card.innerHTML=`
+            <img src="${profile.image || DEFAULT_AVATAR}" alt="Profile">
+            <div>
+                <div class="admin-profile-name">${escapeHtml(profile.name || "Unnamed")}</div>
+                <div class="admin-profile-line"><b>Trade:</b> ${escapeHtml(profile.tradeLink || "-")}</div>
+                <div class="admin-profile-line"><b>Phone:</b> ${escapeHtml(profile.phone || "-")}</div>
+                <div class="admin-profile-line"><b>Telegram:</b> ${escapeHtml(profile.telegram || "-")}</div>
+                <div class="admin-profile-date">Updated: ${escapeHtml(profile.updatedAt || profile.createdAt || "-")}</div>
+            </div>`;
+        container.appendChild(card);
+    });
+}
+
+function renderAdminProfiles(){
+    const container=document.getElementById("adminProfiles");
+    if(!container) return;
+    const profiles=getProfiles();
+    container.innerHTML="";
+    if(profiles.length===0){
+        container.innerHTML='<div class="admin-empty">No customer profiles saved on this browser yet.</div>';
+        return;
+    }
+    profiles.forEach(function(profile){
+        const card=document.createElement("div");
+        card.className="admin-profile-card";
+        card.innerHTML=`
+            <img src="${profile.image || DEFAULT_AVATAR}" alt="Profile">
+            <div>
+                <div class="admin-profile-name">${escapeHtml(profile.name || "Unnamed")}</div>
+                <div class="admin-profile-line"><b>Trade:</b> ${escapeHtml(profile.tradeLink || "-")}</div>
+                <div class="admin-profile-line"><b>Phone:</b> ${escapeHtml(profile.phone || "-")}</div>
+                <div class="admin-profile-line"><b>Telegram:</b> ${escapeHtml(profile.telegram || "-")}</div>
+                <div class="admin-profile-date">Updated: ${escapeHtml(profile.updatedAt || profile.createdAt || "-")}</div>
+            </div>`;
+        container.appendChild(card);
+    });
+}
+
+function clearAllProfiles(){
+    const profiles=getProfiles();
+    if(!profiles.length) return;
+    if(!confirm("Delete ALL customer profiles? This cannot be undone.")) return;
+    localStorage.removeItem(PROFILES_STORAGE_KEY);
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+    updateHeaderAvatar();
     renderAdminPanel();
+}
+
+function renderAdminPanel(){
+    renderAdminProfiles();
+    const orders = getOrders();
+
+    const paidOrders =
+        orders.filter(function(order){
+            return order.status === "PAID";
+        });
+
+    const totalSales =
+        paidOrders.reduce(function(sum,order){
+            return sum + Number(order.total || 0);
+        },0);
+
+    document.getElementById("adminOrderCount").textContent =
+        orders.length;
+
+    document.getElementById("adminPaidCount").textContent =
+        paidOrders.length;
+
+    document.getElementById("adminTotalSales").textContent =
+        formatPrice(totalSales);
+
+    renderAdminProfiles();
+
+    const container =
+        document.getElementById("adminOrders");
+
+    container.innerHTML = "";
+
+    if(orders.length === 0){
+        container.innerHTML = `
+            <div class="admin-empty">
+                No orders yet.
+            </div>
+        `;
+        return;
+    }
+
+    orders.forEach(function(order){
+
+        const itemText =
+            order.items.map(function(item){
+                return (
+                    item.name +
+                    " — " +
+                    formatPrice(item.price)
+                );
+            }).join("<br>");
+
+        const card =
+            document.createElement("div");
+
+        card.className = "admin-order";
+
+        card.innerHTML = `
+            <div class="admin-order-head">
+                <div class="admin-order-id">
+                    ${order.id}
+                </div>
+
+                <div class="admin-order-date">
+                    ${order.createdAt}
+                </div>
+            </div>
+
+            <div class="admin-order-items">
+                ${itemText}
+            </div>
+
+            ${order.profile ? `
+            <div class="admin-order-profile">
+                <div><b>CUSTOMER:</b> ${escapeHtml(order.profile.name || "-")}</div>
+                <div><b>TRADE:</b> ${escapeHtml(order.profile.tradeLink || "-")}</div>
+                <div><b>PHONE:</b> ${escapeHtml(order.profile.phone || "-")}</div>
+                <div><b>TELEGRAM:</b> ${escapeHtml(order.profile.telegram || "-")}</div>
+            </div>` : ""}
+
+            <div class="admin-order-total">
+                ${formatPrice(order.total)}
+            </div>
+
+            ${order.profile ? `
+            <div class="admin-order-profile">
+                <div><b>CUSTOMER:</b> ${escapeHtml(order.profile.name || "-")}</div>
+                <div><b>TRADE:</b> ${escapeHtml(order.profile.tradeLink || "-")}</div>
+                <div><b>PHONE:</b> ${escapeHtml(order.profile.phone || "-")}</div>
+                <div><b>TELEGRAM:</b> ${escapeHtml(order.profile.telegram || "-")}</div>
+            </div>` : ""}
+
+            <div class="admin-order-actions">
+
+                <select
+                    class="admin-status"
+                    onchange="updateOrderStatus('${order.id}',this.value)"
+                >
+                    <option value="PENDING" ${order.status === "PENDING" ? "selected" : ""}>
+                        PENDING
+                    </option>
+
+                    <option value="PAID" ${order.status === "PAID" ? "selected" : ""}>
+                        PAID
+                    </option>
+
+                    <option value="FAILED" ${order.status === "FAILED" ? "selected" : ""}>
+                        FAILED
+                    </option>
+
+                    <option value="DELIVERED" ${order.status === "DELIVERED" ? "selected" : ""}>
+                        DELIVERED
+                    </option>
+                </select>
+
+                <button
+                    class="admin-delete"
+                    onclick="deleteOrder('${order.id}')"
+                >
+                    DELETE
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
 }
 
 
 /* =========================================================
-   INIT
+   START
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        renderCategories();
-
-        renderWeapons();
-
-        renderProducts();
-
-        updateCart();
-
-        updateHeaderAvatar();
-
-        priceChanged("min");
-
-        priceChanged("max");
-
-        generateCaptcha();
-
-    }
-);
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
- <script>
-const SUPABASE_URL = "https://crowmfciejumiwrratun.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_zap3lpLjBYwe8OUzJidwaA_k4J_OVMX";
-
-const wizzySupabase =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+document
+    .getElementById(
+        "weaponBox"
+    )
+    .classList.remove(
+        "show"
     );
 
-console.log("WIZZY SUPABASE CONNECTED");
-</script> </body>
+
+updateHeaderAvatar();
+renderProducts();
+
+updateCart();
+
+updatePriceRange();
+
+updateHeaderAvatar();
+
+generateCaptcha();
+
+</script>
+
+</body>
 </html>
