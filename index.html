@@ -1699,7 +1699,9 @@ function isProfileComplete(){
 function generateCaptcha(){
     const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     currentCaptcha="";
-    for(let i=0;i<5;i++) currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
+    for(let i=0;i<5;i++){
+        currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
+    }
     const box=document.getElementById("captchaBox");
     if(box) box.textContent=currentCaptcha;
 }
@@ -2070,6 +2072,72 @@ function registerLogoClick(){
 .admin-order-profile{margin:10px 0;padding:10px;background:#101010;border:1px solid #292929;border-radius:7px;font-size:10px;color:#aaa;line-height:1.8;}
 @media(max-width:700px){.profile-button{position:relative;right:auto;top:auto;transform:none;padding:5px 7px;font-size:8px}.profile-button img{width:25px;height:25px}.cart-button{position:relative;left:auto;top:auto;transform:none;padding:8px 10px;font-size:9px}.header-inner{justify-content:space-between}.logo-area{text-align:center}.admin-profiles{grid-template-columns:1fr}}
 
+
+/* WIZZY PROFILE REPAIR */
+.profile-box{width:min(900px,96vw)!important;max-width:900px!important;max-height:90vh;overflow:auto}
+.profile-layout{display:grid!important;grid-template-columns:minmax(220px,.72fr) minmax(330px,1.28fr)!important;gap:22px!important;align-items:stretch!important}
+.profile-side-card{min-width:0;background:linear-gradient(145deg,#171717,#0e0e0e);border:1px solid #303030;border-radius:12px;padding:22px;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center}
+.profile-form-card{min-width:0;background:#111;border:1px solid #303030;border-radius:12px;padding:20px}
+.profile-upload-btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 13px;border-radius:7px;background:#1d1d1d;border:1px solid #444;color:#ddd;font-size:10px;font-weight:900;letter-spacing:.6px;cursor:pointer}
+.profile-upload-btn:hover{background:#e00000;border-color:#ff3333;color:#fff}
+.profile-file-hidden{display:none!important}
+.profile-captcha-row{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap}
+.profile-captcha-row .captcha-box{min-width:145px;height:44px;display:flex;align-items:center;justify-content:center;padding:0 14px;background:#080808;border:1px solid #555;border-radius:8px;color:#fff;font-size:18px;font-weight:900;letter-spacing:5px;user-select:none;text-shadow:2px 2px 0 #000}
+.profile-captcha-row .captcha-refresh{height:44px}
+.profile-success-toast{position:fixed!important;left:50%!important;right:auto!important;bottom:20px!important;z-index:99999!important;transform:translate(-50%,25px)!important;opacity:0!important}
+.profile-success-toast.show{animation:profileToastRepair 2.8s ease forwards!important}
+@keyframes profileToastRepair{0%{opacity:0;transform:translate(-50%,25px)}12%,82%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,25px)}}
+@media(max-width:700px){.profile-box{max-height:92vh!important}.profile-layout{grid-template-columns:1fr!important;gap:14px!important}.profile-side-card{padding:18px!important}.profile-form-card{padding:15px!important}.profile-success-toast{left:12px!important;right:12px!important;transform:translateY(25px)!important}.profile-success-toast.show{animation:profileToastRepairMobile 2.8s ease forwards!important}}
+@keyframes profileToastRepairMobile{0%{opacity:0;transform:translateY(25px)}12%,82%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(25px)}}
+
+/* FINAL PROFILE ALIGNMENT FIX */
+.profile-layout{grid-template-columns:260px minmax(0,1fr);gap:16px;align-items:stretch;}
+.profile-side-card{justify-content:flex-start;align-items:center;text-align:center;padding:20px 14px;}
+.profile-form-card{min-width:0;}
+.profile-field input{font-size:12px;}
+#profileTelegram{font-size:12px !important;height:44px !important;}
+.captcha-input-row{display:grid;grid-template-columns:130px minmax(0,1fr) 44px;gap:8px;align-items:center;}
+.captcha-input-row .captcha-box{min-width:0;width:100%;height:44px;}
+.captcha-input{min-width:0;width:100%;height:44px;background:#111;color:#fff;border:1px solid #3c3c3c;border-radius:8px;padding:0 13px;outline:none;}
+.captcha-input:focus{border-color:#e00000;box-shadow:0 0 0 2px rgba(224,0,0,.08);}
+.captcha-input-row .captcha-refresh{width:44px;padding:0;font-size:18px;}
+@media(max-width:700px){.profile-layout{grid-template-columns:1fr;}.captcha-input-row{grid-template-columns:105px minmax(0,1fr) 42px;}.profile-side-card{padding:16px;}}
+
+/* CAPTCHA FINAL FORCE FIX */
+.captcha-field .captcha-input-row{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:8px !important;
+    width:100% !important;
+}
+.captcha-field .captcha-box{
+    order:1 !important;
+    flex:0 0 130px !important;
+    width:130px !important;
+    min-width:130px !important;
+    height:44px !important;
+}
+.captcha-field .captcha-input{
+    order:2 !important;
+    flex:1 1 auto !important;
+    width:auto !important;
+    min-width:0 !important;
+    height:44px !important;
+}
+.captcha-field .captcha-refresh{
+    order:3 !important;
+    flex:0 0 44px !important;
+    width:44px !important;
+    min-width:44px !important;
+    height:44px !important;
+}
+@media(max-width:700px){
+    .captcha-field .captcha-box{flex-basis:105px !important;min-width:105px !important;width:105px !important;}
+    .captcha-field .captcha-refresh{flex-basis:42px !important;min-width:42px !important;width:42px !important;}
+}
 </style>
 </head>
 
@@ -2601,46 +2669,24 @@ function registerLogoClick(){
     <div class="modal-content profile-box">
         <div class="modal-header">
             <h2>YOUR PROFILE</h2>
-            <button class="close" onclick="closeProfile()">×</button>
+            <button class="close" type="button" onclick="closeProfile()">×</button>
         </div>
         <div class="profile-layout">
             <div class="profile-side-card">
-                <div class="profile-avatar-wrap">
-                    <img id="profileAvatarPreview" class="profile-avatar-preview" src="" alt="Profile">
-                </div>
+                <div class="profile-avatar-wrap"><img id="profileAvatarPreview" class="profile-avatar-preview" src="" alt="Profile"></div>
                 <div class="profile-side-title"><span>WIZZY</span> PROFILE</div>
                 <div class="profile-side-text">Complete your profile to place orders and receive your skins safely.</div>
-                <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
+                <label class="profile-upload-btn">CHOOSE PROFILE PICTURE<input id="profileImage" class="profile-file-hidden" type="file" accept="image/*" onchange="previewProfileImage(event)"></label>
             </div>
             <div class="profile-form-card">
                 <div class="profile-form">
-                    <div class="profile-field">
-                        <label>NAME *</label>
-                        <input id="profileName" type="text" placeholder="Your name">
-                    </div>
-                    <div class="profile-field">
-                        <label>STEAM TRADE LINK *</label>
-                        <input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=...">
-                        <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
-                    </div>
-                    <div class="profile-field">
-                        <label>PHONE (OPTIONAL)</label>
-                        <input id="profilePhone" type="text" placeholder="Phone number">
-                    </div>
-                    <div class="profile-field">
-                        <label>TELEGRAM ID (OPTIONAL)</label>
-                        <input id="profileTelegram" type="text" placeholder="@username">
-                    </div>
-                    <div class="profile-field">
-                        <label>CAPTCHA *</label>
-                        <div class="captcha-row">
-                            <div id="captchaBox" class="captcha-box"></div>
-                            <button type="button" class="captcha-refresh" onclick="generateCaptcha()">REFRESH</button>
-                            <input id="captchaInput" type="text" placeholder="Enter code" autocomplete="off">
-                        </div>
-                    </div>
+                    <div class="profile-field"><label>NAME *</label><input id="profileName" type="text" placeholder="Your name"></div>
+                    <div class="profile-field"><label>STEAM TRADE LINK *</label><input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=..."><div class="profile-help">Required to place an order. Phone and Telegram are optional.</div></div>
+                    <div class="profile-field"><label>PHONE (OPTIONAL)</label><input id="profilePhone" type="text" placeholder="Phone number"></div>
+                    <div class="profile-field"><label>TELEGRAM ID (OPTIONAL)</label><input id="profileTelegram" type="text" placeholder="@username"></div>
+                    <div class="profile-field captcha-field"><label>CAPTCHA *</label><div class="captcha-input-row"><div id="captchaBox" class="captcha-box">-----</div><input id="captchaInput" class="captcha-input" type="text" placeholder="Enter captcha" autocomplete="off"><button type="button" class="captcha-refresh" onclick="generateCaptcha()">↻</button></div></div>
                     <div id="profileError" class="profile-error"></div>
-                    <button class="profile-save" onclick="saveProfile()">SAVE PROFILE</button>
+                    <button class="profile-save" type="button" onclick="saveProfile()">SAVE PROFILE</button>
                 </div>
             </div>
         </div>
@@ -2656,69 +2702,6 @@ function registerLogoClick(){
         <h2>PROFILE REQUIRED</h2>
         <p>Please complete your profile before ordering a skin.</p>
         <button class="profile-required-btn" onclick="closeProfileRequired();openProfile();">COMPLETE PROFILE</button>
-    </div>
-</div>
-
-<!-- =========================================================
-     PROFILE REQUIRED
-========================================================= -->
-<div id="profileRequiredModal" class="modal">
-    <div class="modal-content" style="max-width:430px;">
-        <div class="profile-required-box">
-            <div class="profile-required-icon"></div>
-            <div class="profile-required-title">PROFILE REQUIRED</div>
-            <div class="profile-required-text">PLEASE COMPLETE YOUR PROFILE</div>
-            <button class="finalize" onclick="closeProfileRequired();openProfile();">COMPLETE PROFILE</button>
-        </div>
-    </div>
-</div>
-
-<!-- =========================================================
-     PROFILE MODAL
-========================================================= -->
-<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
-    <div class="modal-content" style="max-width:520px;">
-        <div class="modal-header">
-            <h2>YOUR PROFILE</h2>
-            <button class="close" onclick="closeProfile()">×</button>
-        </div>
-        <div class="profile-form">
-            <div class="profile-avatar-row">
-                <img id="profileAvatarPreview" class="profile-avatar-preview" src="" alt="Profile">
-                <div>
-                    <div style="font-weight:bold;margin-bottom:7px;">Profile Picture</div>
-                    <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
-                    <div class="profile-help">Optional. A default avatar is used if you do not choose one.</div>
-                </div>
-            </div>
-            <div class="profile-field">
-                <label>NAME *</label>
-                <input id="profileName" type="text" placeholder="Your name">
-            </div>
-            <div class="profile-field">
-                <label>STEAM TRADE LINK *</label>
-                <input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=...">
-                <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
-            </div>
-            <div class="profile-field">
-                <label>PHONE (OPTIONAL)</label>
-                <input id="profilePhone" type="text" placeholder="Phone number">
-            </div>
-            <div class="profile-field">
-                <label>TELEGRAM ID (OPTIONAL)</label>
-                <input id="profileTelegram" type="text" placeholder="@username">
-            </div>
-            <div class="profile-field">
-                <label>CAPTCHA *</label>
-                <div class="captcha-row">
-                    <div id="captchaBox" class="captcha-box">-----</div>
-                    <button class="captcha-refresh" type="button" onclick="generateCaptcha()">REFRESH</button>
-                </div>
-                <input id="captchaInput" type="text" placeholder="Enter captcha">
-            </div>
-            <div id="profileError" class="profile-error"></div>
-            <button class="finalize" onclick="saveProfile()">SAVE PROFILE</button>
-        </div>
     </div>
 </div>
 
@@ -3808,11 +3791,12 @@ function registerLogoClick(){
 
 function generateCaptcha(){
     const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let code="";
-    for(let i=0;i<6;i++) code+=chars[Math.floor(Math.random()*chars.length)];
-    currentCaptcha=code;
-    const el=document.getElementById("captchaCode");
-    if(el) el.textContent=code;
+    currentCaptcha="";
+    for(let i=0;i<5;i++){
+        currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
+    }
+    const box=document.getElementById("captchaBox");
+    if(box) box.textContent=currentCaptcha;
 }
 
 function openProfile(){
@@ -3940,6 +3924,7 @@ async function saveProfile(){
 
         updateHeaderAvatar();
         closeProfile();
+        showProfileSaved();
     }catch(cloudError){
         console.error("WIZZY PROFILE CLOUD SAVE ERROR:",cloudError);
         error.textContent="PROFILE SAVED LOCALLY, BUT CLOUD SAVE FAILED.";
