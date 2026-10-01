@@ -1,367 +1,294 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WIZZY SHOP - CS2 Skin Store</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>WIZZY SHOP</title>
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
 }
 
 body{
+    background:#090909;
+    color:#fff;
     font-family:Arial,Helvetica,sans-serif;
-    color:#f5f5f5;
     min-height:100vh;
-    background:
-        radial-gradient(circle at 50% -10%,#303030 0%,#171717 24%,#0c0c0c 55%,#070707 100%);
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-        radial-gradient(circle at 15% 20%,rgba(255,255,255,.035),transparent 25%),
-        radial-gradient(circle at 85% 75%,rgba(220,0,0,.045),transparent 25%);
-    z-index:-1;
+button,input,select{
+    font-family:inherit;
 }
-
-/* HEADER */
 
 header{
+    height:82px;
+    background:#0d0d0d;
+    border-bottom:1px solid #292929;
     position:sticky;
     top:0;
-    z-index:1000;
-    height:82px;
-    background:rgba(18,18,18,.94);
-    border-bottom:1px solid #3b3b3b;
-    backdrop-filter:blur(18px);
-    box-shadow:0 5px 25px rgba(0,0,0,.35);
+    z-index:100;
 }
 
 .header-inner{
-    width:95%;
+    width:94%;
     max-width:1450px;
     height:100%;
     margin:auto;
-    position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
+    position:relative;
 }
 
-.logo-area{
-    text-align:center;
+.logo{
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:4px;
     cursor:pointer;
     user-select:none;
 }
 
-.logo{
-    font-size:29px;
-    font-weight:1000;
-    letter-spacing:5px;
-    color:#f5f5f5;
-    text-shadow:0 0 15px rgba(255,255,255,.08);
-}
-
-.logo span{
+.logo span,
+.hero-logo span,
+.footer-logo span{
     color:#e00000;
-    text-shadow:0 0 10px rgba(224,0,0,.5);
 }
 
 .subtitle{
-    margin-top:4px;
-    font-size:11px;
-    color:#999;
-    letter-spacing:1px;
+    text-align:center;
+    color:#777;
+    font-size:10px;
+    margin-top:5px;
 }
 
-.cart-button{
+.profile-button{
     position:absolute;
     right:0;
     top:50%;
     transform:translateY(-50%);
-    background:#1b1b1b;
-    border:1px solid #444;
-    color:#fff;
-    padding:11px 17px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:#151515;
+    border:1px solid #383838;
+    color:#ddd;
+    padding:8px 13px;
     border-radius:8px;
     cursor:pointer;
-    transition:.2s;
+}
+
+.profile-button:hover{
+    border-color:#e00000;
+    color:#fff;
+}
+
+.profile-mini{
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#222;
+}
+
+.cart-button{
+    position:absolute;
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    background:#151515;
+    color:#fff;
+    border:1px solid #383838;
+    padding:11px 15px;
+    border-radius:8px;
+    cursor:pointer;
     font-weight:bold;
 }
 
 .cart-button:hover{
     background:#e00000;
-    border-color:#ff3333;
-    box-shadow:0 0 18px rgba(224,0,0,.25);
+    border-color:#e00000;
 }
 
 .cart-count{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:20px;
-    height:20px;
-    margin-left:7px;
     background:#e00000;
-    border-radius:50%;
+    border-radius:20px;
+    padding:2px 7px;
+    margin-left:5px;
     font-size:11px;
 }
 
-/* MAIN */
-
 main{
-    width:95%;
+    width:94%;
     max-width:1450px;
-    margin:32px auto 65px;
+    margin:0 auto;
 }
-
-/* HERO */
 
 .hero{
     text-align:center;
-    margin:8px auto 38px;
-    padding:15px 10px 10px;
+    padding:55px 10px 35px;
 }
 
 .hero-logo{
-    position:relative;
-    display:inline-block;
-    font-size:clamp(48px,8vw,105px);
-    font-weight:1000;
-    letter-spacing:8px;
-    line-height:1;
-    color:#f5f5f5;
-    text-transform:uppercase;
-    text-shadow:
-        0 0 12px rgba(255,255,255,.12),
-        0 0 30px rgba(255,255,255,.05);
-}
-
-.hero-logo span{
-    color:#e00000;
-    text-shadow:
-        0 0 10px rgba(255,0,0,.75),
-        0 0 30px rgba(220,0,0,.35),
-        0 0 55px rgba(220,0,0,.15);
-}
-
-.hero-logo::before{
-    content:"";
-    position:absolute;
-    left:7%;
-    right:7%;
-    bottom:-13px;
-    height:3px;
-    background:linear-gradient(90deg,transparent,#777,#e00000,#777,transparent);
-    box-shadow:0 0 10px rgba(224,0,0,.4);
+    font-size:68px;
+    font-weight:900;
+    letter-spacing:7px;
 }
 
 .hero-text{
-    margin-top:30px;
-    color:#bdbdbd;
-    font-size:15px;
-    font-weight:bold;
-    letter-spacing:1.5px;
+    color:#aaa;
+    margin-top:10px;
+    font-size:13px;
 }
 
 .hero-text strong{
-    color:#e00000;
+    color:#fff;
 }
 
 .hero-line{
-    width:90px;
+    width:100px;
     height:2px;
-    margin:15px auto 0;
-    background:#555;
+    background:#e00000;
+    margin:20px auto 0;
+    box-shadow:0 0 15px rgba(224,0,0,.5);
 }
-
-/* CONTROLS */
 
 .controls{
     display:flex;
     gap:12px;
-    flex-wrap:wrap;
-    margin-bottom:25px;
+    margin-bottom:15px;
 }
 
 .search{
     flex:1;
-    min-width:240px;
 }
 
 .search input,
-select{
+.filter-box select{
     width:100%;
-    height:46px;
-    background:#171717;
-    color:#f5f5f5;
-    border:1px solid #3c3c3c;
-    border-radius:8px;
-    padding:0 15px;
+    height:45px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:0 14px;
     outline:none;
-    transition:.2s;
-}
-
-.search input::placeholder{
-    color:#777;
 }
 
 .search input:focus,
-select:focus{
-    border-color:#777;
+.filter-box select:focus{
+    border-color:#e00000;
 }
 
 .filter-box{
     width:190px;
 }
 
-/* PRICE */
-
 .price-filter{
-    width:100%;
-    background:linear-gradient(145deg,#1a1a1a,#111);
-    border:1px solid #353535;
-    border-radius:10px;
-    padding:14px 17px 18px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:9px;
+    padding:15px 18px 20px;
     margin-bottom:25px;
 }
 
 .price-filter-top{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    margin-bottom:14px;
-    font-size:11px;
-    font-weight:bold;
     color:#aaa;
+    font-size:11px;
+    margin-bottom:15px;
 }
 
 #priceRangeText{
-    color:#e00000;
+    color:#fff;
 }
 
 .range-container{
     position:relative;
-    width:100%;
-    height:25px;
+    height:30px;
 }
 
 .range-track,
 .range-progress{
     position:absolute;
-    top:10px;
-    left:0;
-    width:100%;
-    height:5px;
+    top:13px;
+    height:4px;
     border-radius:10px;
 }
 
 .range-track{
-    background:#373737;
+    left:0;
+    right:0;
+    background:#333;
 }
 
 .range-progress{
-    background:linear-gradient(90deg,#8b0000,#e00000);
+    background:#e00000;
 }
 
-.range-container input[type="range"]{
+.range-container input{
     position:absolute;
     width:100%;
-    height:5px;
-    top:10px;
+    top:0;
     left:0;
-    margin:0;
     pointer-events:none;
     appearance:none;
     background:none;
-    outline:none;
 }
 
-.range-container input[type="range"]::-webkit-slider-thumb{
+.range-container input::-webkit-slider-thumb{
     appearance:none;
-    width:18px;
-    height:18px;
+    width:17px;
+    height:17px;
     border-radius:50%;
-    background:#e00000;
-    border:3px solid #111;
-    box-shadow:0 0 0 1px #e00000;
-    cursor:pointer;
+    background:#fff;
+    border:3px solid #e00000;
     pointer-events:auto;
-}
-
-.range-container input[type="range"]::-moz-range-thumb{
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#e00000;
-    border:3px solid #111;
     cursor:pointer;
 }
-
-/* CATEGORIES */
 
 .section-title{
-    font-size:13px;
-    color:#858585;
+    color:#888;
+    font-size:11px;
+    font-weight:bold;
     letter-spacing:2px;
     margin-bottom:12px;
-    text-transform:uppercase;
 }
 
 .categories{
-    display:flex;
-    gap:9px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:8px;
 }
 
 .category{
-    background:#181818;
-    color:#bdbdbd;
-    border:1px solid #3b3b3b;
-    padding:11px 17px;
+    background:#111;
+    border:1px solid #303030;
+    color:#aaa;
+    padding:13px 7px;
     border-radius:7px;
     cursor:pointer;
-    font-size:12px;
+    font-size:11px;
     font-weight:bold;
-    letter-spacing:.5px;
-    transition:.2s;
 }
 
-.category:hover{
-    background:#222;
-    border-color:#777;
-    color:#fff;
-}
-
+.category:hover,
 .category.active{
     background:#e00000;
-    border-color:#ff3333;
+    border-color:#e00000;
     color:#fff;
-    box-shadow:0 0 18px rgba(220,0,0,.2);
 }
-
-/* WEAPONS */
 
 .weapon-box{
     display:none;
-    background:linear-gradient(145deg,#191919,#111);
-    border:1px solid #353535;
-    border-radius:10px;
-    padding:18px;
-    margin-bottom:28px;
+    margin-top:18px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:9px;
+    padding:15px;
 }
 
 .weapon-box.show{
@@ -370,9 +297,10 @@ select:focus{
 
 .weapon-title{
     color:#888;
-    font-size:11px;
+    font-size:10px;
+    font-weight:bold;
     letter-spacing:2px;
-    margin-bottom:13px;
+    margin-bottom:12px;
 }
 
 .weapon-list{
@@ -382,86 +310,71 @@ select:focus{
 }
 
 .weapon{
-    padding:9px 13px;
-    border-radius:6px;
-    border:1px solid #383838;
-    background:#151515;
+    background:#181818;
     color:#aaa;
+    border:1px solid #333;
+    border-radius:6px;
+    padding:9px 12px;
     cursor:pointer;
     font-size:11px;
-    font-weight:bold;
 }
 
-.weapon:hover{
-    color:#fff;
-    border-color:#777;
-}
-
+.weapon:hover,
 .weapon.active{
-    background:#a80000;
-    border-color:#e00000;
     color:#fff;
+    border-color:#e00000;
+    background:#250b0b;
 }
-
-/* PRODUCTS */
 
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    padding:25px 0 60px;
 }
 
 .product{
-    background:linear-gradient(145deg,#1a1a1a,#101010);
-    border:1px solid #333;
-    border-radius:12px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:9px;
     overflow:hidden;
-    transition:.25s;
+    transition:.2s;
 }
 
 .product:hover{
-    transform:translateY(-5px);
-    border-color:#777;
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.5),
-        0 0 20px rgba(224,0,0,.08);
+    transform:translateY(-3px);
+    border-color:#555;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
 
 .product-image{
-    height:185px;
+    height:210px;
+    background:#090909;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:radial-gradient(circle,#282828 0%,#161616 45%,#0b0b0b 100%);
-    overflow:hidden;
-    border-bottom:1px solid #292929;
 }
 
 .product-image img{
-    width:90%;
-    height:90%;
+    width:100%;
+    height:100%;
     object-fit:contain;
-    transition:.3s;
-}
-
-.product:hover .product-image img{
-    transform:scale(1.06);
 }
 
 .product-info{
-    padding:15px;
+    padding:14px;
 }
 
 .product-name{
-    font-size:15px;
-    font-weight:800;
-    margin-bottom:7px;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:6px;
 }
 
 .product-weapon{
     color:#777;
-    font-size:11px;
-    margin-bottom:15px;
+    font-size:10px;
+    margin-bottom:13px;
 }
 
 .product-bottom{
@@ -473,46 +386,44 @@ select:focus{
 
 .price{
     color:#e00000;
-    font-size:15px;
     font-weight:900;
+    font-size:12px;
 }
 
 .buy-button{
-    border:0;
-    background:#d00000;
+    background:#e00000;
     color:#fff;
-    padding:9px 14px;
+    border:0;
     border-radius:6px;
+    padding:9px 14px;
     cursor:pointer;
     font-weight:bold;
-    font-size:11px;
+    font-size:10px;
 }
 
 .buy-button:hover{
-    background:#f00000;
+    background:#ff1717;
 }
 
 .empty{
     grid-column:1/-1;
     text-align:center;
-    padding:70px 20px;
     color:#666;
-    border:1px dashed #3b3b3b;
-    border-radius:10px;
+    padding:70px;
 }
 
 /* MODALS */
 
 .modal{
-    display:none;
     position:fixed;
     inset:0;
-    z-index:3000;
-    background:rgba(0,0,0,.78);
-    backdrop-filter:blur(9px);
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(5px);
+    display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
+    z-index:500;
 }
 
 .modal.show{
@@ -521,72 +432,57 @@ select:focus{
 
 .modal-content{
     width:100%;
-    max-width:570px;
+    max-width:520px;
     max-height:90vh;
     overflow:auto;
-    background:linear-gradient(145deg,#1b1b1b,#0d0d0d);
-    border:1px solid #444;
-    border-radius:14px;
-    padding:25px;
-    box-shadow:0 25px 70px rgba(0,0,0,.65);
+    background:#111;
+    border:1px solid #393939;
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 20px 70px rgba(0,0,0,.7);
 }
 
 .modal-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .modal-header h2{
-    font-size:20px;
+    font-size:18px;
 }
 
 .close{
-    width:34px;
-    height:34px;
-    border-radius:7px;
-    border:1px solid #444;
-    background:#171717;
-    color:#aaa;
+    background:none;
+    border:0;
+    color:#888;
+    font-size:27px;
     cursor:pointer;
-    font-size:20px;
 }
 
 .close:hover{
     color:#fff;
-    background:#e00000;
 }
 
 .modal-image{
-    height:230px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:radial-gradient(circle,#252525,#090909);
-    border-radius:10px;
-    margin-bottom:20px;
+    height:250px;
+    background:#090909;
+    border-radius:8px;
+    margin-bottom:18px;
 }
 
 .modal-image img{
-    max-width:90%;
-    max-height:90%;
+    width:100%;
+    height:100%;
     object-fit:contain;
-}
-
-.modal-details{
-    display:grid;
-    gap:10px;
-    margin-bottom:20px;
 }
 
 .detail-row{
     display:flex;
     justify-content:space-between;
-    padding:11px;
-    background:#181818;
-    border:1px solid #292929;
-    border-radius:6px;
+    border-bottom:1px solid #242424;
+    padding:10px 0;
 }
 
 .detail-label{
@@ -594,12 +490,13 @@ select:focus{
 }
 
 .detail-value{
-    font-weight:bold;
+    color:#fff;
 }
 
 .modal-actions{
     display:flex;
     gap:10px;
+    margin-top:20px;
 }
 
 .modal-actions button{
@@ -611,7 +508,7 @@ select:focus{
 }
 
 .add-cart{
-    background:#d00000;
+    background:#e00000;
     color:#fff;
     border:0;
 }
@@ -622,69 +519,137 @@ select:focus{
     border:1px solid #444;
 }
 
-/* CART */
+/* PROFILE */
 
-.cart-items{
-    max-height:350px;
-    overflow:auto;
-    margin-bottom:20px;
+.profile-modal{
+    max-width:560px;
 }
 
-.cart-item{
+.profile-preview{
+    display:flex;
+    justify-content:center;
+    margin-bottom:18px;
+}
+
+.profile-preview img{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#191919;
+    border:2px solid #e00000;
+}
+
+.profile-field{
+    margin-bottom:14px;
+}
+
+.profile-field label{
+    display:block;
+    color:#aaa;
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+.profile-field input{
+    width:100%;
+    height:44px;
+    background:#0b0b0b;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:0 12px;
+    outline:none;
+}
+
+.profile-field input:focus{
+    border-color:#e00000;
+}
+
+.required{
+    color:#e00000;
+}
+
+.optional{
+    color:#666;
+}
+
+.security-box{
+    background:#0b0b0b;
+    border:1px solid #292929;
+    padding:13px;
+    border-radius:8px;
+    margin-top:17px;
+}
+
+.security-title{
+    color:#aaa;
+    font-size:11px;
+    margin-bottom:10px;
+}
+
+.security-code{
     display:flex;
     align-items:center;
-    gap:12px;
-    background:#171717;
-    border:1px solid #292929;
-    padding:10px;
-    border-radius:8px;
-    margin-bottom:8px;
+    justify-content:space-between;
+    gap:10px;
 }
 
-.cart-item img{
-    width:70px;
-    height:55px;
-    object-fit:contain;
-    background:#0b0b0b;
-    border-radius:5px;
-}
-
-.cart-item-info{
+.security-code-value{
     flex:1;
+    background:#181818;
+    border:1px dashed #555;
+    border-radius:6px;
+    text-align:center;
+    padding:12px;
+    font-size:22px;
+    letter-spacing:7px;
+    font-weight:900;
+    color:#fff;
+    user-select:none;
 }
 
-.cart-item-name{
-    font-weight:bold;
-    font-size:13px;
-}
-
-.cart-item-price{
-    color:#e00000;
-    font-size:12px;
-    margin-top:4px;
-}
-
-.remove-item{
-    background:#242424;
+.refresh-code{
+    background:#222;
     border:1px solid #444;
-    color:#e00000;
-    padding:7px 9px;
-    border-radius:5px;
+    color:#aaa;
+    padding:11px;
+    border-radius:6px;
     cursor:pointer;
 }
 
-.cart-total{
-    display:flex;
-    justify-content:space-between;
-    font-size:18px;
-    font-weight:bold;
-    padding:15px 0;
-    border-top:1px solid #353535;
+.security-box input{
+    width:100%;
+    height:42px;
+    margin-top:10px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:6px;
+    padding:0 12px;
+    outline:none;
 }
 
-.finalize{
+.profile-error{
+    min-height:20px;
+    color:#ff3333;
+    font-size:11px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.profile-success{
+    min-height:20px;
+    color:#35d36f;
+    font-size:11px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.save-profile{
     width:100%;
-    padding:14px;
+    margin-top:8px;
+    padding:13px;
     border:0;
     border-radius:7px;
     background:#e00000;
@@ -693,200 +658,142 @@ select:focus{
     cursor:pointer;
 }
 
-.empty-cart{
-    text-align:center;
-    color:#666;
-    padding:45px 10px;
+/* CART */
+
+.cart-items{
+    max-height:330px;
+    overflow:auto;
 }
 
-/* FOOTER */
-
-footer{
-    border-top:1px solid #333;
-    background:linear-gradient(180deg,#111,#080808);
-    padding:38px 20px;
-    text-align:center;
-}
-
-.footer-logo{
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:3px;
-    color:#fff;
-}
-
-.footer-logo span{
-    color:#e00000;
-}
-
-.footer-text{
-    margin-top:8px;
-    color:#777;
-    font-size:12px;
-}
-
-.telegram{
-    display:inline-block;
-    margin-top:16px;
-    color:#d00000;
-    text-decoration:none;
-    font-size:13px;
-    font-weight:bold;
-}
-
-/* =========================================================
-   SECRET ADMIN
-========================================================= */
-
-.admin-login-box{
-    max-width:430px;
-}
-
-.admin-login-note{
-    color:#777;
-    font-size:12px;
-    margin-bottom:15px;
-}
-
-.admin-password{
-    width:100%;
-    height:45px;
-    background:#111;
-    border:1px solid #3c3c3c;
-    border-radius:7px;
-    color:#fff;
-    padding:0 13px;
-    outline:none;
-    margin-bottom:8px;
-}
-
-.admin-password:focus{
-    border-color:#e00000;
-}
-
-.admin-error{
-    min-height:18px;
-    color:#e00000;
-    font-size:11px;
-    margin-bottom:8px;
-}
-
-.admin-enter{
-    width:100%;
-    height:44px;
-    border:0;
-    border-radius:7px;
-    background:#d00000;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.admin-enter:hover{
-    background:#f00000;
-}
-
-.admin-panel{
-    max-width:1000px;
-}
-
-.admin-topbar{
+.cart-item{
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:20px;
+    gap:12px;
+    background:#181818;
+    border:1px solid #292929;
+    padding:10px;
+    border-radius:7px;
+    margin-bottom:8px;
 }
 
-.admin-topbar h2{
-    font-size:20px;
+.cart-item img{
+    width:70px;
+    height:55px;
+    object-fit:contain;
+    background:#090909;
 }
 
-.admin-close-btn,
-.admin-clear,
-.admin-delete{
-    background:#171717;
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-name{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.cart-item-price{
+    color:#e00000;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.remove-item{
+    background:#222;
     border:1px solid #444;
-    color:#fff;
-    border-radius:6px;
-    padding:9px 12px;
+    color:#e00000;
+    padding:7px;
+    border-radius:5px;
     cursor:pointer;
 }
 
-.admin-close-btn:hover,
-.admin-clear:hover,
-.admin-delete:hover{
-    border-color:#e00000;
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid #333;
+    padding:16px 0;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.finalize{
+    width:100%;
+    background:#e00000;
+    color:#fff;
+    border:0;
+    padding:14px;
+    border-radius:7px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+/* ADMIN */
+
+.admin-panel{
+    max-width:1100px;
 }
 
 .admin-stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:20px;
+    gap:10px;
+    margin-bottom:15px;
 }
 
 .admin-stat{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:9px;
-    padding:17px;
+    background:#181818;
+    border:1px solid #303030;
+    border-radius:8px;
+    padding:15px;
 }
 
 .admin-stat-label{
     color:#777;
     font-size:10px;
-    letter-spacing:1px;
 }
 
 .admin-stat-value{
-    color:#e00000;
-    font-size:22px;
+    font-size:18px;
     font-weight:900;
-    margin-top:8px;
+    margin-top:6px;
 }
 
 .admin-orders{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+    display:grid;
+    gap:10px;
 }
 
 .admin-order{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:9px;
-    padding:15px;
+    background:#171717;
+    border:1px solid #303030;
+    border-radius:8px;
+    padding:14px;
 }
 
 .admin-order-head{
     display:flex;
     justify-content:space-between;
-    gap:10px;
-    border-bottom:1px solid #292929;
-    padding-bottom:10px;
     margin-bottom:10px;
 }
 
 .admin-order-id{
     font-weight:bold;
-    color:#fff;
 }
 
 .admin-order-date{
-    color:#666;
+    color:#777;
     font-size:10px;
 }
 
 .admin-order-items{
-    color:#aaa;
+    color:#bbb;
     font-size:12px;
     line-height:1.8;
 }
 
 .admin-order-total{
     color:#e00000;
-    font-weight:bold;
+    font-weight:900;
     margin-top:10px;
 }
 
@@ -897,146 +804,152 @@ footer{
 }
 
 .admin-status{
-    background:#111;
-    border:1px solid #444;
+    background:#101010;
     color:#fff;
-    border-radius:6px;
+    border:1px solid #444;
     padding:8px;
+    border-radius:6px;
+}
+
+.admin-delete,
+.admin-clear{
+    background:#222;
+    color:#ff3333;
+    border:1px solid #444;
+    padding:8px 11px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
 .admin-empty{
     text-align:center;
-    padding:50px;
     color:#666;
-    border:1px dashed #333;
-    border-radius:8px;
+    padding:40px;
 }
 
-/* SCROLLBAR */
-
-::-webkit-scrollbar{
-    width:8px;
+.admin-login-box{
+    max-width:420px;
 }
 
-::-webkit-scrollbar-track{
+.admin-password{
+    width:100%;
+    height:44px;
     background:#0b0b0b;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:0 12px;
+    margin-bottom:10px;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#444;
-    border-radius:10px;
+.admin-error{
+    color:#ff3333;
+    font-size:11px;
+    min-height:18px;
 }
 
-::-webkit-scrollbar-thumb:hover{
+.admin-enter{
+    width:100%;
+    padding:13px;
     background:#e00000;
+    color:#fff;
+    border:0;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-/* MOBILE */
+footer{
+    background:#080808;
+    border-top:1px solid #292929;
+    text-align:center;
+    padding:35px 15px;
+}
 
-@media(max-width:700px){
+.footer-logo{
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:3px;
+}
 
-    header{
-        height:76px;
+.footer-text{
+    color:#777;
+    font-size:11px;
+    margin-top:8px;
+}
+
+.telegram{
+    display:inline-block;
+    color:#e00000;
+    margin-top:15px;
+    text-decoration:none;
+    font-size:12px;
+}
+
+@media(max-width:900px){
+    .products{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    .logo{
-        font-size:22px;
-        letter-spacing:3px;
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .products{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .subtitle{
-        font-size:8px;
-    }
-
-    .cart-button{
-        padding:8px 10px;
-        font-size:9px;
-    }
-
-    main{
-        width:92%;
-    }
-
-    .hero{
-        margin-top:5px;
-        margin-bottom:28px;
-    }
-
-    .hero-logo{
-        font-size:45px;
-        letter-spacing:3px;
-    }
-
-    .hero-text{
-        font-size:11px;
-        letter-spacing:.8px;
+    .controls{
+        flex-direction:column;
     }
 
     .filter-box{
         width:100%;
     }
 
-    .products{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:10px;
+    .hero-logo{
+        font-size:45px;
     }
 
-    .product-image{
-        height:135px;
-    }
-
-    .product-info{
-        padding:10px;
-    }
-
-    .product-name{
-        font-size:12px;
-    }
-
-    .product-weapon{
+    .cart-button{
+        left:8px;
+        padding:8px;
         font-size:9px;
     }
 
-    .price{
-        font-size:11px;
+    .profile-button{
+        right:8px;
+        padding:6px;
+        font-size:9px;
     }
 
-    .buy-button{
-        padding:7px 9px;
-        font-size:9px;
+    .profile-button span{
+        display:none;
+    }
+
+    .logo{
+        font-size:21px;
     }
 
     .admin-stats{
         grid-template-columns:1fr;
     }
-
 }
 
 @media(max-width:430px){
-
     .products{
         grid-template-columns:1fr;
     }
 
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
     .hero-logo{
-        font-size:39px;
+        font-size:38px;
     }
-
-    .cart-button{
-        position:relative;
-        right:auto;
-        top:auto;
-        transform:none;
-    }
-
-    .header-inner{
-        justify-content:space-between;
-    }
-
-    .logo-area{
-        text-align:left;
-    }
-
 }
 </style>
 </head>
@@ -1044,210 +957,130 @@ footer{
 <body>
 
 <header>
-
     <div class="header-inner">
 
-        <!-- فقط این لوگو 5 کلیک می‌خواهد -->
-        <div
-            class="logo-area"
-            id="secretLogo"
-            onclick="secretLogoClick()"
-        >
-
-            <div class="logo">
+        <div class="logo-area">
+            <div class="logo" id="shopLogo">
                 <span>WIZZY</span> SHOP
             </div>
-
             <div class="subtitle">
                 فروشگاه تخصصی اسکین‌های CS2
             </div>
-
         </div>
 
-        <button
-            class="cart-button"
-            onclick="openCart()"
-        >
+        <button class="cart-button" onclick="openCart()">
             CART
-            <span
-                class="cart-count"
-                id="cartCount"
-            >0</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <button class="profile-button" onclick="openProfile()">
+            <img id="profileMini" class="profile-mini" src="https://placehold.co/100x100/191919/ffffff?text=USER">
+            <span>PROFILE</span>
         </button>
 
     </div>
-
 </header>
-
 
 <main>
 
-    <section class="hero">
-
-        <div class="hero-logo">
-            <span>WIZZY</span> SKIN
-        </div>
-
-        <div class="hero-text">
-            سرعت تحویل بالا و <strong>امن</strong>
-        </div>
-
-        <div class="hero-line"></div>
-
-    </section>
-
-
-    <div class="controls">
-
-        <div class="search">
-
-            <input
-                type="text"
-                id="search"
-                placeholder="Search skins, weapons or accessories..."
-                oninput="renderProducts()"
-            >
-
-        </div>
-
-        <div class="filter-box">
-
-            <select
-                id="wearFilter"
-                onchange="renderProducts()"
-            >
-
-                <option value="all">All Wear</option>
-                <option value="Factory New">Factory New</option>
-                <option value="Minimal Wear">Minimal Wear</option>
-                <option value="Field-Tested">Field-Tested</option>
-                <option value="Well-Worn">Well-Worn</option>
-                <option value="Battle-Scarred">Battle-Scarred</option>
-
-            </select>
-
-        </div>
-
+<section class="hero">
+    <div class="hero-logo">
+        <span>WIZZY</span> SKIN
     </div>
 
-
-    <div class="price-filter">
-
-        <div class="price-filter-top">
-
-            <span>PRICE RANGE</span>
-
-            <span id="priceRangeText">
-                0 Toman - 5,200,000 Toman
-            </span>
-
-        </div>
-
-        <div class="range-container">
-
-            <div class="range-track"></div>
-
-            <div
-                class="range-progress"
-                id="rangeProgress"
-            ></div>
-
-            <input
-                type="range"
-                id="minPrice"
-                min="0"
-                max="5200000"
-                step="10000"
-                value="0"
-                oninput="updatePriceRange()"
-            >
-
-            <input
-                type="range"
-                id="maxPrice"
-                min="0"
-                max="5200000"
-                step="10000"
-                value="5200000"
-                oninput="updatePriceRange()"
-            >
-
-        </div>
-
+    <div class="hero-text">
+        سرعت تحویل بالا و <strong>امن</strong>
     </div>
 
+    <div class="hero-line"></div>
+</section>
 
-    <div class="section-title">
-        Categories
-    </div>
+<div class="controls">
 
-    <div class="categories">
-
-        <button class="category" onclick="selectCategory('Pistols',this)">
-            PISTOLS
-        </button>
-
-        <button class="category" onclick="selectCategory('Rifles',this)">
-            RIFLES
-        </button>
-
-        <button class="category" onclick="selectCategory('SMGs',this)">
-            SMGs
-        </button>
-
-        <button class="category" onclick="selectCategory('Snipers',this)">
-            SNIPERS
-        </button>
-
-        <button class="category" onclick="selectCategory('Shotguns',this)">
-            SHOTGUNS
-        </button>
-
-        <button class="category" onclick="selectCategory('Machineguns',this)">
-            MACHINEGUNS
-        </button>
-
-        <button class="category" onclick="selectCategory('Knives',this)">
-            KNIVES
-        </button>
-
-        <button class="category" onclick="selectCategory('Accessories',this)">
-            ACCESSORIES
-        </button>
-
-    </div>
-
-
-    <div
-        id="weaponBox"
-        class="weapon-box"
-    >
-
-        <div
-            id="weaponTitle"
-            class="weapon-title"
+    <div class="search">
+        <input
+            id="search"
+            type="text"
+            placeholder="Search skins, weapons or accessories..."
+            oninput="renderProducts()"
         >
-            WEAPONS
-        </div>
-
-        <div
-            id="weaponList"
-            class="weapon-list"
-        ></div>
-
     </div>
 
+    <div class="filter-box">
+        <select id="wearFilter" onchange="renderProducts()">
+            <option value="all">All Wear</option>
+            <option>Factory New</option>
+            <option>Minimal Wear</option>
+            <option>Field-Tested</option>
+            <option>Well-Worn</option>
+            <option>Battle-Scarred</option>
+        </select>
+    </div>
 
-    <div
-        id="products"
-        class="products"
-    ></div>
+</div>
+
+<div class="price-filter">
+    <div class="price-filter-top">
+        <span>PRICE RANGE</span>
+        <span id="priceRangeText">0 Toman - 5,200,000 Toman</span>
+    </div>
+
+    <div class="range-container">
+        <div class="range-track"></div>
+        <div class="range-progress" id="rangeProgress"></div>
+
+        <input
+            type="range"
+            id="minPrice"
+            min="0"
+            max="5200000"
+            step="10000"
+            value="0"
+            oninput="updatePriceRange()"
+        >
+
+        <input
+            type="range"
+            id="maxPrice"
+            min="0"
+            max="5200000"
+            step="10000"
+            value="5200000"
+            oninput="updatePriceRange()"
+        >
+    </div>
+</div>
+
+<div class="section-title">Categories</div>
+
+<div class="categories">
+
+    <button class="category" onclick="selectCategory('Pistols',this)">PISTOLS</button>
+    <button class="category" onclick="selectCategory('Rifles',this)">RIFLES</button>
+    <button class="category" onclick="selectCategory('SMGs',this)">SMGs</button>
+    <button class="category" onclick="selectCategory('Snipers',this)">SNIPERS</button>
+    <button class="category" onclick="selectCategory('Shotguns',this)">SHOTGUNS</button>
+    <button class="category" onclick="selectCategory('Machineguns',this)">MACHINEGUNS</button>
+    <button class="category" onclick="selectCategory('Knives',this)">KNIVES</button>
+    <button class="category" onclick="selectCategory('Accessories',this)">ACCESSORIES</button>
+
+</div>
+
+<div id="weaponBox" class="weapon-box">
+
+    <div id="weaponTitle" class="weapon-title">
+        WEAPONS
+    </div>
+
+    <div id="weaponList" class="weapon-list"></div>
+
+</div>
+
+<div id="products" class="products"></div>
 
 </main>
 
-
 <footer>
-
     <div class="footer-logo">
         <span>WIZZY</span> SHOP
     </div>
@@ -1256,352 +1089,288 @@ footer{
         فروشگاه تخصصی اسکین‌های CS2
     </div>
 
-    <a
-        class="telegram"
-        href="https://t.me/WizyyShop"
-        target="_blank"
-    >
+    <a class="telegram" href="https://t.me/WizyyShop" target="_blank">
         Telegram: @WizyyShop
     </a>
-
 </footer>
 
 
 <!-- PRODUCT MODAL -->
 
-<div
-    id="productModal"
-    class="modal"
-    onclick="closeModalOutside(event)"
->
-
+<div id="productModal" class="modal" onclick="closeModalOutside(event)">
     <div class="modal-content">
 
         <div class="modal-header">
-
-            <h2 id="modalName">
-                Product
-            </h2>
-
-            <button
-                class="close"
-                onclick="closeProduct()"
-            >
-                ×
-            </button>
-
+            <h2 id="modalName">Product</h2>
+            <button class="close" onclick="closeProduct()">×</button>
         </div>
 
         <div class="modal-image">
-
-            <img
-                id="modalImage"
-                src=""
-                alt=""
-            >
-
+            <img id="modalImage">
         </div>
 
-        <div class="modal-details">
+        <div class="detail-row">
+            <span class="detail-label">Item</span>
+            <span id="modalItem" class="detail-value"></span>
+        </div>
 
-            <div class="detail-row">
-                <span class="detail-label">Item</span>
-                <span class="detail-value" id="modalItem"></span>
-            </div>
+        <div class="detail-row">
+            <span class="detail-label">Type</span>
+            <span id="modalType" class="detail-value"></span>
+        </div>
 
-            <div class="detail-row">
-                <span class="detail-label">Type</span>
-                <span class="detail-value" id="modalType"></span>
-            </div>
+        <div class="detail-row">
+            <span class="detail-label">Wear</span>
+            <span id="modalWear" class="detail-value"></span>
+        </div>
 
-            <div class="detail-row">
-                <span class="detail-label">Wear</span>
-                <span class="detail-value" id="modalWear"></span>
-            </div>
-
-            <div class="detail-row">
-                <span class="detail-label">Price</span>
-                <span class="detail-value" id="modalPrice"></span>
-            </div>
-
+        <div class="detail-row">
+            <span class="detail-label">Price</span>
+            <span id="modalPrice" class="detail-value"></span>
         </div>
 
         <div class="modal-actions">
-
-            <button
-                class="add-cart"
-                onclick="addToCart()"
-            >
+            <button class="add-cart" onclick="addToCart()">
                 ADD TO CART
             </button>
 
-            <button
-                class="cancel"
-                onclick="closeProduct()"
-            >
+            <button class="cancel" onclick="closeProduct()">
                 CANCEL
             </button>
-
         </div>
 
     </div>
-
 </div>
 
 
-<!-- CART -->
+<!-- PROFILE MODAL -->
 
-<div
-    id="cartModal"
-    class="modal"
-    onclick="closeCartOutside(event)"
->
+<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
+    <div class="modal-content profile-modal">
 
+        <div class="modal-header">
+            <h2>MY PROFILE</h2>
+            <button class="close" onclick="closeProfile()">×</button>
+        </div>
+
+        <div class="profile-preview">
+            <img id="profilePreview" src="https://placehold.co/100x100/191919/ffffff?text=USER">
+        </div>
+
+        <div class="profile-field">
+            <label>
+                Profile Picture
+                <span class="optional">(Optional)</span>
+            </label>
+
+            <input
+                id="profileImage"
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                onchange="previewProfileImage(event)"
+            >
+        </div>
+
+        <div class="profile-field">
+            <label>
+                Trade Link
+                <span class="required">*</span>
+            </label>
+
+            <input
+                id="tradeLink"
+                type="text"
+                placeholder="https://steamcommunity.com/tradeoffer/new/?partner=..."
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="profile-field">
+            <label>
+                Phone Number
+                <span class="optional">(Optional)</span>
+            </label>
+
+            <input
+                id="phone"
+                type="text"
+                inputmode="numeric"
+                placeholder="09123456789"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="profile-field">
+            <label>
+                Telegram ID
+                <span class="optional">(Optional)</span>
+            </label>
+
+            <input
+                id="telegramId"
+                type="text"
+                placeholder="@username"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="security-box">
+
+            <div class="security-title">
+                SECURITY CODE <span class="required">*</span>
+            </div>
+
+            <div class="security-code">
+
+                <div
+                    id="securityCode"
+                    class="security-code-value"
+                ></div>
+
+                <button
+                    class="refresh-code"
+                    onclick="generateSecurityCode()"
+                    title="New code"
+                >
+                    ↻
+                </button>
+
+            </div>
+
+            <input
+                id="securityInput"
+                type="text"
+                maxlength="6"
+                inputmode="numeric"
+                placeholder="Enter security code"
+                autocomplete="off"
+            >
+
+        </div>
+
+        <div id="profileError" class="profile-error"></div>
+        <div id="profileSuccess" class="profile-success"></div>
+
+        <button class="save-profile" onclick="saveProfile()">
+            SAVE PROFILE
+        </button>
+
+    </div>
+</div>
+
+
+<!-- CART MODAL -->
+
+<div id="cartModal" class="modal" onclick="closeCartOutside(event)">
     <div class="modal-content">
 
         <div class="modal-header">
-
             <h2>YOUR CART</h2>
-
-            <button
-                class="close"
-                onclick="closeCart()"
-            >
-                ×
-            </button>
-
+            <button class="close" onclick="closeCart()">×</button>
         </div>
 
-        <div
-            id="cartItems"
-            class="cart-items"
-        ></div>
+        <div id="cartItems" class="cart-items"></div>
 
         <div class="cart-total">
-
             <span>TOTAL</span>
-
-            <span
-                id="cartTotal"
-                style="color:#e00000"
-            >
-                0 Toman
-            </span>
-
+            <span id="cartTotal" style="color:#e00000">0 Toman</span>
         </div>
 
-        <button
-            class="finalize"
-            onclick="finalizeOrder()"
-        >
+        <button class="finalize" onclick="finalizeOrder()">
             FINALIZE ORDER
         </button>
 
     </div>
-
 </div>
 
 
-<!-- SECRET ADMIN LOGIN -->
+<!-- ADMIN LOGIN -->
 
-<div
-    id="adminLoginModal"
-    class="modal"
-    onclick="closeAdminLoginOutside(event)"
->
-
+<div id="adminLoginModal" class="modal" onclick="closeAdminLoginOutside(event)">
     <div class="modal-content admin-login-box">
 
         <div class="modal-header">
-
             <h2>ADMIN LOGIN</h2>
-
-            <button
-                class="close"
-                onclick="closeAdminLogin()"
-            >
-                ×
-            </button>
-
-        </div>
-
-        <div class="admin-login-note">
-            Enter administrator password.
+            <button class="close" onclick="closeAdminLogin()">×</button>
         </div>
 
         <input
             id="adminPassword"
             class="admin-password"
             type="password"
-            placeholder="Password"
+            placeholder="Admin password"
             onkeydown="if(event.key==='Enter') loginAdmin()"
         >
 
-        <div
-            id="adminError"
-            class="admin-error"
-        ></div>
+        <div id="adminError" class="admin-error"></div>
 
-        <button
-            class="admin-enter"
-            onclick="loginAdmin()"
-        >
+        <button class="admin-enter" onclick="loginAdmin()">
             ENTER ADMIN PANEL
         </button>
 
     </div>
-
 </div>
 
 
 <!-- ADMIN PANEL -->
 
-<div
-    id="adminPanelModal"
-    class="modal"
-    onclick="closeAdminPanelOutside(event)"
->
-
+<div id="adminPanelModal" class="modal" onclick="closeAdminPanelOutside(event)">
     <div class="modal-content admin-panel">
 
-        <div class="admin-topbar">
-
+        <div class="modal-header">
             <h2>WIZZY ADMIN PANEL</h2>
-
-            <button
-                class="admin-close-btn"
-                onclick="closeAdminPanel()"
-            >
-                CLOSE
-            </button>
-
+            <button class="close" onclick="closeAdminPanel()">×</button>
         </div>
 
         <div class="admin-stats">
 
             <div class="admin-stat">
-
-                <div class="admin-stat-label">
-                    TOTAL ORDERS
-                </div>
-
-                <div
-                    id="adminOrderCount"
-                    class="admin-stat-value"
-                >
-                    0
-                </div>
-
+                <div class="admin-stat-label">TOTAL ORDERS</div>
+                <div id="adminOrderCount" class="admin-stat-value">0</div>
             </div>
 
             <div class="admin-stat">
-
-                <div class="admin-stat-label">
-                    TOTAL SALES
-                </div>
-
-                <div
-                    id="adminTotalSales"
-                    class="admin-stat-value"
-                >
-                    0 Toman
-                </div>
-
+                <div class="admin-stat-label">TOTAL SALES</div>
+                <div id="adminTotalSales" class="admin-stat-value">0 Toman</div>
             </div>
 
             <div class="admin-stat">
-
-                <div class="admin-stat-label">
-                    PAID ORDERS
-                </div>
-
-                <div
-                    id="adminPaidCount"
-                    class="admin-stat-value"
-                >
-                    0
-                </div>
-
+                <div class="admin-stat-label">PAID ORDERS</div>
+                <div id="adminPaidCount" class="admin-stat-value">0</div>
             </div>
 
         </div>
 
-        <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
-
-            <button
-                class="admin-clear"
-                onclick="clearAllOrders()"
-            >
+        <div style="text-align:right;margin-bottom:12px">
+            <button class="admin-clear" onclick="clearAllOrders()">
                 CLEAR ALL ORDERS
             </button>
-
         </div>
 
-        <div
-            id="adminOrders"
-            class="admin-orders"
-        ></div>
+        <div id="adminOrders" class="admin-orders"></div>
 
     </div>
-
 </div>
 
 
 <script>
 
-/* =========================
+/* =====================================================
    STATE
-========================= */
+===================================================== */
 
-let selectedWeapons = [];
 let currentCategory = null;
+let selectedWeapons = [];
 let currentProduct = null;
 let cart = [];
 
-
-/* =========================
-   SECRET ADMIN
-========================= */
-
-const ADMIN_PASSWORD = "WIZZYADMIN2026";
-const ORDERS_STORAGE_KEY = "wizzy_shop_orders";
-
-let secretLogoClicks = 0;
-let secretLogoTimer = null;
+let profileImageData = "";
+let securityCode = "";
 
 
-/*
-    پنج کلیک سریع روی WIZZY SHOP
-*/
-
-function secretLogoClick(){
-
-    secretLogoClicks++;
-
-    clearTimeout(secretLogoTimer);
-
-    secretLogoTimer = setTimeout(function(){
-
-        secretLogoClicks = 0;
-
-    },1500);
-
-    if(secretLogoClicks >= 5){
-
-        secretLogoClicks = 0;
-
-        clearTimeout(secretLogoTimer);
-
-        openAdminLogin();
-
-    }
-
-}
-
-
-/* =========================
+/* =====================================================
    CATEGORY DATA
-========================= */
+===================================================== */
 
 const categoryData = {
 
@@ -1680,9 +1449,9 @@ const categoryData = {
 };
 
 
-/* =========================
+/* =====================================================
    PRODUCTS
-========================= */
+===================================================== */
 
 const products = [
 
@@ -1793,7 +1562,7 @@ const products = [
     category:"Pistols",
     wear:"Field-Tested",
     price:70000,
-    image:"https://placehold.co/700x450/171717/e00000?text=GLOCK-18+WATER+ELEMENTAL"
+    image:"https://placehold.co/700x450/171717/e00000?text=GLOCK-18"
 },
 
 {
@@ -1823,7 +1592,7 @@ const products = [
     category:"SMGs",
     wear:"Field-Tested",
     price:90000,
-    image:"https://placehold.co/700x450/171717/e00000?text=MP9+STARLIGHT+PROTECTOR"
+    image:"https://placehold.co/700x450/171717/e00000?text=MP9"
 },
 
 {
@@ -1833,7 +1602,7 @@ const products = [
     category:"SMGs",
     wear:"Minimal Wear",
     price:110000,
-    image:"https://placehold.co/700x450/171717/e00000?text=MAC-10+NEON+RIDER"
+    image:"https://placehold.co/700x450/171717/e00000?text=MAC-10"
 },
 
 {
@@ -1843,7 +1612,7 @@ const products = [
     category:"Knives",
     wear:"Factory New",
     price:4500000,
-    image:"https://placehold.co/700x450/171717/e00000?text=KARAMBIT+DOPPLER"
+    image:"https://placehold.co/700x450/171717/e00000?text=KARAMBIT"
 },
 
 {
@@ -1853,7 +1622,7 @@ const products = [
     category:"Knives",
     wear:"Factory New",
     price:5200000,
-    image:"https://placehold.co/700x450/171717/e00000?text=BUTTERFLY+DOPPLER"
+    image:"https://placehold.co/700x450/171717/e00000?text=BUTTERFLY"
 },
 
 {
@@ -1868,16 +1637,6 @@ const products = [
 
 {
     id:19,
-    name:"Music Kit | Austin Wintory",
-    weapon:"Music Kits",
-    category:"Accessories",
-    wear:"Factory New",
-    price:95000,
-    image:"https://placehold.co/700x450/171717/e00000?text=MUSIC+KIT"
-},
-
-{
-    id:20,
     name:"Sticker | Howling Dawn",
     weapon:"Stickers",
     category:"Accessories",
@@ -1887,17 +1646,7 @@ const products = [
 },
 
 {
-    id:21,
-    name:"Sticker | Crown",
-    weapon:"Stickers",
-    category:"Accessories",
-    wear:"Factory New",
-    price:320000,
-    image:"https://placehold.co/700x450/171717/e00000?text=STICKER"
-},
-
-{
-    id:22,
+    id:20,
     name:"Agent | Sir Bloody Miami Darryl",
     weapon:"Agent",
     category:"Accessories",
@@ -1907,17 +1656,7 @@ const products = [
 },
 
 {
-    id:23,
-    name:"Agent | Elite Trapper Solman",
-    weapon:"Agent",
-    category:"Accessories",
-    wear:"Factory New",
-    price:125000,
-    image:"https://placehold.co/700x450/171717/e00000?text=AGENT"
-},
-
-{
-    id:24,
+    id:21,
     name:"Case | Dreams & Nightmares",
     weapon:"Cases",
     category:"Accessories",
@@ -1927,17 +1666,7 @@ const products = [
 },
 
 {
-    id:25,
-    name:"Case | Kilowatt Case",
-    weapon:"Cases",
-    category:"Accessories",
-    wear:"Factory New",
-    price:35000,
-    image:"https://placehold.co/700x450/171717/e00000?text=CASE"
-},
-
-{
-    id:26,
+    id:22,
     name:"Charm | Lil' Squirt",
     weapon:"Charms",
     category:"Accessories",
@@ -1947,17 +1676,7 @@ const products = [
 },
 
 {
-    id:27,
-    name:"Charm | Hot Howl",
-    weapon:"Charms",
-    category:"Accessories",
-    wear:"Factory New",
-    price:120000,
-    image:"https://placehold.co/700x450/171717/e00000?text=CHARM"
-},
-
-{
-    id:28,
+    id:23,
     name:"Pin | Inferno 2",
     weapon:"Pins",
     category:"Accessories",
@@ -1967,41 +1686,369 @@ const products = [
 },
 
 {
-    id:29,
-    name:"Pin | Guardian 3",
-    weapon:"Pins",
-    category:"Accessories",
-    wear:"Factory New",
-    price:55000,
-    image:"https://placehold.co/700x450/171717/e00000?text=PIN"
-},
-
-{
-    id:30,
+    id:24,
     name:"Graffiti | Recoil",
     weapon:"Graffiti",
     category:"Accessories",
     wear:"Factory New",
     price:25000,
     image:"https://placehold.co/700x450/171717/e00000?text=GRAFFITI"
-},
-
-{
-    id:31,
-    name:"Graffiti | Rage",
-    weapon:"Graffiti",
-    category:"Accessories",
-    wear:"Factory New",
-    price:30000,
-    image:"https://placehold.co/700x450/171717/e00000?text=GRAFFITI"
 }
 
 ];
 
 
-/* =========================
+/* =====================================================
+   PROFILE SYSTEM
+===================================================== */
+
+const PROFILE_KEY = "wizzy_shop_profile";
+
+function getProfile(){
+
+    try{
+        return JSON.parse(
+            localStorage.getItem(PROFILE_KEY)
+        ) || {};
+    }catch(e){
+        return {};
+    }
+}
+
+
+function isValidTradeLink(link){
+
+    if(!link) return false;
+
+    try{
+
+        const url = new URL(link);
+
+        return (
+            url.protocol === "https:" &&
+            url.hostname === "steamcommunity.com" &&
+            url.pathname === "/tradeoffer/new/" &&
+            url.searchParams.has("partner") &&
+            url.searchParams.has("token")
+        );
+
+    }catch(e){
+
+        return false;
+
+    }
+}
+
+
+function isValidPhone(phone){
+
+    if(!phone) return true;
+
+    const clean = phone.replace(/[ -]/g,"");
+
+    return /^09\d{9}$/.test(clean);
+
+}
+
+
+function isValidTelegram(id){
+
+    if(!id) return true;
+
+    return /^@?[A-Za-z0-9_]{5,32}$/.test(id);
+
+}
+
+
+function generateSecurityCode(){
+
+    securityCode =
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        ).toString();
+
+    document.getElementById(
+        "securityCode"
+    ).textContent = securityCode;
+
+    document.getElementById(
+        "securityInput"
+    ).value = "";
+
+}
+
+
+function openProfile(){
+
+    const profile = getProfile();
+
+    document.getElementById("profileError").textContent = "";
+    document.getElementById("profileSuccess").textContent = "";
+
+    document.getElementById("tradeLink").value =
+        profile.tradeLink || "";
+
+    document.getElementById("phone").value =
+        profile.phone || "";
+
+    document.getElementById("telegramId").value =
+        profile.telegramId || "";
+
+    if(profile.image){
+
+        profileImageData = profile.image;
+
+        document.getElementById(
+            "profilePreview"
+        ).src = profile.image;
+
+    }else{
+
+        profileImageData = "";
+
+        document.getElementById(
+            "profilePreview"
+        ).src =
+            "https://placehold.co/100x100/191919/ffffff?text=USER";
+
+    }
+
+    generateSecurityCode();
+
+    document.getElementById(
+        "profileModal"
+    ).classList.add("show");
+
+}
+
+
+function closeProfile(){
+
+    document.getElementById(
+        "profileModal"
+    ).classList.remove("show");
+
+}
+
+
+function closeProfileOutside(event){
+
+    if(event.target.id === "profileModal"){
+        closeProfile();
+    }
+
+}
+
+
+function previewProfileImage(event){
+
+    const file = event.target.files[0];
+
+    if(!file) return;
+
+    if(file.size > 2 * 1024 * 1024){
+
+        document.getElementById(
+            "profileError"
+        ).textContent =
+            "Profile image must be smaller than 2MB.";
+
+        event.target.value = "";
+
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        profileImageData = e.target.result;
+
+        document.getElementById(
+            "profilePreview"
+        ).src = e.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function saveProfile(){
+
+    const tradeLink =
+        document.getElementById(
+            "tradeLink"
+        ).value.trim();
+
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim();
+
+    const telegramId =
+        document.getElementById(
+            "telegramId"
+        ).value.trim();
+
+    const enteredCode =
+        document.getElementById(
+            "securityInput"
+        ).value.trim();
+
+    const error =
+        document.getElementById(
+            "profileError"
+        );
+
+    const success =
+        document.getElementById(
+            "profileSuccess"
+        );
+
+    error.textContent = "";
+    success.textContent = "";
+
+    /* TRADE LINK REQUIRED */
+
+    if(!tradeLink){
+
+        error.textContent =
+            "Trade Link is required.";
+
+        generateSecurityCode();
+
+        return;
+    }
+
+    if(!isValidTradeLink(tradeLink)){
+
+        error.textContent =
+            "Invalid Steam Trade Link.";
+
+        generateSecurityCode();
+
+        return;
+    }
+
+    /* PHONE OPTIONAL BUT VALID IF ENTERED */
+
+    if(!isValidPhone(phone)){
+
+        error.textContent =
+            "Invalid phone number.";
+
+        generateSecurityCode();
+
+        return;
+    }
+
+    /* TELEGRAM OPTIONAL BUT VALID IF ENTERED */
+
+    if(!isValidTelegram(telegramId)){
+
+        error.textContent =
+            "Invalid Telegram ID.";
+
+        generateSecurityCode();
+
+        return;
+    }
+
+    /* SECURITY CODE */
+
+    if(enteredCode !== securityCode){
+
+        error.textContent =
+            "Wrong security code.";
+
+        generateSecurityCode();
+
+        return;
+    }
+
+    const profile = {
+
+        image:profileImageData || "",
+
+        tradeLink:tradeLink,
+
+        phone:phone,
+
+        telegramId:telegramId
+
+    };
+
+    localStorage.setItem(
+        PROFILE_KEY,
+        JSON.stringify(profile)
+    );
+
+    updateProfileMini();
+
+    success.textContent =
+        "Profile saved successfully.";
+
+    setTimeout(function(){
+
+        closeProfile();
+
+    },700);
+
+}
+
+
+function updateProfileMini(){
+
+    const profile = getProfile();
+
+    document.getElementById(
+        "profileMini"
+    ).src =
+        profile.image ||
+        "https://placehold.co/100x100/191919/ffffff?text=USER";
+
+}
+
+
+/* =====================================================
+   PROFILE REQUIRED FOR ORDERING
+===================================================== */
+
+function isProfileComplete(){
+
+    const profile = getProfile();
+
+    return (
+        profile.tradeLink &&
+        isValidTradeLink(profile.tradeLink)
+    );
+
+}
+
+
+function requireProfileForPurchase(){
+
+    if(isProfileComplete()){
+        return true;
+    }
+
+    alert(
+        "Complete your profile before ordering.\n\nA valid Steam Trade Link is required."
+    );
+
+    openProfile();
+
+    return false;
+
+}
+
+
+/* =====================================================
    PRICE
-========================= */
+===================================================== */
 
 function formatPrice(price){
 
@@ -2010,6 +2057,7 @@ function formatPrice(price){
         + " Toman";
 
 }
+
 
 function updatePriceRange(){
 
@@ -2041,67 +2089,122 @@ function updatePriceRange(){
 
     }
 
-    const limit =
-        Number(maxSlider.max);
+    const limit = Number(maxSlider.max);
 
     const minPercent =
-        (min / limit) * 100;
+        min / limit * 100;
 
     const maxPercent =
-        (max / limit) * 100;
+        max / limit * 100;
 
     const progress =
-        document.getElementById("rangeProgress");
+        document.getElementById(
+            "rangeProgress"
+        );
 
     progress.style.left =
         minPercent + "%";
 
     progress.style.width =
-        (maxPercent - minPercent) + "%";
+        (maxPercent-minPercent) + "%";
 
     document.getElementById(
         "priceRangeText"
     ).textContent =
-        formatPrice(min)
-        + " - "
-        + formatPrice(max);
+        formatPrice(min) +
+        " - " +
+        formatPrice(max);
 
     renderProducts();
 
 }
 
 
-/* =========================
-   WEAPONS
-========================= */
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+function selectCategory(category,element){
+
+    if(currentCategory === category){
+
+        currentCategory = null;
+        selectedWeapons = [];
+
+        document.querySelectorAll(
+            ".category"
+        ).forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+        document.getElementById(
+            "weaponBox"
+        ).classList.remove("show");
+
+        renderProducts();
+
+        return;
+    }
+
+    currentCategory = category;
+    selectedWeapons = [];
+
+    document.querySelectorAll(
+        ".category"
+    ).forEach(function(item){
+
+        item.classList.remove("active");
+
+    });
+
+    element.classList.add("active");
+
+    document.getElementById(
+        "weaponBox"
+    ).classList.add("show");
+
+    document.getElementById(
+        "weaponTitle"
+    ).textContent =
+        category === "Accessories"
+        ? "ACCESSORIES"
+        : category.toUpperCase() + " WEAPONS";
+
+    renderWeapons();
+    renderProducts();
+
+}
+
 
 function renderWeapons(){
 
     const list =
-        document.getElementById("weaponList");
+        document.getElementById(
+            "weaponList"
+        );
 
     list.innerHTML = "";
 
-    const items =
-        categoryData[currentCategory] || [];
-
-    items.forEach(item => {
+    (categoryData[currentCategory] || [])
+    .forEach(function(weapon){
 
         const button =
             document.createElement("button");
 
         button.className = "weapon";
 
-        button.textContent = item;
+        button.textContent = weapon;
 
-        if(selectedWeapons.includes(item)){
+        if(selectedWeapons.includes(weapon)){
             button.classList.add("active");
         }
 
         button.onclick = function(){
 
             selectWeapon(
-                item,
+                weapon,
                 button
             );
 
@@ -2114,10 +2217,7 @@ function renderWeapons(){
 }
 
 
-function selectWeapon(
-    weapon,
-    element
-){
+function selectWeapon(weapon,element){
 
     const index =
         selectedWeapons.indexOf(weapon);
@@ -2141,145 +2241,86 @@ function selectWeapon(
 }
 
 
-/* =========================
-   CATEGORY
-========================= */
-
-function selectCategory(
-    category,
-    element
-){
-
-    if(currentCategory === category){
-
-        currentCategory = null;
-
-        selectedWeapons = [];
-
-        document
-            .querySelectorAll(".category")
-            .forEach(item => {
-
-                item.classList.remove("active");
-
-            });
-
-        document
-            .getElementById("weaponBox")
-            .classList.remove("show");
-
-        renderProducts();
-
-        return;
-
-    }
-
-    currentCategory = category;
-
-    selectedWeapons = [];
-
-    document
-        .querySelectorAll(".category")
-        .forEach(item => {
-
-            item.classList.remove("active");
-
-        });
-
-    element.classList.add("active");
-
-    document
-        .getElementById("weaponBox")
-        .classList.add("show");
-
-    document.getElementById(
-        "weaponTitle"
-    ).textContent =
-        category === "Accessories"
-        ? "ACCESSORIES"
-        : category.toUpperCase() + " WEAPONS";
-
-    renderWeapons();
-
-    renderProducts();
-
-}
-
-
-/* =========================
+/* =====================================================
    PRODUCTS
-========================= */
+===================================================== */
 
 function renderProducts(){
 
     const container =
-        document.getElementById("products");
+        document.getElementById(
+            "products"
+        );
 
     container.innerHTML = "";
 
     const search =
-        document.getElementById("search")
-        .value
-        .toLowerCase()
-        .trim();
+        document.getElementById(
+            "search"
+        ).value.toLowerCase().trim();
 
     const wear =
-        document.getElementById("wearFilter")
-        .value;
+        document.getElementById(
+            "wearFilter"
+        ).value;
 
-    const minPrice =
+    const min =
         Number(
-            document.getElementById("minPrice").value
+            document.getElementById(
+                "minPrice"
+            ).value
         );
 
-    const maxPrice =
+    const max =
         Number(
-            document.getElementById("maxPrice").value
+            document.getElementById(
+                "maxPrice"
+            ).value
         );
 
     const filtered =
-        products.filter(product => {
+        products.filter(function(product){
 
             const searchMatch =
-                product.name
-                    .toLowerCase()
-                    .includes(search)
-                ||
-                product.weapon
-                    .toLowerCase()
-                    .includes(search);
+                product.name.toLowerCase().includes(search) ||
+                product.weapon.toLowerCase().includes(search);
 
             const wearMatch =
-                wear === "all"
-                ||
+                wear === "all" ||
                 product.wear === wear;
 
             const priceMatch =
-                product.price >= minPrice
-                &&
-                product.price <= maxPrice;
+                product.price >= min &&
+                product.price <= max;
 
-            const categoryMatch =
-                currentCategory === null
-                ||
-                product.category === currentCategory;
+            let categoryMatch = true;
 
-            const weaponMatch =
-                selectedWeapons.length === 0
-                ||
-                selectedWeapons.includes(
-                    product.weapon
-                );
+            if(currentCategory){
+
+                categoryMatch =
+                    product.category === currentCategory;
+
+            }
+
+            let weaponMatch = true;
+
+            if(
+                currentCategory &&
+                selectedWeapons.length > 0
+            ){
+
+                weaponMatch =
+                    selectedWeapons.includes(
+                        product.weapon
+                    );
+
+            }
 
             return (
-                searchMatch
-                &&
-                wearMatch
-                &&
-                priceMatch
-                &&
-                categoryMatch
-                &&
+                searchMatch &&
+                wearMatch &&
+                priceMatch &&
+                categoryMatch &&
                 weaponMatch
             );
 
@@ -2288,13 +2329,12 @@ function renderProducts(){
     if(filtered.length === 0){
 
         container.innerHTML =
-            `<div class="empty">No skins found.</div>`;
+            '<div class="empty">No skins found.</div>';
 
         return;
-
     }
 
-    filtered.forEach(product => {
+    filtered.forEach(function(product){
 
         const card =
             document.createElement("div");
@@ -2304,13 +2344,11 @@ function renderProducts(){
         card.innerHTML = `
 
             <div class="product-image">
-
                 <img
                     src="${product.image}"
                     alt="${product.name}"
                     loading="lazy"
                 >
-
             </div>
 
             <div class="product-info">
@@ -2320,9 +2358,7 @@ function renderProducts(){
                 </div>
 
                 <div class="product-weapon">
-                    ${product.weapon}
-                    •
-                    ${product.wear}
+                    ${product.weapon} • ${product.wear}
                 </div>
 
                 <div class="product-bottom">
@@ -2341,6 +2377,7 @@ function renderProducts(){
                 </div>
 
             </div>
+
         `;
 
         container.appendChild(card);
@@ -2350,16 +2387,25 @@ function renderProducts(){
 }
 
 
-/* =========================
+/* =====================================================
    PRODUCT MODAL
-========================= */
+===================================================== */
 
 function openProduct(id){
 
+    /*
+       BUY IS LOCKED UNTIL PROFILE
+       HAS A VALID TRADE LINK.
+    */
+
+    if(!requireProfileForPurchase()){
+        return;
+    }
+
     currentProduct =
-        products.find(
-            product => product.id === id
-        );
+        products.find(function(product){
+            return product.id === id;
+        });
 
     if(!currentProduct) return;
 
@@ -2395,19 +2441,21 @@ function openProduct(id){
             currentProduct.price
         );
 
-    document
-        .getElementById("productModal")
-        .classList.add("show");
+    document.getElementById(
+        "productModal"
+    ).classList.add("show");
 
 }
+
 
 function closeProduct(){
 
-    document
-        .getElementById("productModal")
-        .classList.remove("show");
+    document.getElementById(
+        "productModal"
+    ).classList.remove("show");
 
 }
+
 
 function closeModalOutside(event){
 
@@ -2418,13 +2466,18 @@ function closeModalOutside(event){
 }
 
 
-/* =========================
+/* =====================================================
    CART
-========================= */
+===================================================== */
 
 function addToCart(){
 
     if(!currentProduct) return;
+
+    if(!requireProfileForPurchase()){
+        closeProduct();
+        return;
+    }
 
     cart.push(currentProduct);
 
@@ -2433,6 +2486,7 @@ function addToCart(){
     closeProduct();
 
 }
+
 
 function updateCart(){
 
@@ -2445,19 +2499,20 @@ function updateCart(){
 
 }
 
+
 function renderCart(){
 
     const container =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
 
     container.innerHTML = "";
 
     if(cart.length === 0){
 
         container.innerHTML =
-            `<div class="empty-cart">
-                Your cart is empty.
-            </div>`;
+            '<div class="empty-cart">Your cart is empty.</div>';
 
         document.getElementById(
             "cartTotal"
@@ -2465,54 +2520,46 @@ function renderCart(){
             "0 Toman";
 
         return;
-
     }
 
     let total = 0;
 
-    cart.forEach(
-        (product,index) => {
+    cart.forEach(function(product,index){
 
-            total += product.price;
+        total += product.price;
 
-            const item =
-                document.createElement("div");
+        const item =
+            document.createElement("div");
 
-            item.className =
-                "cart-item";
+        item.className = "cart-item";
 
-            item.innerHTML = `
+        item.innerHTML = `
 
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                >
+            <img src="${product.image}">
 
-                <div class="cart-item-info">
+            <div class="cart-item-info">
 
-                    <div class="cart-item-name">
-                        ${product.name}
-                    </div>
-
-                    <div class="cart-item-price">
-                        ${formatPrice(product.price)}
-                    </div>
-
+                <div class="cart-item-name">
+                    ${product.name}
                 </div>
 
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${index})"
-                >
-                    REMOVE
-                </button>
+                <div class="cart-item-price">
+                    ${formatPrice(product.price)}
+                </div>
 
-            `;
+            </div>
 
-            container.appendChild(item);
+            <button
+                class="remove-item"
+                onclick="removeFromCart(${index})"
+            >
+                REMOVE
+            </button>
+        `;
 
-        }
-    );
+        container.appendChild(item);
+
+    });
 
     document.getElementById(
         "cartTotal"
@@ -2520,6 +2567,7 @@ function renderCart(){
         formatPrice(total);
 
 }
+
 
 function removeFromCart(index){
 
@@ -2529,23 +2577,26 @@ function removeFromCart(index){
 
 }
 
+
 function openCart(){
 
     renderCart();
 
-    document
-        .getElementById("cartModal")
-        .classList.add("show");
+    document.getElementById(
+        "cartModal"
+    ).classList.add("show");
 
 }
+
 
 function closeCart(){
 
-    document
-        .getElementById("cartModal")
-        .classList.remove("show");
+    document.getElementById(
+        "cartModal"
+    ).classList.remove("show");
 
 }
+
 
 function closeCartOutside(event){
 
@@ -2556,9 +2607,12 @@ function closeCartOutside(event){
 }
 
 
-/* =========================================================
-   ADMIN STORAGE
-========================================================= */
+/* =====================================================
+   ORDERS
+===================================================== */
+
+const ORDERS_KEY =
+    "wizzy_shop_orders";
 
 function getOrders(){
 
@@ -2566,11 +2620,11 @@ function getOrders(){
 
         return JSON.parse(
             localStorage.getItem(
-                ORDERS_STORAGE_KEY
+                ORDERS_KEY
             )
         ) || [];
 
-    }catch(error){
+    }catch(e){
 
         return [];
 
@@ -2578,51 +2632,224 @@ function getOrders(){
 
 }
 
+
 function saveOrders(orders){
 
     localStorage.setItem(
-        ORDERS_STORAGE_KEY,
+        ORDERS_KEY,
         JSON.stringify(orders)
     );
 
 }
 
 
-/* =========================================================
-   ADMIN LOGIN
-========================================================= */
+function createLocalOrder(){
+
+    if(cart.length === 0) return null;
+
+    let total = 0;
+
+    const items =
+        cart.map(function(product){
+
+            total += product.price;
+
+            return {
+                id:product.id,
+                name:product.name,
+                weapon:product.weapon,
+                wear:product.wear,
+                price:product.price
+            };
+
+        });
+
+    const profile = getProfile();
+
+    const order = {
+
+        id:
+            "WZ-" +
+            Date.now()
+            .toString(36)
+            .toUpperCase(),
+
+        createdAt:
+            new Date().toLocaleString(),
+
+        status:"PENDING",
+
+        total:total,
+
+        customer:{
+            tradeLink:profile.tradeLink || "",
+            phone:profile.phone || "",
+            telegramId:profile.telegramId || ""
+        },
+
+        items:items
+
+    };
+
+    const orders = getOrders();
+
+    orders.unshift(order);
+
+    saveOrders(orders);
+
+    return order;
+
+}
+
+
+function finalizeOrder(){
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty.");
+
+        return;
+
+    }
+
+    /*
+       FINAL CHECK BEFORE ORDER
+    */
+
+    if(!requireProfileForPurchase()){
+
+        closeCart();
+
+        return;
+
+    }
+
+    let message =
+        "WIZZY SHOP ORDER\n\n";
+
+    const profile = getProfile();
+
+    let total = 0;
+
+    cart.forEach(function(product,index){
+
+        total += product.price;
+
+        message +=
+            `${index+1}. ${product.name} - ${formatPrice(product.price)}\n`;
+
+    });
+
+    message +=
+        `\nTOTAL: ${formatPrice(total)}`;
+
+    message +=
+        `\n\nTRADE LINK: ${profile.tradeLink}`;
+
+    if(profile.telegramId){
+        message +=
+            `\nTELEGRAM: ${profile.telegramId}`;
+    }
+
+    if(profile.phone){
+        message +=
+            `\nPHONE: ${profile.phone}`;
+    }
+
+    createLocalOrder();
+
+    const telegram =
+        "https://t.me/WizyyShop?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        telegram,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   HIDDEN ADMIN
+   5 QUICK CLICKS ON WIZZY SHOP
+===================================================== */
+
+const ADMIN_PASSWORD =
+    "WIZZYADMIN2026";
+
+let logoClicks = 0;
+let logoTimer = null;
+
+document.getElementById(
+    "shopLogo"
+).addEventListener(
+    "click",
+    secretLogoClick
+);
+
+
+function secretLogoClick(){
+
+    logoClicks++;
+
+    clearTimeout(logoTimer);
+
+    logoTimer =
+        setTimeout(function(){
+
+            logoClicks = 0;
+
+        },1500);
+
+    if(logoClicks >= 5){
+
+        logoClicks = 0;
+
+        openAdminLogin();
+
+    }
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
 
 function openAdminLogin(){
+
+    document.getElementById(
+        "adminError"
+    ).textContent = "";
 
     document.getElementById(
         "adminPassword"
     ).value = "";
 
     document.getElementById(
-        "adminError"
-    ).textContent = "";
-
-    document
-        .getElementById("adminLoginModal")
-        .classList.add("show");
+        "adminLoginModal"
+    ).classList.add("show");
 
     setTimeout(function(){
 
-        document
-            .getElementById("adminPassword")
-            .focus();
+        document.getElementById(
+            "adminPassword"
+        ).focus();
 
     },100);
 
 }
 
+
 function closeAdminLogin(){
 
-    document
-        .getElementById("adminLoginModal")
-        .classList.remove("show");
+    document.getElementById(
+        "adminLoginModal"
+    ).classList.remove("show");
 
 }
+
 
 function closeAdminLoginOutside(event){
 
@@ -2631,6 +2858,7 @@ function closeAdminLoginOutside(event){
     }
 
 }
+
 
 function loginAdmin(){
 
@@ -2647,7 +2875,6 @@ function loginAdmin(){
             "Wrong password.";
 
         return;
-
     }
 
     closeAdminLogin();
@@ -2657,27 +2884,25 @@ function loginAdmin(){
 }
 
 
-/* =========================================================
-   ADMIN PANEL
-========================================================= */
-
 function openAdminPanel(){
 
     renderAdminPanel();
 
-    document
-        .getElementById("adminPanelModal")
-        .classList.add("show");
+    document.getElementById(
+        "adminPanelModal"
+    ).classList.add("show");
 
 }
+
 
 function closeAdminPanel(){
 
-    document
-        .getElementById("adminPanelModal")
-        .classList.remove("show");
+    document.getElementById(
+        "adminPanelModal"
+    ).classList.remove("show");
 
 }
+
 
 function closeAdminPanelOutside(event){
 
@@ -2688,83 +2913,14 @@ function closeAdminPanelOutside(event){
 }
 
 
-/* =========================================================
-   CREATE ORDER
-========================================================= */
+function updateOrderStatus(id,status){
 
-function createLocalOrder(){
-
-    if(cart.length === 0){
-        return null;
-    }
-
-    let total = 0;
-
-    const items =
-        cart.map(product => {
-
-            total += product.price;
-
-            return {
-
-                id:product.id,
-                name:product.name,
-                weapon:product.weapon,
-                wear:product.wear,
-                price:product.price
-
-            };
-
-        });
-
-    const order = {
-
-        id:
-            "WZ-" +
-            Date.now()
-                .toString(36)
-                .toUpperCase(),
-
-        createdAt:
-            new Date()
-                .toLocaleString("en-US"),
-
-        status:"PENDING",
-
-        total:total,
-
-        items:items
-
-    };
-
-    const orders =
-        getOrders();
-
-    orders.unshift(order);
-
-    saveOrders(orders);
-
-    return order;
-
-}
-
-
-/* =========================================================
-   ORDER STATUS
-========================================================= */
-
-function updateOrderStatus(
-    orderId,
-    status
-){
-
-    const orders =
-        getOrders();
+    const orders = getOrders();
 
     const order =
-        orders.find(
-            item => item.id === orderId
-        );
+        orders.find(function(item){
+            return item.id === id;
+        });
 
     if(!order) return;
 
@@ -2776,12 +2932,17 @@ function updateOrderStatus(
 
 }
 
-function deleteOrder(orderId){
+
+function deleteOrder(id){
+
+    if(!confirm("Delete this order?")){
+        return;
+    }
 
     const orders =
-        getOrders().filter(
-            item => item.id !== orderId
-        );
+        getOrders().filter(function(order){
+            return order.id !== id;
+        });
 
     saveOrders(orders);
 
@@ -2789,14 +2950,21 @@ function deleteOrder(orderId){
 
 }
 
+
 function clearAllOrders(){
 
-    if(!confirm("Delete ALL orders?")){
+    const orders = getOrders();
+
+    if(!orders.length) return;
+
+    if(!confirm(
+        "Delete ALL orders? This cannot be undone."
+    )){
         return;
     }
 
     localStorage.removeItem(
-        ORDERS_STORAGE_KEY
+        ORDERS_KEY
     );
 
     renderAdminPanel();
@@ -2804,26 +2972,19 @@ function clearAllOrders(){
 }
 
 
-/* =========================================================
-   ADMIN RENDER
-========================================================= */
-
 function renderAdminPanel(){
 
-    const orders =
-        getOrders();
+    const orders = getOrders();
 
-    const paidOrders =
-        orders.filter(
-            order => order.status === "PAID"
-        );
+    const paid =
+        orders.filter(function(order){
+            return order.status === "PAID";
+        });
 
     const totalSales =
-        paidOrders.reduce(
-            (sum,order) =>
-                sum + Number(order.total || 0),
-            0
-        );
+        paid.reduce(function(sum,order){
+            return sum + Number(order.total || 0);
+        },0);
 
     document.getElementById(
         "adminOrderCount"
@@ -2833,55 +2994,49 @@ function renderAdminPanel(){
     document.getElementById(
         "adminPaidCount"
     ).textContent =
-        paidOrders.length;
+        paid.length;
 
     document.getElementById(
         "adminTotalSales"
     ).textContent =
         formatPrice(totalSales);
 
-    const box =
+    const container =
         document.getElementById(
             "adminOrders"
         );
 
-    box.innerHTML = "";
+    container.innerHTML = "";
 
-    if(orders.length === 0){
+    if(!orders.length){
 
-        box.innerHTML =
-            `<div class="admin-empty">
-                NO ORDERS YET
-            </div>`;
+        container.innerHTML =
+            '<div class="admin-empty">No orders yet.</div>';
 
         return;
 
     }
 
-    orders.forEach(order => {
+    orders.forEach(function(order){
 
-        const div =
+        const card =
             document.createElement("div");
 
-        div.className =
+        card.className =
             "admin-order";
 
-        const itemsHTML =
-            order.items.map(item => {
+        const items =
+            order.items.map(function(item){
 
-                return `
-                    <div>
-                        ${item.name}
-                        —
-                        ${item.wear}
-                        —
-                        ${formatPrice(item.price)}
-                    </div>
-                `;
+                return (
+                    item.name +
+                    " — " +
+                    formatPrice(item.price)
+                );
 
-            }).join("");
+            }).join("<br>");
 
-        div.innerHTML = `
+        card.innerHTML = `
 
             <div class="admin-order-head">
 
@@ -2896,50 +3051,59 @@ function renderAdminPanel(){
             </div>
 
             <div class="admin-order-items">
-                ${itemsHTML}
+                ${items}
             </div>
 
             <div class="admin-order-total">
-                TOTAL:
                 ${formatPrice(order.total)}
+            </div>
+
+            <div style="color:#777;font-size:10px;margin-top:8px">
+                Trade:
+                ${order.customer?.tradeLink || "-"}
+            </div>
+
+            <div style="color:#777;font-size:10px;margin-top:4px">
+                Telegram:
+                ${order.customer?.telegramId || "-"}
+            </div>
+
+            <div style="color:#777;font-size:10px;margin-top:4px">
+                Phone:
+                ${order.customer?.phone || "-"}
             </div>
 
             <div class="admin-order-actions">
 
                 <select
                     class="admin-status"
-                    onchange="
-                        updateOrderStatus(
-                            '${order.id}',
-                            this.value
-                        )
-                    "
+                    onchange="updateOrderStatus('${order.id}',this.value)"
                 >
 
                     <option
                         value="PENDING"
-                        ${order.status === "PENDING" ? "selected" : ""}
+                        ${order.status==="PENDING"?"selected":""}
                     >
                         PENDING
                     </option>
 
                     <option
                         value="PAID"
-                        ${order.status === "PAID" ? "selected" : ""}
+                        ${order.status==="PAID"?"selected":""}
                     >
                         PAID
                     </option>
 
                     <option
                         value="FAILED"
-                        ${order.status === "FAILED" ? "selected" : ""}
+                        ${order.status==="FAILED"?"selected":""}
                     >
                         FAILED
                     </option>
 
                     <option
                         value="DELIVERED"
-                        ${order.status === "DELIVERED" ? "selected" : ""}
+                        ${order.status==="DELIVERED"?"selected":""}
                     >
                         DELIVERED
                     </option>
@@ -2948,9 +3112,7 @@ function renderAdminPanel(){
 
                 <button
                     class="admin-delete"
-                    onclick="
-                        deleteOrder('${order.id}')
-                    "
+                    onclick="deleteOrder('${order.id}')"
                 >
                     DELETE
                 </button>
@@ -2958,80 +3120,22 @@ function renderAdminPanel(){
             </div>
         `;
 
-        box.appendChild(div);
+        container.appendChild(card);
 
     });
 
 }
 
 
-/* =========================================================
-   FINALIZE ORDER
-========================================================= */
-
-function finalizeOrder(){
-
-    if(cart.length === 0){
-
-        alert(
-            "Your cart is empty."
-        );
-
-        return;
-
-    }
-
-    /*
-       فعلاً سفارش در مرورگر ذخیره می‌شود.
-       بعداً می‌توان همین قسمت را
-       به Backend و ZarinPal وصل کرد.
-    */
-
-    createLocalOrder();
-
-    let message =
-        "WIZZY SHOP ORDER\n\n";
-
-    let total = 0;
-
-    cart.forEach(
-        (product,index) => {
-
-            total += product.price;
-
-            message +=
-                `${index + 1}. `
-                +
-                `${product.name} - `
-                +
-                `${formatPrice(product.price)}\n`;
-
-        }
-    );
-
-    message +=
-        `\nTOTAL: ${formatPrice(total)}`;
-
-    const telegram =
-        "https://t.me/WizyyShop?text="
-        +
-        encodeURIComponent(message);
-
-    window.open(
-        telegram,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================================
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
-document
-    .getElementById("weaponBox")
-    .classList.remove("show");
+document.getElementById(
+    "weaponBox"
+).classList.remove("show");
+
+updateProfileMini();
 
 renderProducts();
 
@@ -3043,4 +3147,3 @@ updatePriceRange();
 
 </body>
 </html>
-```
