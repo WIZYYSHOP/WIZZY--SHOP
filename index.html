@@ -2562,7 +2562,7 @@ function registerLogoClick(){
         </div>
 
         <div class="profile-field">
-            <label>PHONE (OPTIONAL)</label>
+            <label>PHONE</label>
             <input id="profilePhone" type="tel" maxlength="30" placeholder="Phone number">
         </div>
 
@@ -2639,7 +2639,7 @@ function registerLogoClick(){
                 <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
             </div>
             <div class="profile-field">
-                <label>PHONE (OPTIONAL)</label>
+                <label>PHONE</label>
                 <input id="profilePhone" type="text" placeholder="Phone number">
             </div>
             <div class="profile-field">
@@ -4962,6 +4962,56 @@ window.addEventListener("load",function(){
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
 })();
 </script>
+
+<script>
+(function(){
+  function wizzyMakePhoneOptional(){
+    var phone = document.getElementById('profilePhone');
+    if(!phone) return;
+    phone.removeAttribute('required');
+    phone.required = false;
+    phone.setCustomValidity('');
+  }
+
+  function wizzyPatchSave(){
+    var original = window.saveProfile;
+    if(typeof original !== 'function' || original.__wizzyPhoneOptional) return;
+
+    async function patchedSaveProfile(){
+      var phone = document.getElementById('profilePhone');
+
+      if(phone){
+        phone.removeAttribute('required');
+        phone.required = false;
+        phone.setCustomValidity('');
+      }
+
+      // Empty phone is valid. If entered, it must be a valid Iranian mobile number.
+      if(phone && phone.value.trim() !== '' && !/^09\d{9}$/.test(phone.value.trim())){
+        var err = document.getElementById('profileError');
+        if(err) err.textContent = 'Please enter a valid mobile number or leave it empty.';
+        phone.focus();
+        return;
+      }
+
+      return await original.apply(this, arguments);
+    }
+
+    patchedSaveProfile.__wizzyPhoneOptional = true;
+    window.saveProfile = patchedSaveProfile;
+  }
+
+  wizzyMakePhoneOptional();
+  wizzyPatchSave();
+
+  var obs = new MutationObserver(function(){
+    wizzyMakePhoneOptional();
+    wizzyPatchSave();
+  });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+})();
+</script>
+
 </body>
 </html>
 <!-- WIZZY SUPPORT -->
