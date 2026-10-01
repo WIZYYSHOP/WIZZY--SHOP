@@ -1689,7 +1689,7 @@ function previewProfileImage(event){
     reader.readAsDataURL(file);
 }
 
-function saveProfile(){
+async async function saveProfile(){
     const name=document.getElementById("profileName").value.trim();
     const tradeLink=document.getElementById("profileTradeLink").value.trim();
     const phone=document.getElementById("profilePhone").value.trim();
@@ -2733,11 +2733,21 @@ function registerLogoClick(){
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 const SUPABASE_URL = "https://gneadbhbblwzrakgtwzo.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WDOc16Rn11KCEcnqfE94qg_dAVrniSR";
-const wizzySupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+// Keep the client on window AND as a normal variable.
+// This avoids the classic top-level `let` vs `window` mismatch.
+window.wizzySupabase = null;
+if (window.supabase && typeof window.supabase.createClient === "function") {
+    window.wizzySupabase = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+}
+const wizzySupabase = window.wizzySupabase;
 </script>
 <script>
 
@@ -3765,7 +3775,7 @@ function previewProfileImage(event){
     reader.readAsDataURL(file);
 }
 
-function saveProfile(){
+async function saveProfile(){
     const name=document.getElementById("profileName").value.trim();
     const tradeLink=document.getElementById("profileTradeLink").value.trim();
     const phone=document.getElementById("profilePhone").value.trim();
@@ -3796,6 +3806,7 @@ function saveProfile(){
         updatedAt:new Date().toLocaleString("en-US")
     };
 
+    /* Save locally first so the profile never disappears on this device. */
     localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
 
     const profiles=getProfiles();
@@ -3803,8 +3814,63 @@ function saveProfile(){
     if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
     saveProfiles(profiles);
 
-    updateHeaderAvatar();
-    closeProfile();
+    /* IMPORTANT: also save the customer to Supabase so the admin can see it
+       from another device/browser.  The browser never uses the service key. */
+    try{
+        if(!window.wizzySupabase){
+            error.textContent="CLOUD DATABASE IS NOT READY. PROFILE SAVED ON THIS DEVICE.";
+            updateHeaderAvatar();
+            return;
+        }
+
+        const row={
+            name:profile.name,
+            trade_link:profile.tradeLink,
+            phone:profile.phone || null,
+            telegram:profile.telegram || null,
+            image:profile.image || null
+        };
+
+        let result;
+
+        if(profile.supabaseId){
+            result = await wizzySupabase
+                .from("profiles")
+                .update(row)
+                .eq("id",profile.supabaseId)
+                .select("id")
+                .single();
+        }else{
+            result = await wizzySupabase
+                .from("profiles")
+                .insert(row)
+                .select("id")
+                .single();
+        }
+
+        if(result.error){
+            console.error("WIZZY PROFILE CLOUD SAVE ERROR:",result.error);
+            error.textContent="PROFILE SAVED LOCALLY, BUT CLOUD SAVE FAILED: " + (result.error.message || "Unknown error");
+            updateHeaderAvatar();
+            return;
+        }
+
+        profile.supabaseId=result.data.id;
+        localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
+
+        const latestProfiles=getProfiles();
+        const latestIndex=latestProfiles.findIndex(x=>x.id===profile.id);
+        if(latestIndex===-1) latestProfiles.unshift(profile);
+        else latestProfiles[latestIndex]=profile;
+        saveProfiles(latestProfiles);
+
+        updateHeaderAvatar();
+        closeProfile();
+    }catch(cloudError){
+        console.error("WIZZY PROFILE CLOUD SAVE ERROR:",cloudError);
+        error.textContent="PROFILE SAVED LOCALLY, BUT CLOUD SAVE FAILED.";
+        updateHeaderAvatar();
+    }
 }
 
 function updateHeaderAvatar(){
@@ -4463,15 +4529,55 @@ function renderAdminProfiles(){
     });
 }
 
-function renderAdminProfiles(){
+async function renderAdminProfiles(){
     const container=document.getElementById("adminProfiles");
     if(!container) return;
-    const profiles=getProfiles();
-    container.innerHTML="";
+
+    let profiles=[];
+
+    /* First load cloud profiles. This is what makes profiles saved on a phone
+       visible to the admin on a PC. */
+    try{
+        if(window.wizzySupabase){
+            const {data,error}=await wizzySupabase
+                .from("profiles")
+                .select("id,name,trade_link,phone,telegram,image,created_at")
+                .order("created_at",{ascending:false});
+
+            if(!error && Array.isArray(data)){
+                profiles=data.map(function(row){
+                    return {
+                        supabaseId:row.id,
+                        id:"SB-"+row.id,
+                        name:row.name,
+                        tradeLink:row.trade_link,
+                        phone:row.phone || "",
+                        telegram:row.telegram || "",
+                        image:row.image || DEFAULT_AVATAR,
+                        createdAt:row.created_at || "",
+                        updatedAt:row.created_at || ""
+                    };
+                });
+            }else if(error){
+                console.error("WIZZY ADMIN PROFILE LOAD ERROR:",error);
+            }
+        }
+    }catch(error){
+        console.error("WIZZY ADMIN PROFILE LOAD ERROR:",error);
+    }
+
+    /* If cloud is empty/unavailable, still show local profiles on this device. */
     if(profiles.length===0){
-        container.innerHTML='<div class="admin-empty">No customer profiles saved on this browser yet.</div>';
+        profiles=getProfiles();
+    }
+
+    container.innerHTML="";
+
+    if(profiles.length===0){
+        container.innerHTML='<div class="admin-empty">No customer profiles saved yet.</div>';
         return;
     }
+
     profiles.forEach(function(profile){
         const card=document.createElement("div");
         card.className="admin-profile-card";
@@ -4482,12 +4588,11 @@ function renderAdminProfiles(){
                 <div class="admin-profile-line"><b>Trade:</b> ${escapeHtml(profile.tradeLink || "-")}</div>
                 <div class="admin-profile-line"><b>Phone:</b> ${escapeHtml(profile.phone || "-")}</div>
                 <div class="admin-profile-line"><b>Telegram:</b> ${escapeHtml(profile.telegram || "-")}</div>
-                <div class="admin-profile-date">Updated: ${escapeHtml(profile.updatedAt || profile.createdAt || "-")}</div>
+                <div class="admin-profile-date">Saved: ${escapeHtml(profile.updatedAt || profile.createdAt || "-")}</div>
             </div>`;
         container.appendChild(card);
     });
 }
-
 function clearAllProfiles(){
     const profiles=getProfiles();
     if(!profiles.length) return;
