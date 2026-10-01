@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>WIZYY SHOP | CS2 Skins</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -19,7 +17,7 @@
     --red2:#ff2633;
     --black:#050505;
     --black2:#0b0b0b;
-    --card:#111111;
+    --card:#111;
     --border:#252525;
     --text:#f5f5f5;
     --muted:#858585;
@@ -27,1124 +25,711 @@
 
 body{
     background:
-        radial-gradient(
-            circle at top right,
-            rgba(229,9,20,.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at bottom left,
-            rgba(229,9,20,.06),
-            transparent 30%
-        ),
+        radial-gradient(circle at top right,rgba(229,9,20,.12),transparent 30%),
+        radial-gradient(circle at bottom left,rgba(229,9,20,.06),transparent 30%),
         var(--black);
-
     color:var(--text);
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
     min-height:100vh;
 }
-
 
 /* =========================
    HEADER
 ========================= */
 
 header{
-
     position:sticky;
     top:0;
-
     z-index:1000;
-
-    height:76px;
-
-    background:
-        rgba(5,5,5,.94);
-
+    height:90px;
+    background:rgba(5,5,5,.95);
     backdrop-filter:blur(14px);
-
-    border-bottom:
-        1px solid #1d1d1d;
+    border-bottom:1px solid #1d1d1d;
 }
 
 .header-inner{
-
     width:94%;
     max-width:1450px;
-
     height:100%;
-
     margin:auto;
-
+    position:relative;
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
 .logo{
-
-    font-size:25px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    white-space:nowrap;
 }
 
-.logo span{
+.logo-main{
+    font-size:26px;
+    font-weight:900;
+    letter-spacing:3px;
+}
 
+.logo-main span{
     color:var(--red);
 }
 
+.logo-sub{
+    margin-top:5px;
+    color:#888;
+    font-size:11px;
+    direction:rtl;
+    letter-spacing:0;
+}
+
 .nav{
-
     display:flex;
-
     gap:28px;
 }
 
 .nav a{
-
     color:#999;
-
     text-decoration:none;
-
-    font-size:14px;
-
+    font-size:13px;
     transition:.2s;
 }
 
 .nav a:hover{
-
     color:white;
 }
 
 .cart-btn{
-
-    border:
-        1px solid #292929;
-
+    margin-left:auto;
+    border:1px solid #292929;
     background:#111;
-
     color:white;
-
-    padding:
-        11px 17px;
-
+    padding:11px 17px;
     border-radius:10px;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
 .cart-btn:hover{
-
     border-color:var(--red);
-
-    box-shadow:
-        0 0 18px
-        rgba(229,9,20,.18);
+    box-shadow:0 0 18px rgba(229,9,20,.18);
 }
 
 #cartCount{
-
     background:var(--red);
-
     border-radius:50%;
-
-    padding:
-        2px 7px;
-
+    padding:2px 7px;
     margin-left:5px;
-
     font-size:12px;
 }
-
 
 /* =========================
    HERO
 ========================= */
 
 .hero{
-
     width:94%;
     max-width:1450px;
-
-    margin:
-        38px auto 30px;
-
+    margin:38px auto 30px;
     min-height:260px;
-
-    border:
-        1px solid #202020;
-
+    border:1px solid #202020;
     border-radius:22px;
-
     overflow:hidden;
-
     position:relative;
-
     background:
-
         linear-gradient(
             90deg,
             rgba(0,0,0,.96),
             rgba(0,0,0,.68),
             rgba(0,0,0,.92)
         ),
-
         radial-gradient(
             circle at 80% 50%,
             rgba(229,9,20,.28),
             transparent 38%
         ),
-
         #0b0b0b;
 }
 
 .hero-content{
-
     padding:52px;
-
     max-width:700px;
 }
 
+.hero-line{
+    width:75px;
+    height:4px;
+    background:var(--red);
+    margin-bottom:20px;
+    border-radius:10px;
+}
+
 .hero h1{
-
     font-size:52px;
-
     line-height:1;
-
     margin-bottom:16px;
-
     font-weight:900;
 }
 
 .hero h1 span{
-
     color:var(--red);
 }
 
 .hero p{
-
     color:#999;
-
-    line-height:1.8;
-
+    line-height:1.9;
     max-width:580px;
+    direction:rtl;
+    text-align:left;
 }
-
-.hero-line{
-
-    width:75px;
-
-    height:4px;
-
-    background:var(--red);
-
-    margin:
-        0 0 20px;
-
-    border-radius:10px;
-}
-
 
 /* =========================
    MAIN
 ========================= */
 
 .container{
-
     width:94%;
-
     max-width:1450px;
-
     margin:auto;
 }
 
 .section-title{
-
     font-size:21px;
-
     font-weight:800;
-
     margin-bottom:15px;
 }
-
 
 /* =========================
    CATEGORIES
 ========================= */
 
 .categories{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(7,1fr);
-
+    grid-template-columns:repeat(7,1fr);
     gap:10px;
 }
 
 .category{
-
     background:#101010;
-
-    border:
-        1px solid #222;
-
+    border:1px solid #222;
     border-radius:12px;
-
-    padding:
-        17px 10px;
-
+    padding:17px 10px;
     text-align:center;
-
     cursor:pointer;
-
     color:#999;
-
     transition:.2s;
-
     font-weight:700;
-
     font-size:13px;
 }
 
 .category:hover{
-
     color:white;
-
     border-color:#555;
-
-    transform:
-        translateY(-2px);
+    transform:translateY(-2px);
 }
 
 .category.active{
-
     color:white;
-
-    background:
-        linear-gradient(
-            145deg,
-            #210607,
-            #120000
-        );
-
+    background:linear-gradient(145deg,#210607,#120000);
     border-color:var(--red);
-
-    box-shadow:
-        0 0 22px
-        rgba(229,9,20,.15);
+    box-shadow:0 0 22px rgba(229,9,20,.15);
 }
-
 
 /* =========================
    WEAPONS
 ========================= */
 
 .weapon-box{
-
     margin-top:22px;
-
     padding:18px;
-
     background:#0d0d0d;
-
-    border:
-        1px solid #202020;
-
+    border:1px solid #202020;
     border-radius:16px;
-
     display:none;
 }
 
 .weapon-box.show{
-
     display:block;
 }
 
 .weapon-title{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-bottom:14px;
 }
 
 .weapon-title h3{
-
     font-size:16px;
 }
 
 .weapon-title span{
-
     color:#666;
-
     font-size:12px;
 }
 
 .weapons{
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:9px;
 }
 
 .weapon{
-
-    padding:
-        10px 14px;
-
+    padding:10px 14px;
     background:#141414;
-
-    border:
-        1px solid #242424;
-
+    border:1px solid #242424;
     color:#aaa;
-
     border-radius:9px;
-
     cursor:pointer;
-
     font-size:12px;
-
     transition:.2s;
 }
 
 .weapon:hover{
-
     color:white;
-
     border-color:#555;
 }
 
 .weapon.active{
-
     background:var(--red);
-
     border-color:var(--red);
-
     color:white;
-
-    box-shadow:
-        0 0 16px
-        rgba(229,9,20,.2);
+    box-shadow:0 0 16px rgba(229,9,20,.2);
 }
-
 
 /* =========================
    FILTERS
 ========================= */
 
 .filters{
-
-    margin:
-        28px 0 20px;
-
+    margin:28px 0 20px;
     display:flex;
-
     gap:10px;
-
     flex-wrap:wrap;
 }
 
 .search{
-
     flex:1;
-
     min-width:230px;
 }
 
 .search input,
 .filters select{
-
     width:100%;
-
     background:#101010;
-
-    border:
-        1px solid #252525;
-
+    border:1px solid #252525;
     color:white;
-
-    padding:
-        13px 14px;
-
+    padding:13px 14px;
     border-radius:10px;
-
     outline:none;
 }
 
 .search input:focus,
 .filters select:focus{
-
     border-color:var(--red);
 }
 
-
 /* =========================
-   SELECTED INFO
+   INFO
 ========================= */
 
 .selected-info{
-
     margin-bottom:18px;
-
     min-height:24px;
-
     color:#777;
-
     font-size:13px;
 }
 
 .selected-info strong{
-
     color:white;
 }
-
 
 /* =========================
    PRODUCTS
 ========================= */
 
 .products{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
-
     padding-bottom:60px;
 }
 
 .product{
-
-    background:
-        linear-gradient(
-            180deg,
-            #141414,
-            #0e0e0e
-        );
-
-    border:
-        1px solid #222;
-
+    background:linear-gradient(180deg,#141414,#0e0e0e);
+    border:1px solid #222;
     border-radius:16px;
-
     overflow:hidden;
-
     transition:.25s;
-
     position:relative;
 }
 
 .product:hover{
-
-    transform:
-        translateY(-5px);
-
+    transform:translateY(-5px);
     border-color:#3a3a3a;
-
-    box-shadow:
-        0 15px 35px
-        rgba(0,0,0,.45);
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
 }
 
 .product-image{
-
     height:190px;
-
     background:
-
-        radial-gradient(
-            circle,
-            rgba(229,9,20,.12),
-            transparent 55%
-        ),
-
+        radial-gradient(circle,rgba(229,9,20,.12),transparent 55%),
         #101010;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:18px;
-
-    border-bottom:
-        1px solid #202020;
+    border-bottom:1px solid #202020;
 }
 
 .product-image img{
-
     width:100%;
-
     height:100%;
-
     object-fit:contain;
-
     transition:.3s;
 }
 
-.product:hover
-.product-image img{
-
-    transform:
-        scale(1.06);
+.product:hover .product-image img{
+    transform:scale(1.06);
 }
 
 .product-info{
-
     padding:15px;
 }
 
 .weapon-name{
-
     color:#777;
-
     font-size:11px;
-
     text-transform:uppercase;
-
     margin-bottom:6px;
 }
 
 .product-name{
-
     font-size:16px;
-
     font-weight:800;
-
     margin-bottom:12px;
 }
 
 .product-bottom{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
 .price{
-
     font-weight:900;
-
     color:white;
 }
 
 .price small{
-
     color:#777;
-
     font-weight:400;
 }
 
 .buy{
-
     border:0;
-
     background:var(--red);
-
     color:white;
-
-    padding:
-        9px 13px;
-
+    padding:9px 13px;
     border-radius:8px;
-
     cursor:pointer;
-
     font-weight:700;
-
     transition:.2s;
 }
 
 .buy:hover{
-
     background:var(--red2);
-
-    box-shadow:
-        0 0 18px
-        rgba(229,9,20,.25);
+    box-shadow:0 0 18px rgba(229,9,20,.25);
 }
 
 .wear-tag{
-
     position:absolute;
-
     top:12px;
-
     left:12px;
-
     background:#090909;
-
-    border:
-        1px solid #292929;
-
-    padding:
-        6px 8px;
-
+    border:1px solid #292929;
+    padding:6px 8px;
     border-radius:7px;
-
     color:#aaa;
-
     font-size:10px;
-
     z-index:2;
 }
-
 
 /* =========================
    EMPTY
 ========================= */
 
 .empty{
-
-    grid-column:
-        1 / -1;
-
+    grid-column:1/-1;
     text-align:center;
-
     padding:70px 20px;
-
     color:#666;
-
-    border:
-        1px dashed #292929;
-
+    border:1px dashed #292929;
     border-radius:15px;
 }
-
 
 /* =========================
    MODAL
 ========================= */
 
 .modal{
-
     position:fixed;
-
     inset:0;
-
-    background:
-        rgba(0,0,0,.78);
-
+    background:rgba(0,0,0,.78);
     backdrop-filter:blur(8px);
-
     z-index:2000;
-
     display:none;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
 }
 
 .modal.show{
-
     display:flex;
 }
 
 .modal-box{
-
     width:100%;
-
     max-width:650px;
-
     background:#101010;
-
-    border:
-        1px solid #2a2a2a;
-
+    border:1px solid #2a2a2a;
     border-radius:18px;
-
     padding:24px;
-
-    box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.7);
-
+    box-shadow:0 25px 80px rgba(0,0,0,.7);
     position:relative;
 }
 
 .close{
-
     position:absolute;
-
     top:15px;
-
     right:18px;
-
     background:none;
-
     border:0;
-
     color:#888;
-
     font-size:25px;
-
     cursor:pointer;
 }
 
 .close:hover{
-
     color:white;
 }
 
 .modal-product{
-
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:25px;
-
     align-items:center;
 }
 
 .modal-image{
-
     height:250px;
 }
 
 .modal-image img{
-
     width:100%;
-
     height:100%;
-
     object-fit:contain;
 }
 
 .modal-details h2{
-
     margin-bottom:8px;
 }
 
 .modal-details p{
-
     color:#777;
-
     font-size:13px;
-
     margin-bottom:20px;
 }
 
 .option-label{
-
     color:#888;
-
     font-size:12px;
-
     margin-bottom:8px;
-
     display:block;
 }
 
 .wear-options{
-
     display:flex;
-
     gap:7px;
-
     flex-wrap:wrap;
-
     margin-bottom:20px;
 }
 
 .wear-option{
-
-    padding:
-        9px 11px;
-
+    padding:9px 11px;
     background:#151515;
-
     color:#999;
-
-    border:
-        1px solid #252525;
-
+    border:1px solid #252525;
     border-radius:8px;
-
     cursor:pointer;
 }
 
 .wear-option.active{
-
     border-color:var(--red);
-
     color:white;
-
     background:#260608;
 }
 
 .modal-price{
-
     font-size:24px;
-
     font-weight:900;
-
     margin-bottom:15px;
 }
 
 .add-cart{
-
     width:100%;
-
     padding:13px;
-
     background:var(--red);
-
     border:0;
-
     color:white;
-
     font-weight:800;
-
     border-radius:9px;
-
     cursor:pointer;
 }
 
 .add-cart:hover{
-
     background:var(--red2);
 }
-
 
 /* =========================
    CART
 ========================= */
 
 .cart-panel{
-
     position:fixed;
-
     right:-420px;
-
     top:0;
-
     width:390px;
-
     max-width:94%;
-
     height:100vh;
-
     background:#0c0c0c;
-
-    border-left:
-        1px solid #272727;
-
+    border-left:1px solid #272727;
     z-index:3000;
-
     padding:25px;
-
     transition:.3s;
-
-    box-shadow:
-        -20px 0 60px
-        rgba(0,0,0,.5);
+    box-shadow:-20px 0 60px rgba(0,0,0,.5);
 }
 
 .cart-panel.show{
-
     right:0;
 }
 
 .cart-header{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     padding-bottom:18px;
-
-    border-bottom:
-        1px solid #222;
-
+    border-bottom:1px solid #222;
     margin-bottom:15px;
 }
 
 .cart-header h2{
-
     font-size:20px;
 }
 
 .close-cart{
-
     border:0;
-
     background:none;
-
     color:#888;
-
     font-size:24px;
-
     cursor:pointer;
 }
 
 .cart-items{
-
     max-height:65vh;
-
     overflow:auto;
 }
 
 .cart-item{
-
-    padding:
-        13px 0;
-
-    border-bottom:
-        1px solid #1d1d1d;
-
+    padding:13px 0;
+    border-bottom:1px solid #1d1d1d;
     display:flex;
-
     gap:10px;
 }
 
 .cart-item img{
-
     width:65px;
-
     height:50px;
-
     object-fit:contain;
-
     background:#111;
-
     border-radius:7px;
 }
 
 .cart-item-info{
-
     flex:1;
 }
 
 .cart-item-info strong{
-
     display:block;
-
     font-size:13px;
 }
 
 .cart-item-info span{
-
     display:block;
-
     color:#777;
-
     font-size:11px;
-
     margin-top:5px;
 }
 
 .remove-item{
-
     border:0;
-
     background:none;
-
     color:#777;
-
     cursor:pointer;
 }
 
 .remove-item:hover{
-
     color:var(--red);
 }
 
 .cart-footer{
-
     position:absolute;
-
     bottom:25px;
-
     left:25px;
-
     right:25px;
 }
 
 .total{
-
     display:flex;
-
     justify-content:space-between;
-
     margin-bottom:14px;
-
     font-size:17px;
 }
 
 .telegram{
-
     width:100%;
-
     padding:14px;
-
     border:0;
-
     background:var(--red);
-
     color:white;
-
     border-radius:9px;
-
     cursor:pointer;
-
     font-weight:800;
 }
-
 
 /* =========================
    FOOTER
 ========================= */
 
 footer{
-
-    border-top:
-        1px solid #1c1c1c;
-
-    padding:
-        30px 5%;
-
+    border-top:1px solid #1c1c1c;
+    padding:30px 5%;
     text-align:center;
-
     color:#666;
-
     font-size:12px;
 }
 
 footer strong{
-
     color:#aaa;
 }
 
+.footer-fa{
+    direction:rtl;
+    margin-top:8px;
+    color:#555;
+}
 
 /* =========================
    RESPONSIVE
@@ -1153,54 +738,53 @@ footer strong{
 @media(max-width:1100px){
 
     .products{
-
-        grid-template-columns:
-            repeat(3,1fr);
+        grid-template-columns:repeat(3,1fr);
     }
 
     .categories{
-
-        grid-template-columns:
-            repeat(4,1fr);
+        grid-template-columns:repeat(4,1fr);
     }
 }
 
 @media(max-width:750px){
 
-    .nav{
+    header{
+        height:82px;
+    }
 
+    .nav{
         display:none;
     }
 
-    .hero-content{
+    .logo-main{
+        font-size:22px;
+    }
 
+    .logo-sub{
+        font-size:9px;
+    }
+
+    .hero-content{
         padding:35px 25px;
     }
 
     .hero h1{
-
         font-size:38px;
     }
 
     .products{
-
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .categories{
-
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .modal-product{
-
         grid-template-columns:1fr;
     }
 
     .modal-image{
-
         height:180px;
     }
 }
@@ -1208,24 +792,20 @@ footer strong{
 @media(max-width:480px){
 
     .products{
-
         grid-template-columns:1fr;
     }
 
     .hero{
-
         min-height:auto;
     }
 
     .hero h1{
-
         font-size:32px;
     }
 }
 
 </style>
 </head>
-
 
 <body>
 
@@ -1237,10 +817,6 @@ footer strong{
 <header>
 
     <div class="header-inner">
-
-        <div class="logo">
-            WIZYY <span>SHOP</span>
-        </div>
 
         <nav class="nav">
 
@@ -1257,6 +833,22 @@ footer strong{
             </a>
 
         </nav>
+
+
+        <!-- CENTER LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-main">
+                WIZYY <span>SHOP</span>
+            </div>
+
+            <div class="logo-sub">
+                فروشگاه تخصصی اسکین‌های CS2
+            </div>
+
+        </div>
+
 
         <button
             class="cart-btn"
@@ -1292,9 +884,8 @@ footer strong{
         </h1>
 
         <p>
-            Premium CS2 skins with a clean,
-            fast and professional shopping
-            experience.
+            خرید و فروش اسکین‌های CS2 با تجربه‌ای سریع،
+            ساده و حرفه‌ای.
         </p>
 
     </div>
@@ -1387,7 +978,7 @@ footer strong{
 
 
     <!-- =========================
-         WEAPON SELECTOR
+         WEAPONS
     ========================= -->
 
     <div
@@ -1402,7 +993,7 @@ footer strong{
             </h3>
 
             <span>
-                Click again to unselect
+                Click weapon again to unselect
             </span>
 
         </div>
@@ -1495,8 +1086,6 @@ footer strong{
     </div>
 
 
-
-    <!-- INFO -->
 
     <div
         class="selected-info"
@@ -1658,11 +1247,9 @@ footer strong{
 
     <div class="cart-header">
 
-
         <h2>
             YOUR CART
         </h2>
-
 
         <button
             class="close-cart"
@@ -1670,7 +1257,6 @@ footer strong{
         >
             ×
         </button>
-
 
     </div>
 
@@ -1707,16 +1293,22 @@ footer strong{
 
     </div>
 
-
 </div>
 
 
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
     WIZYY SHOP — CS2 SKINS STORE
 
-    <br>
+    <div class="footer-fa">
+        فروشگاه تخصصی اسکین‌های Counter-Strike 2
+    </div>
+
     <br>
 
     Telegram:
@@ -1730,13 +1322,11 @@ footer strong{
 
 <script>
 
-
 /* =====================================================
    PRODUCTS
 ===================================================== */
 
 const products = [
-
 
     {
         name:"Redline",
@@ -1747,7 +1337,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Slate",
         weapon:"AK-47",
@@ -1756,7 +1345,6 @@ const products = [
         wear:"Field-Tested",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Neon Rider",
@@ -1767,7 +1355,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Temukau",
         weapon:"M4A4",
@@ -1776,7 +1363,6 @@ const products = [
         wear:"Field-Tested",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Desolate Space",
@@ -1787,7 +1373,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Printstream",
         weapon:"M4A1-S",
@@ -1796,7 +1381,6 @@ const products = [
         wear:"Minimal Wear",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Printstream",
@@ -1807,7 +1391,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Code Red",
         weapon:"Desert Eagle",
@@ -1816,7 +1399,6 @@ const products = [
         wear:"Battle-Scarred",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Printstream",
@@ -1827,7 +1409,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Cortex",
         weapon:"USP-S",
@@ -1836,7 +1417,6 @@ const products = [
         wear:"Minimal Wear",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Water Elemental",
@@ -1847,7 +1427,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Asiimov",
         weapon:"AWP",
@@ -1856,7 +1435,6 @@ const products = [
         wear:"Field-Tested",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Wildfire",
@@ -1867,7 +1445,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Starlight Protector",
         weapon:"MP9",
@@ -1876,7 +1453,6 @@ const products = [
         wear:"Field-Tested",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Neon Rider",
@@ -1887,7 +1463,6 @@ const products = [
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
 
-
     {
         name:"Doppler",
         weapon:"Karambit",
@@ -1896,7 +1471,6 @@ const products = [
         wear:"Factory New",
         image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
     },
-
 
     {
         name:"Doppler",
@@ -1910,13 +1484,11 @@ const products = [
 ];
 
 
-
 /* =====================================================
    WEAPONS
 ===================================================== */
 
 const weaponsByCategory = {
-
 
     Pistols:[
         "Desert Eagle",
@@ -1930,7 +1502,6 @@ const weaponsByCategory = {
         "R8 Revolver"
     ],
 
-
     Rifles:[
         "AK-47",
         "M4A4",
@@ -1940,7 +1511,6 @@ const weaponsByCategory = {
         "AUG",
         "SG 553"
     ],
-
 
     SMGs:[
         "MP9",
@@ -1952,14 +1522,12 @@ const weaponsByCategory = {
         "PP-Bizon"
     ],
 
-
     Snipers:[
         "AWP",
         "SSG 08",
         "SCAR-20",
         "G3SG1"
     ],
-
 
     Shotguns:[
         "Nova",
@@ -1968,12 +1536,10 @@ const weaponsByCategory = {
         "Sawed-Off"
     ],
 
-
     Machineguns:[
         "M249",
         "Negev"
     ],
-
 
     Knives:[
         "Karambit",
@@ -1989,22 +1555,9 @@ const weaponsByCategory = {
 };
 
 
-
 /* =====================================================
    STATE
 ===================================================== */
-
-
-/*
-   مهم:
-
-   در شروع سایت هیچ چیز انتخاب نیست.
-
-   currentCategory = null
-   selectedWeapon = null
-
-   بنابراین همه اسکین‌ها قاطی نمایش داده می‌شوند.
-*/
 
 let currentCategory = null;
 
@@ -2017,17 +1570,15 @@ let selectedWear = null;
 let cart = [];
 
 
-
 /* =====================================================
-   SELECT CATEGORY
+   CATEGORY
 ===================================================== */
 
-function selectCategory(category, element){
-
+function selectCategory(category,element){
 
     /*
-       اگر همان Category دوباره کلیک شد،
-       آن را Unselect می‌کنیم.
+       اگر دوباره همان Category کلیک شد:
+       فقط Category و Weapon Selection پاک می‌شود.
     */
 
     if(currentCategory === category){
@@ -2036,18 +1587,15 @@ function selectCategory(category, element){
 
         selectedWeapon = null;
 
-
-        document.querySelectorAll(".category")
+        document
+        .querySelectorAll(".category")
         .forEach(item=>{
-
             item.classList.remove("active");
-
         });
 
-
-        document.getElementById("weaponBox")
+        document
+        .getElementById("weaponBox")
         .classList.remove("show");
-
 
         renderProducts();
 
@@ -2064,30 +1612,23 @@ function selectCategory(category, element){
     selectedWeapon = null;
 
 
-    /*
-       Active category
-    */
-
-    document.querySelectorAll(".category")
+    document
+    .querySelectorAll(".category")
     .forEach(item=>{
-
         item.classList.remove("active");
-
     });
 
 
     element.classList.add("active");
 
 
-    /*
-       نمایش گان‌ها
-    */
-
-    document.getElementById("weaponBox")
+    document
+    .getElementById("weaponBox")
     .classList.add("show");
 
 
-    document.getElementById("weaponTitle")
+    document
+    .getElementById("weaponTitle")
     .textContent =
         category.toUpperCase() +
         " WEAPONS";
@@ -2095,16 +1636,11 @@ function selectCategory(category, element){
 
     renderWeapons();
 
-
-    /*
-       چون هنوز گان خاصی انتخاب نشده،
-       همه اسکین‌ها قاطی هستند.
-    */
-
     renderProducts();
 
 
-    document.getElementById("weaponBox")
+    document
+    .getElementById("weaponBox")
     .scrollIntoView({
         behavior:"smooth",
         block:"center"
@@ -2113,56 +1649,46 @@ function selectCategory(category, element){
 }
 
 
-
 /* =====================================================
-   RENDER WEAPONS
+   WEAPON LIST
 ===================================================== */
 
 function renderWeapons(){
 
-
     const container =
         document.getElementById("weapons");
-
 
     container.innerHTML = "";
 
 
     if(!currentCategory){
-
         return;
-
     }
 
 
-    const weaponList =
+    const list =
         weaponsByCategory[currentCategory] || [];
 
 
-    weaponList.forEach(weapon=>{
-
+    list.forEach(weapon=>{
 
         const button =
             document.createElement("button");
 
 
-        button.className =
-            "weapon";
+        button.className = "weapon";
+
+        button.textContent = weapon;
 
 
-        button.textContent =
-            weapon;
+        button.onclick = function(){
 
+            selectWeapon(
+                weapon,
+                this
+            );
 
-        button.onclick =
-            function(){
-
-                selectWeapon(
-                    weapon,
-                    this
-                );
-
-            };
+        };
 
 
         container.appendChild(button);
@@ -2172,9 +1698,8 @@ function renderWeapons(){
 }
 
 
-
 /* =====================================================
-   SELECT / UNSELECT WEAPON
+   WEAPON SELECT / UNSELECT
 ===================================================== */
 
 function selectWeapon(
@@ -2182,69 +1707,47 @@ function selectWeapon(
     element
 ){
 
-
     /*
-       اگر روی همان گان دوباره کلیک شود:
-       UNSELECT
+       اگر دوباره روی همان گان کلیک شود:
+       فقط خود گان Unselect می‌شود.
+
+       Category همچنان فعال می‌ماند.
+       Weapon Box هم بسته نمی‌شود.
     */
 
     if(selectedWeapon === weapon){
 
-
         selectedWeapon = null;
 
-
-        element.classList.remove(
-            "active"
-        );
-
+        element.classList.remove("active");
 
     }
-
-
-    /*
-       اگر گان جدید انتخاب شود
-    */
 
     else{
 
-
         selectedWeapon = weapon;
 
-
-        document.querySelectorAll(".weapon")
+        document
+        .querySelectorAll(".weapon")
         .forEach(item=>{
-
-            item.classList.remove(
-                "active"
-            );
-
+            item.classList.remove("active");
         });
 
-
-        element.classList.add(
-            "active"
-        );
+        element.classList.add("active");
 
     }
 
-
-    /*
-       نمایش محصولات
-    */
 
     renderProducts();
 
 }
 
 
-
 /* =====================================================
-   RENDER PRODUCTS
+   PRODUCTS
 ===================================================== */
 
 function renderProducts(){
-
 
     const container =
         document.getElementById("products");
@@ -2270,7 +1773,6 @@ function renderProducts(){
         .value;
 
 
-
     let result =
         products.filter(product=>{
 
@@ -2280,7 +1782,7 @@ function renderProducts(){
                همه اسکین‌ها
 
                اگر گان انتخاب شده:
-               فقط همان گان
+               فقط اسکین همان گان
             */
 
             const weaponMatch =
@@ -2289,27 +1791,20 @@ function renderProducts(){
                 : product.weapon === selectedWeapon;
 
 
-
             const searchMatch =
-
                 (
                     product.name +
                     " " +
                     product.weapon
                 )
                 .toLowerCase()
-                .includes(
-                    searchValue
-                );
-
+                .includes(searchValue);
 
 
             const wearMatch =
-
                 wearValue === ""
                 ? true
                 : product.wear === wearValue;
-
 
 
             return (
@@ -2321,16 +1816,13 @@ function renderProducts(){
         });
 
 
-
-    /* =================================================
-       SORT
-    ================================================= */
+    /* SORT */
 
     if(sortValue === "low"){
 
         result.sort(
             (a,b)=>
-                a.price - b.price
+                a.price-b.price
         );
 
     }
@@ -2340,7 +1832,7 @@ function renderProducts(){
 
         result.sort(
             (a,b)=>
-                b.price - a.price
+                b.price-a.price
         );
 
     }
@@ -2350,18 +1842,13 @@ function renderProducts(){
 
         result.sort(
             (a,b)=>
-                a.name.localeCompare(
-                    b.name
-                )
+                a.name.localeCompare(b.name)
         );
 
     }
 
 
-
-    /* =================================================
-       INFO
-    ================================================= */
+    /* INFO */
 
     const info =
         document.getElementById(
@@ -2393,13 +1880,7 @@ function renderProducts(){
     }
 
 
-
-    /* =================================================
-       PRODUCTS HTML
-    ================================================= */
-
     container.innerHTML = "";
-
 
 
     if(result.length === 0){
@@ -2407,9 +1888,7 @@ function renderProducts(){
         container.innerHTML = `
 
             <div class="empty">
-
                 No skins found.
-
             </div>
 
         `;
@@ -2419,75 +1898,46 @@ function renderProducts(){
     }
 
 
-
     result.forEach(product=>{
 
-
         const card =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
-        card.className =
-            "product";
+        card.className = "product";
 
 
         card.innerHTML = `
 
-
             <div class="wear-tag">
-
                 ${product.wear}
-
             </div>
-
-
 
             <div class="product-image">
 
                 <img
-
                     src="${product.image}"
-
-                    alt="
-                        ${product.weapon}
-                        ${product.name}
-                    "
-
+                    alt="${product.weapon} ${product.name}"
                     loading="lazy"
-
                 >
 
             </div>
 
-
-
             <div class="product-info">
 
-
                 <div class="weapon-name">
-
                     ${product.weapon}
-
                 </div>
-
 
                 <div class="product-name">
-
                     ${product.name}
-
                 </div>
-
 
                 <div class="product-bottom">
 
-
                     <div class="price">
 
-                        ${formatPrice(
-                            product.price
-                        )}
+                        ${formatPrice(product.price)}
 
                         <small>
                             T
@@ -2495,71 +1945,53 @@ function renderProducts(){
 
                     </div>
 
-
-
                     <button
-
                         class="buy"
-
                         onclick="
                             openProduct(
                                 ${products.indexOf(product)}
                             )
                         "
-
                     >
-
                         BUY
-
                     </button>
 
-
                 </div>
-
 
             </div>
 
         `;
 
 
-        container.appendChild(
-            card
-        );
+        container.appendChild(card);
 
     });
 
 }
 
 
-
 /* =====================================================
-   FORMAT PRICE
+   PRICE
 ===================================================== */
 
 function formatPrice(price){
 
-    return price.toLocaleString(
-        "en-US"
-    );
+    return price.toLocaleString("en-US");
 
 }
 
 
-
 /* =====================================================
-   OPEN PRODUCT
+   PRODUCT MODAL
 ===================================================== */
 
 function openProduct(index){
 
-
     selectedProduct =
         products[index];
 
-
     selectedWear =
         selectedProduct.wear;
-
 
 
     document.getElementById(
@@ -2568,12 +2000,10 @@ function openProduct(index){
         selectedProduct.image;
 
 
-
     document.getElementById(
         "modalName"
     ).textContent =
         selectedProduct.name;
-
 
 
     document.getElementById(
@@ -2582,30 +2012,20 @@ function openProduct(index){
         selectedProduct.weapon;
 
 
-
     document.getElementById(
         "modalPrice"
     ).textContent =
-
         formatPrice(
             selectedProduct.price
         ) +
-
         " Toman";
 
 
-
     document
-    .querySelectorAll(
-        ".wear-option"
-    )
+    .querySelectorAll(".wear-option")
     .forEach(button=>{
 
-
-        button.classList.remove(
-            "active"
-        );
-
+        button.classList.remove("active");
 
         if(
             button.textContent.trim()
@@ -2613,28 +2033,22 @@ function openProduct(index){
             selectedWear
         ){
 
-            button.classList.add(
-                "active"
-            );
+            button.classList.add("active");
 
         }
 
     });
 
 
-
-    document.getElementById(
-        "modal"
-    ).classList.add(
-        "show"
-    );
+    document
+    .getElementById("modal")
+    .classList.add("show");
 
 }
 
 
-
 /* =====================================================
-   SELECT WEAR
+   WEAR
 ===================================================== */
 
 function selectWear(
@@ -2642,30 +2056,19 @@ function selectWear(
     element
 ){
 
-
-    selectedWear =
-        wear;
+    selectedWear = wear;
 
 
     document
-    .querySelectorAll(
-        ".wear-option"
-    )
+    .querySelectorAll(".wear-option")
     .forEach(button=>{
-
-        button.classList.remove(
-            "active"
-        );
-
+        button.classList.remove("active");
     });
 
 
-    element.classList.add(
-        "active"
-    );
+    element.classList.add("active");
 
 }
-
 
 
 /* =====================================================
@@ -2676,44 +2079,33 @@ function closeModal(){
 
     document
     .getElementById("modal")
-    .classList.remove(
-        "show"
-    );
+    .classList.remove("show");
 
 }
 
 
-
 /* =====================================================
-   ADD TO CART
+   CART
 ===================================================== */
 
 function addToCart(){
 
-
     if(!selectedProduct){
-
         return;
-
     }
 
 
     cart.push({
 
-        name:
-            selectedProduct.name,
+        name:selectedProduct.name,
 
-        weapon:
-            selectedProduct.weapon,
+        weapon:selectedProduct.weapon,
 
-        price:
-            selectedProduct.price,
+        price:selectedProduct.price,
 
-        wear:
-            selectedWear,
+        wear:selectedWear,
 
-        image:
-            selectedProduct.image
+        image:selectedProduct.image
 
     });
 
@@ -2727,13 +2119,7 @@ function addToCart(){
 }
 
 
-
-/* =====================================================
-   UPDATE CART
-===================================================== */
-
 function updateCart(){
-
 
     const container =
         document.getElementById(
@@ -2747,20 +2133,14 @@ function updateCart(){
     let total = 0;
 
 
-
     cart.forEach(
         (item,index)=>{
 
-
-            total +=
-                item.price;
-
+            total += item.price;
 
 
             const div =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             div.className =
@@ -2769,74 +2149,43 @@ function updateCart(){
 
             div.innerHTML = `
 
-
                 <img
-
                     src="${item.image}"
-
                     alt="${item.weapon}"
-
                 >
-
-
 
                 <div class="cart-item-info">
 
-
                     <strong>
-
-                        ${item.weapon}
-                        ${item.name}
-
+                        ${item.weapon} ${item.name}
                     </strong>
 
-
                     <span>
-
                         ${item.wear}
-
                     </span>
-
 
                     <span>
-
-                        ${formatPrice(
-                            item.price
-                        )} T
-
+                        ${formatPrice(item.price)} T
                     </span>
-
 
                 </div>
 
-
-
                 <button
-
                     class="remove-item"
-
                     onclick="
-                        removeCartItem(
-                            ${index}
-                        )
+                        removeCartItem(${index})
                     "
-
                 >
-
                     ×
-
                 </button>
 
             `;
 
 
-            container.appendChild(
-                div
-            );
+            container.appendChild(div);
 
         }
     );
-
 
 
     document.getElementById(
@@ -2845,17 +2194,11 @@ function updateCart(){
         cart.length;
 
 
-
     document.getElementById(
         "cartTotal"
     ).textContent =
-
-        formatPrice(
-            total
-        ) +
-
+        formatPrice(total) +
         " T";
-
 
 
     if(cart.length === 0){
@@ -2867,9 +2210,7 @@ function updateCart(){
                 text-align:center;
                 padding:40px 10px;
             ">
-
                 Your cart is empty.
-
             </div>
 
         `;
@@ -2879,58 +2220,31 @@ function updateCart(){
 }
 
 
-
-/* =====================================================
-   REMOVE CART ITEM
-===================================================== */
-
 function removeCartItem(index){
 
-    cart.splice(
-        index,
-        1
-    );
+    cart.splice(index,1);
 
     updateCart();
 
 }
 
 
-
-/* =====================================================
-   OPEN CART
-===================================================== */
-
 function openCart(){
 
     document
-    .getElementById(
-        "cartPanel"
-    )
-    .classList.add(
-        "show"
-    );
+    .getElementById("cartPanel")
+    .classList.add("show");
 
 }
 
-
-
-/* =====================================================
-   CLOSE CART
-===================================================== */
 
 function closeCart(){
 
     document
-    .getElementById(
-        "cartPanel"
-    )
-    .classList.remove(
-        "show"
-    );
+    .getElementById("cartPanel")
+    .classList.remove("show");
 
 }
-
 
 
 /* =====================================================
@@ -2939,94 +2253,58 @@ function closeCart(){
 
 function sendTelegram(){
 
-
     if(cart.length === 0){
 
-        alert(
-            "Your cart is empty."
-        );
+        alert("Your cart is empty.");
 
         return;
 
     }
 
 
-
     let message =
-
         "Hello WIZYY SHOP,%0A%0A" +
-
         "I want to order:%0A%0A";
-
 
 
     cart.forEach(
         (item,index)=>{
 
-
             message +=
-
                 `${index+1}. ` +
-
                 `${item.weapon} ${item.name}` +
-
                 `%0A` +
-
                 `Wear: ${item.wear}` +
-
                 `%0A` +
-
-                `Price: ${
-                    formatPrice(
-                        item.price
-                    )
-                } T` +
-
+                `Price: ${formatPrice(item.price)} T` +
                 `%0A%0A`;
 
         }
     );
 
 
-
     let total = 0;
 
 
-
-    cart.forEach(
-        item=>{
-
-            total +=
-                item.price;
-
-        }
-    );
-
+    cart.forEach(item=>{
+        total += item.price;
+    });
 
 
     message +=
-
-        `TOTAL: ${
-            formatPrice(total)
-        } T`;
-
+        `TOTAL: ${formatPrice(total)} T`;
 
 
     window.open(
-
-        "https://t.me/WizyyShop?text=" +
-        message,
-
+        "https://t.me/WizyyShop?text=" + message,
         "_blank"
-
     );
 
 }
 
 
-
 /* =====================================================
-   CLOSE MODAL WHEN CLICK OUTSIDE
+   CLOSE MODAL BY BACKGROUND
 ===================================================== */
 
 document
@@ -3036,29 +2314,16 @@ document
     function(e){
 
         if(e.target === this){
-
             closeModal();
-
         }
 
     }
 );
 
 
-
 /* =====================================================
    INITIAL STATE
 ===================================================== */
-
-
-/*
-   اول ورود:
-
-   Category = هیچ
-   Weapon = هیچ
-   Weapon Box = مخفی
-   همه اسکین‌ها = نمایش
-*/
 
 currentCategory = null;
 
@@ -3067,9 +2332,7 @@ selectedWeapon = null;
 
 document
 .getElementById("weaponBox")
-.classList.remove(
-    "show"
-);
+.classList.remove("show");
 
 
 renderProducts();
