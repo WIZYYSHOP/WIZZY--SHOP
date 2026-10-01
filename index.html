@@ -1,1 +1,889 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WIZYY SHOP | CS2 Skins</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Tahoma, sans-serif;
+        }
+
+        body {
+            background: #070707;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 75px;
+            background: rgba(7, 7, 7, 0.94);
+            border-bottom: 1px solid #241010;
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #e50914;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 15px;
+            transition: .25s;
+        }
+
+        nav a:hover {
+            color: #ff2020;
+        }
+
+        .cart {
+            position: relative;
+            border: 1px solid #401414;
+            background: #120909;
+            padding: 11px 17px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .cart:hover {
+            border-color: #e50914;
+            box-shadow: 0 0 20px rgba(229,9,20,.25);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: #e50914;
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 390px;
+            display: flex;
+            align-items: center;
+            padding: 60px 8%;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 80% 50%, rgba(229,9,20,.25), transparent 35%),
+                linear-gradient(110deg, #070707, #110707);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(229,9,20,.15);
+            border-radius: 50%;
+            left: -180px;
+            top: -100px;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            color: #ff3a3a;
+            border: 1px solid #541414;
+            background: #160909;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 75px);
+            line-height: .95;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #e50914;
+            text-shadow: 0 0 35px rgba(229,9,20,.35);
+        }
+
+        .hero p {
+            color: #999;
+            font-size: 17px;
+            line-height: 1.9;
+            max-width: 580px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            margin-top: 28px;
+            background: #e50914;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: .25s;
+        }
+
+        .hero-btn:hover {
+            background: #ff2020;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(229,9,20,.25);
+        }
+
+        /* SHOP */
+        .shop {
+            padding: 55px 6%;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+        }
+
+        .section-title h2 span {
+            color: #e50914;
+        }
+
+        .search {
+            width: 280px;
+            background: #101010;
+            border: 1px solid #2a2a2a;
+            color: white;
+            outline: none;
+            padding: 13px 17px;
+            border-radius: 9px;
+        }
+
+        .search:focus {
+            border-color: #e50914;
+        }
+
+        /* FILTER */
+        .filters {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .filter {
+            flex-shrink: 0;
+            background: #101010;
+            border: 1px solid #292929;
+            color: #aaa;
+            padding: 10px 17px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .filter:hover,
+        .filter.active {
+            color: white;
+            background: #1b0808;
+            border-color: #e50914;
+        }
+
+        /* PRODUCTS */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background: linear-gradient(145deg, #111, #090909);
+            border: 1px solid #222;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: .3s;
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-7px);
+            border-color: #701217;
+            box-shadow: 0 15px 40px rgba(0,0,0,.5);
+        }
+
+        .skin-image {
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle, rgba(229,9,20,.13), transparent 60%),
+                #0b0b0b;
+            padding: 20px;
+        }
+
+        .skin-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: .35s;
+        }
+
+        .product:hover .skin-image img {
+            transform: scale(1.08) rotate(-2deg);
+        }
+
+        .info {
+            padding: 17px;
+        }
+
+        .weapon {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .name {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .wear {
+            display: inline-block;
+            color: #bbb;
+            background: #171717;
+            border: 1px solid #292929;
+            border-radius: 6px;
+            padding: 5px 8px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .price {
+            font-size: 17px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .price small {
+            color: #777;
+            font-size: 10px;
+        }
+
+        .buy {
+            border: 0;
+            background: #e50914;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .buy:hover {
+            background: #ff2020;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 50px;
+            padding: 40px 6%;
+            background: #090909;
+            border-top: 1px solid #211010;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer h2 span {
+            color: #e50914;
+        }
+
+        footer p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .telegram {
+            display: inline-block;
+            margin-top: 18px;
+            color: white;
+            background: #171717;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 4%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 6%;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .skin-image {
+                height: 140px;
+            }
+
+            .info {
+                padding: 12px;
+            }
+
+            .name {
+                font-size: 14px;
+            }
+
+            .price {
+                font-size: 13px;
+            }
+
+            .buy {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        WIZYY <span>SHOP</span>
+    </div>
+
+    <nav>
+        <a href="#">خانه</a>
+        <a href="#shop">اسکین‌ها</a>
+        <a href="#contact">ارتباط با ما</a>
+    </nav>
+
+    <div class="cart" onclick="showCart()">
+        سبد خرید
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            CS2 SKIN MARKET
+        </div>
+
+        <h1>
+            WIZYY<br>
+            <span>SHOP</span>
+        </h1>
+
+        <p>
+            فروش اسکین‌های CS2 با طراحی مدرن، قیمت مناسب
+            و تجربه‌ای متفاوت برای بازیکنان Counter-Strike 2.
+        </p>
+
+        <a href="#shop" class="hero-btn">
+            مشاهده اسکین‌ها
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="shop" id="shop">
+
+    <div class="section-title">
+
+        <h2>
+            اسکین‌های <span>محبوب</span>
+        </h2>
+
+        <input
+            class="search"
+            id="search"
+            type="text"
+            placeholder="جستجوی اسکین..."
+            oninput="searchProducts()"
+        >
+
+    </div>
+
+
+    <div class="filters">
+
+        <button class="filter active" onclick="filterProducts('all', this)">
+            همه
+        </button>
+
+        <button class="filter" onclick="filterProducts('rifle', this)">
+            Rifle
+        </button>
+
+        <button class="filter" onclick="filterProducts('pistol', this)">
+            Pistol
+        </button>
+
+        <button class="filter" onclick="filterProducts('knife', this)">
+            Knife
+        </button>
+
+        <button class="filter" onclick="filterProducts('awp', this)">
+            AWP
+        </button>
+
+    </div>
+
+
+    <div class="products" id="products">
+
+
+        <!-- AK -->
+
+        <div class="product" data-category="rifle" data-name="AK-47 Redline">
+
+            <div class="skin-image">
+                <img src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2500311387/330x192" alt="AK-47 Redline">
+            </div>
+
+            <div class="info">
+
+                <div class="weapon">
+                    AK-47
+                </div>
+
+                <div class="name">
+                    Redline
+                </div>
+
+                <div class="wear">
+                    Field-Tested
+                </div>
+
+                <div class="bottom">
+
+                    <div class="price">
+                        85,000
+                        <small>تومان</small>
+                    </div>
+
+                    <button class="buy" onclick="addCart('AK-47 Redline',85000)">
+                        خرید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AWP -->
+
+        <div class="product" data-category="awp" data-name="AWP Asiimov">
+
+            <div class="skin-image">
+                <img src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2535910706/330x192" alt="AWP Asiimov">
+            </div>
+
+            <div class="info">
+
+                <div class="weapon">
+                    AWP
+                </div>
+
+                <div class="name">
+                    Asiimov
+                </div>
+
+                <div class="wear">
+                    Field-Tested
+                </div>
+
+                <div class="bottom">
+
+                    <div class="price">
+                        650,000
+                        <small>تومان</small>
+                    </div>
+
+                    <button class="buy" onclick="addCart('AWP Asiimov',650000)">
+                        خرید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- M4 -->
+
+        <div class="product" data-category="rifle" data-name="M4A4 Temukau">
+
+            <div class="skin-image">
+                <img src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/3158052675/330x192" alt="M4A4 Temukau">
+            </div>
+
+            <div class="info">
+
+                <div class="weapon">
+                    M4A4
+                </div>
+
+                <div class="name">
+                    Temukau
+                </div>
+
+                <div class="wear">
+                    Minimal Wear
+                </div>
+
+                <div class="bottom">
+
+                    <div class="price">
+                        210,000
+                        <small>تومان</small>
+                    </div>
+
+                    <button class="buy" onclick="addCart('M4A4 Temukau',210000)">
+                        خرید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- USP -->
+
+        <div class="product" data-category="pistol" data-name="USP-S Printstream">
+
+            <div class="skin-image">
+                <img src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/3158052858/330x192" alt="USP-S Printstream">
+            </div>
+
+            <div class="info">
+
+                <div class="weapon">
+                    USP-S
+                </div>
+
+                <div class="name">
+                    Printstream
+                </div>
+
+                <div class="wear">
+                    Factory New
+                </div>
+
+                <div class="bottom">
+
+                    <div class="price">
+                        300,000
+                        <small>تومان</small>
+                    </div>
+
+                    <button class="buy" onclick="addCart('USP-S Printstream',300000)">
+                        خرید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Glock -->
+
+        <div class="product" data-category="pistol" data-name="Glock-18 Water Elemental">
+
+            <div class="skin-image">
+                <img src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2500311411/330x192" alt="Glock-18 Water Elemental">
+            </div>
+
+            <div class="info">
+
+                <div class="weapon">
+                    Glock-18
+                </div>
+
+                <div class="name">
+                    Water Elemental
+                </div>
+
+                <div class="wear">
+                    Minimal Wear
+                </div>
+
+                <div class="bottom">
+
+                    <div class="price">
+                        95,000
+                        <small>تومان</small>
+                    </div>
+
+                    <button class="buy" onclick="addCart('Glock-18 Water Elemental',95000)">
+                        خرید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Knife -->
+
+        <div class="product" data-category="knife" data-name="Karambit Doppler">
+
+            <div class="skin-image">
+                <img src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2500311481/330x192" alt="Karambit Doppler">
+            </div>
+
+            <div class="info">
+
+                <div class="weapon">
+                    Karambit
+                </div>
+
+                <div class="name">
+                    Doppler
+                </div>
+
+                <div class="wear">
+                    Factory New
+                </div>
+
+                <div class="bottom">
+
+                    <div class="price">
+                        8,500,000
+                        <small>تومان</small>
+                    </div>
+
+                    <button class="buy" onclick="addCart('Karambit Doppler',8500000)">
+                        خرید
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer id="contact">
+
+    <h2>
+        WIZYY <span>SHOP</span>
+    </h2>
+
+    <p>
+        فروشگاه اسکین Counter-Strike 2
+    </p>
+
+    <a class="telegram" href="https://t.me/" target="_blank">
+        ارتباط در تلگرام
+    </a>
+
+    <p>
+        © 2026 WIZYY SHOP
+    </p>
+
+</footer>
+
+
+<script>
+
+    let cart = [];
+
+    function addCart(name, price) {
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        document.getElementById("cartCount").innerText = cart.length;
+
+        alert(name + " به سبد خرید اضافه شد.");
+
+    }
+
+
+    function showCart() {
+
+        if (cart.length === 0) {
+            alert("سبد خرید خالی است.");
+            return;
+        }
+
+        let text = "سبد خرید WIZYY SHOP\n\n";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+
+            text += (index + 1) + ". " + item.name +
+                    " - " + item.price.toLocaleString() +
+                    " تومان\n";
+
+            total += item.price;
+
+        });
+
+        text += "\nمجموع: " + total.toLocaleString() + " تومان";
+
+        alert(text);
+
+    }
+
+
+    function filterProducts(category, button) {
+
+        document.querySelectorAll(".filter").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        document.querySelectorAll(".product").forEach(product => {
+
+            if (category === "all" ||
+                product.dataset.category === category) {
+
+                product.style.display = "";
+
+            } else {
+
+                product.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    function searchProducts() {
+
+        let query =
+            document.getElementById("search")
+            .value
+            .toLowerCase();
+
+        document.querySelectorAll(".product").forEach(product => {
+
+            let name =
+                product.dataset.name.toLowerCase();
+
+            if (name.includes(query)) {
+                product.style.display = "";
+            } else {
+                product.style.display = "none";
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>
+```
 
