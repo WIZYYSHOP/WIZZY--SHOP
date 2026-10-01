@@ -4654,3 +4654,171 @@ generateCaptcha();
 
 </body>
 </html>
+<!-- WIZZY SUPPORT -->
+
+<button class="wizzy-support-btn" onclick="openSupportBox()">
+    پشتیبانی
+</button>
+
+
+<div class="wizzy-support-bg" id="supportBox">
+
+<div class="wizzy-support-panel">
+
+<button class="wizzy-close" onclick="closeSupportBox()">×</button>
+
+<h2>WIZZY SHOP</h2>
+
+<p>مشکل خود را انتخاب کنید:</p>
+
+
+<button onclick="showAnswer(1)">
+من وقتی خرید زدم تا کی میرسه دستم؟
+</button>
+
+
+<button onclick="showAnswer(2)">
+تخفیف از کجا بگیریم؟
+</button>
+
+
+<button onclick="openTelegram()">
+ارتباط با پشتیبانی
+</button>
+
+
+<div id="supportAnswer"></div>
+
+
+</div>
+
+</div>
+
+
+<style>
+
+.wizzy-support-btn{
+position:fixed;
+right:25px;
+bottom:25px;
+background:red;
+color:white;
+border:2px solid white;
+padding:15px 25px;
+border-radius:50px;
+cursor:pointer;
+font-size:16px;
+z-index:99999;
+box-shadow:0 0 15px red,0 0 30px white;
+}
+
+
+.wizzy-support-bg{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+align-items:center;
+justify-content:center;
+z-index:999999;
+}
+
+
+.wizzy-support-panel{
+position:relative;
+width:360px;
+background:#0b0b0b;
+color:white;
+border:2px solid red;
+border-radius:20px;
+padding:30px;
+text-align:center;
+box-shadow:0 0 20px red,0 0 40px white;
+}
+
+
+.wizzy-support-panel h2{
+color:red;
+}
+
+
+.wizzy-support-panel button{
+width:100%;
+margin:8px 0;
+padding:14px;
+background:#151515;
+color:white;
+border:1px solid red;
+border-radius:12px;
+cursor:pointer;
+}
+
+
+.wizzy-support-panel button:hover{
+background:red;
+}
+
+
+.wizzy-close{
+position:absolute;
+right:10px;
+top:10px;
+width:35px!important;
+height:35px;
+background:red!important;
+font-size:22px;
+}
+
+
+#supportAnswer{
+margin-top:15px;
+padding:15px;
+background:#111;
+border-radius:10px;
+line-height:1.8;
+}
+
+</style>
+
+
+<script>
+
+function openSupportBox(){
+document.getElementById("supportBox").style.display="flex";
+}
+
+
+function closeSupportBox(){
+document.getElementById("supportBox").style.display="none";
+}
+
+
+function showAnswer(num){
+
+let text="";
+
+if(num==1){
+text="وقتی شما خرید زدید اتوماتیک پیامو برای ما میفرستین و ما هر چه زود تر برای شما ترید میکنیم و خبرتون میکنیم.";
+}
+
+
+if(num==2){
+text="بخش تخفیف ها بزودی اضافه میشه ....";
+}
+
+
+document.getElementById("supportAnswer").innerHTML=text;
+
+}
+
+
+function openTelegram(){
+
+window.open(
+"https://t.me/WIZZY_SHOP2",
+"_blank"
+);
+
+}
+
+</script>
