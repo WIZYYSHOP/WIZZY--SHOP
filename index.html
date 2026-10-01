@@ -31,7 +31,7 @@ body:before{
     z-index:-1;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 header{
     position:sticky;
@@ -79,7 +79,7 @@ header{
     letter-spacing:1px;
 }
 
-/* CART */
+/* ================= CART ================= */
 
 .cart-button{
     position:absolute;
@@ -113,7 +113,7 @@ header{
     font-size:11px;
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
 
 main{
     width:95%;
@@ -121,7 +121,7 @@ main{
     margin:30px auto 60px;
 }
 
-/* CONTROLS */
+/* ================= CONTROLS ================= */
 
 .controls{
     display:flex;
@@ -157,7 +157,101 @@ select:focus{
     width:190px;
 }
 
-/* CATEGORY */
+/* ================= PRICE RANGE ================= */
+
+.price-filter{
+    width:100%;
+    background:#101010;
+    border:1px solid #292929;
+    border-radius:9px;
+    padding:14px 17px 18px;
+    margin-bottom:25px;
+}
+
+.price-filter-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+    font-size:11px;
+    font-weight:bold;
+    color:#aaa;
+}
+
+#priceRangeText{
+    color:#e00000;
+    font-size:11px;
+}
+
+.range-container{
+    position:relative;
+    width:100%;
+    height:25px;
+}
+
+.range-track,
+.range-progress{
+    position:absolute;
+    top:10px;
+    left:0;
+    width:100%;
+    height:5px;
+    border-radius:10px;
+}
+
+.range-track{
+    background:#292929;
+}
+
+.range-progress{
+    background:#d00000;
+}
+
+.range-container input[type="range"]{
+    position:absolute;
+    width:100%;
+    height:5px;
+    top:10px;
+    left:0;
+    margin:0;
+    pointer-events:none;
+    appearance:none;
+    background:none;
+    outline:none;
+}
+
+.range-container input[type="range"]::-webkit-slider-thumb{
+    appearance:none;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#e00000;
+    border:3px solid #0b0b0b;
+    box-shadow:0 0 0 1px #e00000;
+    cursor:pointer;
+    pointer-events:auto;
+}
+
+.range-container input[type="range"]::-moz-range-thumb{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#e00000;
+    border:3px solid #0b0b0b;
+    box-shadow:0 0 0 1px #e00000;
+    cursor:pointer;
+    pointer-events:auto;
+}
+
+.range-container input[type="range"]::-webkit-slider-runnable-track{
+    background:transparent;
+}
+
+.range-container input[type="range"]::-moz-range-track{
+    background:transparent;
+}
+
+/* ================= CATEGORY ================= */
 
 .section-title{
     font-size:13px;
@@ -199,7 +293,7 @@ select:focus{
     box-shadow:0 0 18px rgba(220,0,0,.16);
 }
 
-/* WEAPON / ACCESSORY BOX */
+/* ================= WEAPON BOX ================= */
 
 .weapon-box{
     display:none;
@@ -220,6 +314,7 @@ select:focus{
         opacity:0;
         transform:translateY(-5px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -262,7 +357,7 @@ select:focus{
     color:#fff;
 }
 
-/* PRODUCTS */
+/* ================= PRODUCTS ================= */
 
 .products{
     display:grid;
@@ -361,7 +456,7 @@ select:focus{
     border-radius:10px;
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
 
 .modal{
     display:none;
@@ -395,6 +490,7 @@ select:focus{
         opacity:0;
         transform:scale(.96);
     }
+
     to{
         opacity:1;
         transform:scale(1);
@@ -494,7 +590,7 @@ select:focus{
     border:1px solid #333!important;
 }
 
-/* CART MODAL */
+/* ================= CART ================= */
 
 .cart-items{
     max-height:350px;
@@ -579,7 +675,7 @@ select:focus{
     padding:45px 10px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 footer{
     border-top:1px solid #1e1e1e;
@@ -617,7 +713,7 @@ footer{
     color:#ff2222;
 }
 
-/* RESPONSIVE */
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
@@ -676,16 +772,29 @@ footer{
         padding:7px 9px;
         font-size:9px;
     }
+
+    .price-filter-top{
+        font-size:10px;
+    }
+
+    #priceRangeText{
+        font-size:10px;
+    }
 }
 </style>
 </head>
 
+
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
+
     <div class="header-inner">
 
         <div class="logo-area">
+
             <div class="logo">
                 WIZYY <span>SHOP</span>
             </div>
@@ -693,50 +802,136 @@ footer{
             <div class="subtitle">
                 فروشگاه تخصصی اسکین‌های CS2
             </div>
+
         </div>
 
-        <button class="cart-button" onclick="openCart()">
+
+        <button
+            class="cart-button"
+            onclick="openCart()"
+        >
             CART
-            <span class="cart-count" id="cartCount">0</span>
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
+
         </button>
 
     </div>
+
 </header>
 
 
+<!-- ================= MAIN ================= -->
+
 <main>
 
-    <!-- SEARCH / FILTER -->
+    <!-- SEARCH / WEAR -->
 
     <div class="controls">
 
         <div class="search">
+
             <input
                 type="text"
                 id="search"
                 placeholder="Search skins, weapons or accessories..."
                 oninput="renderProducts()"
             >
+
         </div>
 
-        <div class="filter-box">
-            <select id="wearFilter" onchange="renderProducts()">
-                <option value="all">All Wear</option>
-                <option value="Factory New">Factory New</option>
-                <option value="Minimal Wear">Minimal Wear</option>
-                <option value="Field-Tested">Field-Tested</option>
-                <option value="Well-Worn">Well-Worn</option>
-                <option value="Battle-Scarred">Battle-Scarred</option>
-            </select>
-        </div>
 
         <div class="filter-box">
-            <select id="sortFilter" onchange="renderProducts()">
-                <option value="default">Sort: Default</option>
-                <option value="low">Price: Low to High</option>
-                <option value="high">Price: High to Low</option>
-                <option value="name">Name: A-Z</option>
+
+            <select
+                id="wearFilter"
+                onchange="renderProducts()"
+            >
+
+                <option value="all">
+                    All Wear
+                </option>
+
+                <option value="Factory New">
+                    Factory New
+                </option>
+
+                <option value="Minimal Wear">
+                    Minimal Wear
+                </option>
+
+                <option value="Field-Tested">
+                    Field-Tested
+                </option>
+
+                <option value="Well-Worn">
+                    Well-Worn
+                </option>
+
+                <option value="Battle-Scarred">
+                    Battle-Scarred
+                </option>
+
             </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRICE RANGE -->
+
+    <div class="price-filter">
+
+        <div class="price-filter-top">
+
+            <span>
+                PRICE RANGE
+            </span>
+
+            <span id="priceRangeText">
+                0 Toman - 5,200,000 Toman
+            </span>
+
+        </div>
+
+
+        <div class="range-container">
+
+            <div class="range-track"></div>
+
+            <div
+                class="range-progress"
+                id="rangeProgress"
+            ></div>
+
+
+            <input
+                type="range"
+                id="minPrice"
+                min="0"
+                max="5200000"
+                step="10000"
+                value="0"
+                oninput="updatePriceRange()"
+            >
+
+
+            <input
+                type="range"
+                id="maxPrice"
+                min="0"
+                max="5200000"
+                step="10000"
+                value="5200000"
+                oninput="updatePriceRange()"
+            >
+
         </div>
 
     </div>
@@ -748,6 +943,7 @@ footer{
         Categories
     </div>
 
+
     <div class="categories">
 
         <button
@@ -757,12 +953,14 @@ footer{
             PISTOLS
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Rifles',this)"
         >
             RIFLES
         </button>
+
 
         <button
             class="category"
@@ -771,12 +969,14 @@ footer{
             SMGs
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Snipers',this)"
         >
             SNIPERS
         </button>
+
 
         <button
             class="category"
@@ -785,6 +985,7 @@ footer{
             SHOTGUNS
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Machineguns',this)"
@@ -792,12 +993,14 @@ footer{
             MACHINEGUNS
         </button>
 
+
         <button
             class="category"
             onclick="selectCategory('Knives',this)"
         >
             KNIVES
         </button>
+
 
         <button
             class="category"
@@ -811,7 +1014,10 @@ footer{
 
     <!-- WEAPON / ACCESSORY SELECTOR -->
 
-    <div id="weaponBox" class="weapon-box">
+    <div
+        id="weaponBox"
+        class="weapon-box"
+    >
 
         <div
             id="weaponTitle"
@@ -819,6 +1025,7 @@ footer{
         >
             WEAPONS
         </div>
+
 
         <div
             id="weaponList"
@@ -830,10 +1037,15 @@ footer{
 
     <!-- PRODUCTS -->
 
-    <div id="products" class="products"></div>
+    <div
+        id="products"
+        class="products"
+    ></div>
 
 </main>
 
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -841,9 +1053,11 @@ footer{
         WIZYY <span>SHOP</span>
     </div>
 
+
     <div class="footer-text">
         فروشگاه تخصصی اسکین‌های CS2
     </div>
+
 
     <a
         class="telegram"
@@ -856,7 +1070,7 @@ footer{
 </footer>
 
 
-<!-- PRODUCT MODAL -->
+<!-- ================= PRODUCT MODAL ================= -->
 
 <div
     id="productModal"
@@ -872,6 +1086,7 @@ footer{
                 Product
             </h2>
 
+
             <button
                 class="close"
                 onclick="closeProduct()"
@@ -880,6 +1095,7 @@ footer{
             </button>
 
         </div>
+
 
         <div class="modal-image">
 
@@ -891,41 +1107,66 @@ footer{
 
         </div>
 
+
         <div class="modal-details">
 
             <div class="detail-row">
-                <span class="detail-label">Item</span>
+
+                <span class="detail-label">
+                    Item
+                </span>
+
                 <span
                     class="detail-value"
                     id="modalItem"
                 ></span>
+
             </div>
 
+
             <div class="detail-row">
-                <span class="detail-label">Type</span>
+
+                <span class="detail-label">
+                    Type
+                </span>
+
                 <span
                     class="detail-value"
                     id="modalType"
                 ></span>
+
             </div>
 
+
             <div class="detail-row">
-                <span class="detail-label">Wear</span>
+
+                <span class="detail-label">
+                    Wear
+                </span>
+
                 <span
                     class="detail-value"
                     id="modalWear"
                 ></span>
+
             </div>
 
+
             <div class="detail-row">
-                <span class="detail-label">Price</span>
+
+                <span class="detail-label">
+                    Price
+                </span>
+
                 <span
                     class="detail-value"
                     id="modalPrice"
                 ></span>
+
             </div>
 
         </div>
+
 
         <div class="modal-actions">
 
@@ -935,6 +1176,7 @@ footer{
             >
                 ADD TO CART
             </button>
+
 
             <button
                 class="cancel"
@@ -950,7 +1192,7 @@ footer{
 </div>
 
 
-<!-- CART MODAL -->
+<!-- ================= CART MODAL ================= -->
 
 <div
     id="cartModal"
@@ -966,6 +1208,7 @@ footer{
                 YOUR CART
             </h2>
 
+
             <button
                 class="close"
                 onclick="closeCart()"
@@ -975,16 +1218,19 @@ footer{
 
         </div>
 
+
         <div
             id="cartItems"
             class="cart-items"
         ></div>
+
 
         <div class="cart-total">
 
             <span>
                 TOTAL
             </span>
+
 
             <span
                 id="cartTotal"
@@ -994,6 +1240,7 @@ footer{
             </span>
 
         </div>
+
 
         <button
             class="finalize"
@@ -1014,8 +1261,11 @@ footer{
 ========================= */
 
 let selectedWeapons = [];
+
 let currentCategory = null;
+
 let currentProduct = null;
+
 let cart = [];
 
 
@@ -1025,7 +1275,7 @@ let cart = [];
 
 const categoryData = {
 
-    Pistols: [
+    Pistols:[
         "Desert Eagle",
         "USP-S",
         "Glock-18",
@@ -1037,7 +1287,7 @@ const categoryData = {
         "R8 Revolver"
     ],
 
-    Rifles: [
+    Rifles:[
         "AK-47",
         "M4A4",
         "M4A1-S",
@@ -1047,7 +1297,7 @@ const categoryData = {
         "SG 553"
     ],
 
-    SMGs: [
+    SMGs:[
         "MP9",
         "MAC-10",
         "MP7",
@@ -1057,26 +1307,26 @@ const categoryData = {
         "PP-Bizon"
     ],
 
-    Snipers: [
+    Snipers:[
         "AWP",
         "SSG 08",
         "SCAR-20",
         "G3SG1"
     ],
 
-    Shotguns: [
+    Shotguns:[
         "Nova",
         "XM1014",
         "MAG-7",
         "Sawed-Off"
     ],
 
-    Machineguns: [
+    Machineguns:[
         "M249",
         "Negev"
     ],
 
-    Knives: [
+    Knives:[
         "Karambit",
         "Butterfly Knife",
         "M9 Bayonet",
@@ -1087,7 +1337,7 @@ const categoryData = {
         "Huntsman Knife"
     ],
 
-    Accessories: [
+    Accessories:[
         "Music Kits",
         "Stickers",
         "Agent",
@@ -1104,15 +1354,7 @@ const categoryData = {
    PRODUCTS
 ========================= */
 
-/*
-    IMPORTANT:
-    image values below are sample Steam-style image placeholders.
-    Replace them with your actual per-item image URLs.
-*/
-
 const products = [
-
-    /* RIFLES */
 
     {
         id:1,
@@ -1174,9 +1416,6 @@ const products = [
         image:"https://placehold.co/700x450/090909/e00000?text=M4A1-S+PRINTSTREAM"
     },
 
-
-    /* PISTOLS */
-
     {
         id:7,
         name:"Desert Eagle Printstream",
@@ -1227,9 +1466,6 @@ const products = [
         image:"https://placehold.co/700x450/090909/e00000?text=GLOCK-18+WATER+ELEMENTAL"
     },
 
-
-    /* SNIPERS */
-
     {
         id:12,
         name:"AWP Asiimov",
@@ -1249,9 +1485,6 @@ const products = [
         price:300000,
         image:"https://placehold.co/700x450/090909/e00000?text=AWP+WILDFIRE"
     },
-
-
-    /* SMGS */
 
     {
         id:14,
@@ -1273,9 +1506,6 @@ const products = [
         image:"https://placehold.co/700x450/090909/e00000?text=MAC-10+NEON+RIDER"
     },
 
-
-    /* KNIVES */
-
     {
         id:16,
         name:"Karambit Doppler",
@@ -1296,10 +1526,7 @@ const products = [
         image:"https://placehold.co/700x450/090909/e00000?text=BUTTERFLY+DOPPLER"
     },
 
-
-    /* =========================
-       ACCESSORIES
-    ========================= */
+    /* ACCESSORIES */
 
     {
         id:18,
@@ -1445,12 +1672,97 @@ const products = [
 
 
 /* =========================
-   PRICE
+   PRICE FORMAT
 ========================= */
 
 function formatPrice(price){
 
-    return new Intl.NumberFormat("en-US").format(price) + " Toman";
+    return new Intl.NumberFormat("en-US")
+        .format(price) + " Toman";
+
+}
+
+
+/* =========================
+   PRICE RANGE
+========================= */
+
+function updatePriceRange(){
+
+    const minSlider =
+        document.getElementById("minPrice");
+
+    const maxSlider =
+        document.getElementById("maxPrice");
+
+
+    let min =
+        Number(minSlider.value);
+
+    let max =
+        Number(maxSlider.value);
+
+
+    /*
+        Prevent minimum
+        from going above maximum.
+    */
+
+    if(min > max){
+
+        if(
+            document.activeElement ===
+            minSlider
+        ){
+
+            max = min;
+            maxSlider.value = max;
+
+        }else{
+
+            min = max;
+            minSlider.value = min;
+
+        }
+
+    }
+
+
+    const maxLimit =
+        Number(maxSlider.max);
+
+
+    const minPercent =
+        (min / maxLimit) * 100;
+
+
+    const maxPercent =
+        (max / maxLimit) * 100;
+
+
+    const progress =
+        document.getElementById(
+            "rangeProgress"
+        );
+
+
+    progress.style.left =
+        minPercent + "%";
+
+
+    progress.style.width =
+        (maxPercent - minPercent) + "%";
+
+
+    document.getElementById(
+        "priceRangeText"
+    ).textContent =
+        formatPrice(min) +
+        " - " +
+        formatPrice(max);
+
+
+    renderProducts();
 
 }
 
@@ -1462,25 +1774,38 @@ function formatPrice(price){
 function renderWeapons(){
 
     const list =
-        document.getElementById("weaponList");
+        document.getElementById(
+            "weaponList"
+        );
+
 
     list.innerHTML = "";
 
+
     const items =
         categoryData[currentCategory] || [];
+
 
     items.forEach(item => {
 
         const button =
             document.createElement("button");
 
+
         button.className = "weapon";
+
 
         button.textContent = item;
 
-        if(selectedWeapons.includes(item)){
+
+        if(
+            selectedWeapons.includes(item)
+        ){
+
             button.classList.add("active");
+
         }
+
 
         button.onclick =
             function(){
@@ -1492,6 +1817,7 @@ function renderWeapons(){
 
             };
 
+
         list.appendChild(button);
 
     });
@@ -1500,35 +1826,48 @@ function renderWeapons(){
 
 
 /* =========================
-   SELECT CATEGORY
+   CATEGORY SELECT
 ========================= */
 
-function selectCategory(category,element){
+function selectCategory(
+    category,
+    element
+){
 
     /*
-        Clicking same category again
-        resets everything.
+        Clicking the selected
+        category again resets it.
     */
 
-    if(currentCategory === category){
+    if(
+        currentCategory === category
+    ){
 
         currentCategory = null;
 
         selectedWeapons = [];
 
+
         document
             .querySelectorAll(".category")
-            .forEach(item =>
-                item.classList.remove("active")
-            );
+            .forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
 
         document
             .getElementById("weaponBox")
             .classList.remove("show");
 
+
         renderProducts();
 
         return;
+
     }
 
 
@@ -1539,9 +1878,13 @@ function selectCategory(category,element){
 
     document
         .querySelectorAll(".category")
-        .forEach(item =>
-            item.classList.remove("active")
-        );
+        .forEach(item => {
+
+            item.classList.remove(
+                "active"
+            );
+
+        });
 
 
     element.classList.add("active");
@@ -1552,12 +1895,13 @@ function selectCategory(category,element){
         .classList.add("show");
 
 
-    document
-        .getElementById("weaponTitle")
-        .textContent =
-            category === "Accessories"
-            ? "ACCESSORIES"
-            : category.toUpperCase() + " WEAPONS";
+    document.getElementById(
+        "weaponTitle"
+    ).textContent =
+        category === "Accessories"
+        ? "ACCESSORIES"
+        : category.toUpperCase()
+          + " WEAPONS";
 
 
     renderWeapons();
@@ -1568,37 +1912,42 @@ function selectCategory(category,element){
 
 
 /* =========================
-   SELECT WEAPON / ACCESSORY
+   WEAPON / ACCESSORY SELECT
 ========================= */
 
-function selectWeapon(weapon,element){
+function selectWeapon(
+    weapon,
+    element
+){
 
     const index =
-        selectedWeapons.indexOf(weapon);
+        selectedWeapons.indexOf(
+            weapon
+        );
 
 
     if(index !== -1){
-
-        /*
-            Remove only this item.
-        */
 
         selectedWeapons.splice(
             index,
             1
         );
 
-        element.classList.remove("active");
+
+        element.classList.remove(
+            "active"
+        );
 
     }else{
 
-        /*
-            Add item to multi-select.
-        */
+        selectedWeapons.push(
+            weapon
+        );
 
-        selectedWeapons.push(weapon);
 
-        element.classList.add("active");
+        element.classList.add(
+            "active"
+        );
 
     }
 
@@ -1615,33 +1964,48 @@ function selectWeapon(weapon,element){
 function renderProducts(){
 
     const container =
-        document.getElementById("products");
+        document.getElementById(
+            "products"
+        );
+
 
     container.innerHTML = "";
 
 
     const search =
-        document
-            .getElementById("search")
-            .value
-            .toLowerCase()
-            .trim();
+        document.getElementById(
+            "search"
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
 
     const wear =
-        document
-            .getElementById("wearFilter")
-            .value;
+        document.getElementById(
+            "wearFilter"
+        ).value;
 
 
-    const sort =
-        document
-            .getElementById("sortFilter")
-            .value;
+    const minPrice =
+        Number(
+            document.getElementById(
+                "minPrice"
+            ).value
+        );
+
+
+    const maxPrice =
+        Number(
+            document.getElementById(
+                "maxPrice"
+            ).value
+        );
 
 
     let filtered =
         products.filter(product => {
+
 
             const searchMatch =
                 product.name
@@ -1659,9 +2023,18 @@ function renderProducts(){
                 product.wear === wear;
 
 
+            const priceMatch =
+                product.price >= minPrice
+                &&
+                product.price <= maxPrice;
+
+
             let categoryMatch = true;
 
-            if(currentCategory !== null){
+
+            if(
+                currentCategory !== null
+            ){
 
                 categoryMatch =
                     product.category ===
@@ -1671,6 +2044,7 @@ function renderProducts(){
 
 
             let weaponMatch = true;
+
 
             if(
                 currentCategory !== null
@@ -1687,48 +2061,14 @@ function renderProducts(){
 
 
             return (
-                searchMatch
-                &&
-                wearMatch
-                &&
-                categoryMatch
-                &&
+                searchMatch &&
+                wearMatch &&
+                priceMatch &&
+                categoryMatch &&
                 weaponMatch
             );
 
         });
-
-
-    /* SORT */
-
-    if(sort === "low"){
-
-        filtered.sort(
-            (a,b) =>
-                a.price - b.price
-        );
-
-    }
-
-    else if(sort === "high"){
-
-        filtered.sort(
-            (a,b) =>
-                b.price - a.price
-        );
-
-    }
-
-    else if(sort === "name"){
-
-        filtered.sort(
-            (a,b) =>
-                a.name.localeCompare(
-                    b.name
-                )
-        );
-
-    }
 
 
     /* EMPTY */
@@ -1736,9 +2076,11 @@ function renderProducts(){
     if(filtered.length === 0){
 
         container.innerHTML = `
+
             <div class="empty">
                 No skins found.
             </div>
+
         `;
 
         return;
@@ -1751,7 +2093,10 @@ function renderProducts(){
     filtered.forEach(product => {
 
         const card =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         card.className = "product";
 
@@ -1786,7 +2131,9 @@ function renderProducts(){
                 <div class="product-bottom">
 
                     <div class="price">
-                        ${formatPrice(product.price)}
+                        ${formatPrice(
+                            product.price
+                        )}
                     </div>
 
 
@@ -1800,6 +2147,7 @@ function renderProducts(){
                 </div>
 
             </div>
+
         `;
 
 
@@ -1828,41 +2176,48 @@ function openProduct(id){
     }
 
 
-    document.getElementById("modalName")
-        .textContent =
-            currentProduct.name;
+    document.getElementById(
+        "modalName"
+    ).textContent =
+        currentProduct.name;
 
 
-    document.getElementById("modalImage")
-        .src =
-            currentProduct.image;
+    document.getElementById(
+        "modalImage"
+    ).src =
+        currentProduct.image;
 
 
-    document.getElementById("modalImage")
-        .alt =
-            currentProduct.name;
+    document.getElementById(
+        "modalImage"
+    ).alt =
+        currentProduct.name;
 
 
-    document.getElementById("modalItem")
-        .textContent =
-            currentProduct.name;
+    document.getElementById(
+        "modalItem"
+    ).textContent =
+        currentProduct.name;
 
 
-    document.getElementById("modalType")
-        .textContent =
-            currentProduct.weapon;
+    document.getElementById(
+        "modalType"
+    ).textContent =
+        currentProduct.weapon;
 
 
-    document.getElementById("modalWear")
-        .textContent =
-            currentProduct.wear;
+    document.getElementById(
+        "modalWear"
+    ).textContent =
+        currentProduct.wear;
 
 
-    document.getElementById("modalPrice")
-        .textContent =
-            formatPrice(
-                currentProduct.price
-            );
+    document.getElementById(
+        "modalPrice"
+    ).textContent =
+        formatPrice(
+            currentProduct.price
+        );
 
 
     document
@@ -1883,7 +2238,10 @@ function closeProduct(){
 
 function closeModalOutside(event){
 
-    if(event.target.id === "productModal"){
+    if(
+        event.target.id ===
+        "productModal"
+    ){
 
         closeProduct();
 
@@ -1903,7 +2261,9 @@ function addToCart(){
     }
 
 
-    cart.push(currentProduct);
+    cart.push(
+        currentProduct
+    );
 
 
     updateCart();
@@ -1915,10 +2275,10 @@ function addToCart(){
 
 function updateCart(){
 
-    document
-        .getElementById("cartCount")
-        .textContent =
-            cart.length;
+    document.getElementById(
+        "cartCount"
+    ).textContent =
+        cart.length;
 
 
     renderCart();
@@ -1929,7 +2289,10 @@ function updateCart(){
 function renderCart(){
 
     const container =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
+
 
     container.innerHTML = "";
 
@@ -1937,15 +2300,19 @@ function renderCart(){
     if(cart.length === 0){
 
         container.innerHTML = `
+
             <div class="empty-cart">
                 Your cart is empty.
             </div>
+
         `;
 
-        document
-            .getElementById("cartTotal")
-            .textContent =
-                "0 Toman";
+
+        document.getElementById(
+            "cartTotal"
+        ).textContent =
+            "0 Toman";
+
 
         return;
 
@@ -1955,64 +2322,77 @@ function renderCart(){
     let total = 0;
 
 
-    cart.forEach((product,index) => {
+    cart.forEach(
+        (product,index) => {
 
-        total += product.price;
-
-
-        const item =
-            document.createElement("div");
-
-        item.className = "cart-item";
+            total += product.price;
 
 
-        item.innerHTML = `
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-            >
+            const item =
+                document.createElement(
+                    "div"
+                );
 
 
-            <div class="cart-item-info">
+            item.className =
+                "cart-item";
 
-                <div class="cart-item-name">
-                    ${product.name}
+
+            item.innerHTML = `
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+
+                <div class="cart-item-info">
+
+                    <div class="cart-item-name">
+                        ${product.name}
+                    </div>
+
+
+                    <div class="cart-item-price">
+                        ${formatPrice(
+                            product.price
+                        )}
+                    </div>
+
                 </div>
 
-                <div class="cart-item-price">
-                    ${formatPrice(product.price)}
-                </div>
 
-            </div>
+                <button
+                    class="remove-item"
+                    onclick="removeFromCart(${index})"
+                >
+                    REMOVE
+                </button>
 
-
-            <button
-                class="remove-item"
-                onclick="removeFromCart(${index})"
-            >
-                REMOVE
-            </button>
-
-        `;
+            `;
 
 
-        container.appendChild(item);
+            container.appendChild(item);
 
-    });
+        }
+    );
 
 
-    document
-        .getElementById("cartTotal")
-        .textContent =
-            formatPrice(total);
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
+        formatPrice(total);
 
 }
 
 
 function removeFromCart(index){
 
-    cart.splice(index,1);
+    cart.splice(
+        index,
+        1
+    );
+
 
     updateCart();
 
@@ -2022,6 +2402,7 @@ function removeFromCart(index){
 function openCart(){
 
     renderCart();
+
 
     document
         .getElementById("cartModal")
@@ -2041,7 +2422,10 @@ function closeCart(){
 
 function closeCartOutside(event){
 
-    if(event.target.id === "cartModal"){
+    if(
+        event.target.id ===
+        "cartModal"
+    ){
 
         closeCart();
 
@@ -2051,14 +2435,16 @@ function closeCartOutside(event){
 
 
 /* =========================
-   TELEGRAM ORDER
+   TELEGRAM
 ========================= */
 
 function finalizeOrder(){
 
     if(cart.length === 0){
 
-        alert("Your cart is empty.");
+        alert(
+            "Your cart is empty."
+        );
 
         return;
 
@@ -2066,35 +2452,32 @@ function finalizeOrder(){
 
 
     let message =
-        "WIZYY SHOP ORDER%0A%0A";
+        "WIZYY SHOP ORDER\n\n";
 
 
     let total = 0;
 
 
-    cart.forEach((product,index) => {
+    cart.forEach(
+        (product,index) => {
 
-        total += product.price;
+            total += product.price;
 
 
-        message +=
-            `${index + 1}. ${encodeURIComponent(product.name)} - ${encodeURIComponent(formatPrice(product.price))}%0A`;
+            message +=
+                `${index + 1}. ${product.name} - ${formatPrice(product.price)}\n`;
 
-    });
+        }
+    );
 
 
     message +=
-        `%0ATOTAL: ${encodeURIComponent(formatPrice(total))}`;
+        `\nTOTAL: ${formatPrice(total)}`;
 
-
-    /*
-        Change this username if your
-        Telegram shop username is different.
-    */
 
     const telegram =
         "https://t.me/WizyyShop?text=" +
-        message;
+        encodeURIComponent(message);
 
 
     window.open(
@@ -2106,26 +2489,24 @@ function finalizeOrder(){
 
 
 /* =========================
-   INITIAL STATE
+   INITIAL
 ========================= */
-
-/*
-    IMPORTANT:
-    Nothing selected when page loads.
-    All products are shown mixed together.
-*/
 
 currentCategory = null;
 
 selectedWeapons = [];
 
+
 document
     .getElementById("weaponBox")
     .classList.remove("show");
 
+
 renderProducts();
 
 updateCart();
+
+updatePriceRange();
 
 </script>
 
