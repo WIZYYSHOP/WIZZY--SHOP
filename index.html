@@ -1725,6 +1725,18 @@ function saveProfile(){
     const idx=profiles.findIndex(x=>x.id===profile.id);
     if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
     saveProfiles(profiles);
+
+    const mobile = document.getElementById("profilePhone");
+    if(mobile && !/^09\d{9}$/.test(mobile.value.trim())){
+        error.textContent="Please enter a valid mobile number.";
+        return;
+    }
+
+    const toast=document.getElementById("profileSuccessToast");
+    if(toast){
+        toast.classList.add("show");
+        setTimeout(()=>toast.classList.remove("show"),2500);
+    }
     updateHeaderAvatar();
     closeProfile();
 }
@@ -3803,6 +3815,18 @@ function saveProfile(){
     if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
     saveProfiles(profiles);
 
+    const mobile = document.getElementById("profilePhone");
+    if(mobile && !/^09\d{9}$/.test(mobile.value.trim())){
+        error.textContent="Please enter a valid mobile number.";
+        return;
+    }
+
+    const toast=document.getElementById("profileSuccessToast");
+    if(toast){
+        toast.classList.add("show");
+        setTimeout(()=>toast.classList.remove("show"),2500);
+    }
+
     updateHeaderAvatar();
     closeProfile();
 }
@@ -4652,6 +4676,17 @@ generateCaptcha();
 
 </script>
 
+
+<style>
+.profile-success-toast{
+position:fixed;top:35px;left:50%;transform:translate(-50%,-30px);
+background:#00c853;color:white;padding:16px 30px;border-radius:14px;
+font-weight:900;opacity:0;z-index:999999;
+transition:.4s;box-shadow:0 0 25px #00c853;
+}
+.profile-success-toast.show{opacity:1;transform:translate(-50%,0);}
+</style>
+<div id="profileSuccessToast" class="profile-success-toast">پروفایل شما با موفقیت سیو شد ✅</div>
 </body>
 </html>
 <!-- WIZZY SUPPORT -->
