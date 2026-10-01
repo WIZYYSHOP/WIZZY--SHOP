@@ -3906,39 +3906,7 @@ function closeAdminLoginOutside(event){
 
 async function loginAdmin(){
 
-    const password =
-        document.getElementById(
-            "adminPassword"
-        ).value;
-
-    const email =
-        prompt("ADMIN EMAIL:");
-
-    if(!email){
-        return;
-    }
-
-    const { data, error } =
-        await wizzySupabase.auth.signInWithPassword({
-            email: email.trim(),
-            password: password
-        });
-
-    if(error){
-
-        document.getElementById(
-            "adminError"
-        ).textContent =
-            "WRONG EMAIL OR PASSWORD";
-
-        return;
-    }
-
-    closeAdminLogin();
-
-    openAdminPanel();
-
-}
+   
 
 
 function openAdminPanel(){
@@ -3949,6 +3917,60 @@ function openAdminPanel(){
     document.getElementById(
         "adminPanelModal"
     ).classList.add("show");
+}
+    async function loginAdmin(){
+
+    const email =
+        document.getElementById(
+            "adminEmail"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "adminPassword"
+        ).value;
+
+
+    if(!email || !password){
+
+        document.getElementById(
+            "adminError"
+        ).textContent =
+            "EMAIL AND PASSWORD ARE REQUIRED";
+
+        return;
+    }
+
+
+    const { data, error } =
+        await wizzySupabase.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    if(error){
+
+        console.error(
+            "SUPABASE LOGIN ERROR:",
+            error
+        );
+
+        document.getElementById(
+            "adminError"
+        ).textContent =
+            "WRONG EMAIL OR PASSWORD";
+
+        return;
+    }
+
+
+    closeAdminLogin();
+
+    openAdminPanel();
 
 }
 
