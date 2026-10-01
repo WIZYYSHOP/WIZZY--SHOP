@@ -293,7 +293,7 @@ header{
     border-radius:7px;
     cursor:pointer;
 }
-.profile-error{
+.captcha-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}.captcha-box{height:44px;min-width:150px;flex:1;display:flex;align-items:center;justify-content:center;border:1px dashed #666;border-radius:7px;background:repeating-linear-gradient(135deg,#151515,#151515 7px,#202020 8px,#151515 15px);color:#fff;font-weight:1000;letter-spacing:5px;user-select:none;font-family:monospace}.captcha-refresh{height:44px;padding:0 12px;border:1px solid #444;background:#202020;color:#fff;border-radius:7px;cursor:pointer}.captcha-refresh:hover{border-color:#e00000;color:#fff}.captcha-input{width:100%;height:44px;background:#111;color:#fff;border:1px solid #333;border-radius:7px;padding:0 12px;outline:none;margin-bottom:8px}.captcha-input:focus{border-color:#e00000}.profile-error{
     min-height:18px;
     color:#ff3333;
     font-size:11px;
@@ -1699,11 +1699,17 @@ function isProfileComplete(){
 function generateCaptcha(){
     const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     currentCaptcha="";
-    for(let i=0;i<5;i++){
-        currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
+    const values=new Uint32Array(6);
+    if(window.crypto && crypto.getRandomValues){
+        crypto.getRandomValues(values);
+        for(let i=0;i<values.length;i++) currentCaptcha += chars[values[i] % chars.length];
+    }else{
+        for(let i=0;i<6;i++) currentCaptcha += chars[Math.floor(Math.random()*chars.length)];
     }
     const box=document.getElementById("captchaBox");
     if(box) box.textContent=currentCaptcha;
+    const input=document.getElementById("captchaInput");
+    if(input) input.value="";
 }
 
 function openProfile(){
@@ -1715,8 +1721,6 @@ function openProfile(){
     profileImageData=profile?.image || DEFAULT_AVATAR;
     document.getElementById("profileAvatarPreview").src=profileImageData;
     document.getElementById("profileError").textContent="";
-    document.getElementById("captchaInput").value="";
-    generateCaptcha();
     document.getElementById("profileModal").classList.add("show");
 }
 
@@ -1758,20 +1762,18 @@ async function saveProfile(){
     const tradeLink=document.getElementById("profileTradeLink").value.trim();
     const phone=document.getElementById("profilePhone").value.trim();
     const telegram=document.getElementById("profileTelegram").value.trim();
-    const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
     const error=document.getElementById("profileError");
 
     if(!name){ error.textContent="Please enter your name."; return; }
     if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
         error.textContent="Please enter a valid Steam Trade Link."; return;
     }
-    if(captcha!==currentCaptcha){
-        error.textContent="Captcha is incorrect.";
+    const captchaInput=document.getElementById("captchaInput").value.trim().toUpperCase();
+    if(!captchaInput || captchaInput !== String(currentCaptcha).toUpperCase()){
+        error.textContent="Incorrect captcha. Please try again.";
         generateCaptcha();
-        document.getElementById("captchaInput").value="";
         return;
     }
-
     const old=getCurrentProfile();
     const profile={
         id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
@@ -1816,6 +1818,22 @@ function registerLogoClick(){
         openAdminLogin();
     }
 }
+
+/* SUPPORT */
+const SUPPORT_SESSION_KEY="wizzy_support_session";
+let supportPollTimer=null;
+function getSupportSession(){let id=localStorage.getItem(SUPPORT_SESSION_KEY);if(!id){id="S-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,8).toUpperCase();localStorage.setItem(SUPPORT_SESSION_KEY,id);}return id;}
+function toggleSupportMenu(){document.getElementById("supportMenu")?.classList.toggle("show");}
+function closeSupportMenu(){document.getElementById("supportMenu")?.classList.remove("show");}
+function openSupportTelegram(){closeSupportMenu();window.open("https://t.me/AghoJavaad","_blank");}
+function openSiteSupport(){closeSupportMenu();document.getElementById("siteSupportModal").classList.add("show");loadSupportThread();clearInterval(supportPollTimer);supportPollTimer=setInterval(loadSupportThread,5000);}
+function closeSiteSupport(){document.getElementById("siteSupportModal").classList.remove("show");clearInterval(supportPollTimer);supportPollTimer=null;}
+function closeSiteSupportOutside(e){if(e.target.id==="siteSupportModal")closeSiteSupport();}
+async function loadSupportThread(){if(!window.wizzySupabase)return;const {data,error}=await wizzySupabase.from("support_messages").select("*").eq("session_id",getSupportSession()).order("created_at",{ascending:true});if(error){console.error("SUPPORT LOAD ERROR",error);return;}const box=document.getElementById("supportThread");if(!box)return;if(!data?.length){box.innerHTML='<div class="support-note">No messages yet. Send us a message and we will reply here.</div>';return;}box.innerHTML=data.map(m=>{const u='<div class="support-msg user"><b>YOU</b><br>'+escapeHtml(m.message||"")+'<small>'+escapeHtml(new Date(m.created_at).toLocaleString())+'</small></div>';const a=m.reply?'<div class="support-msg admin"><b>WIZZY SUPPORT</b><br>'+escapeHtml(m.reply)+'<small>'+escapeHtml(m.replied_at?new Date(m.replied_at).toLocaleString():"")+'</small></div>':'';return u+a;}).join("");box.scrollTop=box.scrollHeight;}
+async function sendSupportMessage(){const input=document.getElementById("supportMessageInput"),err=document.getElementById("supportError"),message=(input?.value||"").trim();if(!message){err.textContent="Please write a message.";return;}if(!window.wizzySupabase){err.textContent="Support is temporarily unavailable.";return;}const p=getCurrentProfile()||{};const {error}=await wizzySupabase.from("support_messages").insert({session_id:getSupportSession(),name:p.name||"Guest",telegram:p.telegram||"",message,reply:null,status:"OPEN"});if(error){console.error("SUPPORT SEND ERROR",error);err.textContent="Could not send the message. Please try again.";return;}input.value="";err.textContent="";loadSupportThread();}
+async function renderAdminSupport(){const box=document.getElementById("adminSupport");if(!box||!window.wizzySupabase)return;const {data,error}=await wizzySupabase.from("support_messages").select("*").order("created_at",{ascending:false});if(error){box.innerHTML='<div class="admin-empty">SUPPORT TABLE NOT READY.</div>';return;}if(!data?.length){box.innerHTML='<div class="admin-empty">No support messages yet.</div>';return;}box.innerHTML=data.map(m=>`<div class="admin-support-card"><div class="admin-support-head"><div class="admin-support-name">${escapeHtml(m.name||"Guest")}</div><div class="admin-support-date">${escapeHtml(new Date(m.created_at).toLocaleString())}</div></div><div class="admin-support-message">${escapeHtml(m.message||"")}</div><textarea id="supportReply_${m.id}" class="admin-support-reply" placeholder="Write your reply...">${escapeHtml(m.reply||"")}</textarea><div class="admin-support-actions"><button class="reply" type="button" onclick="replyToSupport('${m.id}')">${m.reply?"UPDATE REPLY":"REPLY"}</button><button type="button" onclick="deleteSupportMessage('${m.id}')">DELETE</button></div><div class="admin-support-status">STATUS: ${escapeHtml(m.status||"OPEN")} ${m.telegram?" • "+escapeHtml(m.telegram):""}</div></div>`).join("");}
+async function replyToSupport(id){const input=document.getElementById("supportReply_"+id),reply=(input?.value||"").trim();if(!reply){alert("Write a reply first.");return;}const {error}=await wizzySupabase.from("support_messages").update({reply,status:"ANSWERED",replied_at:new Date().toISOString()}).eq("id",id);if(error){alert("Could not save reply.");return;}renderAdminSupport();}
+async function deleteSupportMessage(id){if(!confirm("Delete this support message?"))return;const {error}=await wizzySupabase.from("support_messages").delete().eq("id",id);if(!error)renderAdminSupport();}
 
 /* =========================================================
    ADMIN PANEL
@@ -2681,10 +2699,10 @@ function registerLogoClick(){
             <div class="profile-form-card">
                 <div class="profile-form">
                     <div class="profile-field"><label>NAME *</label><input id="profileName" type="text" placeholder="Your name"></div>
-                    <div class="profile-field"><label>STEAM TRADE LINK *</label><input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=..."><div class="profile-help">Required to place an order. Phone and Telegram are optional.</div></div>
+                    <div class="profile-field"><label>STEAM TRADE LINK *</label><input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=..."><div class="profile-help"></div></div>
                     <div class="profile-field"><label>PHONE (OPTIONAL)</label><input id="profilePhone" type="text" placeholder="Phone number"></div>
                     <div class="profile-field"><label>TELEGRAM ID (OPTIONAL)</label><input id="profileTelegram" type="text" placeholder="@username"></div>
-                    <div class="profile-field captcha-field"><label>CAPTCHA *</label><div class="captcha-input-row"><div id="captchaBox" class="captcha-box">-----</div><input id="captchaInput" class="captcha-input" type="text" placeholder="Enter captcha" autocomplete="off"><button type="button" class="captcha-refresh" onclick="generateCaptcha()">↻</button></div></div>
+                    <div class="profile-field"><label>CAPTCHA *</label><div class="captcha-row"><div id="captchaBox" class="captcha-box">------</div><button type="button" class="captcha-refresh" onclick="generateCaptcha()">REFRESH</button></div><input id="captchaInput" class="captcha-input" type="text" placeholder="Enter captcha" autocomplete="off" maxlength="6"></div>
                     <div id="profileError" class="profile-error"></div>
                     <button class="profile-save" type="button" onclick="saveProfile()">SAVE PROFILE</button>
                 </div>
@@ -2775,6 +2793,9 @@ function registerLogoClick(){
                 <div id="adminPaidCount" class="admin-stat-value">0</div>
             </div>
         </div>
+
+        <div class="admin-section-title">SITE SUPPORT</div>
+        <div id="adminSupport" class="admin-support-list"></div>
 
         <div class="admin-section-title">CUSTOMER PROFILES</div>
         <div id="adminProfiles" class="admin-profiles"></div>
@@ -3809,8 +3830,6 @@ function openProfile(){
     profileImageData=p?.image||"";
     document.getElementById("profileAvatarPreview").src=profileImageData||DEFAULT_AVATAR;
     document.getElementById("profileImage").value="";
-    document.getElementById("captchaInput").value="";
-    generateCaptcha();
     document.getElementById("profileModal").classList.add("show");
 }
 
@@ -3838,20 +3857,12 @@ async function saveProfile(){
     const tradeLink=document.getElementById("profileTradeLink").value.trim();
     const phone=document.getElementById("profilePhone").value.trim();
     const telegram=document.getElementById("profileTelegram").value.trim();
-    const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
     const error=document.getElementById("profileError");
 
     if(!name){ error.textContent="Please enter your name."; return; }
     if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
         error.textContent="Please enter a valid Steam Trade Link."; return;
     }
-    if(captcha!==currentCaptcha){
-        error.textContent="Captcha is incorrect.";
-        generateCaptcha();
-        document.getElementById("captchaInput").value="";
-        return;
-    }
-
     const old=getCurrentProfile();
     const profile={
         id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
@@ -4419,10 +4430,13 @@ async function loginAdmin(){
 function openAdminPanel(){
     renderAdminPanel();
     document.getElementById("adminPanelModal").classList.add("show");
+    clearInterval(window.wizzyAdminSupportPoll);
+    window.wizzyAdminSupportPoll=setInterval(function(){if(document.getElementById("adminPanelModal")?.classList.contains("show"))renderAdminSupport();},5000);
 }
 
 function closeAdminPanel(){
     document.getElementById("adminPanelModal").classList.remove("show");
+    clearInterval(window.wizzyAdminSupportPoll);
 }
 
 function closeAdminPanelOutside(event){
@@ -4663,6 +4677,7 @@ function clearAllProfiles(){
 }
 
 function renderAdminPanel(){
+    renderAdminSupport();
     renderAdminProfiles();
     const orders = getOrders();
 
@@ -4812,10 +4827,56 @@ updatePriceRange();
 
 updateHeaderAvatar();
 
-generateCaptcha();
 
+
+    generateCaptcha();
+    document.addEventListener("click",function(e){if(!e.target.closest("#supportFab")&&!e.target.closest("#supportMenu"))closeSupportMenu();});
 </script>
 
 <div id="profileSuccessToast" class="profile-success-toast"><span class="profile-success-check">✓</span><span>PROFILE SAVED SUCCESSFULLY</span></div>
 </body>
 </html>
+<style>
+/* FINAL PROFILE DIRECTION: CARD LEFT / PROFILE FORM RIGHT */
+.profile-layout{
+    grid-template-columns:minmax(230px,.75fr) minmax(320px,1.25fr) !important;
+    direction:ltr !important;
+}
+.profile-side-card{grid-column:1 !important;grid-row:1 !important;}
+.profile-form-card{grid-column:2 !important;grid-row:1 !important;}
+@media(max-width:700px){
+    .profile-layout{grid-template-columns:1fr !important;}
+    .profile-side-card,.profile-form-card{grid-column:1 !important;grid-row:auto !important;}
+}
+
+/* SUPPORT WIDGET */
+.support-fab{position:fixed;right:22px;bottom:22px;width:62px;height:62px;border-radius:50%;border:1px solid #ff3030;background:#e00000;color:#fff;z-index:5000;box-shadow:0 0 24px rgba(224,0,0,.28);font-size:11px;font-weight:900;letter-spacing:.5px;cursor:pointer;transition:.2s}
+.support-fab:hover{transform:scale(1.06);background:#ff1111}
+.support-menu{position:fixed;right:22px;bottom:94px;width:190px;background:#101010;border:1px solid #303030;border-radius:12px;padding:8px;z-index:4999;display:none;box-shadow:0 15px 45px rgba(0,0,0,.5)}
+.support-menu.show{display:grid;gap:7px}
+.support-menu button{width:100%;border:1px solid #333;background:#171717;color:#fff;border-radius:8px;padding:11px 10px;text-align:left;font-weight:800;font-size:11px;cursor:pointer}
+.support-menu button:hover{border-color:#e00000;background:#1e1e1e}
+.support-modal-box{max-width:560px;width:calc(100% - 28px)}
+.support-thread{height:330px;overflow:auto;background:#0b0b0b;border:1px solid #292929;border-radius:9px;padding:12px;margin:14px 0}
+.support-msg{max-width:82%;padding:9px 11px;border-radius:9px;margin-bottom:9px;font-size:12px;line-height:1.55;word-break:break-word}
+.support-msg.user{margin-left:auto;background:#2a0a0a;border:1px solid #5a1a1a;color:#fff}
+.support-msg.admin{margin-right:auto;background:#171717;border:1px solid #343434;color:#ddd}
+.support-msg small{display:block;color:#777;font-size:9px;margin-top:4px}
+.support-compose{display:flex;gap:8px}
+.support-compose textarea{flex:1;min-height:74px;resize:vertical;background:#111;color:#fff;border:1px solid #3b3b3b;border-radius:8px;padding:10px;outline:none}
+.support-compose textarea:focus{border-color:#e00000}
+.support-send{border:0;border-radius:8px;background:#e00000;color:#fff;font-weight:900;padding:0 16px;min-width:90px}
+.support-note{color:#777;font-size:10px;line-height:1.5}
+.admin-support-list{display:grid;gap:10px;margin-bottom:20px}
+.admin-support-card{background:#151515;border:1px solid #303030;border-radius:9px;padding:13px}
+.admin-support-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}
+.admin-support-name{font-weight:900;color:#fff}
+.admin-support-date{color:#777;font-size:9px}
+.admin-support-message{background:#0d0d0d;border:1px solid #292929;border-radius:7px;padding:10px;color:#ddd;font-size:12px;line-height:1.55;margin-bottom:8px;white-space:pre-wrap}
+.admin-support-reply{width:100%;min-height:70px;background:#101010;color:#fff;border:1px solid #3b3b3b;border-radius:7px;padding:9px;resize:vertical;outline:none}
+.admin-support-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;flex-wrap:wrap}
+.admin-support-actions button{border:1px solid #444;background:#202020;color:#fff;border-radius:6px;padding:8px 11px;font-size:10px;font-weight:900}
+.admin-support-actions button.reply{background:#e00000;border-color:#e00000}
+.admin-support-status{font-size:9px;color:#777;margin-top:6px}
+@media(max-width:600px){.support-fab{right:14px;bottom:14px;width:58px;height:58px}.support-menu{right:14px;bottom:82px}.support-compose{flex-direction:column}.support-send{min-height:42px}.support-thread{height:300px}}
+</style>
