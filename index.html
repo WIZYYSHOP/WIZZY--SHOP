@@ -5227,3 +5227,103 @@ window.open(
 
 }
 </script>
+<button class="support-btn" onclick="openTelegramConfirm()">
+    پشتیبانی
+</button>
+
+
+<style>
+.support-btn{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#ff0000;
+    color:white;
+    border:2px solid white;
+    padding:15px 25px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:16px;
+    z-index:99999;
+    box-shadow:
+    0 0 15px red,
+    0 0 30px white;
+}
+
+
+.support-page{
+    position:fixed;
+    inset:0;
+    background:#050505;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+}
+
+
+.support-box{
+    background:#111;
+    border:2px solid red;
+    border-radius:20px;
+    padding:35px;
+    width:320px;
+    text-align:center;
+    color:white;
+    box-shadow:
+    0 0 20px red,
+    0 0 35px white;
+}
+
+
+.accept-btn{
+    margin-top:25px;
+    background:red;
+    color:white;
+    border:none;
+    padding:12px 35px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:17px;
+}
+</style>
+
+
+<div class="support-page" id="supportPage">
+
+<div class="support-box">
+
+<h2>تایید انتقال به تلگرام</h2>
+
+<p>
+برای ارتباط با پشتیبانی وارد تلگرام می‌شوید
+</p>
+
+<button class="accept-btn" onclick="goTelegram()">
+ACCEPT
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+function openTelegramConfirm(){
+
+document.getElementById("supportPage").style.display="flex";
+
+}
+
+
+function goTelegram(){
+
+window.open(
+"https://t.me/WIZZY_SHOP2",
+"_blank"
+);
+
+}
+
+</script>
