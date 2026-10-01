@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>WIZYY SHOP</title>
 
 <style>
+
+/* =========================
+   RESET
+========================= */
+
 *{
     margin:0;
     padding:0;
@@ -14,79 +20,115 @@
 }
 
 body{
-    background:#070707;
+    background:#050505;
     color:#fff;
     min-height:100vh;
 }
 
-/* ================= HEADER ================= */
+
+/* =========================
+   HEADER
+========================= */
 
 header{
+    height:90px;
     position:sticky;
     top:0;
     z-index:1000;
-    height:82px;
-    background:rgba(5,5,5,.96);
-    border-bottom:1px solid #241010;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    backdrop-filter:blur(12px);
+
+    background:rgba(5,5,5,.94);
+    border-bottom:1px solid #1b1b1b;
+
+    backdrop-filter:blur(14px);
 }
+
+
+/* WIZYY SHOP کاملاً آزاد */
 
 .logo{
     text-align:center;
+    background:none;
+    border:none;
+    box-shadow:none;
+    padding:0;
 }
 
 .logo h1{
-    font-size:30px;
-    letter-spacing:5px;
+    font-size:32px;
     font-weight:900;
+    letter-spacing:6px;
     color:#fff;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.08);
 }
 
 .logo h1 span{
     color:#e10600;
+
+    text-shadow:
+        0 0 15px rgba(225,6,0,.4);
 }
 
 .logo p{
-    margin-top:4px;
+    margin-top:6px;
+    color:#777;
     font-size:11px;
-    color:#aaa;
     letter-spacing:1px;
 }
 
-/* ================= CART ================= */
 
-.cart{
+/* =========================
+   CART BUTTON
+========================= */
+
+.cart-button{
     position:absolute;
     right:25px;
-    top:22px;
+    top:25px;
+
+    background:#0d0d0d;
+    border:1px solid #292929;
+
+    padding:10px 16px;
+    border-radius:7px;
+
+    color:#aaa;
     cursor:pointer;
-    border:1px solid #321010;
-    background:#0e0e0e;
-    padding:10px 15px;
-    border-radius:8px;
+
     transition:.2s;
 }
 
-.cart:hover{
+.cart-button:hover{
+    color:#fff;
     border-color:#e10600;
-    box-shadow:0 0 15px rgba(225,6,0,.2);
 }
 
-.cart span{
+.cart-button span{
     color:#e10600;
     font-weight:bold;
 }
 
-/* ================= HERO ================= */
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
     text-align:center;
-    padding:65px 20px 45px;
+
+    padding:70px 20px 45px;
+
     background:
-        radial-gradient(circle at center,rgba(225,6,0,.13),transparent 45%);
+        radial-gradient(
+            circle at center,
+            rgba(225,6,0,.13),
+            transparent 45%
+        );
 }
 
 .hero h2{
@@ -101,58 +143,84 @@ header{
 
 .hero p{
     margin-top:12px;
-    color:#888;
+    color:#777;
+    font-size:14px;
 }
 
-/* ================= CATEGORIES ================= */
+
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
+    max-width:1200px;
+    margin:auto;
+
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:12px;
+
+    gap:10px;
+
     padding:20px;
 }
 
 .category{
     min-width:120px;
+
     padding:13px 20px;
-    background:#0d0d0d;
-    border:1px solid #292929;
-    border-radius:8px;
-    color:#aaa;
-    cursor:pointer;
-    text-align:center;
-    font-size:13px;
+
+    background:#0b0b0b;
+    border:1px solid #272727;
+
+    border-radius:7px;
+
+    color:#888;
+
+    font-size:12px;
     font-weight:bold;
-    letter-spacing:1px;
+
+    text-align:center;
+
+    cursor:pointer;
+
     transition:.2s;
 }
 
 .category:hover{
     color:#fff;
-    border-color:#8b0000;
-    transform:translateY(-2px);
+    border-color:#8f0000;
 }
 
 .category.active{
     color:#fff;
-    background:#160707;
+
+    background:#180606;
+
     border-color:#e10600;
+
     box-shadow:
-        0 0 12px rgba(225,6,0,.25),
-        inset 0 0 15px rgba(225,6,0,.08);
+        0 0 18px rgba(225,6,0,.18);
 }
 
-/* ================= WEAPONS ================= */
+
+/* =========================
+   WEAPON BOX
+========================= */
 
 .weapon-box{
     display:none;
+
     max-width:1200px;
-    margin:20px auto 35px;
-    padding:22px;
-    border:1px solid #241010;
-    background:#0a0a0a;
+
+    margin:15px auto 35px;
+
+    padding:25px;
+
+    background:#080808;
+
+    border:1px solid #202020;
+
     border-radius:12px;
 }
 
@@ -161,49 +229,70 @@ header{
 }
 
 .weapon-title{
-    font-size:13px;
-    color:#777;
-    letter-spacing:2px;
-    margin-bottom:16px;
     text-align:center;
+
+    color:#666;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    margin-bottom:18px;
 }
 
 .weapons{
     display:flex;
-    flex-wrap:wrap;
     justify-content:center;
+    flex-wrap:wrap;
     gap:9px;
 }
 
 .weapon{
-    padding:10px 14px;
+    padding:10px 15px;
+
     background:#101010;
-    border:1px solid #272727;
+
+    border:1px solid #282828;
+
     border-radius:7px;
-    color:#999;
-    cursor:pointer;
+
+    color:#888;
+
     font-size:12px;
+
+    cursor:pointer;
+
     transition:.2s;
 }
 
 .weapon:hover{
     color:#fff;
-    border-color:#a00000;
+    border-color:#900000;
 }
 
 .weapon.active{
     color:#fff;
-    background:#260707;
+
+    background:#280606;
+
     border-color:#e10600;
-    box-shadow:0 0 12px rgba(225,6,0,.22);
+
+    box-shadow:
+        0 0 14px rgba(225,6,0,.25);
 }
 
-/* ================= FILTERS ================= */
+
+/* =========================
+   FILTERS
+========================= */
 
 .filters{
     max-width:1200px;
+
     margin:0 auto 25px;
+
     padding:0 20px;
+
     display:flex;
     gap:10px;
     flex-wrap:wrap;
@@ -212,11 +301,17 @@ header{
 .search{
     flex:1;
     min-width:220px;
+
     padding:13px 15px;
-    background:#0d0d0d;
-    border:1px solid #292929;
-    border-radius:8px;
+
+    background:#0c0c0c;
+
+    border:1px solid #282828;
+
+    border-radius:7px;
+
     color:#fff;
+
     outline:none;
 }
 
@@ -224,63 +319,95 @@ header{
     border-color:#e10600;
 }
 
-select{
+.filters select{
     padding:13px 15px;
-    background:#0d0d0d;
-    border:1px solid #292929;
-    color:#aaa;
-    border-radius:8px;
+
+    background:#0c0c0c;
+
+    border:1px solid #282828;
+
+    border-radius:7px;
+
+    color:#999;
+
     outline:none;
+
     cursor:pointer;
 }
 
-select:focus{
+.filters select:focus{
     border-color:#e10600;
 }
 
-/* ================= PRODUCTS ================= */
+
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
     max-width:1200px;
+
     margin:auto;
-    padding:0 20px 60px;
+
+    padding:0 20px 70px;
+
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+
+    grid-template-columns:
+        repeat(auto-fill,minmax(215px,1fr));
+
     gap:18px;
 }
 
 .product{
-    background:#0d0d0d;
-    border:1px solid #222;
-    border-radius:12px;
+    background:#0b0b0b;
+
+    border:1px solid #202020;
+
+    border-radius:11px;
+
     overflow:hidden;
+
     transition:.25s;
 }
 
 .product:hover{
     transform:translateY(-5px);
-    border-color:#8b0000;
-    box-shadow:0 8px 30px rgba(0,0,0,.45);
+
+    border-color:#750000;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.5);
 }
 
-.product-img{
-    width:100%;
-    height:155px;
-    background:#090909;
+.product-image{
+    height:165px;
+
+    background:
+        radial-gradient(
+            circle,
+            #151515,
+            #080808
+        );
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     overflow:hidden;
 }
 
-.product-img img{
-    width:90%;
-    height:90%;
+.product-image img{
+    width:92%;
+    height:92%;
+
     object-fit:contain;
+
     transition:.3s;
 }
 
-.product:hover .product-img img{
+.product:hover .product-image img{
     transform:scale(1.06);
 }
 
@@ -294,50 +421,89 @@ select:focus{
 }
 
 .product-weapon{
-    color:#777;
+    color:#666;
+
     font-size:11px;
-    margin-top:5px;
+
+    margin-top:6px;
 }
 
 .product-bottom{
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
-    margin-top:15px;
+
+    justify-content:space-between;
+
+    margin-top:16px;
 }
 
 .price{
     color:#e10600;
-    font-size:15px;
+
     font-weight:bold;
+
+    font-size:14px;
 }
 
-.buy{
-    background:#e10600;
-    color:white;
+.buy-button{
     border:none;
-    padding:8px 12px;
+
+    background:#e10600;
+
+    color:white;
+
+    padding:8px 13px;
+
     border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
+
     font-size:11px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
     transition:.2s;
 }
 
-.buy:hover{
-    background:#ff160f;
+.buy-button:hover{
+    background:#ff1710;
 }
 
-/* ================= MODAL ================= */
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    color:#555;
+}
+
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
     position:fixed;
+
     inset:0;
+
     background:rgba(0,0,0,.82);
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     z-index:2000;
+
     padding:20px;
 }
 
@@ -348,41 +514,54 @@ select:focus{
 .modal-content{
     width:100%;
     max-width:500px;
-    background:#0b0b0b;
-    border:1px solid #3b1010;
-    border-radius:14px;
+
+    background:#0a0a0a;
+
+    border:1px solid #351010;
+
+    border-radius:13px;
+
     padding:25px;
+
     position:relative;
-    box-shadow:0 0 50px rgba(0,0,0,.7);
 }
 
-.close{
+.close-modal{
     position:absolute;
-    right:18px;
-    top:14px;
-    color:#777;
-    font-size:24px;
+
+    right:17px;
+    top:12px;
+
+    font-size:25px;
+
+    color:#666;
+
     cursor:pointer;
 }
 
-.close:hover{
+.close-modal:hover{
     color:#fff;
 }
 
 .modal-image{
-    width:100%;
     height:220px;
+
+    background:#080808;
+
+    border-radius:9px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    background:#080808;
-    border-radius:10px;
+
     margin-bottom:20px;
 }
 
 .modal-image img{
-    max-width:90%;
-    max-height:90%;
+    width:90%;
+    height:90%;
+
     object-fit:contain;
 }
 
@@ -390,57 +569,94 @@ select:focus{
     font-size:22px;
 }
 
-.modal-content .modal-weapon{
-    color:#777;
-    margin-top:5px;
+.modal-subtitle{
+    margin-top:6px;
+
+    color:#666;
+
     font-size:12px;
 }
 
 .modal-options{
-    display:grid;
-    gap:10px;
     margin-top:20px;
 }
 
 .modal-options label{
-    color:#888;
+    display:block;
+
+    color:#777;
+
     font-size:11px;
+
+    margin-bottom:7px;
 }
 
 .modal-options select{
     width:100%;
+
+    padding:13px;
+
+    background:#111;
+
+    color:#aaa;
+
+    border:1px solid #292929;
+
+    border-radius:7px;
+
+    outline:none;
 }
 
 .add-cart{
     width:100%;
+
     margin-top:20px;
+
     padding:14px;
+
     border:none;
+
     background:#e10600;
+
     color:#fff;
-    border-radius:8px;
-    cursor:pointer;
+
+    border-radius:7px;
+
     font-weight:bold;
+
+    cursor:pointer;
 }
 
 .add-cart:hover{
-    background:#ff160f;
+    background:#ff1710;
 }
 
-/* ================= CART PANEL ================= */
+
+/* =========================
+   CART PANEL
+========================= */
 
 .cart-panel{
     position:fixed;
-    right:-420px;
+
     top:0;
-    width:400px;
+    right:-430px;
+
+    width:410px;
     max-width:95%;
+
     height:100vh;
-    background:#0a0a0a;
-    border-left:1px solid #351010;
+
+    background:#090909;
+
+    border-left:1px solid #301010;
+
     z-index:3000;
+
     padding:25px;
+
     transition:.3s;
+
     overflow-y:auto;
 }
 
@@ -450,9 +666,13 @@ select:focus{
 
 .cart-header{
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     padding-bottom:20px;
+
     border-bottom:1px solid #222;
 }
 
@@ -461,13 +681,20 @@ select:focus{
 }
 
 .cart-close{
+    font-size:23px;
+
+    color:#666;
+
     cursor:pointer;
-    color:#888;
-    font-size:22px;
+}
+
+.cart-close:hover{
+    color:#fff;
 }
 
 .cart-item{
-    padding:15px 0;
+    padding:16px 0;
+
     border-bottom:1px solid #202020;
 }
 
@@ -477,54 +704,70 @@ select:focus{
 
 .cart-item small{
     display:block;
-    color:#777;
+
+    color:#666;
+
     margin-top:5px;
 }
 
-.cart-item button{
-    margin-top:8px;
+.remove-item{
     border:none;
+
     background:none;
+
     color:#e10600;
+
+    margin-top:8px;
+
     cursor:pointer;
+
     font-size:11px;
 }
 
 .cart-total{
     margin-top:25px;
+
     display:flex;
+
     justify-content:space-between;
+
     font-weight:bold;
 }
 
-.telegram{
+.telegram-button{
     width:100%;
+
     margin-top:20px;
+
     padding:14px;
+
     border:none;
+
     background:#e10600;
+
     color:#fff;
-    border-radius:8px;
-    cursor:pointer;
+
+    border-radius:7px;
+
     font-weight:bold;
+
+    cursor:pointer;
 }
 
-/* ================= EMPTY ================= */
 
-.empty{
-    grid-column:1/-1;
-    text-align:center;
-    color:#555;
-    padding:60px 0;
-}
-
-/* ================= FOOTER ================= */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-    border-top:1px solid #1d1d1d;
+    border-top:1px solid #191919;
+
     text-align:center;
+
     padding:35px 20px;
+
     color:#555;
+
     font-size:12px;
 }
 
@@ -533,24 +776,40 @@ footer strong{
 }
 
 footer p{
-    margin-top:7px;
+    margin-top:8px;
 }
 
-/* ================= RESPONSIVE ================= */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:650px){
 
     header{
-        height:75px;
+        height:78px;
     }
 
     .logo h1{
         font-size:23px;
+        letter-spacing:4px;
     }
 
-    .cart{
+    .logo p{
+        font-size:9px;
+    }
+
+    .cart-button{
         right:10px;
+        top:21px;
+
         padding:8px 10px;
+
+        font-size:10px;
+    }
+
+    .hero{
+        padding:50px 15px 35px;
     }
 
     .hero h2{
@@ -559,10 +818,11 @@ footer p{
 
     .products{
         grid-template-columns:repeat(2,1fr);
+
         gap:10px;
     }
 
-    .product-img{
+    .product-image{
         height:120px;
     }
 
@@ -571,43 +831,65 @@ footer p{
     }
 
     .product-name{
-        font-size:13px;
-    }
-
-    .price{
         font-size:12px;
     }
 
-    .buy{
+    .price{
+        font-size:11px;
+    }
+
+    .buy-button{
         padding:7px 8px;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
     <div class="logo">
-        <h1>WIZYY <span>SHOP</span></h1>
-        <p>فروشگاه تخصصی اسکین‌های CS2</p>
+
+        <h1>
+            WIZYY <span>SHOP</span>
+        </h1>
+
+        <p>
+            فروشگاه تخصصی اسکین‌های CS2
+        </p>
+
     </div>
 
-    <div class="cart" onclick="toggleCart()">
-        CART <span id="cartCount">0</span>
+
+    <div
+        class="cart-button"
+        onclick="toggleCart()"
+    >
+        CART
+        <span id="cartCount">0</span>
     </div>
 
 </header>
 
 
-<!-- ================= HERO ================= -->
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-    <h2>CS2 <span>SKINS</span></h2>
+    <h2>
+        CS2 <span>SKINS</span>
+    </h2>
 
     <p>
         Browse and find your favorite Counter-Strike 2 skins.
@@ -616,91 +898,179 @@ footer p{
 </section>
 
 
-<!-- ================= CATEGORIES ================= -->
 
-<div class="categories">
+<!-- =========================
+     CATEGORIES
+========================= -->
 
-    <div class="category" onclick="selectCategory('Pistols',this)">
+<section class="categories">
+
+    <div
+        class="category"
+        onclick="selectCategory('Pistols',this)"
+    >
         PISTOLS
     </div>
 
-    <div class="category" onclick="selectCategory('Rifles',this)">
+    <div
+        class="category"
+        onclick="selectCategory('Rifles',this)"
+    >
         RIFLES
     </div>
 
-    <div class="category" onclick="selectCategory('SMGs',this)">
+    <div
+        class="category"
+        onclick="selectCategory('SMGs',this)"
+    >
         SMGs
     </div>
 
-    <div class="category" onclick="selectCategory('Snipers',this)">
+    <div
+        class="category"
+        onclick="selectCategory('Snipers',this)"
+    >
         SNIPERS
     </div>
 
-    <div class="category" onclick="selectCategory('Shotguns',this)">
+    <div
+        class="category"
+        onclick="selectCategory('Shotguns',this)"
+    >
         SHOTGUNS
     </div>
 
-    <div class="category" onclick="selectCategory('Machineguns',this)">
+    <div
+        class="category"
+        onclick="selectCategory('Machineguns',this)"
+    >
         MACHINEGUNS
     </div>
 
-    <div class="category" onclick="selectCategory('Knives',this)">
+    <div
+        class="category"
+        onclick="selectCategory('Knives',this)"
+    >
         KNIVES
     </div>
-
-</div>
-
-
-<!-- ================= WEAPON BOX ================= -->
-
-<section class="weapon-box" id="weaponBox">
-
-    <div class="weapon-title" id="weaponTitle">
-        WEAPONS
-    </div>
-
-    <div class="weapons" id="weapons"></div>
 
 </section>
 
 
-<!-- ================= FILTERS ================= -->
 
-<div class="filters">
+<!-- =========================
+     WEAPONS
+========================= -->
+
+<section
+    class="weapon-box"
+    id="weaponBox"
+>
+
+    <div
+        class="weapon-title"
+        id="weaponTitle"
+    >
+        WEAPONS
+    </div>
+
+    <div
+        class="weapons"
+        id="weapons"
+    ></div>
+
+</section>
+
+
+
+<!-- =========================
+     FILTERS
+========================= -->
+
+<section class="filters">
 
     <input
-        type="text"
-        id="search"
         class="search"
+        id="search"
+        type="text"
         placeholder="Search skins..."
         oninput="renderProducts()"
     >
 
-    <select id="wearFilter" onchange="renderProducts()">
-        <option value="all">All Wear</option>
-        <option value="Factory New">Factory New</option>
-        <option value="Minimal Wear">Minimal Wear</option>
-        <option value="Field-Tested">Field-Tested</option>
-        <option value="Well-Worn">Well-Worn</option>
-        <option value="Battle-Scarred">Battle-Scarred</option>
+
+    <select
+        id="wearFilter"
+        onchange="renderProducts()"
+    >
+
+        <option value="all">
+            All Wear
+        </option>
+
+        <option value="Factory New">
+            Factory New
+        </option>
+
+        <option value="Minimal Wear">
+            Minimal Wear
+        </option>
+
+        <option value="Field-Tested">
+            Field-Tested
+        </option>
+
+        <option value="Well-Worn">
+            Well-Worn
+        </option>
+
+        <option value="Battle-Scarred">
+            Battle-Scarred
+        </option>
+
     </select>
 
-    <select id="sortFilter" onchange="renderProducts()">
-        <option value="default">Sort</option>
-        <option value="low">Price: Low to High</option>
-        <option value="high">Price: High to Low</option>
-        <option value="name">Name</option>
+
+    <select
+        id="sortFilter"
+        onchange="renderProducts()"
+    >
+
+        <option value="default">
+            Sort
+        </option>
+
+        <option value="low">
+            Price: Low to High
+        </option>
+
+        <option value="high">
+            Price: High to Low
+        </option>
+
+        <option value="name">
+            Name
+        </option>
+
     </select>
 
-</div>
+</section>
 
 
-<!-- ================= PRODUCTS ================= -->
 
-<section class="products" id="products"></section>
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section
+    class="products"
+    id="products"
+></section>
 
 
-<!-- ================= FOOTER ================= -->
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -717,39 +1087,82 @@ footer p{
 </footer>
 
 
-<!-- ================= PRODUCT MODAL ================= -->
 
-<div class="modal" id="productModal">
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="productModal"
+>
 
     <div class="modal-content">
 
-        <div class="close" onclick="closeModal()">
+        <div
+            class="close-modal"
+            onclick="closeModal()"
+        >
             ×
         </div>
 
+
         <div class="modal-image">
-            <img id="modalImage" src="" alt="">
+
+            <img
+                id="modalImage"
+                src=""
+                alt=""
+            >
+
         </div>
+
 
         <h2 id="modalName"></h2>
 
-        <div class="modal-weapon" id="modalWeapon"></div>
+        <div
+            class="modal-subtitle"
+            id="modalWeapon"
+        ></div>
+
 
         <div class="modal-options">
 
-            <label>Wear</label>
+            <label>
+                WEAR
+            </label>
 
             <select id="modalWear">
-                <option>Factory New</option>
-                <option>Minimal Wear</option>
-                <option>Field-Tested</option>
-                <option>Well-Worn</option>
-                <option>Battle-Scarred</option>
+
+                <option>
+                    Factory New
+                </option>
+
+                <option>
+                    Minimal Wear
+                </option>
+
+                <option>
+                    Field-Tested
+                </option>
+
+                <option>
+                    Well-Worn
+                </option>
+
+                <option>
+                    Battle-Scarred
+                </option>
+
             </select>
 
         </div>
 
-        <button class="add-cart" onclick="addToCart()">
+
+        <button
+            class="add-cart"
+            onclick="addToCart()"
+        >
             ADD TO CART
         </button>
 
@@ -758,25 +1171,40 @@ footer p{
 </div>
 
 
-<!-- ================= CART PANEL ================= -->
 
-<div class="cart-panel" id="cartPanel">
+<!-- =========================
+     CART
+========================= -->
+
+<div
+    class="cart-panel"
+    id="cartPanel"
+>
 
     <div class="cart-header">
 
-        <h2>YOUR CART</h2>
+        <h2>
+            YOUR CART
+        </h2>
 
-        <div class="cart-close" onclick="toggleCart()">
+        <div
+            class="cart-close"
+            onclick="toggleCart()"
+        >
             ×
         </div>
 
     </div>
 
+
     <div id="cartItems"></div>
+
 
     <div class="cart-total">
 
-        <span>TOTAL</span>
+        <span>
+            TOTAL
+        </span>
 
         <span id="cartTotal">
             0 Toman
@@ -784,17 +1212,22 @@ footer p{
 
     </div>
 
-    <button class="telegram" onclick="sendTelegram()">
+
+    <button
+        class="telegram-button"
+        onclick="sendTelegram()"
+    >
         FINALIZE ORDER
     </button>
 
 </div>
 
 
+
 <script>
 
 /* =========================================================
-   DATA
+   WEAPONS
 ========================================================= */
 
 const weaponsByCategory = {
@@ -862,6 +1295,7 @@ const weaponsByCategory = {
     ]
 
 };
+
 
 
 /* =========================================================
@@ -1043,36 +1477,36 @@ const products = [
 ];
 
 
+
 /* =========================================================
-   STATE
+   VARIABLES
 ========================================================= */
 
-/*
-    مهم:
-    selectedWeapons یک آرایه است.
-    بنابراین می‌توانیم همزمان چند گان را انتخاب کنیم.
-*/
 
-let currentCategory = null;
+/*
+    چند گان می‌توانند همزمان داخل این آرایه باشند
+*/
 
 let selectedWeapons = [];
 
-let cart = [];
+let currentCategory = null;
 
 let currentProduct = null;
 
+let cart = [];
+
+
 
 /* =========================================================
-   CATEGORY SELECT
+   CATEGORY
 ========================================================= */
 
 function selectCategory(category,element){
 
     /*
-        اگر همان Category دوباره کلیک شود:
-        Category بسته می‌شود
-        تمام Weapon ها Unselect می‌شوند
-        همه اسکین‌ها دوباره نمایش داده می‌شوند
+
+        اگر دوباره همان Category کلیک شد
+        همه انتخاب‌ها پاک شوند
     */
 
     if(currentCategory === category){
@@ -1081,15 +1515,18 @@ function selectCategory(category,element){
 
         selectedWeapons = [];
 
+
         document
             .querySelectorAll(".category")
             .forEach(item=>{
                 item.classList.remove("active");
             });
 
+
         document
             .getElementById("weaponBox")
             .classList.remove("show");
+
 
         renderProducts();
 
@@ -1102,10 +1539,6 @@ function selectCategory(category,element){
     */
 
     currentCategory = category;
-
-    /*
-        با عوض کردن Category انتخاب‌های قبلی پاک می‌شوند
-    */
 
     selectedWeapons = [];
 
@@ -1135,42 +1568,41 @@ function selectCategory(category,element){
 
     renderProducts();
 
-
-    document
-        .getElementById("weaponBox")
-        .scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
 }
 
 
+
 /* =========================================================
-   MULTI WEAPON SELECT
+   MULTI SELECT WEAPONS
 ========================================================= */
 
 function selectWeapon(weapon,element){
 
     /*
-        اگر گان از قبل انتخاب شده:
-        فقط همان گان را Unselect می‌کنیم
+        بررسی می‌کنیم گان قبلاً انتخاب شده یا نه
     */
 
-    if(selectedWeapons.includes(weapon)){
+    const index =
+        selectedWeapons.indexOf(weapon);
 
-        selectedWeapons =
-            selectedWeapons.filter(
-                item => item !== weapon
-            );
+
+    /*
+        اگر انتخاب شده بود:
+        فقط خودش حذف شود
+    */
+
+    if(index !== -1){
+
+        selectedWeapons.splice(index,1);
 
         element.classList.remove("active");
 
     }
 
+
     /*
-        اگر انتخاب نشده:
-        به لیست انتخاب‌ها اضافه می‌شود
+        اگر انتخاب نشده بود:
+        به لیست اضافه شود
     */
 
     else{
@@ -1182,9 +1614,14 @@ function selectWeapon(weapon,element){
     }
 
 
+    /*
+        محصولات دوباره فیلتر شوند
+    */
+
     renderProducts();
 
 }
+
 
 
 /* =========================================================
@@ -1195,6 +1632,7 @@ function renderWeapons(){
 
     const container =
         document.getElementById("weapons");
+
 
     container.innerHTML = "";
 
@@ -1208,16 +1646,21 @@ function renderWeapons(){
         const button =
             document.createElement("div");
 
+
         button.className = "weapon";
 
 
         /*
-            اگر قبلاً انتخاب شده باشد
-            active می‌شود
+            اگر گان قبلاً انتخاب شده
+            دوباره active شود
         */
 
-        if(selectedWeapons.includes(weapon)){
+        if(
+            selectedWeapons.includes(weapon)
+        ){
+
             button.classList.add("active");
+
         }
 
 
@@ -1241,6 +1684,7 @@ function renderWeapons(){
 }
 
 
+
 /* =========================================================
    RENDER PRODUCTS
 ========================================================= */
@@ -1249,6 +1693,7 @@ function renderProducts(){
 
     const container =
         document.getElementById("products");
+
 
     container.innerHTML = "";
 
@@ -1278,13 +1723,16 @@ function renderProducts(){
 
 
             /*
-                Search
+                SEARCH
             */
 
             const searchMatch =
+
                 product.name
                     .toLowerCase()
-                    .includes(search) ||
+                    .includes(search)
+
+                ||
 
                 product.weapon
                     .toLowerCase()
@@ -1292,24 +1740,28 @@ function renderProducts(){
 
 
             /*
-                Wear
+                WEAR
             */
 
             const wearMatch =
-                wear === "all" ||
+
+                wear === "all"
+
+                ||
+
                 product.wear === wear;
 
 
             /*
-                Multi Weapon Filter
+                MULTI WEAPON
             */
 
             let weaponMatch = true;
 
 
             /*
-                اگر هیچ گانی انتخاب نشده:
-                همه محصولات نمایش داده شوند
+                اگر حداقل یک گان انتخاب شده:
+                فقط همان گان‌ها
             */
 
             if(selectedWeapons.length > 0){
@@ -1331,9 +1783,10 @@ function renderProducts(){
         });
 
 
-    /*
-        Sort
-    */
+
+    /* =========================
+       SORT
+    ========================= */
 
     if(sort === "low"){
 
@@ -1361,16 +1814,21 @@ function renderProducts(){
     }
 
 
-    /*
-        Empty
-    */
+
+    /* =========================
+       EMPTY
+    ========================= */
 
     if(filtered.length === 0){
 
         container.innerHTML = `
+
             <div class="empty">
+
                 No skins found.
+
             </div>
+
         `;
 
         return;
@@ -1378,26 +1836,27 @@ function renderProducts(){
     }
 
 
-    /*
-        Product Cards
-    */
+
+    /* =========================
+       PRODUCTS
+    ========================= */
 
     filtered.forEach(product=>{
 
         const card =
             document.createElement("div");
 
+
         card.className = "product";
 
 
         card.innerHTML = `
 
-            <div class="product-img">
+            <div class="product-image">
 
                 <img
                     src="${product.image}"
                     alt="${product.name}"
-                    onerror="this.style.display='none'"
                 >
 
             </div>
@@ -1406,27 +1865,39 @@ function renderProducts(){
             <div class="product-info">
 
                 <div class="product-name">
+
                     ${product.name}
+
                 </div>
 
+
                 <div class="product-weapon">
+
                     ${product.weapon}
+
                     •
+
                     ${product.wear}
+
                 </div>
 
 
                 <div class="product-bottom">
 
                     <div class="price">
+
                         ${formatPrice(product.price)}
+
                     </div>
 
+
                     <button
-                        class="buy"
+                        class="buy-button"
                         onclick="openProduct(${product.id})"
                     >
+
                         BUY
+
                     </button>
 
                 </div>
@@ -1443,18 +1914,21 @@ function renderProducts(){
 }
 
 
+
 /* =========================================================
-   FORMAT PRICE
+   PRICE
 ========================================================= */
 
 function formatPrice(price){
 
     return (
         price.toLocaleString("en-US")
-        + " Toman"
+        +
+        " Toman"
     );
 
 }
+
 
 
 /* =========================================================
@@ -1465,7 +1939,7 @@ function openProduct(id){
 
     currentProduct =
         products.find(
-            product => product.id === id
+            product=>product.id===id
         );
 
 
@@ -1489,9 +1963,13 @@ function openProduct(id){
     document
         .getElementById("modalWeapon")
         .textContent =
-        currentProduct.weapon +
-        " • " +
-        formatPrice(currentProduct.price);
+        currentProduct.weapon
+        +
+        " • "
+        +
+        formatPrice(
+            currentProduct.price
+        );
 
 
     document
@@ -1507,6 +1985,7 @@ function openProduct(id){
 }
 
 
+
 /* =========================================================
    CLOSE MODAL
 ========================================================= */
@@ -1520,8 +1999,9 @@ function closeModal(){
 }
 
 
+
 /* =========================================================
-   ADD TO CART
+   ADD CART
 ========================================================= */
 
 function addToCart(){
@@ -1531,7 +2011,7 @@ function addToCart(){
     }
 
 
-    const selectedWear =
+    const wear =
         document
             .getElementById("modalWear")
             .value;
@@ -1540,9 +2020,6 @@ function addToCart(){
     cart.push({
 
         id:Date.now(),
-
-        productId:
-            currentProduct.id,
 
         name:
             currentProduct.name,
@@ -1553,8 +2030,7 @@ function addToCart(){
         price:
             currentProduct.price,
 
-        wear:
-            selectedWear
+        wear:wear
 
     });
 
@@ -1566,18 +2042,16 @@ function addToCart(){
 }
 
 
+
 /* =========================================================
-   UPDATE CART
+   CART
 ========================================================= */
 
 function updateCart(){
 
-    const count =
-        document
-            .getElementById("cartCount");
-
-
-    count.textContent =
+    document
+        .getElementById("cartCount")
+        .textContent =
         cart.length;
 
 
@@ -1595,13 +2069,17 @@ function updateCart(){
     if(cart.length === 0){
 
         container.innerHTML = `
+
             <div style="
                 color:#555;
                 text-align:center;
-                padding:40px 0;
+                padding:45px 0;
             ">
+
                 Your cart is empty.
+
             </div>
+
         `;
 
     }
@@ -1615,30 +2093,44 @@ function updateCart(){
         const div =
             document.createElement("div");
 
-        div.className =
-            "cart-item";
+
+        div.className = "cart-item";
 
 
         div.innerHTML = `
 
             <strong>
+
                 ${item.name}
+
             </strong>
 
-            <small>
-                ${item.weapon}
-                •
-                ${item.wear}
-            </small>
 
             <small>
-                ${formatPrice(item.price)}
+
+                ${item.weapon}
+
+                •
+
+                ${item.wear}
+
             </small>
+
+
+            <small>
+
+                ${formatPrice(item.price)}
+
+            </small>
+
 
             <button
-                onclick="removeFromCart(${item.id})"
+                class="remove-item"
+                onclick="removeCartItem(${item.id})"
             >
+
                 REMOVE
+
             </button>
 
         `;
@@ -1657,24 +2149,27 @@ function updateCart(){
 }
 
 
+
 /* =========================================================
-   REMOVE CART ITEM
+   REMOVE CART
 ========================================================= */
 
-function removeFromCart(id){
+function removeCartItem(id){
 
     cart =
         cart.filter(
-            item => item.id !== id
+            item=>item.id!==id
         );
+
 
     updateCart();
 
 }
 
 
+
 /* =========================================================
-   CART TOGGLE
+   CART PANEL
 ========================================================= */
 
 function toggleCart(){
@@ -1686,15 +2181,18 @@ function toggleCart(){
 }
 
 
+
 /* =========================================================
-   TELEGRAM ORDER
+   TELEGRAM
 ========================================================= */
 
 function sendTelegram(){
 
     if(cart.length === 0){
 
-        alert("Your cart is empty.");
+        alert(
+            "Your cart is empty."
+        );
 
         return;
 
@@ -1702,7 +2200,9 @@ function sendTelegram(){
 
 
     let message =
-        "Hello WIZYY SHOP%0A%0A" +
+        "Hello WIZYY SHOP%0A%0A";
+
+    message +=
         "I want to order:%0A";
 
 
@@ -1715,81 +2215,115 @@ function sendTelegram(){
 
 
         message +=
-            "%0A" +
-            (index + 1) +
-            ". " +
-            encodeURIComponent(item.name) +
-            "%0A" +
-            "Weapon: " +
-            encodeURIComponent(item.weapon) +
-            "%0A" +
-            "Wear: " +
-            encodeURIComponent(item.wear) +
-            "%0A" +
-            "Price: " +
+
+            "%0A"
+
+            +
+
+            (index+1)
+
+            +
+
+            ". "
+
+            +
+
             encodeURIComponent(
-                formatPrice(item.price)
-            ) +
+                item.name
+            )
+
+            +
+
+            "%0AWeapon: "
+
+            +
+
+            encodeURIComponent(
+                item.weapon
+            )
+
+            +
+
+            "%0AWear: "
+
+            +
+
+            encodeURIComponent(
+                item.wear
+            )
+
+            +
+
+            "%0APrice: "
+
+            +
+
+            encodeURIComponent(
+                formatPrice(
+                    item.price
+                )
+            )
+
+            +
+
             "%0A";
 
     });
 
 
     message +=
-        "%0ATotal: " +
+
+        "%0ATotal: "
+
+        +
+
         encodeURIComponent(
             formatPrice(total)
         );
 
 
-    /*
-        Telegram username
-        اینو اگر یوزرنیم واقعی شاپت فرق دارد
-        عوض کن.
-    */
+    const telegramURL =
 
-    const telegram =
-        "https://t.me/WizyyShop?text=" +
+        "https://t.me/WizyyShop?text="
+
+        +
+
         message;
 
 
     window.open(
-        telegram,
+        telegramURL,
         "_blank"
     );
 
 }
 
 
+
 /* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
+   MODAL OUTSIDE CLICK
 ========================================================= */
 
 document
     .getElementById("productModal")
     .addEventListener(
         "click",
-        function(e){
+        function(event){
 
-            if(e.target === this){
+            if(event.target === this){
+
                 closeModal();
+
             }
 
         }
     );
 
 
-/* =========================================================
-   INITIAL STATE
-========================================================= */
 
-/*
-    اول سایت:
-    هیچ Category انتخاب نیست
-    هیچ Weapon انتخاب نیست
-    Weapon Box مخفی است
-    تمام اسکین‌ها نمایش داده می‌شوند
-*/
+/* =========================================================
+   INITIAL
+========================================================= */
 
 currentCategory = null;
 
@@ -1798,7 +2332,6 @@ selectedWeapons = [];
 document
     .getElementById("weaponBox")
     .classList.remove("show");
-
 
 renderProducts();
 
