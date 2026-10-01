@@ -4,406 +4,301 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WIZYY SHOP</title>
+<title>WIZYY SHOP - CS2 Skin Store</title>
 
 <style>
-
-/* =========================
-   RESET
-========================= */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#050505;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080808;
     color:#fff;
     min-height:100vh;
 }
 
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 50% -10%,rgba(180,0,0,.18),transparent 35%),
+        radial-gradient(circle at 0% 100%,rgba(130,0,0,.08),transparent 30%);
+    z-index:-1;
+}
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
-    height:90px;
     position:sticky;
     top:0;
     z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(5,5,5,.94);
-    border-bottom:1px solid #1b1b1b;
-
+    height:86px;
+    background:rgba(7,7,7,.94);
+    border-bottom:1px solid #220909;
     backdrop-filter:blur(14px);
 }
 
+.header-inner{
+    width:95%;
+    max-width:1450px;
+    height:100%;
+    margin:auto;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-/* WIZYY SHOP کاملاً آزاد */
+.logo-area{
+    text-align:center;
+}
 
 .logo{
-    text-align:center;
-    background:none;
-    border:none;
-    box-shadow:none;
-    padding:0;
-}
-
-.logo h1{
     font-size:32px;
-    font-weight:900;
-    letter-spacing:6px;
+    font-weight:1000;
+    letter-spacing:5px;
     color:#fff;
-
     text-shadow:
-        0 0 10px rgba(255,255,255,.08);
+        0 0 8px rgba(255,0,0,.45),
+        0 0 25px rgba(255,0,0,.18);
 }
 
-.logo h1 span{
-    color:#e10600;
-
-    text-shadow:
-        0 0 15px rgba(225,6,0,.4);
+.logo span{
+    color:#e00000;
 }
 
-.logo p{
-    margin-top:6px;
-    color:#777;
-    font-size:11px;
+.subtitle{
+    margin-top:5px;
+    font-size:12px;
+    color:#aaa;
     letter-spacing:1px;
 }
 
-
-/* =========================
-   CART BUTTON
-========================= */
+/* CART */
 
 .cart-button{
     position:absolute;
-    right:25px;
-    top:25px;
-
-    background:#0d0d0d;
-    border:1px solid #292929;
-
-    padding:10px 16px;
-    border-radius:7px;
-
-    color:#aaa;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    background:#110909;
+    border:1px solid #500d0d;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:9px;
     cursor:pointer;
-
     transition:.2s;
+    font-weight:bold;
 }
 
 .cart-button:hover{
-    color:#fff;
-    border-color:#e10600;
+    background:#e00000;
+    border-color:#e00000;
 }
 
-.cart-button span{
-    color:#e10600;
-    font-weight:bold;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    text-align:center;
-
-    padding:70px 20px 45px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(225,6,0,.13),
-            transparent 45%
-        );
-}
-
-.hero h2{
-    font-size:42px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.hero h2 span{
-    color:#e10600;
-}
-
-.hero p{
-    margin-top:12px;
-    color:#777;
-    font-size:14px;
-}
-
-
-/* =========================
-   CATEGORIES
-========================= */
-
-.categories{
-    max-width:1200px;
-    margin:auto;
-
-    display:flex;
+.cart-count{
+    display:inline-flex;
+    align-items:center;
     justify-content:center;
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    padding:20px;
+    min-width:20px;
+    height:20px;
+    margin-left:7px;
+    background:#e00000;
+    border-radius:50%;
+    font-size:11px;
 }
 
-.category{
-    min-width:120px;
+/* MAIN */
 
-    padding:13px 20px;
-
-    background:#0b0b0b;
-    border:1px solid #272727;
-
-    border-radius:7px;
-
-    color:#888;
-
-    font-size:12px;
-    font-weight:bold;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.2s;
+main{
+    width:95%;
+    max-width:1450px;
+    margin:30px auto 60px;
 }
 
-.category:hover{
-    color:#fff;
-    border-color:#8f0000;
-}
+/* CONTROLS */
 
-.category.active{
-    color:#fff;
-
-    background:#180606;
-
-    border-color:#e10600;
-
-    box-shadow:
-        0 0 18px rgba(225,6,0,.18);
-}
-
-
-/* =========================
-   WEAPON BOX
-========================= */
-
-.weapon-box{
-    display:none;
-
-    max-width:1200px;
-
-    margin:15px auto 35px;
-
-    padding:25px;
-
-    background:#080808;
-
-    border:1px solid #202020;
-
-    border-radius:12px;
-}
-
-.weapon-box.show{
-    display:block;
-}
-
-.weapon-title{
-    text-align:center;
-
-    color:#666;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-    margin-bottom:18px;
-}
-
-.weapons{
+.controls{
     display:flex;
-    justify-content:center;
+    gap:12px;
     flex-wrap:wrap;
-    gap:9px;
-}
-
-.weapon{
-    padding:10px 15px;
-
-    background:#101010;
-
-    border:1px solid #282828;
-
-    border-radius:7px;
-
-    color:#888;
-
-    font-size:12px;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.weapon:hover{
-    color:#fff;
-    border-color:#900000;
-}
-
-.weapon.active{
-    color:#fff;
-
-    background:#280606;
-
-    border-color:#e10600;
-
-    box-shadow:
-        0 0 14px rgba(225,6,0,.25);
-}
-
-
-/* =========================
-   FILTERS
-========================= */
-
-.filters{
-    max-width:1200px;
-
-    margin:0 auto 25px;
-
-    padding:0 20px;
-
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+    margin-bottom:25px;
 }
 
 .search{
     flex:1;
-    min-width:220px;
+    min-width:240px;
+}
 
-    padding:13px 15px;
-
-    background:#0c0c0c;
-
-    border:1px solid #282828;
-
-    border-radius:7px;
-
+.search input,
+select{
+    width:100%;
+    height:46px;
+    background:#101010;
     color:#fff;
-
+    border:1px solid #2d2d2d;
+    border-radius:8px;
+    padding:0 15px;
     outline:none;
 }
 
-.search:focus{
-    border-color:#e10600;
+.search input:focus,
+select:focus{
+    border-color:#b00000;
+    box-shadow:0 0 0 2px rgba(176,0,0,.12);
 }
 
-.filters select{
-    padding:13px 15px;
+.filter-box{
+    width:190px;
+}
 
-    background:#0c0c0c;
+/* CATEGORY */
 
+.section-title{
+    font-size:13px;
+    color:#777;
+    letter-spacing:2px;
+    margin-bottom:12px;
+    text-transform:uppercase;
+}
+
+.categories{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.category{
+    background:#101010;
+    color:#bbb;
     border:1px solid #282828;
-
+    padding:11px 17px;
     border-radius:7px;
-
-    color:#999;
-
-    outline:none;
-
     cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:.5px;
+    transition:.2s;
 }
 
-.filters select:focus{
-    border-color:#e10600;
+.category:hover{
+    border-color:#9d0000;
+    color:#fff;
 }
 
+.category.active{
+    background:#b00000;
+    border-color:#e00000;
+    color:#fff;
+    box-shadow:0 0 18px rgba(220,0,0,.16);
+}
 
-/* =========================
-   PRODUCTS
-========================= */
+/* WEAPON / ACCESSORY BOX */
+
+.weapon-box{
+    display:none;
+    background:#0d0d0d;
+    border:1px solid #292929;
+    border-radius:10px;
+    padding:18px;
+    margin-bottom:28px;
+}
+
+.weapon-box.show{
+    display:block;
+    animation:fadeDown .2s ease;
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.weapon-title{
+    color:#777;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:13px;
+}
+
+.weapon-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.weapon{
+    padding:9px 13px;
+    border-radius:6px;
+    border:1px solid #292929;
+    background:#151515;
+    color:#aaa;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+    transition:.18s;
+}
+
+.weapon:hover{
+    color:#fff;
+    border-color:#850000;
+}
+
+.weapon.active{
+    background:#9d0000;
+    border-color:#e00000;
+    color:#fff;
+}
+
+/* PRODUCTS */
 
 .products{
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:0 20px 70px;
-
     display:grid;
-
-    grid-template-columns:
-        repeat(auto-fill,minmax(215px,1fr));
-
+    grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
     gap:18px;
 }
 
 .product{
-    background:#0b0b0b;
-
-    border:1px solid #202020;
-
-    border-radius:11px;
-
+    background:#101010;
+    border:1px solid #252525;
+    border-radius:12px;
     overflow:hidden;
-
     transition:.25s;
+    position:relative;
 }
 
 .product:hover{
-    transform:translateY(-5px);
-
-    border-color:#750000;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.5);
+    transform:translateY(-4px);
+    border-color:#720000;
+    box-shadow:0 12px 35px rgba(0,0,0,.45);
 }
 
 .product-image{
-    height:165px;
-
-    background:
-        radial-gradient(
-            circle,
-            #151515,
-            #080808
-        );
-
+    height:185px;
     display:flex;
-
     align-items:center;
     justify-content:center;
-
+    background:
+        radial-gradient(circle,#191919 0%,#0b0b0b 70%);
     overflow:hidden;
 }
 
 .product-image img{
-    width:92%;
-    height:92%;
-
+    width:90%;
+    height:90%;
     object-fit:contain;
-
     transition:.3s;
 }
 
@@ -417,93 +312,66 @@ header{
 
 .product-name{
     font-size:15px;
-    font-weight:bold;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
 .product-weapon{
-    color:#666;
-
+    color:#777;
     font-size:11px;
-
-    margin-top:6px;
+    margin-bottom:15px;
 }
 
 .product-bottom{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
-    margin-top:16px;
+    gap:8px;
 }
 
 .price{
-    color:#e10600;
-
-    font-weight:bold;
-
-    font-size:14px;
+    color:#e30000;
+    font-size:15px;
+    font-weight:900;
 }
 
 .buy-button{
-    border:none;
-
-    background:#e10600;
-
-    color:white;
-
-    padding:8px 13px;
-
+    border:0;
+    background:#c40000;
+    color:#fff;
+    padding:9px 14px;
     border-radius:6px;
-
-    font-size:11px;
-
-    font-weight:bold;
-
     cursor:pointer;
-
+    font-weight:bold;
+    font-size:11px;
     transition:.2s;
 }
 
 .buy-button:hover{
-    background:#ff1710;
+    background:#f00000;
+    transform:scale(1.03);
 }
-
-
-/* =========================
-   EMPTY
-========================= */
 
 .empty{
     grid-column:1/-1;
-
     text-align:center;
-
     padding:70px 20px;
-
-    color:#555;
+    color:#666;
+    border:1px dashed #2a2a2a;
+    border-radius:10px;
 }
 
-
-/* =========================
-   MODAL
-========================= */
+/* MODAL */
 
 .modal{
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.82);
-
     display:none;
-
+    position:fixed;
+    inset:0;
+    z-index:3000;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(8px);
     align-items:center;
     justify-content:center;
-
-    z-index:2000;
-
     padding:20px;
 }
 
@@ -513,317 +381,279 @@ header{
 
 .modal-content{
     width:100%;
-    max-width:500px;
-
-    background:#0a0a0a;
-
-    border:1px solid #351010;
-
-    border-radius:13px;
-
+    max-width:570px;
+    background:#0d0d0d;
+    border:1px solid #450000;
+    border-radius:14px;
     padding:25px;
-
-    position:relative;
+    box-shadow:0 25px 70px rgba(0,0,0,.65);
+    animation:modalIn .2s ease;
 }
 
-.close-modal{
-    position:absolute;
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
 
-    right:17px;
-    top:12px;
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
 
-    font-size:25px;
+.modal-header h2{
+    font-size:20px;
+}
 
-    color:#666;
-
+.close{
+    width:34px;
+    height:34px;
+    border-radius:7px;
+    border:1px solid #333;
+    background:#161616;
+    color:#aaa;
     cursor:pointer;
 }
 
-.close-modal:hover{
+.close:hover{
     color:#fff;
+    background:#b00000;
 }
 
 .modal-image{
-    height:220px;
-
-    background:#080808;
-
-    border-radius:9px;
-
+    height:230px;
     display:flex;
-
-    align-items:center;
     justify-content:center;
-
+    align-items:center;
+    background:#080808;
+    border-radius:10px;
     margin-bottom:20px;
 }
 
 .modal-image img{
-    width:90%;
-    height:90%;
-
+    max-width:90%;
+    max-height:90%;
     object-fit:contain;
 }
 
-.modal-content h2{
-    font-size:22px;
+.modal-details{
+    display:grid;
+    gap:10px;
+    margin-bottom:20px;
 }
 
-.modal-subtitle{
-    margin-top:6px;
-
-    color:#666;
-
-    font-size:12px;
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    padding:11px;
+    background:#141414;
+    border-radius:6px;
 }
 
-.modal-options{
-    margin-top:20px;
-}
-
-.modal-options label{
-    display:block;
-
+.detail-label{
     color:#777;
-
-    font-size:11px;
-
-    margin-bottom:7px;
 }
 
-.modal-options select{
-    width:100%;
+.detail-value{
+    font-weight:bold;
+}
 
+.modal-actions{
+    display:flex;
+    gap:10px;
+}
+
+.modal-actions button{
+    flex:1;
     padding:13px;
-
-    background:#111;
-
-    color:#aaa;
-
-    border:1px solid #292929;
-
     border-radius:7px;
-
-    outline:none;
+    border:0;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 .add-cart{
-    width:100%;
-
-    margin-top:20px;
-
-    padding:14px;
-
-    border:none;
-
-    background:#e10600;
-
+    background:#a80000;
     color:#fff;
-
-    border-radius:7px;
-
-    font-weight:bold;
-
-    cursor:pointer;
 }
 
 .add-cart:hover{
-    background:#ff1710;
+    background:#e00000;
 }
 
-
-/* =========================
-   CART PANEL
-========================= */
-
-.cart-panel{
-    position:fixed;
-
-    top:0;
-    right:-430px;
-
-    width:410px;
-    max-width:95%;
-
-    height:100vh;
-
-    background:#090909;
-
-    border-left:1px solid #301010;
-
-    z-index:3000;
-
-    padding:25px;
-
-    transition:.3s;
-
-    overflow-y:auto;
+.cancel{
+    background:#1b1b1b;
+    color:#aaa;
+    border:1px solid #333!important;
 }
 
-.cart-panel.show{
-    right:0;
-}
+/* CART MODAL */
 
-.cart-header{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding-bottom:20px;
-
-    border-bottom:1px solid #222;
-}
-
-.cart-header h2{
-    font-size:20px;
-}
-
-.cart-close{
-    font-size:23px;
-
-    color:#666;
-
-    cursor:pointer;
-}
-
-.cart-close:hover{
-    color:#fff;
+.cart-items{
+    max-height:350px;
+    overflow:auto;
+    margin-bottom:20px;
 }
 
 .cart-item{
-    padding:16px 0;
-
-    border-bottom:1px solid #202020;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#151515;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:8px;
 }
 
-.cart-item strong{
-    font-size:14px;
+.cart-item img{
+    width:70px;
+    height:55px;
+    object-fit:contain;
+    background:#0b0b0b;
+    border-radius:5px;
 }
 
-.cart-item small{
-    display:block;
+.cart-item-info{
+    flex:1;
+}
 
-    color:#666;
+.cart-item-name{
+    font-weight:bold;
+    font-size:13px;
+}
 
-    margin-top:5px;
+.cart-item-price{
+    color:#e00000;
+    font-size:12px;
+    margin-top:4px;
 }
 
 .remove-item{
-    border:none;
-
-    background:none;
-
-    color:#e10600;
-
-    margin-top:8px;
-
+    background:#270909;
+    border:1px solid #550d0d;
+    color:#e00000;
+    padding:7px 9px;
+    border-radius:5px;
     cursor:pointer;
+}
 
-    font-size:11px;
+.remove-item:hover{
+    background:#e00000;
+    color:#fff;
 }
 
 .cart-total{
-    margin-top:25px;
-
     display:flex;
-
     justify-content:space-between;
-
+    font-size:18px;
     font-weight:bold;
+    padding:15px 0;
+    border-top:1px solid #292929;
 }
 
-.telegram-button{
+.finalize{
     width:100%;
-
-    margin-top:20px;
-
     padding:14px;
-
-    border:none;
-
-    background:#e10600;
-
-    color:#fff;
-
+    border:0;
     border-radius:7px;
-
-    font-weight:bold;
-
+    background:#e00000;
+    color:#fff;
+    font-weight:900;
     cursor:pointer;
 }
 
+.finalize:hover{
+    background:#ff1111;
+}
 
-/* =========================
-   FOOTER
-========================= */
+.empty-cart{
+    text-align:center;
+    color:#666;
+    padding:45px 10px;
+}
+
+/* FOOTER */
 
 footer{
-    border-top:1px solid #191919;
-
-    text-align:center;
-
+    border-top:1px solid #1e1e1e;
+    background:#070707;
     padding:35px 20px;
+    text-align:center;
+}
 
-    color:#555;
+.footer-logo{
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:3px;
+}
 
+.footer-logo span{
+    color:#e00000;
+}
+
+.footer-text{
+    margin-top:8px;
+    color:#777;
     font-size:12px;
 }
 
-footer strong{
-    color:#e10600;
+.telegram{
+    display:inline-block;
+    margin-top:16px;
+    color:#d00000;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:bold;
 }
 
-footer p{
-    margin-top:8px;
+.telegram:hover{
+    color:#ff2222;
 }
 
+/* RESPONSIVE */
 
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:650px){
+@media(max-width:700px){
 
     header{
-        height:78px;
+        height:76px;
     }
 
-    .logo h1{
+    .logo{
         font-size:23px;
-        letter-spacing:4px;
+        letter-spacing:3px;
     }
 
-    .logo p{
+    .subtitle{
         font-size:9px;
     }
 
     .cart-button{
-        right:10px;
-        top:21px;
-
-        padding:8px 10px;
-
+        padding:9px 11px;
         font-size:10px;
     }
 
-    .hero{
-        padding:50px 15px 35px;
+    main{
+        width:92%;
     }
 
-    .hero h2{
-        font-size:29px;
+    .filter-box{
+        width:100%;
     }
 
     .products{
-        grid-template-columns:repeat(2,1fr);
-
+        grid-template-columns:repeat(2,minmax(0,1fr));
         gap:10px;
     }
 
     .product-image{
-        height:120px;
+        height:135px;
     }
 
     .product-info{
@@ -834,278 +664,222 @@ footer p{
         font-size:12px;
     }
 
+    .product-weapon{
+        font-size:9px;
+    }
+
     .price{
         font-size:11px;
     }
 
     .buy-button{
-        padding:7px 8px;
+        padding:7px 9px;
+        font-size:9px;
     }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
+    <div class="header-inner">
 
-    <div class="logo">
+        <div class="logo-area">
+            <div class="logo">
+                WIZYY <span>SHOP</span>
+            </div>
 
-        <h1>
-            WIZYY <span>SHOP</span>
-        </h1>
+            <div class="subtitle">
+                فروشگاه تخصصی اسکین‌های CS2
+            </div>
+        </div>
 
-        <p>
-            فروشگاه تخصصی اسکین‌های CS2
-        </p>
+        <button class="cart-button" onclick="openCart()">
+            CART
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
 
     </div>
-
-
-    <div
-        class="cart-button"
-        onclick="toggleCart()"
-    >
-        CART
-        <span id="cartCount">0</span>
-    </div>
-
 </header>
 
 
+<main>
 
-<!-- =========================
-     HERO
-========================= -->
+    <!-- SEARCH / FILTER -->
 
-<section class="hero">
+    <div class="controls">
 
-    <h2>
-        CS2 <span>SKINS</span>
-    </h2>
+        <div class="search">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search skins, weapons or accessories..."
+                oninput="renderProducts()"
+            >
+        </div>
 
-    <p>
-        Browse and find your favorite Counter-Strike 2 skins.
-    </p>
+        <div class="filter-box">
+            <select id="wearFilter" onchange="renderProducts()">
+                <option value="all">All Wear</option>
+                <option value="Factory New">Factory New</option>
+                <option value="Minimal Wear">Minimal Wear</option>
+                <option value="Field-Tested">Field-Tested</option>
+                <option value="Well-Worn">Well-Worn</option>
+                <option value="Battle-Scarred">Battle-Scarred</option>
+            </select>
+        </div>
 
-</section>
+        <div class="filter-box">
+            <select id="sortFilter" onchange="renderProducts()">
+                <option value="default">Sort: Default</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="name">Name: A-Z</option>
+            </select>
+        </div>
 
-
-
-<!-- =========================
-     CATEGORIES
-========================= -->
-
-<section class="categories">
-
-    <div
-        class="category"
-        onclick="selectCategory('Pistols',this)"
-    >
-        PISTOLS
     </div>
 
-    <div
-        class="category"
-        onclick="selectCategory('Rifles',this)"
-    >
-        RIFLES
+
+    <!-- CATEGORIES -->
+
+    <div class="section-title">
+        Categories
     </div>
 
-    <div
-        class="category"
-        onclick="selectCategory('SMGs',this)"
-    >
-        SMGs
+    <div class="categories">
+
+        <button
+            class="category"
+            onclick="selectCategory('Pistols',this)"
+        >
+            PISTOLS
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('Rifles',this)"
+        >
+            RIFLES
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('SMGs',this)"
+        >
+            SMGs
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('Snipers',this)"
+        >
+            SNIPERS
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('Shotguns',this)"
+        >
+            SHOTGUNS
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('Machineguns',this)"
+        >
+            MACHINEGUNS
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('Knives',this)"
+        >
+            KNIVES
+        </button>
+
+        <button
+            class="category"
+            onclick="selectCategory('Accessories',this)"
+        >
+            ACCESSORIES
+        </button>
+
     </div>
 
-    <div
-        class="category"
-        onclick="selectCategory('Snipers',this)"
-    >
-        SNIPERS
+
+    <!-- WEAPON / ACCESSORY SELECTOR -->
+
+    <div id="weaponBox" class="weapon-box">
+
+        <div
+            id="weaponTitle"
+            class="weapon-title"
+        >
+            WEAPONS
+        </div>
+
+        <div
+            id="weaponList"
+            class="weapon-list"
+        ></div>
+
     </div>
 
-    <div
-        class="category"
-        onclick="selectCategory('Shotguns',this)"
-    >
-        SHOTGUNS
-    </div>
 
-    <div
-        class="category"
-        onclick="selectCategory('Machineguns',this)"
-    >
-        MACHINEGUNS
-    </div>
+    <!-- PRODUCTS -->
 
-    <div
-        class="category"
-        onclick="selectCategory('Knives',this)"
-    >
-        KNIVES
-    </div>
+    <div id="products" class="products"></div>
 
-</section>
+</main>
 
-
-
-<!-- =========================
-     WEAPONS
-========================= -->
-
-<section
-    class="weapon-box"
-    id="weaponBox"
->
-
-    <div
-        class="weapon-title"
-        id="weaponTitle"
-    >
-        WEAPONS
-    </div>
-
-    <div
-        class="weapons"
-        id="weapons"
-    ></div>
-
-</section>
-
-
-
-<!-- =========================
-     FILTERS
-========================= -->
-
-<section class="filters">
-
-    <input
-        class="search"
-        id="search"
-        type="text"
-        placeholder="Search skins..."
-        oninput="renderProducts()"
-    >
-
-
-    <select
-        id="wearFilter"
-        onchange="renderProducts()"
-    >
-
-        <option value="all">
-            All Wear
-        </option>
-
-        <option value="Factory New">
-            Factory New
-        </option>
-
-        <option value="Minimal Wear">
-            Minimal Wear
-        </option>
-
-        <option value="Field-Tested">
-            Field-Tested
-        </option>
-
-        <option value="Well-Worn">
-            Well-Worn
-        </option>
-
-        <option value="Battle-Scarred">
-            Battle-Scarred
-        </option>
-
-    </select>
-
-
-    <select
-        id="sortFilter"
-        onchange="renderProducts()"
-    >
-
-        <option value="default">
-            Sort
-        </option>
-
-        <option value="low">
-            Price: Low to High
-        </option>
-
-        <option value="high">
-            Price: High to Low
-        </option>
-
-        <option value="name">
-            Name
-        </option>
-
-    </select>
-
-</section>
-
-
-
-<!-- =========================
-     PRODUCTS
-========================= -->
-
-<section
-    class="products"
-    id="products"
-></section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
-    <strong>WIZYY SHOP</strong>
+    <div class="footer-logo">
+        WIZYY <span>SHOP</span>
+    </div>
 
-    <p>
+    <div class="footer-text">
         فروشگاه تخصصی اسکین‌های CS2
-    </p>
+    </div>
 
-    <p>
-        All rights reserved.
-    </p>
+    <a
+        class="telegram"
+        href="https://t.me/WizyyShop"
+        target="_blank"
+    >
+        Telegram: @WizyyShop
+    </a>
 
 </footer>
 
 
-
-<!-- =========================
-     PRODUCT MODAL
-========================= -->
+<!-- PRODUCT MODAL -->
 
 <div
-    class="modal"
     id="productModal"
+    class="modal"
+    onclick="closeModalOutside(event)"
 >
 
     <div class="modal-content">
 
-        <div
-            class="close-modal"
-            onclick="closeModal()"
-        >
-            ×
-        </div>
+        <div class="modal-header">
 
+            <h2 id="modalName">
+                Product
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeProduct()"
+            >
+                ×
+            </button>
+
+        </div>
 
         <div class="modal-image">
 
@@ -1117,53 +891,115 @@ footer p{
 
         </div>
 
+        <div class="modal-details">
 
-        <h2 id="modalName"></h2>
+            <div class="detail-row">
+                <span class="detail-label">Item</span>
+                <span
+                    class="detail-value"
+                    id="modalItem"
+                ></span>
+            </div>
 
-        <div
-            class="modal-subtitle"
-            id="modalWeapon"
-        ></div>
+            <div class="detail-row">
+                <span class="detail-label">Type</span>
+                <span
+                    class="detail-value"
+                    id="modalType"
+                ></span>
+            </div>
 
+            <div class="detail-row">
+                <span class="detail-label">Wear</span>
+                <span
+                    class="detail-value"
+                    id="modalWear"
+                ></span>
+            </div>
 
-        <div class="modal-options">
-
-            <label>
-                WEAR
-            </label>
-
-            <select id="modalWear">
-
-                <option>
-                    Factory New
-                </option>
-
-                <option>
-                    Minimal Wear
-                </option>
-
-                <option>
-                    Field-Tested
-                </option>
-
-                <option>
-                    Well-Worn
-                </option>
-
-                <option>
-                    Battle-Scarred
-                </option>
-
-            </select>
+            <div class="detail-row">
+                <span class="detail-label">Price</span>
+                <span
+                    class="detail-value"
+                    id="modalPrice"
+                ></span>
+            </div>
 
         </div>
 
+        <div class="modal-actions">
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                ADD TO CART
+            </button>
+
+            <button
+                class="cancel"
+                onclick="closeProduct()"
+            >
+                CANCEL
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CART MODAL -->
+
+<div
+    id="cartModal"
+    class="modal"
+    onclick="closeCartOutside(event)"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                YOUR CART
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeCart()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="cartItems"
+            class="cart-items"
+        ></div>
+
+        <div class="cart-total">
+
+            <span>
+                TOTAL
+            </span>
+
+            <span
+                id="cartTotal"
+                style="color:#e00000"
+            >
+                0 Toman
+            </span>
+
+        </div>
 
         <button
-            class="add-cart"
-            onclick="addToCart()"
+            class="finalize"
+            onclick="finalizeOrder()"
         >
-            ADD TO CART
+            FINALIZE ORDER
         </button>
 
     </div>
@@ -1171,68 +1007,25 @@ footer p{
 </div>
 
 
-
-<!-- =========================
-     CART
-========================= -->
-
-<div
-    class="cart-panel"
-    id="cartPanel"
->
-
-    <div class="cart-header">
-
-        <h2>
-            YOUR CART
-        </h2>
-
-        <div
-            class="cart-close"
-            onclick="toggleCart()"
-        >
-            ×
-        </div>
-
-    </div>
-
-
-    <div id="cartItems"></div>
-
-
-    <div class="cart-total">
-
-        <span>
-            TOTAL
-        </span>
-
-        <span id="cartTotal">
-            0 Toman
-        </span>
-
-    </div>
-
-
-    <button
-        class="telegram-button"
-        onclick="sendTelegram()"
-    >
-        FINALIZE ORDER
-    </button>
-
-</div>
-
-
-
 <script>
 
-/* =========================================================
-   WEAPONS
-========================================================= */
+/* =========================
+   STATE
+========================= */
 
-const weaponsByCategory = {
+let selectedWeapons = [];
+let currentCategory = null;
+let currentProduct = null;
+let cart = [];
 
-    Pistols:[
+
+/* =========================
+   CATEGORY DATA
+========================= */
+
+const categoryData = {
+
+    Pistols: [
         "Desert Eagle",
         "USP-S",
         "Glock-18",
@@ -1244,7 +1037,7 @@ const weaponsByCategory = {
         "R8 Revolver"
     ],
 
-    Rifles:[
+    Rifles: [
         "AK-47",
         "M4A4",
         "M4A1-S",
@@ -1254,7 +1047,7 @@ const weaponsByCategory = {
         "SG 553"
     ],
 
-    SMGs:[
+    SMGs: [
         "MP9",
         "MAC-10",
         "MP7",
@@ -1264,26 +1057,26 @@ const weaponsByCategory = {
         "PP-Bizon"
     ],
 
-    Snipers:[
+    Snipers: [
         "AWP",
         "SSG 08",
         "SCAR-20",
         "G3SG1"
     ],
 
-    Shotguns:[
+    Shotguns: [
         "Nova",
         "XM1014",
         "MAG-7",
         "Sawed-Off"
     ],
 
-    Machineguns:[
+    Machineguns: [
         "M249",
         "Negev"
     ],
 
-    Knives:[
+    Knives: [
         "Karambit",
         "Butterfly Knife",
         "M9 Bayonet",
@@ -1292,26 +1085,43 @@ const weaponsByCategory = {
         "Flip Knife",
         "Falchion Knife",
         "Huntsman Knife"
+    ],
+
+    Accessories: [
+        "Music Kits",
+        "Stickers",
+        "Agent",
+        "Cases",
+        "Charms",
+        "Pins",
+        "Graffiti"
     ]
 
 };
 
 
-
-/* =========================================================
+/* =========================
    PRODUCTS
-========================================================= */
+========================= */
+
+/*
+    IMPORTANT:
+    image values below are sample Steam-style image placeholders.
+    Replace them with your actual per-item image URLs.
+*/
 
 const products = [
+
+    /* RIFLES */
 
     {
         id:1,
         name:"AK-47 Redline",
         weapon:"AK-47",
         category:"Rifles",
+        wear:"Field-Tested",
         price:153000,
-        wear:"Minimal Wear",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=AK-47+REDLINE"
     },
 
     {
@@ -1319,9 +1129,9 @@ const products = [
         name:"AK-47 Slate",
         weapon:"AK-47",
         category:"Rifles",
-        price:60000,
         wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:60000,
+        image:"https://placehold.co/700x450/090909/e00000?text=AK-47+SLATE"
     },
 
     {
@@ -1329,9 +1139,9 @@ const products = [
         name:"AK-47 Neon Rider",
         weapon:"AK-47",
         category:"Rifles",
+        wear:"Minimal Wear",
         price:210000,
-        wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=AK-47+NEON+RIDER"
     },
 
     {
@@ -1339,9 +1149,9 @@ const products = [
         name:"M4A4 Temukau",
         weapon:"M4A4",
         category:"Rifles",
+        wear:"Minimal Wear",
         price:180000,
-        wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=M4A4+TEMUKAU"
     },
 
     {
@@ -1349,9 +1159,9 @@ const products = [
         name:"M4A4 Desolate Space",
         weapon:"M4A4",
         category:"Rifles",
+        wear:"Field-Tested",
         price:95000,
-        wear:"Minimal Wear",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=M4A4+DESOLATE+SPACE"
     },
 
     {
@@ -1359,19 +1169,22 @@ const products = [
         name:"M4A1-S Printstream",
         weapon:"M4A1-S",
         category:"Rifles",
-        price:420000,
         wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:420000,
+        image:"https://placehold.co/700x450/090909/e00000?text=M4A1-S+PRINTSTREAM"
     },
+
+
+    /* PISTOLS */
 
     {
         id:7,
         name:"Desert Eagle Printstream",
         weapon:"Desert Eagle",
         category:"Pistols",
+        wear:"Minimal Wear",
         price:250000,
-        wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=DEAGLE+PRINTSTREAM"
     },
 
     {
@@ -1379,9 +1192,9 @@ const products = [
         name:"Desert Eagle Code Red",
         weapon:"Desert Eagle",
         category:"Pistols",
+        wear:"Field-Tested",
         price:140000,
-        wear:"Minimal Wear",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=DEAGLE+CODE+RED"
     },
 
     {
@@ -1389,9 +1202,9 @@ const products = [
         name:"USP-S Printstream",
         weapon:"USP-S",
         category:"Pistols",
+        wear:"Field-Tested",
         price:180000,
-        wear:"Minimal Wear",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=USP-S+PRINTSTREAM"
     },
 
     {
@@ -1399,9 +1212,9 @@ const products = [
         name:"USP-S Cortex",
         weapon:"USP-S",
         category:"Pistols",
-        price:85000,
         wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:85000,
+        image:"https://placehold.co/700x450/090909/e00000?text=USP-S+CORTEX"
     },
 
     {
@@ -1409,19 +1222,22 @@ const products = [
         name:"Glock-18 Water Elemental",
         weapon:"Glock-18",
         category:"Pistols",
-        price:70000,
         wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:70000,
+        image:"https://placehold.co/700x450/090909/e00000?text=GLOCK-18+WATER+ELEMENTAL"
     },
+
+
+    /* SNIPERS */
 
     {
         id:12,
         name:"AWP Asiimov",
         weapon:"AWP",
         category:"Snipers",
-        price:650000,
         wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:650000,
+        image:"https://placehold.co/700x450/090909/e00000?text=AWP+ASIIMOV"
     },
 
     {
@@ -1429,19 +1245,22 @@ const products = [
         name:"AWP Wildfire",
         weapon:"AWP",
         category:"Snipers",
-        price:300000,
         wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:300000,
+        image:"https://placehold.co/700x450/090909/e00000?text=AWP+WILDFIRE"
     },
+
+
+    /* SMGS */
 
     {
         id:14,
         name:"MP9 Starlight Protector",
         weapon:"MP9",
         category:"SMGs",
+        wear:"Field-Tested",
         price:90000,
-        wear:"Minimal Wear",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=MP9+STARLIGHT+PROTECTOR"
     },
 
     {
@@ -1449,19 +1268,22 @@ const products = [
         name:"MAC-10 Neon Rider",
         weapon:"MAC-10",
         category:"SMGs",
+        wear:"Minimal Wear",
         price:110000,
-        wear:"Field-Tested",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        image:"https://placehold.co/700x450/090909/e00000?text=MAC-10+NEON+RIDER"
     },
+
+
+    /* KNIVES */
 
     {
         id:16,
         name:"Karambit Doppler",
         weapon:"Karambit",
         category:"Knives",
-        price:4500000,
         wear:"Factory New",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:4500000,
+        image:"https://placehold.co/700x450/090909/e00000?text=KARAMBIT+DOPPLER"
     },
 
     {
@@ -1469,44 +1291,223 @@ const products = [
         name:"Butterfly Knife Doppler",
         weapon:"Butterfly Knife",
         category:"Knives",
-        price:5200000,
         wear:"Factory New",
-        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        price:5200000,
+        image:"https://placehold.co/700x450/090909/e00000?text=BUTTERFLY+DOPPLER"
+    },
+
+
+    /* =========================
+       ACCESSORIES
+    ========================= */
+
+    {
+        id:18,
+        name:"Music Kit | The Verkkars",
+        weapon:"Music Kits",
+        category:"Accessories",
+        wear:"Factory New",
+        price:75000,
+        image:"https://placehold.co/700x450/090909/e00000?text=MUSIC+KIT"
+    },
+
+    {
+        id:19,
+        name:"Music Kit | Austin Wintory",
+        weapon:"Music Kits",
+        category:"Accessories",
+        wear:"Factory New",
+        price:95000,
+        image:"https://placehold.co/700x450/090909/e00000?text=MUSIC+KIT"
+    },
+
+    {
+        id:20,
+        name:"Sticker | Howling Dawn",
+        weapon:"Stickers",
+        category:"Accessories",
+        wear:"Factory New",
+        price:450000,
+        image:"https://placehold.co/700x450/090909/e00000?text=STICKER"
+    },
+
+    {
+        id:21,
+        name:"Sticker | Crown",
+        weapon:"Stickers",
+        category:"Accessories",
+        wear:"Factory New",
+        price:320000,
+        image:"https://placehold.co/700x450/090909/e00000?text=STICKER"
+    },
+
+    {
+        id:22,
+        name:"Agent | Sir Bloody Miami Darryl",
+        weapon:"Agent",
+        category:"Accessories",
+        wear:"Factory New",
+        price:180000,
+        image:"https://placehold.co/700x450/090909/e00000?text=AGENT"
+    },
+
+    {
+        id:23,
+        name:"Agent | Elite Trapper Solman",
+        weapon:"Agent",
+        category:"Accessories",
+        wear:"Factory New",
+        price:125000,
+        image:"https://placehold.co/700x450/090909/e00000?text=AGENT"
+    },
+
+    {
+        id:24,
+        name:"Case | Dreams & Nightmares",
+        weapon:"Cases",
+        category:"Accessories",
+        wear:"Factory New",
+        price:45000,
+        image:"https://placehold.co/700x450/090909/e00000?text=CASE"
+    },
+
+    {
+        id:25,
+        name:"Case | Kilowatt Case",
+        weapon:"Cases",
+        category:"Accessories",
+        wear:"Factory New",
+        price:35000,
+        image:"https://placehold.co/700x450/090909/e00000?text=CASE"
+    },
+
+    {
+        id:26,
+        name:"Charm | Lil' Squirt",
+        weapon:"Charms",
+        category:"Accessories",
+        wear:"Factory New",
+        price:85000,
+        image:"https://placehold.co/700x450/090909/e00000?text=CHARM"
+    },
+
+    {
+        id:27,
+        name:"Charm | Hot Howl",
+        weapon:"Charms",
+        category:"Accessories",
+        wear:"Factory New",
+        price:120000,
+        image:"https://placehold.co/700x450/090909/e00000?text=CHARM"
+    },
+
+    {
+        id:28,
+        name:"Pin | Inferno 2",
+        weapon:"Pins",
+        category:"Accessories",
+        wear:"Factory New",
+        price:60000,
+        image:"https://placehold.co/700x450/090909/e00000?text=PIN"
+    },
+
+    {
+        id:29,
+        name:"Pin | Guardian 3",
+        weapon:"Pins",
+        category:"Accessories",
+        wear:"Factory New",
+        price:55000,
+        image:"https://placehold.co/700x450/090909/e00000?text=PIN"
+    },
+
+    {
+        id:30,
+        name:"Graffiti | Recoil",
+        weapon:"Graffiti",
+        category:"Accessories",
+        wear:"Factory New",
+        price:25000,
+        image:"https://placehold.co/700x450/090909/e00000?text=GRAFFITI"
+    },
+
+    {
+        id:31,
+        name:"Graffiti | Rage",
+        weapon:"Graffiti",
+        category:"Accessories",
+        wear:"Factory New",
+        price:30000,
+        image:"https://placehold.co/700x450/090909/e00000?text=GRAFFITI"
     }
 
 ];
 
 
+/* =========================
+   PRICE
+========================= */
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+function formatPrice(price){
 
+    return new Intl.NumberFormat("en-US").format(price) + " Toman";
 
-/*
-    چند گان می‌توانند همزمان داخل این آرایه باشند
-*/
-
-let selectedWeapons = [];
-
-let currentCategory = null;
-
-let currentProduct = null;
-
-let cart = [];
+}
 
 
+/* =========================
+   RENDER WEAPONS
+========================= */
 
-/* =========================================================
-   CATEGORY
-========================================================= */
+function renderWeapons(){
+
+    const list =
+        document.getElementById("weaponList");
+
+    list.innerHTML = "";
+
+    const items =
+        categoryData[currentCategory] || [];
+
+    items.forEach(item => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "weapon";
+
+        button.textContent = item;
+
+        if(selectedWeapons.includes(item)){
+            button.classList.add("active");
+        }
+
+        button.onclick =
+            function(){
+
+                selectWeapon(
+                    item,
+                    button
+                );
+
+            };
+
+        list.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================
+   SELECT CATEGORY
+========================= */
 
 function selectCategory(category,element){
 
     /*
-
-        اگر دوباره همان Category کلیک شد
-        همه انتخاب‌ها پاک شوند
+        Clicking same category again
+        resets everything.
     */
 
     if(currentCategory === category){
@@ -1515,28 +1516,21 @@ function selectCategory(category,element){
 
         selectedWeapons = [];
 
-
         document
             .querySelectorAll(".category")
-            .forEach(item=>{
-                item.classList.remove("active");
-            });
-
+            .forEach(item =>
+                item.classList.remove("active")
+            );
 
         document
             .getElementById("weaponBox")
             .classList.remove("show");
-
 
         renderProducts();
 
         return;
     }
 
-
-    /*
-        Category جدید
-    */
 
     currentCategory = category;
 
@@ -1545,9 +1539,9 @@ function selectCategory(category,element){
 
     document
         .querySelectorAll(".category")
-        .forEach(item=>{
-            item.classList.remove("active");
-        });
+        .forEach(item =>
+            item.classList.remove("active")
+        );
 
 
     element.classList.add("active");
@@ -1561,7 +1555,9 @@ function selectCategory(category,element){
     document
         .getElementById("weaponTitle")
         .textContent =
-        category.toUpperCase() + " WEAPONS";
+            category === "Accessories"
+            ? "ACCESSORIES"
+            : category.toUpperCase() + " WEAPONS";
 
 
     renderWeapons();
@@ -1571,41 +1567,34 @@ function selectCategory(category,element){
 }
 
 
-
-/* =========================================================
-   MULTI SELECT WEAPONS
-========================================================= */
+/* =========================
+   SELECT WEAPON / ACCESSORY
+========================= */
 
 function selectWeapon(weapon,element){
-
-    /*
-        بررسی می‌کنیم گان قبلاً انتخاب شده یا نه
-    */
 
     const index =
         selectedWeapons.indexOf(weapon);
 
 
-    /*
-        اگر انتخاب شده بود:
-        فقط خودش حذف شود
-    */
-
     if(index !== -1){
 
-        selectedWeapons.splice(index,1);
+        /*
+            Remove only this item.
+        */
+
+        selectedWeapons.splice(
+            index,
+            1
+        );
 
         element.classList.remove("active");
 
-    }
+    }else{
 
-
-    /*
-        اگر انتخاب نشده بود:
-        به لیست اضافه شود
-    */
-
-    else{
+        /*
+            Add item to multi-select.
+        */
 
         selectedWeapons.push(weapon);
 
@@ -1614,86 +1603,19 @@ function selectWeapon(weapon,element){
     }
 
 
-    /*
-        محصولات دوباره فیلتر شوند
-    */
-
     renderProducts();
 
 }
 
 
-
-/* =========================================================
-   RENDER WEAPONS
-========================================================= */
-
-function renderWeapons(){
-
-    const container =
-        document.getElementById("weapons");
-
-
-    container.innerHTML = "";
-
-
-    const weapons =
-        weaponsByCategory[currentCategory] || [];
-
-
-    weapons.forEach(weapon=>{
-
-        const button =
-            document.createElement("div");
-
-
-        button.className = "weapon";
-
-
-        /*
-            اگر گان قبلاً انتخاب شده
-            دوباره active شود
-        */
-
-        if(
-            selectedWeapons.includes(weapon)
-        ){
-
-            button.classList.add("active");
-
-        }
-
-
-        button.textContent = weapon;
-
-
-        button.onclick = function(){
-
-            selectWeapon(
-                weapon,
-                button
-            );
-
-        };
-
-
-        container.appendChild(button);
-
-    });
-
-}
-
-
-
-/* =========================================================
+/* =========================
    RENDER PRODUCTS
-========================================================= */
+========================= */
 
 function renderProducts(){
 
     const container =
         document.getElementById("products");
-
 
     container.innerHTML = "";
 
@@ -1719,52 +1641,42 @@ function renderProducts(){
 
 
     let filtered =
-        products.filter(product=>{
-
-
-            /*
-                SEARCH
-            */
+        products.filter(product => {
 
             const searchMatch =
-
                 product.name
                     .toLowerCase()
                     .includes(search)
-
                 ||
-
                 product.weapon
                     .toLowerCase()
                     .includes(search);
 
 
-            /*
-                WEAR
-            */
-
             const wearMatch =
-
                 wear === "all"
-
                 ||
-
                 product.wear === wear;
 
 
-            /*
-                MULTI WEAPON
-            */
+            let categoryMatch = true;
+
+            if(currentCategory !== null){
+
+                categoryMatch =
+                    product.category ===
+                    currentCategory;
+
+            }
+
 
             let weaponMatch = true;
 
-
-            /*
-                اگر حداقل یک گان انتخاب شده:
-                فقط همان گان‌ها
-            */
-
-            if(selectedWeapons.length > 0){
+            if(
+                currentCategory !== null
+                &&
+                selectedWeapons.length > 0
+            ){
 
                 weaponMatch =
                     selectedWeapons.includes(
@@ -1775,23 +1687,25 @@ function renderProducts(){
 
 
             return (
-                searchMatch &&
-                wearMatch &&
+                searchMatch
+                &&
+                wearMatch
+                &&
+                categoryMatch
+                &&
                 weaponMatch
             );
 
         });
 
 
-
-    /* =========================
-       SORT
-    ========================= */
+    /* SORT */
 
     if(sort === "low"){
 
         filtered.sort(
-            (a,b)=>a.price-b.price
+            (a,b) =>
+                a.price - b.price
         );
 
     }
@@ -1799,7 +1713,8 @@ function renderProducts(){
     else if(sort === "high"){
 
         filtered.sort(
-            (a,b)=>b.price-a.price
+            (a,b) =>
+                b.price - a.price
         );
 
     }
@@ -1807,28 +1722,23 @@ function renderProducts(){
     else if(sort === "name"){
 
         filtered.sort(
-            (a,b)=>
-                a.name.localeCompare(b.name)
+            (a,b) =>
+                a.name.localeCompare(
+                    b.name
+                )
         );
 
     }
 
 
-
-    /* =========================
-       EMPTY
-    ========================= */
+    /* EMPTY */
 
     if(filtered.length === 0){
 
         container.innerHTML = `
-
             <div class="empty">
-
                 No skins found.
-
             </div>
-
         `;
 
         return;
@@ -1836,16 +1746,12 @@ function renderProducts(){
     }
 
 
+    /* PRODUCTS */
 
-    /* =========================
-       PRODUCTS
-    ========================= */
-
-    filtered.forEach(product=>{
+    filtered.forEach(product => {
 
         const card =
             document.createElement("div");
-
 
         card.className = "product";
 
@@ -1857,6 +1763,7 @@ function renderProducts(){
                 <img
                     src="${product.image}"
                     alt="${product.name}"
+                    loading="lazy"
                 >
 
             </div>
@@ -1865,29 +1772,21 @@ function renderProducts(){
             <div class="product-info">
 
                 <div class="product-name">
-
                     ${product.name}
-
                 </div>
 
 
                 <div class="product-weapon">
-
                     ${product.weapon}
-
                     •
-
                     ${product.wear}
-
                 </div>
 
 
                 <div class="product-bottom">
 
                     <div class="price">
-
                         ${formatPrice(product.price)}
-
                     </div>
 
 
@@ -1895,15 +1794,12 @@ function renderProducts(){
                         class="buy-button"
                         onclick="openProduct(${product.id})"
                     >
-
                         BUY
-
                     </button>
 
                 </div>
 
             </div>
-
         `;
 
 
@@ -1914,32 +1810,16 @@ function renderProducts(){
 }
 
 
-
-/* =========================================================
-   PRICE
-========================================================= */
-
-function formatPrice(price){
-
-    return (
-        price.toLocaleString("en-US")
-        +
-        " Toman"
-    );
-
-}
-
-
-
-/* =========================================================
-   OPEN PRODUCT
-========================================================= */
+/* =========================
+   PRODUCT MODAL
+========================= */
 
 function openProduct(id){
 
     currentProduct =
         products.find(
-            product=>product.id===id
+            product =>
+                product.id === id
         );
 
 
@@ -1948,34 +1828,41 @@ function openProduct(id){
     }
 
 
-    document
-        .getElementById("modalImage")
+    document.getElementById("modalName")
+        .textContent =
+            currentProduct.name;
+
+
+    document.getElementById("modalImage")
         .src =
-        currentProduct.image;
+            currentProduct.image;
 
 
-    document
-        .getElementById("modalName")
+    document.getElementById("modalImage")
+        .alt =
+            currentProduct.name;
+
+
+    document.getElementById("modalItem")
         .textContent =
-        currentProduct.name;
+            currentProduct.name;
 
 
-    document
-        .getElementById("modalWeapon")
+    document.getElementById("modalType")
         .textContent =
-        currentProduct.weapon
-        +
-        " • "
-        +
-        formatPrice(
-            currentProduct.price
-        );
+            currentProduct.weapon;
 
 
-    document
-        .getElementById("modalWear")
-        .value =
-        currentProduct.wear;
+    document.getElementById("modalWear")
+        .textContent =
+            currentProduct.wear;
+
+
+    document.getElementById("modalPrice")
+        .textContent =
+            formatPrice(
+                currentProduct.price
+            );
 
 
     document
@@ -1985,12 +1872,7 @@ function openProduct(id){
 }
 
 
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeModal(){
+function closeProduct(){
 
     document
         .getElementById("productModal")
@@ -1999,10 +1881,20 @@ function closeModal(){
 }
 
 
+function closeModalOutside(event){
 
-/* =========================================================
-   ADD CART
-========================================================= */
+    if(event.target.id === "productModal"){
+
+        closeProduct();
+
+    }
+
+}
+
+
+/* =========================
+   CART
+========================= */
 
 function addToCart(){
 
@@ -2011,132 +1903,101 @@ function addToCart(){
     }
 
 
-    const wear =
-        document
-            .getElementById("modalWear")
-            .value;
-
-
-    cart.push({
-
-        id:Date.now(),
-
-        name:
-            currentProduct.name,
-
-        weapon:
-            currentProduct.weapon,
-
-        price:
-            currentProduct.price,
-
-        wear:wear
-
-    });
+    cart.push(currentProduct);
 
 
     updateCart();
 
-    closeModal();
+    closeProduct();
 
 }
 
-
-
-/* =========================================================
-   CART
-========================================================= */
 
 function updateCart(){
 
     document
         .getElementById("cartCount")
         .textContent =
-        cart.length;
+            cart.length;
 
+
+    renderCart();
+
+}
+
+
+function renderCart(){
 
     const container =
-        document
-            .getElementById("cartItems");
-
+        document.getElementById("cartItems");
 
     container.innerHTML = "";
-
-
-    let total = 0;
 
 
     if(cart.length === 0){
 
         container.innerHTML = `
-
-            <div style="
-                color:#555;
-                text-align:center;
-                padding:45px 0;
-            ">
-
+            <div class="empty-cart">
                 Your cart is empty.
-
             </div>
-
         `;
+
+        document
+            .getElementById("cartTotal")
+            .textContent =
+                "0 Toman";
+
+        return;
 
     }
 
 
-    cart.forEach(item=>{
-
-        total += item.price;
+    let total = 0;
 
 
-        const div =
+    cart.forEach((product,index) => {
+
+        total += product.price;
+
+
+        const item =
             document.createElement("div");
 
-
-        div.className = "cart-item";
-
-
-        div.innerHTML = `
-
-            <strong>
-
-                ${item.name}
-
-            </strong>
+        item.className = "cart-item";
 
 
-            <small>
+        item.innerHTML = `
 
-                ${item.weapon}
-
-                •
-
-                ${item.wear}
-
-            </small>
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+            >
 
 
-            <small>
+            <div class="cart-item-info">
 
-                ${formatPrice(item.price)}
+                <div class="cart-item-name">
+                    ${product.name}
+                </div>
 
-            </small>
+                <div class="cart-item-price">
+                    ${formatPrice(product.price)}
+                </div>
+
+            </div>
 
 
             <button
                 class="remove-item"
-                onclick="removeCartItem(${item.id})"
+                onclick="removeFromCart(${index})"
             >
-
                 REMOVE
-
             </button>
 
         `;
 
 
-        container.appendChild(div);
+        container.appendChild(item);
 
     });
 
@@ -2144,55 +2005,60 @@ function updateCart(){
     document
         .getElementById("cartTotal")
         .textContent =
-        formatPrice(total);
+            formatPrice(total);
 
 }
 
 
+function removeFromCart(index){
 
-/* =========================================================
-   REMOVE CART
-========================================================= */
-
-function removeCartItem(id){
-
-    cart =
-        cart.filter(
-            item=>item.id!==id
-        );
-
+    cart.splice(index,1);
 
     updateCart();
 
 }
 
 
+function openCart(){
 
-/* =========================================================
-   CART PANEL
-========================================================= */
-
-function toggleCart(){
+    renderCart();
 
     document
-        .getElementById("cartPanel")
-        .classList.toggle("show");
+        .getElementById("cartModal")
+        .classList.add("show");
 
 }
 
 
+function closeCart(){
 
-/* =========================================================
-   TELEGRAM
-========================================================= */
+    document
+        .getElementById("cartModal")
+        .classList.remove("show");
 
-function sendTelegram(){
+}
+
+
+function closeCartOutside(event){
+
+    if(event.target.id === "cartModal"){
+
+        closeCart();
+
+    }
+
+}
+
+
+/* =========================
+   TELEGRAM ORDER
+========================= */
+
+function finalizeOrder(){
 
     if(cart.length === 0){
 
-        alert(
-            "Your cart is empty."
-        );
+        alert("Your cart is empty.");
 
         return;
 
@@ -2200,130 +2066,54 @@ function sendTelegram(){
 
 
     let message =
-        "Hello WIZYY SHOP%0A%0A";
-
-    message +=
-        "I want to order:%0A";
+        "WIZYY SHOP ORDER%0A%0A";
 
 
     let total = 0;
 
 
-    cart.forEach((item,index)=>{
+    cart.forEach((product,index) => {
 
-        total += item.price;
+        total += product.price;
 
 
         message +=
-
-            "%0A"
-
-            +
-
-            (index+1)
-
-            +
-
-            ". "
-
-            +
-
-            encodeURIComponent(
-                item.name
-            )
-
-            +
-
-            "%0AWeapon: "
-
-            +
-
-            encodeURIComponent(
-                item.weapon
-            )
-
-            +
-
-            "%0AWear: "
-
-            +
-
-            encodeURIComponent(
-                item.wear
-            )
-
-            +
-
-            "%0APrice: "
-
-            +
-
-            encodeURIComponent(
-                formatPrice(
-                    item.price
-                )
-            )
-
-            +
-
-            "%0A";
+            `${index + 1}. ${encodeURIComponent(product.name)} - ${encodeURIComponent(formatPrice(product.price))}%0A`;
 
     });
 
 
     message +=
-
-        "%0ATotal: "
-
-        +
-
-        encodeURIComponent(
-            formatPrice(total)
-        );
+        `%0ATOTAL: ${encodeURIComponent(formatPrice(total))}`;
 
 
-    const telegramURL =
+    /*
+        Change this username if your
+        Telegram shop username is different.
+    */
 
-        "https://t.me/WizyyShop?text="
-
-        +
-
+    const telegram =
+        "https://t.me/WizyyShop?text=" +
         message;
 
 
     window.open(
-        telegramURL,
+        telegram,
         "_blank"
     );
 
 }
 
 
+/* =========================
+   INITIAL STATE
+========================= */
 
-/* =========================================================
-   MODAL OUTSIDE CLICK
-========================================================= */
-
-document
-    .getElementById("productModal")
-    .addEventListener(
-        "click",
-        function(event){
-
-            if(event.target === this){
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-
-
-/* =========================================================
-   INITIAL
-========================================================= */
+/*
+    IMPORTANT:
+    Nothing selected when page loads.
+    All products are shown mixed together.
+*/
 
 currentCategory = null;
 
