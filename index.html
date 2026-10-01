@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
 }
 
 body{
-    background:#090909;
+    background:#080808;
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
     min-height:100vh;
@@ -43,6 +44,8 @@ header{
     position:relative;
 }
 
+/* LOGO */
+
 .logo{
     font-size:27px;
     font-weight:900;
@@ -64,34 +67,7 @@ header{
     margin-top:5px;
 }
 
-.profile-button{
-    position:absolute;
-    right:0;
-    top:50%;
-    transform:translateY(-50%);
-    display:flex;
-    align-items:center;
-    gap:9px;
-    background:#151515;
-    border:1px solid #383838;
-    color:#ddd;
-    padding:8px 13px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.profile-button:hover{
-    border-color:#e00000;
-    color:#fff;
-}
-
-.profile-mini{
-    width:31px;
-    height:31px;
-    border-radius:50%;
-    object-fit:cover;
-    background:#222;
-}
+/* CART LEFT */
 
 .cart-button{
     position:absolute;
@@ -101,10 +77,11 @@ header{
     background:#151515;
     color:#fff;
     border:1px solid #383838;
-    padding:11px 15px;
+    padding:10px 15px;
     border-radius:8px;
     cursor:pointer;
     font-weight:bold;
+    transition:.2s;
 }
 
 .cart-button:hover{
@@ -120,10 +97,45 @@ header{
     font-size:11px;
 }
 
+/* PROFILE RIGHT */
+
+.profile-button{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:#151515;
+    border:1px solid #383838;
+    color:#ddd;
+    padding:7px 12px 7px 8px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.profile-button:hover{
+    border-color:#e00000;
+    color:#fff;
+}
+
+.profile-mini{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#222;
+    border:1px solid #444;
+}
+
+/* HERO */
+
 main{
     width:94%;
     max-width:1450px;
-    margin:0 auto;
+    margin:auto;
 }
 
 .hero{
@@ -155,6 +167,8 @@ main{
     box-shadow:0 0 15px rgba(224,0,0,.5);
 }
 
+/* SEARCH */
+
 .controls{
     display:flex;
     gap:12px;
@@ -185,6 +199,8 @@ main{
 .filter-box{
     width:190px;
 }
+
+/* PRICE */
 
 .price-filter{
     background:#111;
@@ -250,6 +266,8 @@ main{
     cursor:pointer;
 }
 
+/* CATEGORIES */
+
 .section-title{
     color:#888;
     font-size:11px;
@@ -281,6 +299,8 @@ main{
     border-color:#e00000;
     color:#fff;
 }
+
+/* WEAPONS */
 
 .weapon-box{
     display:none;
@@ -325,6 +345,8 @@ main{
     border-color:#e00000;
     background:#250b0b;
 }
+
+/* PRODUCTS */
 
 .products{
     display:grid;
@@ -412,13 +434,13 @@ main{
     padding:70px;
 }
 
-/* MODALS */
+/* MODAL */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.82);
-    backdrop-filter:blur(5px);
+    background:rgba(0,0,0,.84);
+    backdrop-filter:blur(6px);
     display:none;
     align-items:center;
     justify-content:center;
@@ -440,6 +462,18 @@ main{
     border-radius:12px;
     padding:22px;
     box-shadow:0 20px 70px rgba(0,0,0,.7);
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:scale(.92) translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
 }
 
 .modal-header{
@@ -532,8 +566,8 @@ main{
 }
 
 .profile-preview img{
-    width:100px;
-    height:100px;
+    width:105px;
+    height:105px;
     border-radius:50%;
     object-fit:cover;
     background:#191919;
@@ -603,7 +637,7 @@ main{
     text-align:center;
     padding:12px;
     font-size:22px;
-    letter-spacing:7px;
+    letter-spacing:6px;
     font-weight:900;
     color:#fff;
     user-select:none;
@@ -656,6 +690,100 @@ main{
     color:#fff;
     font-weight:900;
     cursor:pointer;
+}
+
+/* PROFILE NOT COMPLETE ANIMATION */
+
+.profile-required-modal{
+    text-align:center;
+    max-width:430px;
+    padding:38px 25px;
+}
+
+.error-animation{
+    width:95px;
+    height:95px;
+    margin:0 auto 25px;
+    position:relative;
+}
+
+.error-circle{
+    position:absolute;
+    inset:0;
+    border:3px solid #e00000;
+    border-radius:50%;
+    animation:errorCircle .7s ease forwards;
+}
+
+.error-x{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#e00000;
+    font-size:63px;
+    font-weight:900;
+    line-height:1;
+    opacity:0;
+    transform:scale(.2) rotate(-90deg);
+    animation:errorX .55s .35s cubic-bezier(.17,.67,.35,1.35) forwards;
+}
+
+@keyframes errorCircle{
+    0%{
+        transform:scale(.2);
+        opacity:0;
+    }
+
+    60%{
+        transform:scale(1.12);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+@keyframes errorX{
+    0%{
+        opacity:0;
+        transform:scale(.2) rotate(-90deg);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1) rotate(0);
+    }
+}
+
+.profile-required-title{
+    font-size:20px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.profile-required-text{
+    color:#777;
+    font-size:12px;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.go-profile{
+    background:#e00000;
+    color:#fff;
+    border:0;
+    padding:12px 25px;
+    border-radius:7px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.go-profile:hover{
+    background:#ff1717;
 }
 
 /* CART */
@@ -859,6 +987,8 @@ main{
     font-weight:bold;
 }
 
+/* FOOTER */
+
 footer{
     background:#080808;
     border-top:1px solid #292929;
@@ -886,7 +1016,10 @@ footer{
     font-size:12px;
 }
 
+/* RESPONSIVE */
+
 @media(max-width:900px){
+
     .products{
         grid-template-columns:repeat(3,1fr);
     }
@@ -897,6 +1030,7 @@ footer{
 }
 
 @media(max-width:650px){
+
     .products{
         grid-template-columns:repeat(2,1fr);
     }
@@ -921,8 +1055,7 @@ footer{
 
     .profile-button{
         right:8px;
-        padding:6px;
-        font-size:9px;
+        padding:5px;
     }
 
     .profile-button span{
@@ -939,6 +1072,7 @@ footer{
 }
 
 @media(max-width:430px){
+
     .products{
         grid-template-columns:1fr;
     }
@@ -957,33 +1091,48 @@ footer{
 <body>
 
 <header>
-    <div class="header-inner">
 
-        <div class="logo-area">
-            <div class="logo" id="shopLogo">
-                <span>WIZZY</span> SHOP
-            </div>
-            <div class="subtitle">
-                فروشگاه تخصصی اسکین‌های CS2
-            </div>
+<div class="header-inner">
+
+    <!-- CART LEFT -->
+    <button class="cart-button" onclick="openCart()">
+        CART
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- CENTER LOGO -->
+    <div class="logo-area">
+        <div class="logo" id="shopLogo">
+            <span>WIZZY</span> SHOP
         </div>
 
-        <button class="cart-button" onclick="openCart()">
-            CART
-            <span class="cart-count" id="cartCount">0</span>
-        </button>
-
-        <button class="profile-button" onclick="openProfile()">
-            <img id="profileMini" class="profile-mini" src="https://placehold.co/100x100/191919/ffffff?text=USER">
-            <span>PROFILE</span>
-        </button>
-
+        <div class="subtitle">
+            فروشگاه تخصصی اسکین‌های CS2
+        </div>
     </div>
+
+    <!-- PROFILE RIGHT -->
+    <button class="profile-button" onclick="openProfile()">
+
+        <img
+            id="profileMini"
+            class="profile-mini"
+            src="https://placehold.co/100x100/191919/ffffff?text=USER"
+        >
+
+        <span>PROFILE</span>
+
+    </button>
+
+</div>
+
 </header>
+
 
 <main>
 
 <section class="hero">
+
     <div class="hero-logo">
         <span>WIZZY</span> SKIN
     </div>
@@ -993,39 +1142,58 @@ footer{
     </div>
 
     <div class="hero-line"></div>
+
 </section>
+
 
 <div class="controls">
 
     <div class="search">
+
         <input
             id="search"
             type="text"
             placeholder="Search skins, weapons or accessories..."
             oninput="renderProducts()"
         >
+
     </div>
 
     <div class="filter-box">
-        <select id="wearFilter" onchange="renderProducts()">
+
+        <select
+            id="wearFilter"
+            onchange="renderProducts()"
+        >
+
             <option value="all">All Wear</option>
             <option>Factory New</option>
             <option>Minimal Wear</option>
             <option>Field-Tested</option>
             <option>Well-Worn</option>
             <option>Battle-Scarred</option>
+
         </select>
+
     </div>
 
 </div>
 
+
 <div class="price-filter">
+
     <div class="price-filter-top">
+
         <span>PRICE RANGE</span>
-        <span id="priceRangeText">0 Toman - 5,200,000 Toman</span>
+
+        <span id="priceRangeText">
+            0 Toman - 5,200,000 Toman
+        </span>
+
     </div>
 
     <div class="range-container">
+
         <div class="range-track"></div>
         <div class="range-progress" id="rangeProgress"></div>
 
@@ -1048,23 +1216,77 @@ footer{
             value="5200000"
             oninput="updatePriceRange()"
         >
+
     </div>
+
 </div>
 
-<div class="section-title">Categories</div>
+
+<div class="section-title">
+    Categories
+</div>
+
 
 <div class="categories">
 
-    <button class="category" onclick="selectCategory('Pistols',this)">PISTOLS</button>
-    <button class="category" onclick="selectCategory('Rifles',this)">RIFLES</button>
-    <button class="category" onclick="selectCategory('SMGs',this)">SMGs</button>
-    <button class="category" onclick="selectCategory('Snipers',this)">SNIPERS</button>
-    <button class="category" onclick="selectCategory('Shotguns',this)">SHOTGUNS</button>
-    <button class="category" onclick="selectCategory('Machineguns',this)">MACHINEGUNS</button>
-    <button class="category" onclick="selectCategory('Knives',this)">KNIVES</button>
-    <button class="category" onclick="selectCategory('Accessories',this)">ACCESSORIES</button>
+    <button
+        class="category"
+        onclick="selectCategory('Pistols',this)"
+    >
+        PISTOLS
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('Rifles',this)"
+    >
+        RIFLES
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('SMGs',this)"
+    >
+        SMGs
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('Snipers',this)"
+    >
+        SNIPERS
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('Shotguns',this)"
+    >
+        SHOTGUNS
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('Machineguns',this)"
+    >
+        MACHINEGUNS
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('Knives',this)"
+    >
+        KNIVES
+    </button>
+
+    <button
+        class="category"
+        onclick="selectCategory('Accessories',this)"
+    >
+        ACCESSORIES
+    </button>
 
 </div>
+
 
 <div id="weaponBox" class="weapon-box">
 
@@ -1076,11 +1298,14 @@ footer{
 
 </div>
 
+
 <div id="products" class="products"></div>
 
 </main>
 
+
 <footer>
+
     <div class="footer-logo">
         <span>WIZZY</span> SHOP
     </div>
@@ -1089,267 +1314,579 @@ footer{
         فروشگاه تخصصی اسکین‌های CS2
     </div>
 
-    <a class="telegram" href="https://t.me/WizyyShop" target="_blank">
+    <a
+        class="telegram"
+        href="https://t.me/WizyyShop"
+        target="_blank"
+    >
         Telegram: @WizyyShop
     </a>
+
 </footer>
 
 
 <!-- PRODUCT MODAL -->
 
-<div id="productModal" class="modal" onclick="closeModalOutside(event)">
-    <div class="modal-content">
+<div
+    id="productModal"
+    class="modal"
+    onclick="closeModalOutside(event)"
+>
 
-        <div class="modal-header">
-            <h2 id="modalName">Product</h2>
-            <button class="close" onclick="closeProduct()">×</button>
-        </div>
+<div class="modal-content">
 
-        <div class="modal-image">
-            <img id="modalImage">
-        </div>
+    <div class="modal-header">
 
-        <div class="detail-row">
-            <span class="detail-label">Item</span>
-            <span id="modalItem" class="detail-value"></span>
-        </div>
+        <h2 id="modalName">
+            Product
+        </h2>
 
-        <div class="detail-row">
-            <span class="detail-label">Type</span>
-            <span id="modalType" class="detail-value"></span>
-        </div>
-
-        <div class="detail-row">
-            <span class="detail-label">Wear</span>
-            <span id="modalWear" class="detail-value"></span>
-        </div>
-
-        <div class="detail-row">
-            <span class="detail-label">Price</span>
-            <span id="modalPrice" class="detail-value"></span>
-        </div>
-
-        <div class="modal-actions">
-            <button class="add-cart" onclick="addToCart()">
-                ADD TO CART
-            </button>
-
-            <button class="cancel" onclick="closeProduct()">
-                CANCEL
-            </button>
-        </div>
+        <button
+            class="close"
+            onclick="closeProduct()"
+        >
+            ×
+        </button>
 
     </div>
+
+    <div class="modal-image">
+
+        <img id="modalImage">
+
+    </div>
+
+    <div class="detail-row">
+
+        <span class="detail-label">
+            Item
+        </span>
+
+        <span
+            id="modalItem"
+            class="detail-value"
+        ></span>
+
+    </div>
+
+    <div class="detail-row">
+
+        <span class="detail-label">
+            Type
+        </span>
+
+        <span
+            id="modalType"
+            class="detail-value"
+        ></span>
+
+    </div>
+
+    <div class="detail-row">
+
+        <span class="detail-label">
+            Wear
+        </span>
+
+        <span
+            id="modalWear"
+            class="detail-value"
+        ></span>
+
+    </div>
+
+    <div class="detail-row">
+
+        <span class="detail-label">
+            Price
+        </span>
+
+        <span
+            id="modalPrice"
+            class="detail-value"
+        ></span>
+
+    </div>
+
+    <div class="modal-actions">
+
+        <button
+            class="add-cart"
+            onclick="addToCart()"
+        >
+            ADD TO CART
+        </button>
+
+        <button
+            class="cancel"
+            onclick="closeProduct()"
+        >
+            CANCEL
+        </button>
+
+    </div>
+
+</div>
+
 </div>
 
 
 <!-- PROFILE MODAL -->
 
-<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
-    <div class="modal-content profile-modal">
+<div
+    id="profileModal"
+    class="modal"
+    onclick="closeProfileOutside(event)"
+>
 
-        <div class="modal-header">
-            <h2>MY PROFILE</h2>
-            <button class="close" onclick="closeProfile()">×</button>
-        </div>
+<div class="modal-content profile-modal">
 
-        <div class="profile-preview">
-            <img id="profilePreview" src="https://placehold.co/100x100/191919/ffffff?text=USER">
-        </div>
+    <div class="modal-header">
 
-        <div class="profile-field">
-            <label>
-                Profile Picture
-                <span class="optional">(Optional)</span>
-            </label>
+        <h2>
+            MY PROFILE
+        </h2>
 
-            <input
-                id="profileImage"
-                type="file"
-                accept="image/png,image/jpeg,image/webp"
-                onchange="previewProfileImage(event)"
-            >
-        </div>
-
-        <div class="profile-field">
-            <label>
-                Trade Link
-                <span class="required">*</span>
-            </label>
-
-            <input
-                id="tradeLink"
-                type="text"
-                placeholder="https://steamcommunity.com/tradeoffer/new/?partner=..."
-                autocomplete="off"
-            >
-        </div>
-
-        <div class="profile-field">
-            <label>
-                Phone Number
-                <span class="optional">(Optional)</span>
-            </label>
-
-            <input
-                id="phone"
-                type="text"
-                inputmode="numeric"
-                placeholder="09123456789"
-                autocomplete="off"
-            >
-        </div>
-
-        <div class="profile-field">
-            <label>
-                Telegram ID
-                <span class="optional">(Optional)</span>
-            </label>
-
-            <input
-                id="telegramId"
-                type="text"
-                placeholder="@username"
-                autocomplete="off"
-            >
-        </div>
-
-        <div class="security-box">
-
-            <div class="security-title">
-                SECURITY CODE <span class="required">*</span>
-            </div>
-
-            <div class="security-code">
-
-                <div
-                    id="securityCode"
-                    class="security-code-value"
-                ></div>
-
-                <button
-                    class="refresh-code"
-                    onclick="generateSecurityCode()"
-                    title="New code"
-                >
-                    ↻
-                </button>
-
-            </div>
-
-            <input
-                id="securityInput"
-                type="text"
-                maxlength="6"
-                inputmode="numeric"
-                placeholder="Enter security code"
-                autocomplete="off"
-            >
-
-        </div>
-
-        <div id="profileError" class="profile-error"></div>
-        <div id="profileSuccess" class="profile-success"></div>
-
-        <button class="save-profile" onclick="saveProfile()">
-            SAVE PROFILE
+        <button
+            class="close"
+            onclick="closeProfile()"
+        >
+            ×
         </button>
 
     </div>
+
+
+    <div class="profile-preview">
+
+        <img
+            id="profilePreview"
+            src="https://placehold.co/100x100/191919/ffffff?text=USER"
+        >
+
+    </div>
+
+
+    <!-- NAME -->
+
+    <div class="profile-field">
+
+        <label>
+            Name
+            <span class="required">*</span>
+        </label>
+
+        <input
+            id="profileName"
+            type="text"
+            placeholder="Enter your name"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- PHOTO -->
+
+    <div class="profile-field">
+
+        <label>
+            Profile Picture
+            <span class="optional">
+                (Optional)
+            </span>
+        </label>
+
+        <input
+            id="profileImage"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            onchange="previewProfileImage(event)"
+        >
+
+    </div>
+
+
+    <!-- TRADE LINK -->
+
+    <div class="profile-field">
+
+        <label>
+            Trade Link
+            <span class="required">*</span>
+        </label>
+
+        <input
+            id="tradeLink"
+            type="text"
+            placeholder="https://steamcommunity.com/tradeoffer/new/?partner=..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- PHONE -->
+
+    <div class="profile-field">
+
+        <label>
+            Phone Number
+            <span class="optional">
+                (Optional)
+            </span>
+        </label>
+
+        <input
+            id="phone"
+            type="text"
+            inputmode="numeric"
+            placeholder="09123456789"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- TELEGRAM -->
+
+    <div class="profile-field">
+
+        <label>
+            Telegram ID
+            <span class="optional">
+                (Optional)
+            </span>
+        </label>
+
+        <input
+            id="telegramId"
+            type="text"
+            placeholder="@username"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- CAPTCHA -->
+
+    <div class="security-box">
+
+        <div class="security-title">
+
+            CAPTCHA
+            <span class="required">*</span>
+
+        </div>
+
+
+        <div class="security-code">
+
+            <div
+                id="securityCode"
+                class="security-code-value"
+            ></div>
+
+            <button
+                class="refresh-code"
+                onclick="generateSecurityCode()"
+            >
+                ↻
+            </button>
+
+        </div>
+
+
+        <input
+            id="securityInput"
+            type="text"
+            maxlength="6"
+            placeholder="Enter CAPTCHA"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div
+        id="profileError"
+        class="profile-error"
+    ></div>
+
+    <div
+        id="profileSuccess"
+        class="profile-success"
+    ></div>
+
+
+    <button
+        class="save-profile"
+        onclick="saveProfile()"
+    >
+        SAVE PROFILE
+    </button>
+
+</div>
+
 </div>
 
 
-<!-- CART MODAL -->
+<!-- PROFILE REQUIRED ANIMATION -->
 
-<div id="cartModal" class="modal" onclick="closeCartOutside(event)">
-    <div class="modal-content">
+<div
+    id="profileRequiredModal"
+    class="modal"
+    onclick="closeProfileRequiredOutside(event)"
+>
 
-        <div class="modal-header">
-            <h2>YOUR CART</h2>
-            <button class="close" onclick="closeCart()">×</button>
+<div class="modal-content profile-required-modal">
+
+    <div class="error-animation">
+
+        <div class="error-circle"></div>
+
+        <div class="error-x">
+            ×
         </div>
 
-        <div id="cartItems" class="cart-items"></div>
+    </div>
 
-        <div class="cart-total">
-            <span>TOTAL</span>
-            <span id="cartTotal" style="color:#e00000">0 Toman</span>
-        </div>
 
-        <button class="finalize" onclick="finalizeOrder()">
-            FINALIZE ORDER
+    <div class="profile-required-title">
+        PROFILE REQUIRED
+    </div>
+
+
+    <div class="profile-required-text">
+        PLEASE COMPLETE YOUR PROFILE
+        <br>
+        BEFORE ORDERING A SKIN.
+    </div>
+
+
+    <button
+        class="go-profile"
+        onclick="goToProfile()"
+    >
+        COMPLETE PROFILE
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- CART -->
+
+<div
+    id="cartModal"
+    class="modal"
+    onclick="closeCartOutside(event)"
+>
+
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h2>
+            YOUR CART
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeCart()"
+        >
+            ×
         </button>
 
     </div>
+
+
+    <div
+        id="cartItems"
+        class="cart-items"
+    ></div>
+
+
+    <div class="cart-total">
+
+        <span>
+            TOTAL
+        </span>
+
+        <span
+            id="cartTotal"
+            style="color:#e00000"
+        >
+            0 Toman
+        </span>
+
+    </div>
+
+
+    <button
+        class="finalize"
+        onclick="finalizeOrder()"
+    >
+        FINALIZE ORDER
+    </button>
+
+</div>
+
 </div>
 
 
 <!-- ADMIN LOGIN -->
 
-<div id="adminLoginModal" class="modal" onclick="closeAdminLoginOutside(event)">
-    <div class="modal-content admin-login-box">
+<div
+    id="adminLoginModal"
+    class="modal"
+    onclick="closeAdminLoginOutside(event)"
+>
 
-        <div class="modal-header">
-            <h2>ADMIN LOGIN</h2>
-            <button class="close" onclick="closeAdminLogin()">×</button>
-        </div>
+<div class="modal-content admin-login-box">
 
-        <input
-            id="adminPassword"
-            class="admin-password"
-            type="password"
-            placeholder="Admin password"
-            onkeydown="if(event.key==='Enter') loginAdmin()"
+    <div class="modal-header">
+
+        <h2>
+            ADMIN LOGIN
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeAdminLogin()"
         >
-
-        <div id="adminError" class="admin-error"></div>
-
-        <button class="admin-enter" onclick="loginAdmin()">
-            ENTER ADMIN PANEL
+            ×
         </button>
 
     </div>
+
+
+    <input
+        id="adminPassword"
+        class="admin-password"
+        type="password"
+        placeholder="Admin password"
+        onkeydown="if(event.key==='Enter') loginAdmin()"
+    >
+
+
+    <div
+        id="adminError"
+        class="admin-error"
+    ></div>
+
+
+    <button
+        class="admin-enter"
+        onclick="loginAdmin()"
+    >
+        ENTER ADMIN PANEL
+    </button>
+
+</div>
+
 </div>
 
 
 <!-- ADMIN PANEL -->
 
-<div id="adminPanelModal" class="modal" onclick="closeAdminPanelOutside(event)">
-    <div class="modal-content admin-panel">
+<div
+    id="adminPanelModal"
+    class="modal"
+    onclick="closeAdminPanelOutside(event)"
+>
 
-        <div class="modal-header">
-            <h2>WIZZY ADMIN PANEL</h2>
-            <button class="close" onclick="closeAdminPanel()">×</button>
-        </div>
+<div class="modal-content admin-panel">
 
-        <div class="admin-stats">
+    <div class="modal-header">
 
-            <div class="admin-stat">
-                <div class="admin-stat-label">TOTAL ORDERS</div>
-                <div id="adminOrderCount" class="admin-stat-value">0</div>
-            </div>
+        <h2>
+            WIZZY ADMIN PANEL
+        </h2>
 
-            <div class="admin-stat">
-                <div class="admin-stat-label">TOTAL SALES</div>
-                <div id="adminTotalSales" class="admin-stat-value">0 Toman</div>
-            </div>
-
-            <div class="admin-stat">
-                <div class="admin-stat-label">PAID ORDERS</div>
-                <div id="adminPaidCount" class="admin-stat-value">0</div>
-            </div>
-
-        </div>
-
-        <div style="text-align:right;margin-bottom:12px">
-            <button class="admin-clear" onclick="clearAllOrders()">
-                CLEAR ALL ORDERS
-            </button>
-        </div>
-
-        <div id="adminOrders" class="admin-orders"></div>
+        <button
+            class="close"
+            onclick="closeAdminPanel()"
+        >
+            ×
+        </button>
 
     </div>
+
+
+    <div class="admin-stats">
+
+        <div class="admin-stat">
+
+            <div class="admin-stat-label">
+                TOTAL ORDERS
+            </div>
+
+            <div
+                id="adminOrderCount"
+                class="admin-stat-value"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+            <div class="admin-stat-label">
+                TOTAL SALES
+            </div>
+
+            <div
+                id="adminTotalSales"
+                class="admin-stat-value"
+            >
+                0 Toman
+            </div>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+            <div class="admin-stat-label">
+                PAID ORDERS
+            </div>
+
+            <div
+                id="adminPaidCount"
+                class="admin-stat-value"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div style="text-align:right;margin-bottom:12px">
+
+        <button
+            class="admin-clear"
+            onclick="clearAllOrders()"
+        >
+            CLEAR ALL ORDERS
+        </button>
+
+    </div>
+
+
+    <div
+        id="adminOrders"
+        class="admin-orders"
+    ></div>
+
+</div>
+
 </div>
 
 
@@ -1360,16 +1897,20 @@ footer{
 ===================================================== */
 
 let currentCategory = null;
+
 let selectedWeapons = [];
+
 let currentProduct = null;
+
 let cart = [];
 
 let profileImageData = "";
+
 let securityCode = "";
 
 
 /* =====================================================
-   CATEGORY DATA
+   CATEGORIES
 ===================================================== */
 
 const categoryData = {
@@ -1699,26 +2240,75 @@ const products = [
 
 
 /* =====================================================
-   PROFILE SYSTEM
+   PROFILE
 ===================================================== */
 
-const PROFILE_KEY = "wizzy_shop_profile";
+const PROFILE_KEY =
+    "wizzy_shop_profile";
+
 
 function getProfile(){
 
     try{
+
         return JSON.parse(
             localStorage.getItem(PROFILE_KEY)
         ) || {};
+
     }catch(e){
+
         return {};
+
     }
+
 }
 
 
+/* =====================================================
+   CAPTCHA
+   LETTERS + NUMBERS
+===================================================== */
+
+function generateSecurityCode(){
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let code = "";
+
+    for(let i=0;i<6;i++){
+
+        code +=
+            chars[
+                Math.floor(
+                    Math.random() * chars.length
+                )
+            ];
+
+    }
+
+    securityCode = code;
+
+    document.getElementById(
+        "securityCode"
+    ).textContent = code;
+
+    document.getElementById(
+        "securityInput"
+    ).value = "";
+
+}
+
+
+/* =====================================================
+   TRADE LINK
+===================================================== */
+
 function isValidTradeLink(link){
 
-    if(!link) return false;
+    if(!link){
+        return false;
+    }
 
     try{
 
@@ -1728,8 +2318,12 @@ function isValidTradeLink(link){
             url.protocol === "https:" &&
             url.hostname === "steamcommunity.com" &&
             url.pathname === "/tradeoffer/new/" &&
-            url.searchParams.has("partner") &&
-            url.searchParams.has("token")
+            /^\d+$/.test(
+                url.searchParams.get("partner") || ""
+            ) &&
+            /^[A-Za-z0-9_-]+$/.test(
+                url.searchParams.get("token") || ""
+            )
         );
 
     }catch(e){
@@ -1737,82 +2331,87 @@ function isValidTradeLink(link){
         return false;
 
     }
+
 }
 
 
+/* =====================================================
+   PHONE
+===================================================== */
+
 function isValidPhone(phone){
 
-    if(!phone) return true;
+    if(!phone){
+        return true;
+    }
 
-    const clean = phone.replace(/[ -]/g,"");
+    const clean =
+        phone.replace(/[ -]/g,"");
 
     return /^09\d{9}$/.test(clean);
 
 }
 
 
+/* =====================================================
+   TELEGRAM
+===================================================== */
+
 function isValidTelegram(id){
 
-    if(!id) return true;
+    if(!id){
+        return true;
+    }
 
     return /^@?[A-Za-z0-9_]{5,32}$/.test(id);
 
 }
 
 
-function generateSecurityCode(){
-
-    securityCode =
-        Math.floor(
-            100000 +
-            Math.random() * 900000
-        ).toString();
-
-    document.getElementById(
-        "securityCode"
-    ).textContent = securityCode;
-
-    document.getElementById(
-        "securityInput"
-    ).value = "";
-
-}
-
+/* =====================================================
+   OPEN PROFILE
+===================================================== */
 
 function openProfile(){
 
     const profile = getProfile();
 
-    document.getElementById("profileError").textContent = "";
-    document.getElementById("profileSuccess").textContent = "";
+    document.getElementById(
+        "profileName"
+    ).value =
+        profile.name || "";
 
-    document.getElementById("tradeLink").value =
+    document.getElementById(
+        "tradeLink"
+    ).value =
         profile.tradeLink || "";
 
-    document.getElementById("phone").value =
+    document.getElementById(
+        "phone"
+    ).value =
         profile.phone || "";
 
-    document.getElementById("telegramId").value =
+    document.getElementById(
+        "telegramId"
+    ).value =
         profile.telegramId || "";
 
-    if(profile.image){
+    document.getElementById(
+        "profileError"
+    ).textContent = "";
 
-        profileImageData = profile.image;
+    document.getElementById(
+        "profileSuccess"
+    ).textContent = "";
 
-        document.getElementById(
-            "profilePreview"
-        ).src = profile.image;
+    profileImageData =
+        profile.image || "";
 
-    }else{
-
-        profileImageData = "";
-
-        document.getElementById(
-            "profilePreview"
-        ).src =
-            "https://placehold.co/100x100/191919/ffffff?text=USER";
-
-    }
+    document.getElementById(
+        "profilePreview"
+    ).src =
+        profile.image ||
+        "https://placehold.co/100x100/191919/ffffff?text=USER";
 
     generateSecurityCode();
 
@@ -1835,17 +2434,26 @@ function closeProfile(){
 function closeProfileOutside(event){
 
     if(event.target.id === "profileModal"){
+
         closeProfile();
+
     }
 
 }
 
 
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
 function previewProfileImage(event){
 
-    const file = event.target.files[0];
+    const file =
+        event.target.files[0];
 
-    if(!file) return;
+    if(!file){
+        return;
+    }
 
     if(file.size > 2 * 1024 * 1024){
 
@@ -1857,17 +2465,21 @@ function previewProfileImage(event){
         event.target.value = "";
 
         return;
+
     }
 
-    const reader = new FileReader();
+    const reader =
+        new FileReader();
 
     reader.onload = function(e){
 
-        profileImageData = e.target.result;
+        profileImageData =
+            e.target.result;
 
         document.getElementById(
             "profilePreview"
-        ).src = e.target.result;
+        ).src =
+            e.target.result;
 
     };
 
@@ -1876,7 +2488,16 @@ function previewProfileImage(event){
 }
 
 
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
 function saveProfile(){
+
+    const name =
+        document.getElementById(
+            "profileName"
+        ).value.trim();
 
     const tradeLink =
         document.getElementById(
@@ -1896,7 +2517,8 @@ function saveProfile(){
     const enteredCode =
         document.getElementById(
             "securityInput"
-        ).value.trim();
+        ).value.trim()
+        .toUpperCase();
 
     const error =
         document.getElementById(
@@ -1911,7 +2533,22 @@ function saveProfile(){
     error.textContent = "";
     success.textContent = "";
 
-    /* TRADE LINK REQUIRED */
+
+    /* NAME */
+
+    if(!name){
+
+        error.textContent =
+            "Please enter your name.";
+
+        generateSecurityCode();
+
+        return;
+
+    }
+
+
+    /* TRADE LINK */
 
     if(!tradeLink){
 
@@ -1921,7 +2558,9 @@ function saveProfile(){
         generateSecurityCode();
 
         return;
+
     }
+
 
     if(!isValidTradeLink(tradeLink)){
 
@@ -1931,9 +2570,11 @@ function saveProfile(){
         generateSecurityCode();
 
         return;
+
     }
 
-    /* PHONE OPTIONAL BUT VALID IF ENTERED */
+
+    /* PHONE */
 
     if(!isValidPhone(phone)){
 
@@ -1943,9 +2584,11 @@ function saveProfile(){
         generateSecurityCode();
 
         return;
+
     }
 
-    /* TELEGRAM OPTIONAL BUT VALID IF ENTERED */
+
+    /* TELEGRAM */
 
     if(!isValidTelegram(telegramId)){
 
@@ -1955,21 +2598,27 @@ function saveProfile(){
         generateSecurityCode();
 
         return;
+
     }
 
-    /* SECURITY CODE */
+
+    /* CAPTCHA */
 
     if(enteredCode !== securityCode){
 
         error.textContent =
-            "Wrong security code.";
+            "Incorrect CAPTCHA.";
 
         generateSecurityCode();
 
         return;
+
     }
 
+
     const profile = {
+
+        name:name,
 
         image:profileImageData || "",
 
@@ -1981,15 +2630,19 @@ function saveProfile(){
 
     };
 
+
     localStorage.setItem(
         PROFILE_KEY,
         JSON.stringify(profile)
     );
 
+
     updateProfileMini();
+
 
     success.textContent =
         "Profile saved successfully.";
+
 
     setTimeout(function(){
 
@@ -2000,9 +2653,14 @@ function saveProfile(){
 }
 
 
+/* =====================================================
+   PROFILE BUTTON IMAGE
+===================================================== */
+
 function updateProfileMini(){
 
-    const profile = getProfile();
+    const profile =
+        getProfile();
 
     document.getElementById(
         "profileMini"
@@ -2014,34 +2672,66 @@ function updateProfileMini(){
 
 
 /* =====================================================
-   PROFILE REQUIRED FOR ORDERING
+   PROFILE COMPLETE?
 ===================================================== */
 
 function isProfileComplete(){
 
-    const profile = getProfile();
+    const profile =
+        getProfile();
 
     return (
-        profile.tradeLink &&
-        isValidTradeLink(profile.tradeLink)
+        profile.name &&
+        profile.name.trim() &&
+        isValidTradeLink(
+            profile.tradeLink
+        )
     );
 
 }
 
 
-function requireProfileForPurchase(){
+/* =====================================================
+   PROFILE REQUIRED ANIMATION
+===================================================== */
 
-    if(isProfileComplete()){
-        return true;
+function showProfileRequired(){
+
+    document.getElementById(
+        "profileRequiredModal"
+    ).classList.add("show");
+
+}
+
+
+function closeProfileRequired(){
+
+    document.getElementById(
+        "profileRequiredModal"
+    ).classList.remove("show");
+
+}
+
+
+function closeProfileRequiredOutside(event){
+
+    if(
+        event.target.id ===
+        "profileRequiredModal"
+    ){
+
+        closeProfileRequired();
+
     }
 
-    alert(
-        "Complete your profile before ordering.\n\nA valid Steam Trade Link is required."
-    );
+}
+
+
+function goToProfile(){
+
+    closeProfileRequired();
 
     openProfile();
-
-    return false;
 
 }
 
@@ -2062,10 +2752,14 @@ function formatPrice(price){
 function updatePriceRange(){
 
     const minSlider =
-        document.getElementById("minPrice");
+        document.getElementById(
+            "minPrice"
+        );
 
     const maxSlider =
-        document.getElementById("maxPrice");
+        document.getElementById(
+            "maxPrice"
+        );
 
     let min =
         Number(minSlider.value);
@@ -2073,9 +2767,13 @@ function updatePriceRange(){
     let max =
         Number(maxSlider.value);
 
+
     if(min > max){
 
-        if(document.activeElement === minSlider){
+        if(
+            document.activeElement ===
+            minSlider
+        ){
 
             max = min;
             maxSlider.value = max;
@@ -2089,7 +2787,9 @@ function updatePriceRange(){
 
     }
 
-    const limit = Number(maxSlider.max);
+
+    const limit =
+        Number(maxSlider.max);
 
     const minPercent =
         min / limit * 100;
@@ -2097,16 +2797,18 @@ function updatePriceRange(){
     const maxPercent =
         max / limit * 100;
 
-    const progress =
-        document.getElementById(
-            "rangeProgress"
-        );
 
-    progress.style.left =
+    document.getElementById(
+        "rangeProgress"
+    ).style.left =
         minPercent + "%";
 
-    progress.style.width =
+
+    document.getElementById(
+        "rangeProgress"
+    ).style.width =
         (maxPercent-minPercent) + "%";
+
 
     document.getElementById(
         "priceRangeText"
@@ -2114,6 +2816,7 @@ function updatePriceRange(){
         formatPrice(min) +
         " - " +
         formatPrice(max);
+
 
     renderProducts();
 
@@ -2124,18 +2827,24 @@ function updatePriceRange(){
    CATEGORY
 ===================================================== */
 
-function selectCategory(category,element){
+function selectCategory(
+    category,
+    element
+){
 
     if(currentCategory === category){
 
         currentCategory = null;
+
         selectedWeapons = [];
 
         document.querySelectorAll(
             ".category"
         ).forEach(function(item){
 
-            item.classList.remove("active");
+            item.classList.remove(
+                "active"
+            );
 
         });
 
@@ -2146,24 +2855,33 @@ function selectCategory(category,element){
         renderProducts();
 
         return;
+
     }
 
+
     currentCategory = category;
+
     selectedWeapons = [];
+
 
     document.querySelectorAll(
         ".category"
     ).forEach(function(item){
 
-        item.classList.remove("active");
+        item.classList.remove(
+            "active"
+        );
 
     });
 
+
     element.classList.add("active");
+
 
     document.getElementById(
         "weaponBox"
     ).classList.add("show");
+
 
     document.getElementById(
         "weaponTitle"
@@ -2172,11 +2890,17 @@ function selectCategory(category,element){
         ? "ACCESSORIES"
         : category.toUpperCase() + " WEAPONS";
 
+
     renderWeapons();
+
     renderProducts();
 
 }
 
+
+/* =====================================================
+   WEAPONS
+===================================================== */
 
 function renderWeapons(){
 
@@ -2187,54 +2911,92 @@ function renderWeapons(){
 
     list.innerHTML = "";
 
-    (categoryData[currentCategory] || [])
-    .forEach(function(weapon){
+
+    (
+        categoryData[
+            currentCategory
+        ] || []
+    ).forEach(function(weapon){
 
         const button =
-            document.createElement("button");
-
-        button.className = "weapon";
-
-        button.textContent = weapon;
-
-        if(selectedWeapons.includes(weapon)){
-            button.classList.add("active");
-        }
-
-        button.onclick = function(){
-
-            selectWeapon(
-                weapon,
-                button
+            document.createElement(
+                "button"
             );
 
-        };
+        button.className =
+            "weapon";
 
-        list.appendChild(button);
+        button.textContent =
+            weapon;
+
+
+        if(
+            selectedWeapons.includes(
+                weapon
+            )
+        ){
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        button.onclick =
+            function(){
+
+                selectWeapon(
+                    weapon,
+                    button
+                );
+
+            };
+
+
+        list.appendChild(
+            button
+        );
 
     });
 
 }
 
 
-function selectWeapon(weapon,element){
+function selectWeapon(
+    weapon,
+    element
+){
 
     const index =
-        selectedWeapons.indexOf(weapon);
+        selectedWeapons.indexOf(
+            weapon
+        );
+
 
     if(index !== -1){
 
-        selectedWeapons.splice(index,1);
+        selectedWeapons.splice(
+            index,
+            1
+        );
 
-        element.classList.remove("active");
+        element.classList.remove(
+            "active"
+        );
 
     }else{
 
-        selectedWeapons.push(weapon);
+        selectedWeapons.push(
+            weapon
+        );
 
-        element.classList.add("active");
+        element.classList.add(
+            "active"
+        );
 
     }
+
 
     renderProducts();
 
@@ -2254,15 +3016,20 @@ function renderProducts(){
 
     container.innerHTML = "";
 
+
     const search =
         document.getElementById(
             "search"
-        ).value.toLowerCase().trim();
+        ).value
+        .toLowerCase()
+        .trim();
+
 
     const wear =
         document.getElementById(
             "wearFilter"
         ).value;
+
 
     const min =
         Number(
@@ -2271,6 +3038,7 @@ function renderProducts(){
             ).value
         );
 
+
     const max =
         Number(
             document.getElementById(
@@ -2278,53 +3046,72 @@ function renderProducts(){
             ).value
         );
 
+
     const filtered =
-        products.filter(function(product){
+        products.filter(
+            function(product){
 
-            const searchMatch =
-                product.name.toLowerCase().includes(search) ||
-                product.weapon.toLowerCase().includes(search);
+                const searchMatch =
+                    product.name
+                    .toLowerCase()
+                    .includes(search) ||
 
-            const wearMatch =
-                wear === "all" ||
-                product.wear === wear;
+                    product.weapon
+                    .toLowerCase()
+                    .includes(search);
 
-            const priceMatch =
-                product.price >= min &&
-                product.price <= max;
 
-            let categoryMatch = true;
+                const wearMatch =
+                    wear === "all" ||
+                    product.wear === wear;
 
-            if(currentCategory){
 
-                categoryMatch =
-                    product.category === currentCategory;
+                const priceMatch =
+                    product.price >= min &&
+                    product.price <= max;
+
+
+                let categoryMatch =
+                    true;
+
+
+                if(currentCategory){
+
+                    categoryMatch =
+                        product.category ===
+                        currentCategory;
+
+                }
+
+
+                let weaponMatch =
+                    true;
+
+
+                if(
+                    currentCategory &&
+                    selectedWeapons.length > 0
+                ){
+
+                    weaponMatch =
+                        selectedWeapons.includes(
+                            product.weapon
+                        );
+
+                }
+
+
+                return (
+                    searchMatch &&
+                    wearMatch &&
+                    priceMatch &&
+                    categoryMatch &&
+                    weaponMatch
+                );
 
             }
+        );
 
-            let weaponMatch = true;
-
-            if(
-                currentCategory &&
-                selectedWeapons.length > 0
-            ){
-
-                weaponMatch =
-                    selectedWeapons.includes(
-                        product.weapon
-                    );
-
-            }
-
-            return (
-                searchMatch &&
-                wearMatch &&
-                priceMatch &&
-                categoryMatch &&
-                weaponMatch
-            );
-
-        });
 
     if(filtered.length === 0){
 
@@ -2332,107 +3119,138 @@ function renderProducts(){
             '<div class="empty">No skins found.</div>';
 
         return;
+
     }
 
-    filtered.forEach(function(product){
 
-        const card =
-            document.createElement("div");
+    filtered.forEach(
+        function(product){
 
-        card.className = "product";
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-        card.innerHTML = `
+            card.className =
+                "product";
 
-            <div class="product-image">
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
-                >
-            </div>
 
-            <div class="product-info">
+            card.innerHTML = `
 
-                <div class="product-name">
-                    ${product.name}
+                <div class="product-image">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        loading="lazy"
+                    >
+
                 </div>
 
-                <div class="product-weapon">
-                    ${product.weapon} • ${product.wear}
-                </div>
 
-                <div class="product-bottom">
+                <div class="product-info">
 
-                    <div class="price">
-                        ${formatPrice(product.price)}
+                    <div class="product-name">
+                        ${product.name}
                     </div>
 
-                    <button
-                        class="buy-button"
-                        onclick="openProduct(${product.id})"
-                    >
-                        BUY
-                    </button>
+
+                    <div class="product-weapon">
+                        ${product.weapon}
+                        •
+                        ${product.wear}
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="price">
+                            ${formatPrice(product.price)}
+                        </div>
+
+
+                        <button
+                            class="buy-button"
+                            onclick="openProduct(${product.id})"
+                        >
+                            BUY
+                        </button>
+
+                    </div>
 
                 </div>
+            `;
 
-            </div>
 
-        `;
+            container.appendChild(
+                card
+            );
 
-        container.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
 
 /* =====================================================
-   PRODUCT MODAL
+   PRODUCT
 ===================================================== */
 
 function openProduct(id){
 
-    /*
-       BUY IS LOCKED UNTIL PROFILE
-       HAS A VALID TRADE LINK.
-    */
+    if(!isProfileComplete()){
 
-    if(!requireProfileForPurchase()){
+        showProfileRequired();
+
+        return;
+
+    }
+
+
+    currentProduct =
+        products.find(
+            function(product){
+
+                return product.id === id;
+
+            }
+        );
+
+
+    if(!currentProduct){
         return;
     }
 
-    currentProduct =
-        products.find(function(product){
-            return product.id === id;
-        });
-
-    if(!currentProduct) return;
 
     document.getElementById(
         "modalName"
     ).textContent =
         currentProduct.name;
 
+
     document.getElementById(
         "modalImage"
     ).src =
         currentProduct.image;
+
 
     document.getElementById(
         "modalItem"
     ).textContent =
         currentProduct.name;
 
+
     document.getElementById(
         "modalType"
     ).textContent =
         currentProduct.weapon;
 
+
     document.getElementById(
         "modalWear"
     ).textContent =
         currentProduct.wear;
+
 
     document.getElementById(
         "modalPrice"
@@ -2440,6 +3258,7 @@ function openProduct(id){
         formatPrice(
             currentProduct.price
         );
+
 
     document.getElementById(
         "productModal"
@@ -2459,8 +3278,13 @@ function closeProduct(){
 
 function closeModalOutside(event){
 
-    if(event.target.id === "productModal"){
+    if(
+        event.target.id ===
+        "productModal"
+    ){
+
         closeProduct();
+
     }
 
 }
@@ -2472,14 +3296,26 @@ function closeModalOutside(event){
 
 function addToCart(){
 
-    if(!currentProduct) return;
-
-    if(!requireProfileForPurchase()){
-        closeProduct();
+    if(!currentProduct){
         return;
     }
 
-    cart.push(currentProduct);
+
+    if(!isProfileComplete()){
+
+        closeProduct();
+
+        showProfileRequired();
+
+        return;
+
+    }
+
+
+    cart.push(
+        currentProduct
+    );
+
 
     updateCart();
 
@@ -2509,10 +3345,11 @@ function renderCart(){
 
     container.innerHTML = "";
 
+
     if(cart.length === 0){
 
         container.innerHTML =
-            '<div class="empty-cart">Your cart is empty.</div>';
+            '<div class="empty">Your cart is empty.</div>';
 
         document.getElementById(
             "cartTotal"
@@ -2520,46 +3357,66 @@ function renderCart(){
             "0 Toman";
 
         return;
+
     }
+
 
     let total = 0;
 
-    cart.forEach(function(product,index){
 
-        total += product.price;
+    cart.forEach(
+        function(product,index){
 
-        const item =
-            document.createElement("div");
+            total +=
+                product.price;
 
-        item.className = "cart-item";
 
-        item.innerHTML = `
+            const item =
+                document.createElement(
+                    "div"
+                );
 
-            <img src="${product.image}">
+            item.className =
+                "cart-item";
 
-            <div class="cart-item-info">
 
-                <div class="cart-item-name">
-                    ${product.name}
+            item.innerHTML = `
+
+                <img
+                    src="${product.image}"
+                >
+
+
+                <div class="cart-item-info">
+
+                    <div class="cart-item-name">
+                        ${product.name}
+                    </div>
+
+                    <div class="cart-item-price">
+                        ${formatPrice(product.price)}
+                    </div>
+
                 </div>
 
-                <div class="cart-item-price">
-                    ${formatPrice(product.price)}
-                </div>
 
-            </div>
+                <button
+                    class="remove-item"
+                    onclick="removeFromCart(${index})"
+                >
+                    REMOVE
+                </button>
 
-            <button
-                class="remove-item"
-                onclick="removeFromCart(${index})"
-            >
-                REMOVE
-            </button>
-        `;
+            `;
 
-        container.appendChild(item);
 
-    });
+            container.appendChild(
+                item
+            );
+
+        }
+    );
+
 
     document.getElementById(
         "cartTotal"
@@ -2571,7 +3428,10 @@ function renderCart(){
 
 function removeFromCart(index){
 
-    cart.splice(index,1);
+    cart.splice(
+        index,
+        1
+    );
 
     updateCart();
 
@@ -2600,8 +3460,13 @@ function closeCart(){
 
 function closeCartOutside(event){
 
-    if(event.target.id === "cartModal"){
+    if(
+        event.target.id ===
+        "cartModal"
+    ){
+
         closeCart();
+
     }
 
 }
@@ -2613,6 +3478,7 @@ function closeCartOutside(event){
 
 const ORDERS_KEY =
     "wizzy_shop_orders";
+
 
 function getOrders(){
 
@@ -2633,11 +3499,15 @@ function getOrders(){
 }
 
 
-function saveOrders(orders){
+function saveOrders(
+    orders
+){
 
     localStorage.setItem(
         ORDERS_KEY,
-        JSON.stringify(orders)
+        JSON.stringify(
+            orders
+        )
     );
 
 }
@@ -2645,26 +3515,43 @@ function saveOrders(orders){
 
 function createLocalOrder(){
 
-    if(cart.length === 0) return null;
+    if(cart.length === 0){
+        return null;
+    }
+
 
     let total = 0;
 
+
     const items =
-        cart.map(function(product){
+        cart.map(
+            function(product){
 
-            total += product.price;
+                total +=
+                    product.price;
 
-            return {
-                id:product.id,
-                name:product.name,
-                weapon:product.weapon,
-                wear:product.wear,
-                price:product.price
-            };
 
-        });
+                return {
 
-    const profile = getProfile();
+                    id:product.id,
+
+                    name:product.name,
+
+                    weapon:product.weapon,
+
+                    wear:product.wear,
+
+                    price:product.price
+
+                };
+
+            }
+        );
+
+
+    const profile =
+        getProfile();
+
 
     const order = {
 
@@ -2675,27 +3562,47 @@ function createLocalOrder(){
             .toUpperCase(),
 
         createdAt:
-            new Date().toLocaleString(),
+            new Date()
+            .toLocaleString(),
 
         status:"PENDING",
 
         total:total,
 
         customer:{
-            tradeLink:profile.tradeLink || "",
-            phone:profile.phone || "",
-            telegramId:profile.telegramId || ""
+
+            name:
+                profile.name || "",
+
+            tradeLink:
+                profile.tradeLink || "",
+
+            phone:
+                profile.phone || "",
+
+            telegramId:
+                profile.telegramId || ""
+
         },
 
         items:items
 
     };
 
-    const orders = getOrders();
 
-    orders.unshift(order);
+    const orders =
+        getOrders();
 
-    saveOrders(orders);
+
+    orders.unshift(
+        order
+    );
+
+
+    saveOrders(
+        orders
+    );
+
 
     return order;
 
@@ -2706,61 +3613,88 @@ function finalizeOrder(){
 
     if(cart.length === 0){
 
-        alert("Your cart is empty.");
+        alert(
+            "Your cart is empty."
+        );
 
         return;
 
     }
 
-    /*
-       FINAL CHECK BEFORE ORDER
-    */
 
-    if(!requireProfileForPurchase()){
+    if(!isProfileComplete()){
 
         closeCart();
 
+        showProfileRequired();
+
         return;
 
     }
+
 
     let message =
         "WIZZY SHOP ORDER\n\n";
 
-    const profile = getProfile();
+
+    const profile =
+        getProfile();
+
 
     let total = 0;
 
-    cart.forEach(function(product,index){
 
-        total += product.price;
+    cart.forEach(
+        function(product,index){
 
-        message +=
-            `${index+1}. ${product.name} - ${formatPrice(product.price)}\n`;
+            total +=
+                product.price;
 
-    });
+
+            message +=
+                `${index+1}. ${product.name} - ${formatPrice(product.price)}\n`;
+
+        }
+    );
+
 
     message +=
         `\nTOTAL: ${formatPrice(total)}`;
 
+
     message +=
-        `\n\nTRADE LINK: ${profile.tradeLink}`;
+        `\n\nNAME: ${profile.name}`;
+
+
+    message +=
+        `\nTRADE LINK: ${profile.tradeLink}`;
+
 
     if(profile.telegramId){
+
         message +=
             `\nTELEGRAM: ${profile.telegramId}`;
+
     }
 
+
     if(profile.phone){
+
         message +=
             `\nPHONE: ${profile.phone}`;
+
     }
+
 
     createLocalOrder();
 
+
     const telegram =
         "https://t.me/WizyyShop?text=" +
-        encodeURIComponent(message);
+        encodeURIComponent(
+            message
+        );
+
 
     window.open(
         telegram,
@@ -2772,14 +3706,17 @@ function finalizeOrder(){
 
 /* =====================================================
    HIDDEN ADMIN
-   5 QUICK CLICKS ON WIZZY SHOP
+   5 CLICKS ON LOGO
 ===================================================== */
 
 const ADMIN_PASSWORD =
     "WIZZYADMIN2026";
 
+
 let logoClicks = 0;
+
 let logoTimer = null;
+
 
 document.getElementById(
     "shopLogo"
@@ -2793,14 +3730,21 @@ function secretLogoClick(){
 
     logoClicks++;
 
-    clearTimeout(logoTimer);
+    clearTimeout(
+        logoTimer
+    );
+
 
     logoTimer =
-        setTimeout(function(){
+        setTimeout(
+            function(){
 
-            logoClicks = 0;
+                logoClicks = 0;
 
-        },1500);
+            },
+            1500
+        );
+
 
     if(logoClicks >= 5){
 
@@ -2823,21 +3767,27 @@ function openAdminLogin(){
         "adminError"
     ).textContent = "";
 
+
     document.getElementById(
         "adminPassword"
     ).value = "";
+
 
     document.getElementById(
         "adminLoginModal"
     ).classList.add("show");
 
-    setTimeout(function(){
 
-        document.getElementById(
-            "adminPassword"
-        ).focus();
+    setTimeout(
+        function(){
 
-    },100);
+            document.getElementById(
+                "adminPassword"
+            ).focus();
+
+        },
+        100
+    );
 
 }
 
@@ -2853,8 +3803,13 @@ function closeAdminLogin(){
 
 function closeAdminLoginOutside(event){
 
-    if(event.target.id === "adminLoginModal"){
+    if(
+        event.target.id ===
+        "adminLoginModal"
+    ){
+
         closeAdminLogin();
+
     }
 
 }
@@ -2867,7 +3822,11 @@ function loginAdmin(){
             "adminPassword"
         ).value;
 
-    if(password !== ADMIN_PASSWORD){
+
+    if(
+        password !==
+        ADMIN_PASSWORD
+    ){
 
         document.getElementById(
             "adminError"
@@ -2875,7 +3834,9 @@ function loginAdmin(){
             "Wrong password.";
 
         return;
+
     }
+
 
     closeAdminLogin();
 
@@ -2906,27 +3867,50 @@ function closeAdminPanel(){
 
 function closeAdminPanelOutside(event){
 
-    if(event.target.id === "adminPanelModal"){
+    if(
+        event.target.id ===
+        "adminPanelModal"
+    ){
+
         closeAdminPanel();
+
     }
 
 }
 
 
-function updateOrderStatus(id,status){
+function updateOrderStatus(
+    id,
+    status
+){
 
-    const orders = getOrders();
+    const orders =
+        getOrders();
+
 
     const order =
-        orders.find(function(item){
-            return item.id === id;
-        });
+        orders.find(
+            function(item){
 
-    if(!order) return;
+                return item.id === id;
 
-    order.status = status;
+            }
+        );
 
-    saveOrders(orders);
+
+    if(!order){
+        return;
+    }
+
+
+    order.status =
+        status;
+
+
+    saveOrders(
+        orders
+    );
+
 
     renderAdminPanel();
 
@@ -2935,16 +3919,32 @@ function updateOrderStatus(id,status){
 
 function deleteOrder(id){
 
-    if(!confirm("Delete this order?")){
+    if(
+        !confirm(
+            "Delete this order?"
+        )
+    ){
+
         return;
+
     }
 
-    const orders =
-        getOrders().filter(function(order){
-            return order.id !== id;
-        });
 
-    saveOrders(orders);
+    const orders =
+        getOrders()
+        .filter(
+            function(order){
+
+                return order.id !== id;
+
+            }
+        );
+
+
+    saveOrders(
+        orders
+    );
+
 
     renderAdminPanel();
 
@@ -2953,19 +3953,30 @@ function deleteOrder(id){
 
 function clearAllOrders(){
 
-    const orders = getOrders();
+    const orders =
+        getOrders();
 
-    if(!orders.length) return;
 
-    if(!confirm(
-        "Delete ALL orders? This cannot be undone."
-    )){
+    if(!orders.length){
         return;
     }
+
+
+    if(
+        !confirm(
+            "Delete ALL orders? This cannot be undone."
+        )
+    ){
+
+        return;
+
+    }
+
 
     localStorage.removeItem(
         ORDERS_KEY
     );
+
 
     renderAdminPanel();
 
@@ -2974,39 +3985,65 @@ function clearAllOrders(){
 
 function renderAdminPanel(){
 
-    const orders = getOrders();
+    const orders =
+        getOrders();
+
 
     const paid =
-        orders.filter(function(order){
-            return order.status === "PAID";
-        });
+        orders.filter(
+            function(order){
+
+                return order.status ===
+                    "PAID";
+
+            }
+        );
+
 
     const totalSales =
-        paid.reduce(function(sum,order){
-            return sum + Number(order.total || 0);
-        },0);
+        paid.reduce(
+            function(sum,order){
+
+                return (
+                    sum +
+                    Number(
+                        order.total || 0
+                    )
+                );
+
+            },
+            0
+        );
+
 
     document.getElementById(
         "adminOrderCount"
     ).textContent =
         orders.length;
 
+
     document.getElementById(
         "adminPaidCount"
     ).textContent =
         paid.length;
 
+
     document.getElementById(
         "adminTotalSales"
     ).textContent =
-        formatPrice(totalSales);
+        formatPrice(
+            totalSales
+        );
+
 
     const container =
         document.getElementById(
             "adminOrders"
         );
 
+
     container.innerHTML = "";
+
 
     if(!orders.length){
 
@@ -3017,112 +4054,143 @@ function renderAdminPanel(){
 
     }
 
-    orders.forEach(function(order){
 
-        const card =
-            document.createElement("div");
+    orders.forEach(
+        function(order){
 
-        card.className =
-            "admin-order";
-
-        const items =
-            order.items.map(function(item){
-
-                return (
-                    item.name +
-                    " — " +
-                    formatPrice(item.price)
+            const card =
+                document.createElement(
+                    "div"
                 );
 
-            }).join("<br>");
 
-        card.innerHTML = `
+            card.className =
+                "admin-order";
 
-            <div class="admin-order-head">
 
-                <div class="admin-order-id">
-                    ${order.id}
+            const items =
+                order.items
+                .map(
+                    function(item){
+
+                        return (
+                            item.name +
+                            " — " +
+                            formatPrice(
+                                item.price
+                            )
+                        );
+
+                    }
+                )
+                .join("<br>");
+
+
+            card.innerHTML = `
+
+                <div class="admin-order-head">
+
+                    <div class="admin-order-id">
+                        ${order.id}
+                    </div>
+
+                    <div class="admin-order-date">
+                        ${order.createdAt}
+                    </div>
+
                 </div>
 
-                <div class="admin-order-date">
-                    ${order.createdAt}
+
+                <div class="admin-order-items">
+                    ${items}
                 </div>
 
-            </div>
 
-            <div class="admin-order-items">
-                ${items}
-            </div>
+                <div class="admin-order-total">
+                    ${formatPrice(order.total)}
+                </div>
 
-            <div class="admin-order-total">
-                ${formatPrice(order.total)}
-            </div>
 
-            <div style="color:#777;font-size:10px;margin-top:8px">
-                Trade:
-                ${order.customer?.tradeLink || "-"}
-            </div>
+                <div style="color:#777;font-size:10px;margin-top:8px">
+                    Name:
+                    ${order.customer?.name || "-"}
+                </div>
 
-            <div style="color:#777;font-size:10px;margin-top:4px">
-                Telegram:
-                ${order.customer?.telegramId || "-"}
-            </div>
 
-            <div style="color:#777;font-size:10px;margin-top:4px">
-                Phone:
-                ${order.customer?.phone || "-"}
-            </div>
+                <div style="color:#777;font-size:10px;margin-top:4px">
+                    Trade:
+                    ${order.customer?.tradeLink || "-"}
+                </div>
 
-            <div class="admin-order-actions">
 
-                <select
-                    class="admin-status"
-                    onchange="updateOrderStatus('${order.id}',this.value)"
-                >
+                <div style="color:#777;font-size:10px;margin-top:4px">
+                    Telegram:
+                    ${order.customer?.telegramId || "-"}
+                </div>
 
-                    <option
-                        value="PENDING"
-                        ${order.status==="PENDING"?"selected":""}
+
+                <div style="color:#777;font-size:10px;margin-top:4px">
+                    Phone:
+                    ${order.customer?.phone || "-"}
+                </div>
+
+
+                <div class="admin-order-actions">
+
+                    <select
+                        class="admin-status"
+                        onchange="updateOrderStatus('${order.id}',this.value)"
                     >
-                        PENDING
-                    </option>
 
-                    <option
-                        value="PAID"
-                        ${order.status==="PAID"?"selected":""}
+                        <option
+                            value="PENDING"
+                            ${order.status==="PENDING"?"selected":""}
+                        >
+                            PENDING
+                        </option>
+
+                        <option
+                            value="PAID"
+                            ${order.status==="PAID"?"selected":""}
+                        >
+                            PAID
+                        </option>
+
+                        <option
+                            value="FAILED"
+                            ${order.status==="FAILED"?"selected":""}
+                        >
+                            FAILED
+                        </option>
+
+                        <option
+                            value="DELIVERED"
+                            ${order.status==="DELIVERED"?"selected":""}
+                        >
+                            DELIVERED
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        class="admin-delete"
+                        onclick="deleteOrder('${order.id}')"
                     >
-                        PAID
-                    </option>
+                        DELETE
+                    </button>
 
-                    <option
-                        value="FAILED"
-                        ${order.status==="FAILED"?"selected":""}
-                    >
-                        FAILED
-                    </option>
+                </div>
 
-                    <option
-                        value="DELIVERED"
-                        ${order.status==="DELIVERED"?"selected":""}
-                    >
-                        DELIVERED
-                    </option>
+            `;
 
-                </select>
 
-                <button
-                    class="admin-delete"
-                    onclick="deleteOrder('${order.id}')"
-                >
-                    DELETE
-                </button>
+            container.appendChild(
+                card
+            );
 
-            </div>
-        `;
-
-        container.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
@@ -3133,7 +4201,9 @@ function renderAdminPanel(){
 
 document.getElementById(
     "weaponBox"
-).classList.remove("show");
+).classList.remove(
+    "show"
+);
 
 updateProfileMini();
 
@@ -3147,3 +4217,4 @@ updatePriceRange();
 
 </body>
 </html>
+```
