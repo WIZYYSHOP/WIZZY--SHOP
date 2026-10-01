@@ -3843,37 +3843,61 @@ function closeAdminLoginOutside(event){
 }
 
 async function loginAdmin(){
-    const email=document.getElementById("adminEmail").value.trim();
-    const password=document.getElementById("adminPassword").value;
-    const errorBox=document.getElementById("adminError");
-    errorBox.textContent="";
-    if(!email||!password){
-        errorBox.textContent="EMAIL AND PASSWORD ARE REQUIRED";
-        return;
-    }
-    if(typeof wizzySupabase==="undefined"){
-        errorBox.textContent="SUPABASE IS NOT CONNECTED";
-        return;
-    }
-    try{
-        const {data,error}=await wizzySupabase.auth.signInWithPassword({email:email,password:password});
-        if(error){
-            console.error("SUPABASE LOGIN ERROR:",error);
-            errorBox.textContent="WRONG EMAIL OR PASSWORD";
-            return;
-        }
-        console.log("ADMIN LOGIN SUCCESS:",data.user?.email);
-        closeAdminLogin();
-        openAdminPanel();
-    }catch(error){
-        console.error("ADMIN LOGIN ERROR:",error);
-        errorBox.textContent="LOGIN ERROR";
-    }
-}
 
-function openAdminPanel(){
-    renderAdminPanel();
-    document.getElementById("adminPanelModal").classList.add("show");
+    const email =
+        document.getElementById("adminEmail").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const errorBox =
+        document.getElementById("adminError");
+
+    errorBox.textContent = "";
+
+    if(!email || !password){
+
+        errorBox.textContent =
+            "EMAIL AND PASSWORD ARE REQUIRED";
+
+        return;
+    }
+
+    if(typeof wizzySupabase === "undefined"){
+
+        errorBox.textContent =
+            "SUPABASE IS NOT CONNECTED";
+
+        return;
+    }
+
+    const { data, error } =
+        await wizzySupabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+    if(error){
+
+        console.error(
+            "SUPABASE LOGIN ERROR:",
+            error
+        );
+
+        errorBox.textContent =
+            error.message || "UNKNOWN SUPABASE ERROR";
+
+        return;
+    }
+
+    console.log(
+        "ADMIN LOGIN SUCCESS:",
+        data.user?.email
+    );
+
+    closeAdminLogin();
+
+    openAdminPanel();
 }
 
 function closeAdminPanel(){
