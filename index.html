@@ -3887,28 +3887,35 @@ function closeAdminLoginOutside(event){
 }
 
 
-function loginAdmin(){
+async function loginAdmin(){
 
     const password =
         document.getElementById(
             "adminPassword"
         ).value;
 
+    const email =
+        prompt("ADMIN EMAIL:");
 
-    if(
-        password !==
-        ADMIN_PASSWORD
-    ){
+    if(!email){
+        return;
+    }
+
+    const { data, error } =
+        await wizzySupabase.auth.signInWithPassword({
+            email: email.trim(),
+            password: password
+        });
+
+    if(error){
 
         document.getElementById(
             "adminError"
         ).textContent =
-            "WRONG PASSWORD";
+            "WRONG EMAIL OR PASSWORD";
 
         return;
-
     }
-
 
     closeAdminLogin();
 
