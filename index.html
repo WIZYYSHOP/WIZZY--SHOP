@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1468,6 +1468,68 @@ footer{
 }
 
 
+/* PROFILE LAYOUT + SUCCESS TOAST */
+.profile-box{
+    max-width:900px !important;
+}
+.profile-layout{
+    display:grid;
+    grid-template-columns: minmax(230px, .75fr) minmax(320px, 1.25fr);
+    gap:24px;
+    align-items:stretch;
+}
+.profile-side-card{
+    background:linear-gradient(145deg,#171717,#0e0e0e);
+    border:1px solid #303030;
+    border-radius:12px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+.profile-form-card{
+    background:#111;
+    border:1px solid #303030;
+    border-radius:12px;
+    padding:20px;
+}
+.profile-side-title{font-size:17px;font-weight:1000;letter-spacing:1px;margin-bottom:7px;}
+.profile-side-title span{color:#e00000;}
+.profile-side-text{color:#777;font-size:10px;line-height:1.7;max-width:220px;margin-bottom:18px;}
+.profile-success-toast{
+    position:fixed;
+    left:24px;
+    bottom:24px;
+    z-index:5000;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px 17px;
+    background:#102016;
+    border:1px solid #27d65c;
+    color:#7dff9d;
+    border-radius:9px;
+    box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 18px rgba(39,214,92,.12);
+    font-size:12px;
+    font-weight:900;
+    transform:translateY(20px);
+    opacity:0;
+    pointer-events:none;
+}
+.profile-success-toast.show{animation:profileToastIn 2.8s ease forwards;}
+.profile-success-check{
+    width:22px;height:22px;border-radius:50%;background:#27d65c;color:#07140b;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:1000;
+}
+@keyframes profileToastIn{0%{opacity:0;transform:translateY(20px)}12%,82%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(20px)}}
+@media(max-width:700px){
+    .profile-layout{grid-template-columns:1fr;gap:14px;}
+    .profile-side-card{padding:16px;}
+    .profile-success-toast{left:12px;right:12px;bottom:12px;justify-content:center;}
+}
+
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -1689,7 +1751,7 @@ function previewProfileImage(event){
     reader.readAsDataURL(file);
 }
 
-async async function saveProfile(){
+async function saveProfile(){
     const name=document.getElementById("profileName").value.trim();
     const tradeLink=document.getElementById("profileTradeLink").value.trim();
     const phone=document.getElementById("profilePhone").value.trim();
@@ -1727,6 +1789,15 @@ async async function saveProfile(){
     saveProfiles(profiles);
     updateHeaderAvatar();
     closeProfile();
+    showProfileSaved();
+}
+
+function showProfileSaved(){
+    const toast=document.getElementById("profileSuccessToast");
+    if(!toast) return;
+    toast.classList.remove("show");
+    void toast.offsetWidth;
+    toast.classList.add("show");
 }
 
 function updateHeaderAvatar(){
@@ -2529,47 +2600,50 @@ function registerLogoClick(){
 <div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
     <div class="modal-content profile-box">
         <div class="modal-header">
-            <h2>PROFILE</h2>
+            <h2>YOUR PROFILE</h2>
             <button class="close" onclick="closeProfile()">×</button>
         </div>
-
-        <div class="profile-avatar-wrap">
-            <img id="profileAvatarPreview" class="profile-avatar-preview" alt="Profile preview">
-        </div>
-
-        <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
-
-        <div class="profile-field">
-            <label>NAME *</label>
-            <input id="profileName" type="text" maxlength="60" placeholder="Your name">
-        </div>
-
-        <div class="profile-field">
-            <label>STEAM TRADE LINK *</label>
-            <input id="profileTradeLink" type="url" placeholder="https://steamcommunity.com/tradeoffer/new/?..."></input>
-        </div>
-
-        <div class="profile-field">
-            <label>PHONE (OPTIONAL)</label>
-            <input id="profilePhone" type="tel" maxlength="30" placeholder="Phone number">
-        </div>
-
-        <div class="profile-field">
-            <label>TELEGRAM ID (OPTIONAL)</label>
-            <input id="profileTelegram" type="text" maxlength="50" placeholder="@username">
-        </div>
-
-        <div class="profile-field">
-            <label>CAPTCHA *</label>
-            <div class="captcha-row">
-                <div id="captchaCode" class="captcha-code"></div>
-                <button type="button" class="captcha-refresh" onclick="generateCaptcha()">NEW</button>
-                <input id="captchaInput" type="text" maxlength="6" placeholder="Enter code" autocomplete="off">
+        <div class="profile-layout">
+            <div class="profile-side-card">
+                <div class="profile-avatar-wrap">
+                    <img id="profileAvatarPreview" class="profile-avatar-preview" src="" alt="Profile">
+                </div>
+                <div class="profile-side-title"><span>WIZZY</span> PROFILE</div>
+                <div class="profile-side-text">Complete your profile to place orders and receive your skins safely.</div>
+                <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
+            </div>
+            <div class="profile-form-card">
+                <div class="profile-form">
+                    <div class="profile-field">
+                        <label>NAME *</label>
+                        <input id="profileName" type="text" placeholder="Your name">
+                    </div>
+                    <div class="profile-field">
+                        <label>STEAM TRADE LINK *</label>
+                        <input id="profileTradeLink" type="text" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=...">
+                        <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
+                    </div>
+                    <div class="profile-field">
+                        <label>PHONE (OPTIONAL)</label>
+                        <input id="profilePhone" type="text" placeholder="Phone number">
+                    </div>
+                    <div class="profile-field">
+                        <label>TELEGRAM ID (OPTIONAL)</label>
+                        <input id="profileTelegram" type="text" placeholder="@username">
+                    </div>
+                    <div class="profile-field">
+                        <label>CAPTCHA *</label>
+                        <div class="captcha-row">
+                            <div id="captchaBox" class="captcha-box"></div>
+                            <button type="button" class="captcha-refresh" onclick="generateCaptcha()">REFRESH</button>
+                            <input id="captchaInput" type="text" placeholder="Enter code" autocomplete="off">
+                        </div>
+                    </div>
+                    <div id="profileError" class="profile-error"></div>
+                    <button class="profile-save" onclick="saveProfile()">SAVE PROFILE</button>
+                </div>
             </div>
         </div>
-
-        <div id="profileError" class="profile-error"></div>
-        <button class="profile-save" onclick="saveProfile()">SAVE PROFILE</button>
     </div>
 </div>
 
@@ -4757,5 +4831,6 @@ generateCaptcha();
 
 </script>
 
+<div id="profileSuccessToast" class="profile-success-toast"><span class="profile-success-check">✓</span><span>PROFILE SAVED SUCCESSFULLY</span></div>
 </body>
 </html>
