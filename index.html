@@ -1693,28 +1693,17 @@ function saveProfile(){
     const name=document.getElementById("profileName").value.trim();
     const tradeLink=document.getElementById("profileTradeLink").value.trim();
     const phone=document.getElementById("profilePhone").value.trim();
-    let telegram=document.getElementById("profileTelegram").value.trim();
+    const telegram=document.getElementById("profileTelegram").value.trim();
     const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
     const error=document.getElementById("profileError");
-    error.textContent="";
 
     if(!name){ error.textContent="Please enter your name."; return; }
-    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?(?=.*(?:^|[?&])partner=\d+)(?=.*(?:^|[?&])token=[A-Za-z0-9_-]+).+$/i.test(tradeLink)){
+    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
         error.textContent="Please enter a valid Steam Trade Link."; return;
     }
-    if(telegram){
-        telegram=telegram.replace(/^https?:\/\/(?:www\.)?(?:t\.me|telegram\.me)\//i,"");
-        if(telegram[0]!=="@") telegram="@"+telegram;
-        if(!/^@[A-Za-z][A-Za-z0-9_]{4,31}$/.test(telegram)){
-            error.textContent="Please enter a valid Telegram ID."; return;
-        }
-    }
-    if(phone && !/^09\d{9}$/.test(phone)){
-        error.textContent="Please enter a valid phone number."; return;
-    }
-    if(!captcha || captcha!==String(currentCaptcha||"").toUpperCase()){
+    if(captcha!==currentCaptcha){
         error.textContent="Captcha is incorrect.";
-        if(typeof generateCaptcha==="function") generateCaptcha();
+        generateCaptcha();
         document.getElementById("captchaInput").value="";
         return;
     }
@@ -1722,20 +1711,21 @@ function saveProfile(){
     const old=getCurrentProfile();
     const profile={
         id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
-        name:name, tradeLink:tradeLink, phone:phone, telegram:telegram,
-        image:profileImageData||DEFAULT_AVATAR,
+        name:name,
+        tradeLink:tradeLink,
+        phone:phone,
+        telegram:telegram,
+        image:profileImageData || DEFAULT_AVATAR,
         createdAt:old?.createdAt || new Date().toLocaleString("en-US"),
         updatedAt:new Date().toLocaleString("en-US")
     };
+
     localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
-    try{
-        const profiles=getProfiles();
-        const idx=profiles.findIndex(x=>x.id===profile.id);
-        if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
-        saveProfiles(profiles);
-    }catch(e){}
+    const profiles=getProfiles();
+    const idx=profiles.findIndex(x=>x.id===profile.id);
+    if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
+    saveProfiles(profiles);
     updateHeaderAvatar();
-    syncProfileButtons();
     closeProfile();
 }
 
@@ -1747,7 +1737,7 @@ function updateHeaderAvatar(){
 function registerLogoClick(){
     logoClickCount++;
     clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){logoClickCount=0;},900);
+    logoClickTimer=setTimeout(function(){logoClickCount=0;},2200);
     if(logoClickCount>=5){
         logoClickCount=0;
         openAdminLogin();
@@ -2534,6 +2524,56 @@ function registerLogoClick(){
 
 
 <!-- =========================================================
+     PROFILE MODAL
+========================================================= -->
+<div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
+    <div class="modal-content profile-box">
+        <div class="modal-header">
+            <h2>PROFILE</h2>
+            <button class="close" onclick="closeProfile()">×</button>
+        </div>
+
+        <div class="profile-avatar-wrap">
+            <img id="profileAvatarPreview" class="profile-avatar-preview" alt="Profile preview">
+        </div>
+
+        <input id="profileImage" class="profile-file" type="file" accept="image/*" onchange="previewProfileImage(event)">
+
+        <div class="profile-field">
+            <label>NAME *</label>
+            <input id="profileName" type="text" maxlength="60" placeholder="Your name">
+        </div>
+
+        <div class="profile-field">
+            <label>STEAM TRADE LINK *</label>
+            <input id="profileTradeLink" type="url" placeholder="https://steamcommunity.com/tradeoffer/new/?..."></input>
+        </div>
+
+        <div class="profile-field">
+            <label>PHONE (OPTIONAL)</label>
+            <input id="profilePhone" type="tel" maxlength="30" placeholder="Phone number">
+        </div>
+
+        <div class="profile-field">
+            <label>TELEGRAM ID (OPTIONAL)</label>
+            <input id="profileTelegram" type="text" maxlength="50" placeholder="@username">
+        </div>
+
+        <div class="profile-field">
+            <label>CAPTCHA *</label>
+            <div class="captcha-row">
+                <div id="captchaCode" class="captcha-code"></div>
+                <button type="button" class="captcha-refresh" onclick="generateCaptcha()">NEW</button>
+                <input id="captchaInput" type="text" maxlength="6" placeholder="Enter code" autocomplete="off">
+            </div>
+        </div>
+
+        <div id="profileError" class="profile-error"></div>
+        <button class="profile-save" onclick="saveProfile()">SAVE PROFILE</button>
+    </div>
+</div>
+
+<!-- =========================================================
      PROFILE REQUIRED
 ========================================================= -->
 <div id="profileRequiredModal" class="modal" onclick="closeProfileRequiredOutside(event)">
@@ -2587,13 +2627,13 @@ function registerLogoClick(){
                 <div class="profile-help">Required to place an order. Phone and Telegram are optional.</div>
             </div>
             <div class="profile-field">
-                <label>TELEGRAM ID</label>
-                <input id="profileTelegram" type="text" placeholder="@username">
-            </div><div class="profile-field">
-                <label>PHONE</label>
+                <label>PHONE (OPTIONAL)</label>
                 <input id="profilePhone" type="text" placeholder="Phone number">
             </div>
-            
+            <div class="profile-field">
+                <label>TELEGRAM ID (OPTIONAL)</label>
+                <input id="profileTelegram" type="text" placeholder="@username">
+            </div>
             <div class="profile-field">
                 <label>CAPTCHA *</label>
                 <div class="captcha-row">
@@ -2603,8 +2643,7 @@ function registerLogoClick(){
                 <input id="captchaInput" type="text" placeholder="Enter captcha">
             </div>
             <div id="profileError" class="profile-error"></div>
-            <button id="wizzyDeleteProfileBtn" class="finalize" type="button" style="display:none;">حذف پروفایل</button>
-            <button class="finalize profile-save" onclick="saveProfile()">SAVE PROFILE</button>
+            <button class="finalize" onclick="saveProfile()">SAVE PROFILE</button>
         </div>
     </div>
 </div>
@@ -2694,7 +2733,31 @@ function registerLogoClick(){
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://crowmfciejumiwrratun.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_zap3lpLjBYwe8OUzJidwaA_k4J_OVMX";
+window.wizzySupabase = null;
+window.WIZZY_SUPABASE_READY = false;
+function initWizzySupabase(){
+  try{
+    if(window.supabase && typeof window.supabase.createClient === "function"){
+      window.wizzySupabase = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+      window.WIZZY_SUPABASE_READY = true;
+      window.wizzySupabaseReady = window.wizzySupabase;
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+function loadSupabase(){
+  if(initWizzySupabase()) return;
+  var s=document.createElement("script");
+  s.src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js";
+  s.onload=initWizzySupabase;
+  document.head.appendChild(s);
+}
+loadSupabase();
+</script>
 <script>
 const SUPABASE_URL = "https://gneadbhbblwzrakgtwzo.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WDOc16Rn11KCEcnqfE94qg_dAVrniSR";
@@ -3676,7 +3739,7 @@ function isProfileComplete(){
 function registerLogoClick(){
     logoClickCount++;
     clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){ logoClickCount=0; },900);
+    logoClickTimer=setTimeout(function(){ logoClickCount=0; },2200);
     if(logoClickCount>=5){
         logoClickCount=0;
         openAdminLogin();
@@ -3724,6 +3787,48 @@ function previewProfileImage(event){
         document.getElementById("profileAvatarPreview").src=profileImageData;
     };
     reader.readAsDataURL(file);
+}
+
+function saveProfile(){
+    const name=document.getElementById("profileName").value.trim();
+    const tradeLink=document.getElementById("profileTradeLink").value.trim();
+    const phone=document.getElementById("profilePhone").value.trim();
+    const telegram=document.getElementById("profileTelegram").value.trim();
+    const captcha=document.getElementById("captchaInput").value.trim().toUpperCase();
+    const error=document.getElementById("profileError");
+
+    if(!name){ error.textContent="Please enter your name."; return; }
+    if(!/^https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?/i.test(tradeLink)){
+        error.textContent="Please enter a valid Steam Trade Link."; return;
+    }
+    if(captcha!==currentCaptcha){
+        error.textContent="Captcha is incorrect.";
+        generateCaptcha();
+        document.getElementById("captchaInput").value="";
+        return;
+    }
+
+    const old=getCurrentProfile();
+    const profile={
+        id:old?.id || ("P-"+Date.now().toString(36).toUpperCase()),
+        name:name,
+        tradeLink:tradeLink,
+        phone:phone,
+        telegram:telegram,
+        image:profileImageData||DEFAULT_AVATAR,
+        createdAt:old?.createdAt || new Date().toLocaleString("en-US"),
+        updatedAt:new Date().toLocaleString("en-US")
+    };
+
+    localStorage.setItem(PROFILE_STORAGE_KEY,JSON.stringify(profile));
+
+    const profiles=getProfiles();
+    const idx=profiles.findIndex(x=>x.id===profile.id);
+    if(idx===-1) profiles.unshift(profile); else profiles[idx]=profile;
+    saveProfiles(profiles);
+
+    updateHeaderAvatar();
+    closeProfile();
 }
 
 function updateHeaderAvatar(){
@@ -4191,7 +4296,7 @@ async function loginAdmin(){
     }
 
     if(!window.wizzySupabase){
-        errorBox.textContent = "SUPABASE FAILED TO LOAD";
+        errorBox.textContent = "SUPABASE IS STILL LOADING — TRY AGAIN IN A MOMENT.";
         return;
     }
 
@@ -4571,385 +4676,5 @@ generateCaptcha();
 
 </script>
 
-
-<style>
-.profile-success-toast{
-position:fixed;top:35px;left:50%;transform:translate(-50%,-30px);
-background:#00c853;color:white;padding:16px 30px;border-radius:14px;
-font-weight:900;opacity:0;z-index:999999;
-transition:.4s;box-shadow:0 0 25px #00c853;
-}
-.profile-success-toast.show{opacity:1;transform:translate(-50%,0);}
-</style>
-<div id="profileSuccessToast" class="profile-success-toast">پروفایل شما با موفقیت سیو شد ✅</div>
-
-
-<!-- FINAL WIZZY FIXES -->
-<style>
-/* support answer area */
-#answerBox, #supportAnswer{
- background:linear-gradient(135deg,#220000,#ff0000)!important;
- border:1px solid #ff3333!important;
- color:white!important;
- box-shadow:0 0 15px rgba(255,0,0,.35)!important;
-}
-
-/* support close X */
-.close-support,.wizzy-close{
- font-size:26px!important;
- line-height:1!important;
- border-radius:50%!important;
- width:38px!important;
- height:38px!important;
- padding:0!important;
-}
-</style>
-
-<script>
-// profile delete button helper
-function addDeleteProfileButton(){
- if(document.getElementById('deleteProfileBtn')) return;
- let btn=document.createElement('button');
- btn.id='deleteProfileBtn';
- btn.innerHTML='حذف پروفایل';
- btn.style.cssText='display:none;margin:15px auto;background:#a00000;color:white;border:1px solid red;padding:12px 25px;border-radius:12px;cursor:pointer;';
- btn.onclick=function(){
-   localStorage.removeItem('profile');
-   document.querySelectorAll('input').forEach(i=>{if(i.closest('.profile')){i.disabled=false;i.value='';}});
-   btn.style.display='none';
-   alert('پروفایل حذف شد');
- };
- let p=document.querySelector('.profile');
- if(p) p.appendChild(btn);
-}
-window.addEventListener('load',addDeleteProfileButton);
-</script>
-
-<style>
-#deleteProfileBtn{
-display:none;
-margin:15px auto;
-background:#b00000;
-color:white;
-border:1px solid #ff4444;
-padding:12px 28px;
-border-radius:12px;
-cursor:pointer;
-font-weight:bold;
-}
-#deleteProfileBtn:hover{
-background:#ff0000;
-box-shadow:0 0 15px rgba(255,0,0,.5);
-}
-</style>
-
-<script>
-(function(){
-
-function lockSavedProfile(){
-    let box=document.querySelector('.profile');
-    if(!box) return;
-
-    box.querySelectorAll('input,textarea').forEach(function(i){
-        i.disabled=true;
-    });
-
-    let btn=document.getElementById('deleteProfileBtn');
-    if(btn) btn.style.display="block";
-}
-
-function unlockProfile(){
-    let box=document.querySelector('.profile');
-    if(box){
-        box.querySelectorAll('input,textarea').forEach(function(i){
-            i.disabled=false;
-            i.value="";
-        });
-    }
-
-    let btn=document.getElementById('deleteProfileBtn');
-    if(btn) btn.style.display="none";
-
-    localStorage.removeItem(PROFILE_STORAGE_KEY);
-
-    let profiles=getProfiles();
-    let old=getCurrentProfile();
-    if(old){
-        profiles=profiles.filter(p=>p.id!==old.id);
-        saveProfiles(profiles);
-    }
-
-    if(typeof generateCaptcha==="function") generateCaptcha();
-}
-
-function addDeleteButtonFixed(){
-    if(document.getElementById('deleteProfileBtn')) return;
-
-    let btn=document.createElement('button');
-    btn.id="deleteProfileBtn";
-    btn.innerHTML="حذف پروفایل";
-    btn.onclick=function(){
-        unlockProfile();
-        alert("پروفایل حذف شد، می‌توانید دوباره وارد کنید");
-    };
-
-    let profile=document.querySelector('.profile');
-    if(profile) profile.appendChild(btn);
-
-    if(getCurrentProfile()) lockSavedProfile();
-}
-
-window.addEventListener("load",function(){
-    addDeleteButtonFixed();
-
-    if(typeof saveProfile==="function" && !saveProfile.__fixed){
-        let oldSave=saveProfile;
-        saveProfile=function(){
-            oldSave();
-            setTimeout(function(){
-                if(getCurrentProfile()) lockSavedProfile();
-            },300);
-        };
-        saveProfile.__fixed=true;
-    }
-});
-
-})();
-</script>
-
-<!-- WIZZY PROFILE LOCK FIX -->
-<style id="wizzyProfileLockStyles">
-#wizzyDeleteProfileBtn{display:none;width:100%;margin-top:12px;padding:12px 16px;border:1px solid rgba(255,70,70,.75);border-radius:10px;background:linear-gradient(135deg,#260000,#090909);color:#fff;font-weight:900;cursor:pointer;transition:.2s ease}
-#wizzyDeleteProfileBtn:hover{background:#b40000;box-shadow:0 0 18px rgba(255,0,0,.35);transform:translateY(-1px)}
-#wizzyProfileSavedToast{position:fixed;top:24px;left:50%;transform:translate(-50%,-18px) scale(.96);opacity:0;pointer-events:none;z-index:1000000;padding:13px 20px;border-radius:12px;background:linear-gradient(135deg,#00a844,#007d32);color:#fff;border:1px solid rgba(100,255,150,.65);box-shadow:0 0 25px rgba(0,255,100,.3);font-weight:900;transition:.28s ease}
-#wizzyProfileSavedToast.show{opacity:1;transform:translate(-50%,0) scale(1)}
-</style>
-<div id="wizzyProfileSavedToast">پروفایل شما با موفقیت ذخیره شد ✓</div>
-
-<!-- /WIZZY PROFILE LOCK FIX -->
-
-
-
-
-
-
-
-
-
-
-<style id="WIZZY_EXACT_SAVE_DELETE">
-#wizzyDeleteProfileBtn.wizzy-exact-place{
-  display:block !important;
-  width:100% !important;
-  margin:0 !important;
-  box-sizing:border-box !important;
-}
-.profile-save.wizzy-exact-hidden{display:none !important;}
-</style>
-
-
 </body>
 </html>
-<!-- WIZZY SUPPORT -->
-
-<button class="wizzy-support-btn" onclick="openSupportBox()">
-    پشتیبانی
-</button>
-
-
-<div class="wizzy-support-bg" id="supportBox">
-
-<div class="wizzy-support-panel">
-
-<button class="wizzy-close" onclick="closeSupportBox()">×</button>
-
-<h2>WIZZY SHOP</h2>
-
-<p>مشکل خود را انتخاب کنید:</p>
-
-
-<button onclick="showAnswer(1)">
-من وقتی خرید زدم تا کی میرسه دستم؟
-</button>
-
-
-<button onclick="showAnswer(2)">
-تخفیف از کجا بگیریم؟
-</button>
-
-
-<button onclick="openTelegram()">
-ارتباط با پشتیبانی
-</button>
-
-
-<div id="supportAnswer"></div>
-
-
-</div>
-
-</div>
-
-
-<style>
-
-.wizzy-support-btn{
-position:fixed;
-right:25px;
-bottom:25px;
-background:red;
-color:white;
-border:2px solid white;
-padding:15px 25px;
-border-radius:50px;
-cursor:pointer;
-font-size:16px;
-z-index:99999;
-box-shadow:0 0 15px red,0 0 30px white;
-}
-
-
-.wizzy-support-bg{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.8);
-align-items:center;
-justify-content:center;
-z-index:999999;
-}
-
-
-.wizzy-support-panel{
-position:relative;
-width:360px;
-background:#0b0b0b;
-color:white;
-border:2px solid red;
-border-radius:20px;
-padding:30px;
-text-align:center;
-box-shadow:0 0 20px red,0 0 40px white;
-}
-
-
-.wizzy-support-panel h2{
-color:red;
-}
-
-
-.wizzy-support-panel button{
-width:100%;
-margin:8px 0;
-padding:14px;
-background:#151515;
-color:white;
-border:1px solid red;
-border-radius:12px;
-cursor:pointer;
-}
-
-
-.wizzy-support-panel button:hover{
-background:red;
-}
-
-
-.wizzy-close{
-position:absolute;
-right:10px;
-top:10px;
-width:35px!important;
-height:35px;
-background:red!important;
-font-size:22px;
-}
-
-
-#supportAnswer{
-margin-top:15px;
-padding:15px;
-background:#111;
-border-radius:10px;
-line-height:1.8;
-}
-
-</style>
-
-
-<script>
-
-function openSupportBox(){
-document.getElementById("supportBox").style.display="flex";
-}
-
-
-function closeSupportBox(){
-document.getElementById("supportBox").style.display="none";
-}
-
-
-function showAnswer(num){
-
-let text="";
-
-if(num==1){
-text="وقتی شما خرید زدید اتوماتیک پیامو برای ما میفرستین و ما هر چه زود تر برای شما ترید میکنیم و خبرتون میکنیم.";
-}
-
-
-if(num==2){
-text="بخش تخفیف ها بزودی اضافه میشه ....";
-}
-
-
-document.getElementById("supportAnswer").innerHTML=text;
-
-}
-
-
-function openTelegram(){
-
-window.open(
-"https://t.me/WIZZY_SHOP2",
-"_blank"
-);
-
-}
-
-</script>
-
-<!-- WIZZY SAVE -> DELETE FINAL -->
-<style id="wizzySaveDeleteFinalStyle">
-.profile-save.wizzy-save-gone{display:none !important}
-#wizzyDeleteProfileBtn.wizzy-replace-save{display:block !important;width:100%;margin-top:0 !important;box-sizing:border-box}
-</style>
-
-
-<!-- WIZZY PROFILE DELETE FINAL LOCATION + IMAGE RESET -->
-<style id="wizzyProfileDeleteFinalStyle">
-#wizzyDeleteProfileBtn{
-  display:none !important;
-  width:100% !important;
-  margin:0 0 10px 0 !important;
-  padding:13px !important;
-  box-sizing:border-box !important;
-  border:0 !important;
-  border-radius:7px !important;
-  background:#d00000 !important;
-  color:#fff !important;
-  font-weight:900 !important;
-  cursor:pointer !important;
-}
-#wizzyDeleteProfileBtn.wizzy-delete-visible{display:block !important}
-.profile-save.wizzy-save-hidden{display:none !important}
-</style>
-
-
-<!-- WIZZY FINAL AUTHORITATIVE PROFILE STATE -->
-<style id="wizzyFinalAuthoritativeStyle">
-#wizzyDeleteProfileBtn.wizzy-final-delete{display:block!important;width:100%!important;margin:10px 0 0!important;box-sizing:border-box!important}
-.profile-save.wizzy-final-hidden{display:none!important}
-</style>
-
-\n<style id="wizzyProfileFinalStyle">\n#wizzyDeleteProfileBtn{width:100%;margin-top:10px!important;}\n#wizzyDeleteProfileBtn[style*="display: none"]{display:none!important;}\n</style>\n<script id="wizzyProfileFinalState">\n(function(){\n  function id(x){return document.getElementById(x)}\n  window.syncProfileButtons=function(){\n    var save=document.querySelector('#profileModal .profile-save');\n    var del=id('wizzyDeleteProfileBtn');\n    if(!save||!del)return;\n    var has=false;\n    try{var p=JSON.parse(localStorage.getItem('wizzy_shop_profile'));has=!!(p&&p.name&&p.tradeLink)}catch(e){}\n    if(has){save.style.display='none';del.style.display='block';}\n    else{save.style.display='';del.style.display='none';}\n  };\n  function resetProfile(){\n    ['wizzy_shop_profile','wizzy_current_profile','wizzyProfile','wizzy_profile','wizzy_profile_locked_v1'].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}});\n    ['profileName','profileTradeLink','profileTelegram','profilePhone','captchaInput'].forEach(function(k){var e=id(k);if(e){e.disabled=false;e.value='';}});\n    var f=id('profileImage');if(f){f.value='';f.disabled=false;}\n    if(typeof DEFAULT_AVATAR!=='undefined'){var a=id('profileAvatarPreview');if(a)a.src=DEFAULT_AVATAR;if(typeof profileImageData!=='undefined')profileImageData=DEFAULT_AVATAR;}\n    if(typeof generateCaptcha==='function')generateCaptcha();\n    var er=id('profileError');if(er)er.textContent='';\n    syncProfileButtons();\n    if(typeof updateHeaderAvatar==='function')updateHeaderAvatar();\n  }\n  window.addEventListener('load',function(){syncProfileButtons();setTimeout(syncProfileButtons,300);});\n  document.addEventListener('click',function(e){\n    if(e.target.closest('#profileModal .profile-save')){setTimeout(syncProfileButtons,150);setTimeout(syncProfileButtons,600);}\n  },true);\n  document.addEventListener('click',function(e){\n    if(e.target.closest('#wizzyDeleteProfileBtn')){e.preventDefault();resetProfile();}\n  },true);\n  var oldOpen=window.openProfile;\n  if(typeof oldOpen==='function'){window.openProfile=function(){var r=oldOpen.apply(this,arguments);setTimeout(syncProfileButtons,30);return r;};}\n})();\n</script>\n
