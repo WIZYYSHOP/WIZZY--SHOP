@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>WIZYY SHOP - CS2 Skin Store</title>
+<title>WIZZY SKIN - CS2 Skin Store</title>
 
 <style>
 *{
@@ -15,19 +14,19 @@
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#080808;
+    background:#070707;
     color:#fff;
     min-height:100vh;
 }
 
-body:before{
+body::before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
     background:
-        radial-gradient(circle at 50% -10%,rgba(180,0,0,.18),transparent 35%),
-        radial-gradient(circle at 0% 100%,rgba(130,0,0,.08),transparent 30%);
+        radial-gradient(circle at 50% 0%,rgba(210,0,0,.18),transparent 32%),
+        radial-gradient(circle at 0% 100%,rgba(140,0,0,.08),transparent 30%);
     z-index:-1;
 }
 
@@ -37,9 +36,9 @@ header{
     position:sticky;
     top:0;
     z-index:1000;
-    height:86px;
-    background:rgba(7,7,7,.94);
-    border-bottom:1px solid #220909;
+    height:82px;
+    background:rgba(6,6,6,.95);
+    border-bottom:1px solid #260707;
     backdrop-filter:blur(14px);
 }
 
@@ -59,7 +58,7 @@ header{
 }
 
 .logo{
-    font-size:32px;
+    font-size:29px;
     font-weight:1000;
     letter-spacing:5px;
     color:#fff;
@@ -73,13 +72,11 @@ header{
 }
 
 .subtitle{
-    margin-top:5px;
-    font-size:12px;
-    color:#aaa;
+    margin-top:4px;
+    font-size:11px;
+    color:#999;
     letter-spacing:1px;
 }
-
-/* ================= CART ================= */
 
 .cart-button{
     position:absolute;
@@ -89,8 +86,8 @@ header{
     background:#110909;
     border:1px solid #500d0d;
     color:#fff;
-    padding:12px 18px;
-    border-radius:9px;
+    padding:11px 17px;
+    border-radius:8px;
     cursor:pointer;
     transition:.2s;
     font-weight:bold;
@@ -118,7 +115,78 @@ header{
 main{
     width:95%;
     max-width:1450px;
-    margin:30px auto 60px;
+    margin:32px auto 60px;
+}
+
+/* ================= WIZZY SKIN HERO ================= */
+
+.hero{
+    text-align:center;
+    margin:10px auto 38px;
+    padding:15px 10px 8px;
+}
+
+.hero-logo{
+    position:relative;
+    display:inline-block;
+    font-size:clamp(48px,8vw,105px);
+    font-weight:1000;
+    letter-spacing:8px;
+    line-height:1;
+    color:#fff;
+    text-transform:uppercase;
+    text-shadow:
+        0 0 8px rgba(255,0,0,.85),
+        0 0 22px rgba(255,0,0,.65),
+        0 0 45px rgba(190,0,0,.38);
+}
+
+.hero-logo::before{
+    content:"";
+    position:absolute;
+    left:8%;
+    right:8%;
+    bottom:-10px;
+    height:3px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #e00000,
+        #ff2222,
+        #e00000,
+        transparent
+    );
+    box-shadow:
+        0 0 10px #e00000,
+        0 0 25px rgba(220,0,0,.55);
+}
+
+.hero-logo span{
+    color:#e00000;
+    text-shadow:
+        0 0 8px rgba(255,0,0,.9),
+        0 0 22px rgba(255,0,0,.75),
+        0 0 45px rgba(200,0,0,.5);
+}
+
+.hero-text{
+    margin-top:28px;
+    color:#aaa;
+    font-size:15px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+}
+
+.hero-text strong{
+    color:#e00000;
+}
+
+.hero-line{
+    width:90px;
+    height:2px;
+    margin:15px auto 0;
+    background:#b00000;
+    box-shadow:0 0 12px rgba(220,0,0,.6);
 }
 
 /* ================= CONTROLS ================= */
@@ -205,6 +273,7 @@ select:focus{
 
 .range-progress{
     background:#d00000;
+    box-shadow:0 0 8px rgba(220,0,0,.45);
 }
 
 .range-container input[type="range"]{
@@ -314,7 +383,6 @@ select:focus{
         opacity:0;
         transform:translateY(-5px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
@@ -385,8 +453,11 @@ select:focus{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:
-        radial-gradient(circle,#191919 0%,#0b0b0b 70%);
+    background:radial-gradient(
+        circle,
+        #191919 0%,
+        #0b0b0b 70%
+    );
     overflow:hidden;
 }
 
@@ -456,7 +527,7 @@ select:focus{
     border-radius:10px;
 }
 
-/* ================= MODAL ================= */
+/* ================= MODALS ================= */
 
 .modal{
     display:none;
@@ -490,7 +561,6 @@ select:focus{
         opacity:0;
         transform:scale(.96);
     }
-
     to{
         opacity:1;
         transform:scale(1);
@@ -516,6 +586,7 @@ select:focus{
     background:#161616;
     color:#aaa;
     cursor:pointer;
+    font-size:20px;
 }
 
 .close:hover{
@@ -722,21 +793,36 @@ footer{
     }
 
     .logo{
-        font-size:23px;
+        font-size:22px;
         letter-spacing:3px;
     }
 
     .subtitle{
-        font-size:9px;
+        font-size:8px;
     }
 
     .cart-button{
-        padding:9px 11px;
-        font-size:10px;
+        padding:8px 10px;
+        font-size:9px;
     }
 
     main{
         width:92%;
+    }
+
+    .hero{
+        margin-top:5px;
+        margin-bottom:28px;
+    }
+
+    .hero-logo{
+        font-size:45px;
+        letter-spacing:3px;
+    }
+
+    .hero-text{
+        font-size:11px;
+        letter-spacing:.8px;
     }
 
     .filter-box{
@@ -784,7 +870,6 @@ footer{
 </style>
 </head>
 
-
 <body>
 
 <!-- ================= HEADER ================= -->
@@ -796,7 +881,7 @@ footer{
         <div class="logo-area">
 
             <div class="logo">
-                WIZYY <span>SHOP</span>
+                WIZZY <span>SHOP</span>
             </div>
 
             <div class="subtitle">
@@ -805,20 +890,15 @@ footer{
 
         </div>
 
-
         <button
             class="cart-button"
             onclick="openCart()"
         >
             CART
-
             <span
                 class="cart-count"
                 id="cartCount"
-            >
-                0
-            </span>
-
+            >0</span>
         </button>
 
     </div>
@@ -830,7 +910,24 @@ footer{
 
 <main>
 
-    <!-- SEARCH / WEAR -->
+    <!-- BIG LOGO -->
+
+    <section class="hero">
+
+        <div class="hero-logo">
+            WIZZY <span>SKIN</span>
+        </div>
+
+        <div class="hero-text">
+            سرعت تحویل بالا و <strong>امن</strong>
+        </div>
+
+        <div class="hero-line"></div>
+
+    </section>
+
+
+    <!-- SEARCH -->
 
     <div class="controls">
 
@@ -910,7 +1007,6 @@ footer{
                 id="rangeProgress"
             ></div>
 
-
             <input
                 type="range"
                 id="minPrice"
@@ -920,7 +1016,6 @@ footer{
                 value="0"
                 oninput="updatePriceRange()"
             >
-
 
             <input
                 type="range"
@@ -953,14 +1048,12 @@ footer{
             PISTOLS
         </button>
 
-
         <button
             class="category"
             onclick="selectCategory('Rifles',this)"
         >
             RIFLES
         </button>
-
 
         <button
             class="category"
@@ -969,14 +1062,12 @@ footer{
             SMGs
         </button>
 
-
         <button
             class="category"
             onclick="selectCategory('Snipers',this)"
         >
             SNIPERS
         </button>
-
 
         <button
             class="category"
@@ -985,7 +1076,6 @@ footer{
             SHOTGUNS
         </button>
 
-
         <button
             class="category"
             onclick="selectCategory('Machineguns',this)"
@@ -993,14 +1083,12 @@ footer{
             MACHINEGUNS
         </button>
 
-
         <button
             class="category"
             onclick="selectCategory('Knives',this)"
         >
             KNIVES
         </button>
-
 
         <button
             class="category"
@@ -1012,7 +1100,7 @@ footer{
     </div>
 
 
-    <!-- WEAPON / ACCESSORY SELECTOR -->
+    <!-- WEAPONS -->
 
     <div
         id="weaponBox"
@@ -1025,7 +1113,6 @@ footer{
         >
             WEAPONS
         </div>
-
 
         <div
             id="weaponList"
@@ -1050,14 +1137,12 @@ footer{
 <footer>
 
     <div class="footer-logo">
-        WIZYY <span>SHOP</span>
+        WIZZY <span>SKIN</span>
     </div>
-
 
     <div class="footer-text">
         فروشگاه تخصصی اسکین‌های CS2
     </div>
-
 
     <a
         class="telegram"
@@ -1086,7 +1171,6 @@ footer{
                 Product
             </h2>
 
-
             <button
                 class="close"
                 onclick="closeProduct()"
@@ -1095,7 +1179,6 @@ footer{
             </button>
 
         </div>
-
 
         <div class="modal-image">
 
@@ -1106,7 +1189,6 @@ footer{
             >
 
         </div>
-
 
         <div class="modal-details">
 
@@ -1123,7 +1205,6 @@ footer{
 
             </div>
 
-
             <div class="detail-row">
 
                 <span class="detail-label">
@@ -1137,7 +1218,6 @@ footer{
 
             </div>
 
-
             <div class="detail-row">
 
                 <span class="detail-label">
@@ -1150,7 +1230,6 @@ footer{
                 ></span>
 
             </div>
-
 
             <div class="detail-row">
 
@@ -1167,7 +1246,6 @@ footer{
 
         </div>
 
-
         <div class="modal-actions">
 
             <button
@@ -1176,7 +1254,6 @@ footer{
             >
                 ADD TO CART
             </button>
-
 
             <button
                 class="cancel"
@@ -1208,7 +1285,6 @@ footer{
                 YOUR CART
             </h2>
 
-
             <button
                 class="close"
                 onclick="closeCart()"
@@ -1218,19 +1294,16 @@ footer{
 
         </div>
 
-
         <div
             id="cartItems"
             class="cart-items"
         ></div>
-
 
         <div class="cart-total">
 
             <span>
                 TOTAL
             </span>
-
 
             <span
                 id="cartTotal"
@@ -1240,7 +1313,6 @@ footer{
             </span>
 
         </div>
-
 
         <button
             class="finalize"
@@ -1256,22 +1328,15 @@ footer{
 
 <script>
 
-/* =========================
-   STATE
-========================= */
+/* ================= STATE ================= */
 
 let selectedWeapons = [];
-
 let currentCategory = null;
-
 let currentProduct = null;
-
 let cart = [];
 
 
-/* =========================
-   CATEGORY DATA
-========================= */
+/* ================= CATEGORY DATA ================= */
 
 const categoryData = {
 
@@ -1350,9 +1415,7 @@ const categoryData = {
 };
 
 
-/* =========================
-   PRODUCTS
-========================= */
+/* ================= PRODUCTS ================= */
 
 const products = [
 
@@ -1526,8 +1589,6 @@ const products = [
         image:"https://placehold.co/700x450/090909/e00000?text=BUTTERFLY+DOPPLER"
     },
 
-    /* ACCESSORIES */
-
     {
         id:18,
         name:"Music Kit | The Verkkars",
@@ -1671,9 +1732,7 @@ const products = [
 ];
 
 
-/* =========================
-   PRICE FORMAT
-========================= */
+/* ================= PRICE ================= */
 
 function formatPrice(price){
 
@@ -1683,10 +1742,6 @@ function formatPrice(price){
 }
 
 
-/* =========================
-   PRICE RANGE
-========================= */
-
 function updatePriceRange(){
 
     const minSlider =
@@ -1695,7 +1750,6 @@ function updatePriceRange(){
     const maxSlider =
         document.getElementById("maxPrice");
 
-
     let min =
         Number(minSlider.value);
 
@@ -1703,17 +1757,9 @@ function updatePriceRange(){
         Number(maxSlider.value);
 
 
-    /*
-        Prevent minimum
-        from going above maximum.
-    */
-
     if(min > max){
 
-        if(
-            document.activeElement ===
-            minSlider
-        ){
+        if(document.activeElement === minSlider){
 
             max = min;
             maxSlider.value = max;
@@ -1731,24 +1777,19 @@ function updatePriceRange(){
     const maxLimit =
         Number(maxSlider.max);
 
-
     const minPercent =
         (min / maxLimit) * 100;
-
 
     const maxPercent =
         (max / maxLimit) * 100;
 
 
     const progress =
-        document.getElementById(
-            "rangeProgress"
-        );
+        document.getElementById("rangeProgress");
 
 
     progress.style.left =
         minPercent + "%";
-
 
     progress.style.width =
         (maxPercent - minPercent) + "%";
@@ -1767,17 +1808,12 @@ function updatePriceRange(){
 }
 
 
-/* =========================
-   RENDER WEAPONS
-========================= */
+/* ================= WEAPONS ================= */
 
 function renderWeapons(){
 
     const list =
-        document.getElementById(
-            "weaponList"
-        );
-
+        document.getElementById("weaponList");
 
     list.innerHTML = "";
 
@@ -1791,31 +1827,23 @@ function renderWeapons(){
         const button =
             document.createElement("button");
 
-
         button.className = "weapon";
-
 
         button.textContent = item;
 
 
-        if(
-            selectedWeapons.includes(item)
-        ){
+        if(selectedWeapons.includes(item)){
 
             button.classList.add("active");
 
         }
 
 
-        button.onclick =
-            function(){
+        button.onclick = function(){
 
-                selectWeapon(
-                    item,
-                    button
-                );
+            selectWeapon(item,button);
 
-            };
+        };
 
 
         list.appendChild(button);
@@ -1825,23 +1853,11 @@ function renderWeapons(){
 }
 
 
-/* =========================
-   CATEGORY SELECT
-========================= */
+/* ================= CATEGORY ================= */
 
-function selectCategory(
-    category,
-    element
-){
+function selectCategory(category,element){
 
-    /*
-        Clicking the selected
-        category again resets it.
-    */
-
-    if(
-        currentCategory === category
-    ){
+    if(currentCategory === category){
 
         currentCategory = null;
 
@@ -1852,9 +1868,7 @@ function selectCategory(
             .querySelectorAll(".category")
             .forEach(item => {
 
-                item.classList.remove(
-                    "active"
-                );
+                item.classList.remove("active");
 
             });
 
@@ -1880,9 +1894,7 @@ function selectCategory(
         .querySelectorAll(".category")
         .forEach(item => {
 
-            item.classList.remove(
-                "active"
-            );
+            item.classList.remove("active");
 
         });
 
@@ -1900,8 +1912,7 @@ function selectCategory(
     ).textContent =
         category === "Accessories"
         ? "ACCESSORIES"
-        : category.toUpperCase()
-          + " WEAPONS";
+        : category.toUpperCase() + " WEAPONS";
 
 
     renderWeapons();
@@ -1911,43 +1922,25 @@ function selectCategory(
 }
 
 
-/* =========================
-   WEAPON / ACCESSORY SELECT
-========================= */
+/* ================= WEAPON SELECT ================= */
 
-function selectWeapon(
-    weapon,
-    element
-){
+function selectWeapon(weapon,element){
 
     const index =
-        selectedWeapons.indexOf(
-            weapon
-        );
+        selectedWeapons.indexOf(weapon);
 
 
     if(index !== -1){
 
-        selectedWeapons.splice(
-            index,
-            1
-        );
+        selectedWeapons.splice(index,1);
 
-
-        element.classList.remove(
-            "active"
-        );
+        element.classList.remove("active");
 
     }else{
 
-        selectedWeapons.push(
-            weapon
-        );
+        selectedWeapons.push(weapon);
 
-
-        element.classList.add(
-            "active"
-        );
+        element.classList.add("active");
 
     }
 
@@ -1957,55 +1950,42 @@ function selectWeapon(
 }
 
 
-/* =========================
-   RENDER PRODUCTS
-========================= */
+/* ================= PRODUCTS ================= */
 
 function renderProducts(){
 
     const container =
-        document.getElementById(
-            "products"
-        );
-
+        document.getElementById("products");
 
     container.innerHTML = "";
 
 
     const search =
-        document.getElementById(
-            "search"
-        )
+        document.getElementById("search")
         .value
         .toLowerCase()
         .trim();
 
 
     const wear =
-        document.getElementById(
-            "wearFilter"
-        ).value;
+        document.getElementById("wearFilter")
+        .value;
 
 
     const minPrice =
         Number(
-            document.getElementById(
-                "minPrice"
-            ).value
+            document.getElementById("minPrice").value
         );
 
 
     const maxPrice =
         Number(
-            document.getElementById(
-                "maxPrice"
-            ).value
+            document.getElementById("maxPrice").value
         );
 
 
-    let filtered =
+    const filtered =
         products.filter(product => {
-
 
             const searchMatch =
                 product.name
@@ -2018,37 +1998,29 @@ function renderProducts(){
 
 
             const wearMatch =
-                wear === "all"
-                ||
+                wear === "all" ||
                 product.wear === wear;
 
 
             const priceMatch =
-                product.price >= minPrice
-                &&
+                product.price >= minPrice &&
                 product.price <= maxPrice;
 
 
             let categoryMatch = true;
 
-
-            if(
-                currentCategory !== null
-            ){
+            if(currentCategory !== null){
 
                 categoryMatch =
-                    product.category ===
-                    currentCategory;
+                    product.category === currentCategory;
 
             }
 
 
             let weaponMatch = true;
 
-
             if(
-                currentCategory !== null
-                &&
+                currentCategory !== null &&
                 selectedWeapons.length > 0
             ){
 
@@ -2071,16 +2043,12 @@ function renderProducts(){
         });
 
 
-    /* EMPTY */
-
     if(filtered.length === 0){
 
         container.innerHTML = `
-
             <div class="empty">
                 No skins found.
             </div>
-
         `;
 
         return;
@@ -2088,15 +2056,10 @@ function renderProducts(){
     }
 
 
-    /* PRODUCTS */
-
     filtered.forEach(product => {
 
         const card =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         card.className = "product";
 
@@ -2131,9 +2094,7 @@ function renderProducts(){
                 <div class="product-bottom">
 
                     <div class="price">
-                        ${formatPrice(
-                            product.price
-                        )}
+                        ${formatPrice(product.price)}
                     </div>
 
 
@@ -2158,16 +2119,13 @@ function renderProducts(){
 }
 
 
-/* =========================
-   PRODUCT MODAL
-========================= */
+/* ================= PRODUCT MODAL ================= */
 
 function openProduct(id){
 
     currentProduct =
         products.find(
-            product =>
-                product.id === id
+            product => product.id === id
         );
 
 
@@ -2215,9 +2173,7 @@ function openProduct(id){
     document.getElementById(
         "modalPrice"
     ).textContent =
-        formatPrice(
-            currentProduct.price
-        );
+        formatPrice(currentProduct.price);
 
 
     document
@@ -2238,10 +2194,7 @@ function closeProduct(){
 
 function closeModalOutside(event){
 
-    if(
-        event.target.id ===
-        "productModal"
-    ){
+    if(event.target.id === "productModal"){
 
         closeProduct();
 
@@ -2250,9 +2203,7 @@ function closeModalOutside(event){
 }
 
 
-/* =========================
-   CART
-========================= */
+/* ================= CART ================= */
 
 function addToCart(){
 
@@ -2261,10 +2212,7 @@ function addToCart(){
     }
 
 
-    cart.push(
-        currentProduct
-    );
-
+    cart.push(currentProduct);
 
     updateCart();
 
@@ -2289,10 +2237,7 @@ function updateCart(){
 function renderCart(){
 
     const container =
-        document.getElementById(
-            "cartItems"
-        );
-
+        document.getElementById("cartItems");
 
     container.innerHTML = "";
 
@@ -2300,11 +2245,9 @@ function renderCart(){
     if(cart.length === 0){
 
         container.innerHTML = `
-
             <div class="empty-cart">
                 Your cart is empty.
             </div>
-
         `;
 
 
@@ -2322,60 +2265,52 @@ function renderCart(){
     let total = 0;
 
 
-    cart.forEach(
-        (product,index) => {
+    cart.forEach((product,index) => {
 
-            total += product.price;
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
+        total += product.price;
 
 
-            item.className =
-                "cart-item";
+        const item =
+            document.createElement("div");
+
+        item.className = "cart-item";
 
 
-            item.innerHTML = `
+        item.innerHTML = `
 
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                >
-
-
-                <div class="cart-item-info">
-
-                    <div class="cart-item-name">
-                        ${product.name}
-                    </div>
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+            >
 
 
-                    <div class="cart-item-price">
-                        ${formatPrice(
-                            product.price
-                        )}
-                    </div>
+            <div class="cart-item-info">
 
+                <div class="cart-item-name">
+                    ${product.name}
                 </div>
 
 
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${index})"
-                >
-                    REMOVE
-                </button>
+                <div class="cart-item-price">
+                    ${formatPrice(product.price)}
+                </div>
 
-            `;
+            </div>
 
 
-            container.appendChild(item);
+            <button
+                class="remove-item"
+                onclick="removeFromCart(${index})"
+            >
+                REMOVE
+            </button>
 
-        }
-    );
+        `;
+
+
+        container.appendChild(item);
+
+    });
 
 
     document.getElementById(
@@ -2388,11 +2323,7 @@ function renderCart(){
 
 function removeFromCart(index){
 
-    cart.splice(
-        index,
-        1
-    );
-
+    cart.splice(index,1);
 
     updateCart();
 
@@ -2402,7 +2333,6 @@ function removeFromCart(index){
 function openCart(){
 
     renderCart();
-
 
     document
         .getElementById("cartModal")
@@ -2422,10 +2352,7 @@ function closeCart(){
 
 function closeCartOutside(event){
 
-    if(
-        event.target.id ===
-        "cartModal"
-    ){
+    if(event.target.id === "cartModal"){
 
         closeCart();
 
@@ -2434,17 +2361,13 @@ function closeCartOutside(event){
 }
 
 
-/* =========================
-   TELEGRAM
-========================= */
+/* ================= TELEGRAM ================= */
 
 function finalizeOrder(){
 
     if(cart.length === 0){
 
-        alert(
-            "Your cart is empty."
-        );
+        alert("Your cart is empty.");
 
         return;
 
@@ -2452,23 +2375,21 @@ function finalizeOrder(){
 
 
     let message =
-        "WIZYY SHOP ORDER\n\n";
+        "WIZZY SKIN ORDER\n\n";
 
 
     let total = 0;
 
 
-    cart.forEach(
-        (product,index) => {
+    cart.forEach((product,index) => {
 
-            total += product.price;
+        total += product.price;
 
 
-            message +=
-                `${index + 1}. ${product.name} - ${formatPrice(product.price)}\n`;
+        message +=
+            `${index + 1}. ${product.name} - ${formatPrice(product.price)}\n`;
 
-        }
-    );
+    });
 
 
     message +=
@@ -2488,14 +2409,7 @@ function finalizeOrder(){
 }
 
 
-/* =========================
-   INITIAL
-========================= */
-
-currentCategory = null;
-
-selectedWeapons = [];
-
+/* ================= START ================= */
 
 document
     .getElementById("weaponBox")
