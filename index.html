@@ -1,1696 +1,1551 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-<title>WIZYY SHOP | فروشگاه اسکین CS2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WIZYY SHOP | CS2 Skins</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
- --red:#e51b23;
- --red2:#ff3038;
- --dark:#070707;
- --card:#101010;
- --card2:#151515;
- --border:#292929;
- --text:#f5f5f5;
- --muted:#929292;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,Arial,sans-serif;
 }
 
 body{
- font-family:Vazirmatn,Tahoma,sans-serif;
- background:
- radial-gradient(circle at 50% -10%,rgba(229,27,35,.12),transparent 35%),
- #070707;
- color:var(--text);
- min-height:100vh;
+    background:#080808;
+    color:#fff;
 }
 
-button,input,select{font-family:inherit}
-button{cursor:pointer}
-
-a{text-decoration:none;color:inherit}
-
-/* ================= HEADER ================= */
-
-.header{
- height:76px;
- position:sticky;
- top:0;
- z-index:1000;
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:0 5%;
- background:rgba(7,7,7,.92);
- border-bottom:1px solid #222;
- backdrop-filter:blur(15px);
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    height:72px;
+    background:#0c0c0c;
+    border-bottom:1px solid #242424;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
 }
 
 .logo{
- font-size:25px;
- font-weight:900;
- letter-spacing:1px;
+    color:#ff1b1b;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
-.logo span{color:var(--red)}
-
-.nav{
- display:flex;
- align-items:center;
- gap:30px;
+nav{
+    display:flex;
+    gap:25px;
 }
 
-.nav a{
- color:#aaa;
- font-size:14px;
- transition:.2s;
+nav a{
+    color:#ddd;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
 }
 
-.nav a:hover{color:white}
-
-.header-actions{
- display:flex;
- align-items:center;
- gap:10px;
+nav a:hover{
+    color:#ff2020;
 }
 
-.icon-btn{
- border:1px solid #292929;
- background:#111;
- color:white;
- height:43px;
- padding:0 15px;
- border-radius:9px;
- transition:.2s;
+.cart-btn{
+    background:#151515;
+    border:1px solid #333;
+    color:#fff;
+    padding:11px 17px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-.icon-btn:hover{
- border-color:var(--red);
- background:#180909;
+.cart-btn:hover{
+    border-color:#ff1e1e;
 }
 
-.cart-count{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- background:var(--red);
- width:20px;
- height:20px;
- border-radius:50%;
- font-size:11px;
- margin-right:5px;
-}
-
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
- min-height:450px;
- position:relative;
- overflow:hidden;
- display:flex;
- align-items:center;
- padding:65px 8%;
- background:
- linear-gradient(90deg,rgba(0,0,0,.98) 0%,rgba(0,0,0,.82) 40%,rgba(0,0,0,.3) 100%),
- url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1800&q=85")
- center/cover;
-}
-
-.hero:before{
- content:"";
- position:absolute;
- inset:0;
- background:
- linear-gradient(180deg,transparent 70%,#070707 100%),
- radial-gradient(circle at 70% 50%,rgba(229,27,35,.25),transparent 35%);
-}
-
-.hero-content{
- position:relative;
- z-index:2;
- max-width:650px;
-}
-
-.hero-tag{
- display:inline-block;
- padding:7px 13px;
- border:1px solid #651519;
- background:#190909;
- color:#ff555c;
- border-radius:30px;
- font-size:12px;
- margin-bottom:18px;
+    min-height:350px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+    radial-gradient(circle at center,rgba(255,20,20,.18),transparent 45%),
+    #080808;
+    padding:60px 20px;
 }
 
 .hero h1{
- font-size:clamp(42px,6vw,75px);
- line-height:1;
- font-weight:900;
- margin-bottom:18px;
+    font-size:48px;
+    margin-bottom:15px;
 }
 
 .hero h1 span{
- color:var(--red);
- text-shadow:0 0 35px rgba(229,27,35,.35);
+    color:#ff1d1d;
 }
 
 .hero p{
- color:#aaa;
- line-height:2;
- font-size:15px;
- max-width:570px;
+    color:#aaa;
+    font-size:16px;
 }
 
-.hero-buttons{
- display:flex;
- gap:10px;
- margin-top:28px;
+.hero-btn{
+    display:inline-block;
+    margin-top:25px;
+    background:#e91414;
+    color:#fff;
+    padding:14px 30px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.2s;
 }
 
-.primary{
- background:var(--red);
- color:white;
- border:0;
- padding:13px 25px;
- border-radius:8px;
- font-weight:700;
- transition:.2s;
+.hero-btn:hover{
+    background:#ff2929;
+    transform:translateY(-2px);
 }
 
-.primary:hover{
- background:var(--red2);
- transform:translateY(-2px);
- box-shadow:0 10px 30px rgba(229,27,35,.2);
+/* CATEGORY */
+
+.section{
+    width:90%;
+    max-width:1400px;
+    margin:45px auto;
 }
 
-.secondary{
- background:#151515;
- color:white;
- border:1px solid #333;
- padding:13px 25px;
- border-radius:8px;
- font-weight:600;
+.section-title{
+    font-size:25px;
+    margin-bottom:25px;
 }
 
-.secondary:hover{border-color:#777}
-
-/* ================= BENEFITS ================= */
-
-.benefits{
- max-width:1250px;
- margin:-35px auto 0;
- position:relative;
- z-index:5;
- padding:0 20px;
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:12px;
+.section-title span{
+    color:#ff2020;
 }
-
-.benefit{
- background:#101010;
- border:1px solid #252525;
- padding:20px;
- border-radius:12px;
- text-align:center;
-}
-
-.benefit .big{
- color:var(--red);
- font-size:25px;
- font-weight:900;
- margin-bottom:5px;
-}
-
-.benefit h3{
- font-size:14px;
- margin-bottom:4px;
-}
-
-.benefit p{
- color:#777;
- font-size:11px;
-}
-
-/* ================= MAIN ================= */
-
-.container{
- max-width:1250px;
- margin:auto;
- padding:65px 20px;
-}
-
-.section-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:25px;
-}
-
-.section-title h2{
- font-size:27px;
-}
-
-.section-title h2 span{color:var(--red)}
-
-.section-title p{
- color:#777;
- font-size:12px;
- margin-top:5px;
-}
-
-/* ================= CATEGORIES ================= */
 
 .categories{
- display:grid;
- grid-template-columns:repeat(8,1fr);
- gap:9px;
- margin-bottom:35px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px;
 }
 
 .category{
- background:#101010;
- border:1px solid #292929;
- color:#aaa;
- padding:13px 5px;
- border-radius:8px;
- text-align:center;
- font-size:12px;
- transition:.2s;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:12px;
+    padding:22px 12px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
 }
 
-.category:hover,
+.category:hover{
+    border-color:#e51b1b;
+    transform:translateY(-4px);
+    box-shadow:0 0 20px rgba(255,0,0,.12);
+}
+
 .category.active{
- color:white;
- background:#190909;
- border-color:var(--red);
+    background:#180909;
+    border-color:#ff2020;
+    box-shadow:0 0 20px rgba(255,0,0,.15);
 }
 
-/* ================= TOOLBAR ================= */
-
-.toolbar{
- background:#0e0e0e;
- border:1px solid #252525;
- padding:15px;
- border-radius:12px;
- display:flex;
- gap:10px;
- flex-wrap:wrap;
- margin-bottom:25px;
+.category .icon{
+    font-size:32px;
+    margin-bottom:12px;
 }
 
-.search{
- flex:1;
- min-width:220px;
+.category h3{
+    font-size:15px;
 }
 
-.search input,
-.toolbar select,
-.price-input{
- width:100%;
- height:43px;
- background:#151515;
- color:white;
- border:1px solid #2c2c2c;
- border-radius:8px;
- outline:none;
- padding:0 13px;
+/* WEAPONS */
+
+.weapon-box{
+    margin-top:30px;
 }
 
-.search input:focus,
-.toolbar select:focus,
-.price-input:focus{
- border-color:var(--red);
+.weapon-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
 }
 
-.toolbar select{
- width:180px;
+.weapon-title h2{
+    font-size:21px;
 }
 
-.price-box{
- display:flex;
- gap:7px;
- width:300px;
+.weapon-title span{
+    color:#888;
+    font-size:13px;
 }
 
-.price-input{
- width:50%;
+.weapons{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+    gap:12px;
 }
 
-.reset{
- height:43px;
- border:1px solid #333;
- background:#171717;
- color:#bbb;
- padding:0 16px;
- border-radius:8px;
+.weapon{
+    background:#101010;
+    border:1px solid #282828;
+    border-radius:10px;
+    padding:14px;
+    cursor:pointer;
+    transition:.2s;
+    text-align:center;
 }
 
-.reset:hover{
- color:white;
- border-color:var(--red);
+.weapon:hover{
+    border-color:#e51c1c;
+    transform:translateY(-3px);
 }
 
-/* ================= PRODUCTS ================= */
+.weapon.active{
+    border-color:#ff1c1c;
+    background:#190909;
+}
+
+.weapon img{
+    width:100%;
+    height:70px;
+    object-fit:contain;
+    margin-bottom:8px;
+}
+
+.weapon-name{
+    font-size:13px;
+    color:#eee;
+}
+
+/* FILTERS */
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.filters input,
+.filters select{
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:12px;
+    outline:none;
+}
+
+.filters input:focus,
+.filters select:focus{
+    border-color:#e21b1b;
+}
+
+/* PRODUCTS */
 
 .products{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:18px;
 }
 
 .product{
- background:linear-gradient(145deg,#111,#0b0b0b);
- border:1px solid #242424;
- border-radius:12px;
- overflow:hidden;
- transition:.25s;
- position:relative;
+    background:#101010;
+    border:1px solid #272727;
+    border-radius:13px;
+    overflow:hidden;
+    transition:.25s;
 }
 
 .product:hover{
- transform:translateY(-5px);
- border-color:#64151a;
- box-shadow:0 15px 45px rgba(0,0,0,.45);
+    transform:translateY(-5px);
+    border-color:#d91b1b;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
-.product-image{
- height:190px;
- position:relative;
- display:flex;
- align-items:center;
- justify-content:center;
- background:
- radial-gradient(circle,rgba(229,27,35,.12),transparent 62%),
- #0c0c0c;
- padding:18px;
+.product-img{
+    height:180px;
+    background:#0b0b0b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
 }
 
-.product-image img{
- width:100%;
- height:100%;
- object-fit:contain;
- transition:.3s;
+.product-img img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
 }
 
-.product:hover .product-image img{
- transform:scale(1.07);
+.product-info{
+    padding:15px;
 }
 
-.badge{
- position:absolute;
- top:10px;
- right:10px;
- background:#160707;
- border:1px solid #5a171b;
- color:#ff5b61;
- border-radius:6px;
- padding:5px 7px;
- font-size:9px;
+.product-info h3{
+    font-size:15px;
+    margin-bottom:10px;
 }
 
-.favorite{
- position:absolute;
- top:10px;
- left:10px;
- width:31px;
- height:31px;
- border-radius:50%;
- border:1px solid #333;
- background:#111;
- color:#aaa;
-}
-
-.favorite:hover{color:#ff3038}
-
-.product-info{padding:15px}
-
-.weapon{
- color:#777;
- font-size:10px;
- margin-bottom:4px;
-}
-
-.product-name{
- font-size:16px;
- font-weight:800;
- margin-bottom:10px;
-}
-
-.meta{
- display:flex;
- gap:5px;
- flex-wrap:wrap;
- margin-bottom:14px;
-}
-
-.meta span{
- color:#aaa;
- background:#181818;
- border:1px solid #292929;
- padding:4px 7px;
- border-radius:5px;
- font-size:9px;
-}
-
-.product-bottom{
- display:flex;
- justify-content:space-between;
- align-items:end;
- gap:8px;
+.wear{
+    color:#999;
+    font-size:12px;
+    margin-bottom:10px;
 }
 
 .price{
- font-size:17px;
- font-weight:900;
+    color:#ff2929;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.price small{
- color:#777;
- font-size:9px;
- font-weight:400;
+.product-actions{
+    display:flex;
+    gap:8px;
+    margin-top:14px;
 }
 
 .buy{
- background:var(--red);
- color:white;
- border:0;
- border-radius:7px;
- padding:9px 13px;
- font-size:11px;
- font-weight:700;
+    flex:1;
+    border:0;
+    background:#e71919;
+    color:white;
+    border-radius:7px;
+    padding:10px;
+    cursor:pointer;
 }
 
-.buy:hover{background:var(--red2)}
-
-.old-price{
- color:#666;
- text-decoration:line-through;
- font-size:10px;
- margin-bottom:2px;
+.buy:hover{
+    background:#ff2929;
 }
 
-/* ================= EMPTY ================= */
-
-.empty{
- display:none;
- text-align:center;
- padding:80px 20px;
- color:#777;
+.favorite{
+    width:42px;
+    border:1px solid #333;
+    background:#151515;
+    color:#fff;
+    border-radius:7px;
+    cursor:pointer;
 }
 
-.empty strong{
- display:block;
- color:#aaa;
- font-size:20px;
- margin-bottom:8px;
-}
-
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
- display:none;
- position:fixed;
- inset:0;
- z-index:3000;
- background:rgba(0,0,0,.78);
- backdrop-filter:blur(8px);
- align-items:center;
- justify-content:center;
- padding:20px;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
 }
 
-.modal.show{display:flex}
+.modal.show{
+    display:flex;
+}
 
 .modal-box{
- width:520px;
- max-width:100%;
- background:#101010;
- border:1px solid #333;
- border-radius:15px;
- overflow:hidden;
- box-shadow:0 30px 100px #000;
- animation:modalIn .2s ease;
+    width:100%;
+    max-width:550px;
+    background:#111;
+    border:1px solid #333;
+    border-radius:14px;
+    padding:25px;
+    position:relative;
 }
-
-@keyframes modalIn{
- from{opacity:0;transform:scale(.95)}
- to{opacity:1;transform:scale(1)}
-}
-
-.modal-top{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:18px 20px;
- border-bottom:1px solid #252525;
-}
-
-.modal-top h3{font-size:17px}
 
 .close{
- border:0;
- background:#191919;
- color:#aaa;
- width:32px;
- height:32px;
- border-radius:7px;
- font-size:18px;
+    position:absolute;
+    left:18px;
+    top:15px;
+    font-size:25px;
+    color:#aaa;
+    cursor:pointer;
 }
 
-.modal-body{padding:20px}
-
-.modal-product{
- display:flex;
- gap:18px;
- align-items:center;
+.modal-img{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    margin-bottom:15px;
 }
 
-.modal-product img{
- width:180px;
- height:130px;
- object-fit:contain;
- background:#0b0b0b;
- border-radius:9px;
-}
-
-.modal-info h2{
- font-size:21px;
- margin-bottom:7px;
-}
-
-.modal-info p{
- color:#888;
- font-size:12px;
- line-height:2;
+.modal-box h2{
+    margin-bottom:10px;
 }
 
 .modal-price{
- color:#ff4048;
- font-size:20px;
- font-weight:900;
- margin-top:10px;
+    color:#ff2222;
+    font-size:22px;
+    font-weight:bold;
+    margin:15px 0;
 }
 
-.wear-select{
- width:100%;
- height:45px;
- background:#171717;
- border:1px solid #303030;
- color:white;
- border-radius:8px;
- margin-top:20px;
- padding:0 12px;
+.modal-select{
+    width:100%;
+    padding:12px;
+    background:#090909;
+    border:1px solid #333;
+    color:white;
+    border-radius:7px;
+    margin-bottom:15px;
 }
 
-.modal-order{
- width:100%;
- height:47px;
- margin-top:12px;
- background:var(--red);
- color:white;
- border:0;
- border-radius:8px;
- font-weight:800;
+.full-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:#e71919;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-/* ================= CART ================= */
-
-.cart-items{
- max-height:350px;
- overflow:auto;
-}
+/* CART */
 
 .cart-item{
- display:flex;
- justify-content:space-between;
- gap:10px;
- padding:13px 0;
- border-bottom:1px solid #222;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid #252525;
 }
 
-.cart-item-name{
- font-size:13px;
- font-weight:700;
+.cart-item img{
+    width:75px;
+    height:55px;
+    object-fit:contain;
 }
 
-.cart-item-price{
- color:#ff4048;
- font-size:12px;
- margin-top:3px;
+.cart-item-info{
+    flex:1;
 }
 
 .remove{
- border:0;
- background:#180909;
- color:#ff555b;
- padding:6px 9px;
- border-radius:5px;
- font-size:10px;
+    background:#1c1c1c;
+    color:#ff3030;
+    border:1px solid #333;
+    padding:7px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-.cart-total{
- display:flex;
- justify-content:space-between;
- padding-top:20px;
- font-weight:800;
+.total{
+    margin:20px 0;
+    font-size:19px;
+    font-weight:bold;
 }
 
-.telegram{
- display:block;
- width:100%;
- text-align:center;
- background:#1687e8;
- color:white;
- padding:13px;
- border-radius:8px;
- margin-top:15px;
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 footer{
- border-top:1px solid #202020;
- background:#090909;
- padding:45px 20px;
- text-align:center;
+    margin-top:70px;
+    padding:35px 5%;
+    background:#0d0d0d;
+    border-top:1px solid #242424;
+    text-align:center;
+    color:#777;
 }
 
-.footer-logo{
- font-size:25px;
- font-weight:900;
+footer strong{
+    color:#ff2020;
 }
 
-.footer-logo span{color:var(--red)}
-
-footer p{
- color:#666;
- font-size:12px;
- margin-top:8px;
-}
-
-.footer-links{
- margin:20px 0;
- display:flex;
- justify-content:center;
- gap:20px;
- color:#888;
- font-size:12px;
-}
-
-.footer-links a:hover{color:white}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1000px){
- .products{grid-template-columns:repeat(3,1fr)}
- .categories{grid-template-columns:repeat(4,1fr)}
- .benefits{grid-template-columns:repeat(2,1fr)}
-}
+/* MOBILE */
 
 @media(max-width:700px){
- .header{padding:0 15px}
- .nav{display:none}
- .logo{font-size:20px}
- .hero{padding:55px 25px;min-height:430px}
- .hero h1{font-size:48px}
- .container{padding:50px 12px}
- .products{grid-template-columns:repeat(2,1fr);gap:9px}
- .product-image{height:145px}
- .product-info{padding:10px}
- .product-name{font-size:13px}
- .price{font-size:13px}
- .buy{padding:8px 9px}
- .categories{grid-template-columns:repeat(4,1fr)}
- .category{font-size:10px}
- .section-head{align-items:flex-start}
- .toolbar{padding:10px}
- .price-box{width:100%}
- .toolbar select{width:100%}
- .modal-product{flex-direction:column}
- .modal-product img{width:100%;height:170px}
-}
 
-@media(max-width:430px){
- .products{grid-template-columns:1fr 1fr}
- .benefits{grid-template-columns:1fr 1fr}
- .benefit{padding:14px 5px}
- .benefit .big{font-size:20px}
- .benefit h3{font-size:11px}
- .hero-buttons{flex-direction:column}
+    header{
+        height:auto;
+        padding:15px;
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    nav{
+        order:3;
+        width:100%;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .section{
+        width:94%;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .product-img{
+        height:130px;
+    }
+
+    .weapons{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="header">
+<header>
 
- <a href="#" class="logo">
-  WIZYY <span>SHOP</span>
- </a>
+    <div class="logo">WIZYY SHOP</div>
 
- <nav class="nav">
-  <a href="#">خانه</a>
-  <a href="#shop">فروشگاه</a>
-  <a href="#categories">دسته‌بندی‌ها</a>
-  <a href="#footer">ارتباط با ما</a>
- </nav>
+    <nav>
+        <a href="#home">خانه</a>
+        <a href="#weapons">اسکین‌ها</a>
+        <a href="#shop">فروشگاه</a>
+    </nav>
 
- <div class="header-actions">
-  <button class="icon-btn" onclick="openCart()">
-   سبد خرید
-   <span class="cart-count" id="cartCount">0</span>
-  </button>
- </div>
+    <button class="cart-btn" onclick="openCart()">
+        سبد خرید (<span id="cartCount">0</span>)
+    </button>
 
 </header>
 
 
-<!-- HERO -->
-<section class="hero">
+<section class="hero" id="home">
 
- <div class="hero-content">
+    <div>
 
-  <span class="hero-tag">
-   WIZYY SHOP • CS2 SKINS
-  </span>
+        <h1>
+            <span>WIZYY</span> SHOP
+        </h1>
 
-  <h1>
-   بازار اسکین<br>
-   <span>CS2</span>
-  </h1>
+        <p>
+            فروش اسکین‌های CS2 با قیمت مناسب
+        </p>
 
-  <p>
-   اسکین‌های مورد علاقه‌ات را پیدا کن.
-   از AK-47 و AWP تا Knife و Pistol،
-   همه در فروشگاه WIZYY SHOP.
-  </p>
+        <a href="#weapons" class="hero-btn">
+            مشاهده اسکین‌ها
+        </a>
 
-  <div class="hero-buttons">
-   <a href="#shop" class="primary">مشاهده اسکین‌ها</a>
-   <a href="#categories" class="secondary">دسته‌بندی‌ها</a>
-  </div>
-
- </div>
+    </div>
 
 </section>
 
 
-<!-- BENEFITS -->
-<section class="benefits">
+<section class="section" id="weapons">
 
- <div class="benefit">
-  <div class="big">CS2</div>
-  <h3>اسکین‌های متنوع</h3>
-  <p>انتخاب از انواع آیتم‌ها</p>
- </div>
+    <div class="section-title">
+        انتخاب <span>نوع سلاح</span>
+    </div>
 
- <div class="benefit">
-  <div class="big">24/7</div>
-  <h3>پشتیبانی</h3>
-  <p>پاسخگویی به کاربران</p>
- </div>
+    <div class="categories">
 
- <div class="benefit">
-  <div class="big">FAST</div>
-  <h3>تحویل سریع</h3>
-  <p>ثبت سفارش آسان</p>
- </div>
+        <div class="category active" onclick="selectCategory('Pistols',this)">
+            <div class="icon">🔫</div>
+            <h3>Pistols</h3>
+        </div>
 
- <div class="benefit">
-  <div class="big">SAFE</div>
-  <h3>خرید مطمئن</h3>
-  <p>فرآیند سفارش شفاف</p>
- </div>
+        <div class="category" onclick="selectCategory('Rifles',this)">
+            <div class="icon">🔫</div>
+            <h3>Rifles</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('SMGs',this)">
+            <div class="icon">⚡</div>
+            <h3>SMGs</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('Snipers',this)">
+            <div class="icon">🎯</div>
+            <h3>Snipers</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('Shotguns',this)">
+            <div class="icon">💥</div>
+            <h3>Shotguns</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('Machineguns',this)">
+            <div class="icon">⚙</div>
+            <h3>Machineguns</h3>
+        </div>
+
+        <div class="category" onclick="selectCategory('Knives',this)">
+            <div class="icon">🔪</div>
+            <h3>Knives</h3>
+        </div>
+
+    </div>
+
+
+    <div class="weapon-box">
+
+        <div class="weapon-title">
+            <h2 id="categoryTitle">Pistols</h2>
+            <span>یک گان را انتخاب کن</span>
+        </div>
+
+        <div class="weapons" id="weaponList"></div>
+
+    </div>
 
 </section>
 
 
-<!-- SHOP -->
-<main class="container" id="shop">
+<section class="section" id="shop">
 
- <div class="section-head">
-  <div class="section-title">
-   <h2>فروشگاه <span>اسکین‌ها</span></h2>
-   <p>اسکین مورد نظرت را پیدا کن</p>
-  </div>
- </div>
-
-
- <!-- CATEGORIES -->
- <div class="categories" id="categories">
-
-  <button class="category active" onclick="categoryFilter('all',this)">همه</button>
-
-  <button class="category" onclick="categoryFilter('rifle',this)">Rifle</button>
-
-  <button class="category" onclick="categoryFilter('pistol',this)">Pistol</button>
-
-  <button class="category" onclick="categoryFilter('knife',this)">Knife</button>
-
-  <button class="category" onclick="categoryFilter('awp',this)">AWP</button>
-
-  <button class="category" onclick="categoryFilter('smg',this)">SMG</button>
-
-  <button class="category" onclick="categoryFilter('shotgun',this)">Shotgun</button>
-
-  <button class="category" onclick="categoryFilter('other',this)">Other</button>
-
- </div>
-
-
- <!-- TOOLBAR -->
- <div class="toolbar">
-
-  <div class="search">
-   <input
-    type="text"
-    id="search"
-    placeholder="جستجوی نام اسکین..."
-    oninput="filterProducts()"
-   >
-  </div>
-
-  <select id="wear" onchange="filterProducts()">
-   <option value="all">همه Wear ها</option>
-   <option value="Factory New">Factory New</option>
-   <option value="Minimal Wear">Minimal Wear</option>
-   <option value="Field-Tested">Field-Tested</option>
-   <option value="Well-Worn">Well-Worn</option>
-   <option value="Battle-Scarred">Battle-Scarred</option>
-  </select>
-
-  <div class="price-box">
-   <input class="price-input" id="minPrice" type="number" placeholder="حداقل قیمت" oninput="filterProducts()">
-   <input class="price-input" id="maxPrice" type="number" placeholder="حداکثر قیمت" oninput="filterProducts()">
-  </div>
-
-  <select id="sort" onchange="sortProducts()">
-   <option value="default">مرتب‌سازی</option>
-   <option value="low">ارزان‌ترین</option>
-   <option value="high">گران‌ترین</option>
-   <option value="name">نام اسکین</option>
-  </select>
-
-  <button class="reset" onclick="resetFilters()">حذف فیلترها</button>
-
- </div>
-
-
- <!-- PRODUCTS -->
- <div class="products" id="products">
-
-
-  <!-- 1 -->
-  <article class="product"
-   data-category="rifle"
-   data-name="AK-47 Redline"
-   data-wear="Field-Tested"
-   data-price="85000">
-
-   <div class="product-image">
-    <span class="badge">محبوب</span>
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2500311387/330x192"
-     alt="AK-47 Redline">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">AK-47</div>
-    <div class="product-name">Redline</div>
-
-    <div class="meta">
-     <span>Field-Tested</span>
-     <span>Rifle</span>
+    <div class="section-title">
+        اسکین‌های <span id="selectedWeaponText">Desert Eagle</span>
     </div>
 
-    <div class="product-bottom">
-     <div>
-      <div class="price">85,000 <small>تومان</small></div>
-     </div>
+    <div class="filters">
 
-     <button class="buy" onclick="openProduct(this)">
-      مشاهده
-     </button>
-    </div>
-   </div>
+        <input
+            type="text"
+            id="search"
+            placeholder="جستجوی اسکین..."
+            oninput="renderProducts()"
+        >
 
-  </article>
+        <select id="wearFilter" onchange="renderProducts()">
 
+            <option value="all">همه Wear ها</option>
+            <option value="Factory New">Factory New</option>
+            <option value="Minimal Wear">Minimal Wear</option>
+            <option value="Field-Tested">Field-Tested</option>
+            <option value="Well-Worn">Well-Worn</option>
+            <option value="Battle-Scarred">Battle-Scarred</option>
 
-  <!-- 2 -->
-  <article class="product"
-   data-category="awp"
-   data-name="AWP Asiimov"
-   data-wear="Field-Tested"
-   data-price="650000">
+        </select>
 
-   <div class="product-image">
-    <span class="badge">محبوب</span>
-    <button class="favorite">♡</button>
+        <select id="sortFilter" onchange="renderProducts()">
 
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2535910706/330x192"
-     alt="AWP Asiimov">
-   </div>
+            <option value="default">مرتب‌سازی</option>
+            <option value="low">ارزان‌ترین</option>
+            <option value="high">گران‌ترین</option>
 
-   <div class="product-info">
-    <div class="weapon">AWP</div>
-    <div class="product-name">Asiimov</div>
+        </select>
 
-    <div class="meta">
-     <span>Field-Tested</span>
-     <span>AWP</span>
     </div>
 
-    <div class="product-bottom">
-     <div class="price">650,000 <small>تومان</small></div>
+    <div class="products" id="products"></div>
 
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
-  <!-- 3 -->
-  <article class="product"
-   data-category="rifle"
-   data-name="M4A4 Temukau"
-   data-wear="Minimal Wear"
-   data-price="210000">
-
-   <div class="product-image">
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/3158052675/330x192"
-     alt="M4A4 Temukau">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">M4A4</div>
-    <div class="product-name">Temukau</div>
-
-    <div class="meta">
-     <span>Minimal Wear</span>
-     <span>Rifle</span>
-    </div>
-
-    <div class="product-bottom">
-     <div class="price">210,000 <small>تومان</small></div>
-
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
-  <!-- 4 -->
-  <article class="product"
-   data-category="pistol"
-   data-name="USP-S Printstream"
-   data-wear="Factory New"
-   data-price="300000">
-
-   <div class="product-image">
-    <span class="badge">جدید</span>
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/3158052858/330x192"
-     alt="USP-S Printstream">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">USP-S</div>
-    <div class="product-name">Printstream</div>
-
-    <div class="meta">
-     <span>Factory New</span>
-     <span>Pistol</span>
-    </div>
-
-    <div class="product-bottom">
-     <div class="price">300,000 <small>تومان</small></div>
-
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
-  <!-- 5 -->
-  <article class="product"
-   data-category="pistol"
-   data-name="Glock-18 Water Elemental"
-   data-wear="Minimal Wear"
-   data-price="95000">
-
-   <div class="product-image">
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2500311411/330x192"
-     alt="Glock-18 Water Elemental">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">Glock-18</div>
-    <div class="product-name">Water Elemental</div>
-
-    <div class="meta">
-     <span>Minimal Wear</span>
-     <span>Pistol</span>
-    </div>
-
-    <div class="product-bottom">
-     <div class="price">95,000 <small>تومان</small></div>
-
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
-  <!-- 6 -->
-  <article class="product"
-   data-category="knife"
-   data-name="Karambit Doppler"
-   data-wear="Factory New"
-   data-price="8500000">
-
-   <div class="product-image">
-    <span class="badge">Knife</span>
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/2500311481/330x192"
-     alt="Karambit Doppler">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">Karambit</div>
-    <div class="product-name">Doppler</div>
-
-    <div class="meta">
-     <span>Factory New</span>
-     <span>Knife</span>
-    </div>
-
-    <div class="product-bottom">
-     <div class="price">8,500,000 <small>تومان</small></div>
-
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
-  <!-- 7 -->
-  <article class="product"
-   data-category="smg"
-   data-name="MP9 Starlight Protector"
-   data-wear="Minimal Wear"
-   data-price="70000">
-
-   <div class="product-image">
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/3158053017/330x192"
-     alt="MP9 Starlight Protector">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">MP9</div>
-    <div class="product-name">Starlight Protector</div>
-
-    <div class="meta">
-     <span>Minimal Wear</span>
-     <span>SMG</span>
-    </div>
-
-    <div class="product-bottom">
-     <div class="price">70,000 <small>تومان</small></div>
-
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
-  <!-- 8 -->
-  <article class="product"
-   data-category="rifle"
-   data-name="AK-47 Slate"
-   data-wear="Factory New"
-   data-price="120000">
-
-   <div class="product-image">
-    <button class="favorite">♡</button>
-
-    <img
-     src="https://steamcommunity-a.akamaihd.net/economy/image/class/730/3158052571/330x192"
-     alt="AK-47 Slate">
-   </div>
-
-   <div class="product-info">
-    <div class="weapon">AK-47</div>
-    <div class="product-name">Slate</div>
-
-    <div class="meta">
-     <span>Factory New</span>
-     <span>Rifle</span>
-    </div>
-
-    <div class="product-bottom">
-     <div class="price">120,000 <small>تومان</small></div>
-
-     <button class="buy" onclick="openProduct(this)">مشاهده</button>
-    </div>
-   </div>
-
-  </article>
-
-
- </div>
-
-
- <div class="empty" id="empty">
-  <strong>اسکینی پیدا نشد</strong>
-  فیلترها یا عبارت جستجو را تغییر بده.
- </div>
-
-</main>
+</section>
 
 
 <!-- PRODUCT MODAL -->
+
 <div class="modal" id="productModal">
 
- <div class="modal-box">
+    <div class="modal-box">
 
-  <div class="modal-top">
-   <h3>جزئیات اسکین</h3>
-   <button class="close" onclick="closeModal('productModal')">×</button>
-  </div>
+        <div class="close" onclick="closeModal('productModal')">×</div>
 
-  <div class="modal-body">
+        <img id="modalImg" class="modal-img">
 
-   <div class="modal-product">
+        <h2 id="modalName"></h2>
 
-    <img id="modalImage" src="" alt="">
+        <div id="modalWear" class="wear"></div>
 
-    <div class="modal-info">
-     <h2 id="modalName">Skin</h2>
-     <p id="modalWeapon">Weapon</p>
-     <p id="modalWear">Wear</p>
-     <div class="modal-price" id="modalPrice">0 تومان</div>
+        <div id="modalPrice" class="modal-price"></div>
+
+        <select class="modal-select" id="modalWearSelect">
+
+            <option>Factory New</option>
+            <option>Minimal Wear</option>
+            <option>Field-Tested</option>
+            <option>Well-Worn</option>
+            <option>Battle-Scarred</option>
+
+        </select>
+
+        <button class="full-btn" onclick="addFromModal()">
+            افزودن به سبد خرید
+        </button>
+
     </div>
-
-   </div>
-
-   <select class="wear-select" id="modalWearSelect">
-    <option>Factory New</option>
-    <option>Minimal Wear</option>
-    <option>Field-Tested</option>
-    <option>Well-Worn</option>
-    <option>Battle-Scarred</option>
-   </select>
-
-   <button class="modal-order" onclick="addModalToCart()">
-    افزودن به سبد خرید
-   </button>
-
-  </div>
-
- </div>
 
 </div>
 
 
 <!-- CART MODAL -->
+
 <div class="modal" id="cartModal">
 
- <div class="modal-box">
+    <div class="modal-box">
 
-  <div class="modal-top">
-   <h3>سبد خرید WIZYY SHOP</h3>
-   <button class="close" onclick="closeModal('cartModal')">×</button>
-  </div>
+        <div class="close" onclick="closeModal('cartModal')">×</div>
 
-  <div class="modal-body">
+        <h2>سبد خرید</h2>
 
-   <div class="cart-items" id="cartItems"></div>
+        <div id="cartItems"></div>
 
-   <div class="cart-total">
-    <span>مجموع</span>
-    <span id="cartTotal">0 تومان</span>
-   </div>
+        <div class="total">
+            مجموع:
+            <span id="cartTotal">0</span>
+            تومان
+        </div>
 
-   <a
-    id="telegramOrder"
-    class="telegram"
-    href="#"
-    target="_blank"
-    onclick="prepareTelegram()">
-    ارسال سفارش در تلگرام
-   </a>
+        <button class="full-btn" onclick="finalizeOrder()">
+            نهایی کردن سفارش
+        </button>
 
-  </div>
-
- </div>
+    </div>
 
 </div>
 
 
-<!-- FOOTER -->
-<footer id="footer">
+<footer>
 
- <div class="footer-logo">
-  WIZYY <span>SHOP</span>
- </div>
+    <p>
+        © 2026 <strong>WIZYY SHOP</strong>
+    </p>
 
- <p>
-  فروشگاه اسکین‌های Counter-Strike 2
- </p>
-
- <div class="footer-links">
-  <a href="#shop">فروشگاه</a>
-  <a href="#categories">دسته‌بندی‌ها</a>
-  <a href="#">قوانین</a>
-  <a href="#">پشتیبانی</a>
- </div>
-
- <p>
-  © 2026 WIZYY SHOP — All Rights Reserved
- </p>
+    <p style="margin-top:10px">
+        Telegram: @WizyyShop
+    </p>
 
 </footer>
 
 
 <script>
 
-/* ================= DATA ================= */
+/* =========================
+   WEAPONS
+========================= */
 
+const weapons = {
+
+    Pistols: [
+
+        {
+            name:"Desert Eagle",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
+        },
+
+        {
+            name:"USP-S",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/61"
+        },
+
+        {
+            name:"Glock-18",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/4"
+        },
+
+        {
+            name:"P250",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/36"
+        },
+
+        {
+            name:"Five-SeveN",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/3"
+        },
+
+        {
+            name:"Tec-9",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/30"
+        },
+
+        {
+            name:"CZ75-Auto",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/63"
+        },
+
+        {
+            name:"Dual Berettas",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/2"
+        },
+
+        {
+            name:"R8 Revolver",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/64"
+        }
+
+    ],
+
+
+    Rifles: [
+
+        {
+            name:"AK-47",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+        },
+
+        {
+            name:"M4A4",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/16"
+        },
+
+        {
+            name:"M4A1-S",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/60"
+        },
+
+        {
+            name:"FAMAS",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/10"
+        },
+
+        {
+            name:"Galil AR",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/13"
+        },
+
+        {
+            name:"AUG",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/8"
+        },
+
+        {
+            name:"SG 553",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/39"
+        }
+
+    ],
+
+
+    SMGs: [
+
+        {
+            name:"MP9",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/34"
+        },
+
+        {
+            name:"MAC-10",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/17"
+        },
+
+        {
+            name:"MP7",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/33"
+        },
+
+        {
+            name:"MP5-SD",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/23"
+        },
+
+        {
+            name:"P90",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/19"
+        },
+
+        {
+            name:"UMP-45",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/24"
+        },
+
+        {
+            name:"PP-Bizon",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/26"
+        }
+
+    ],
+
+
+    Snipers: [
+
+        {
+            name:"AWP",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/9"
+        },
+
+        {
+            name:"SSG 08",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/40"
+        },
+
+        {
+            name:"SCAR-20",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/38"
+        },
+
+        {
+            name:"G3SG1",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/11"
+        }
+
+    ],
+
+
+    Shotguns: [
+
+        {
+            name:"Nova",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/35"
+        },
+
+        {
+            name:"XM1014",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/25"
+        },
+
+        {
+            name:"MAG-7",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/29"
+        },
+
+        {
+            name:"Sawed-Off",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/27"
+        }
+
+    ],
+
+
+    Machineguns: [
+
+        {
+            name:"M249",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/14"
+        },
+
+        {
+            name:"Negev",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/28"
+        }
+
+    ],
+
+
+    Knives: [
+
+        {
+            name:"Karambit",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/507"
+        },
+
+        {
+            name:"Butterfly Knife",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/515"
+        },
+
+        {
+            name:"M9 Bayonet",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/508"
+        },
+
+        {
+            name:"Bayonet",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/500"
+        },
+
+        {
+            name:"Gut Knife",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/506"
+        },
+
+        {
+            name:"Flip Knife",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/505"
+        },
+
+        {
+            name:"Falchion Knife",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/512"
+        },
+
+        {
+            name:"Huntsman Knife",
+            image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/509"
+        }
+
+    ]
+
+};
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+const products = [
+
+    {
+        name:"Desert Eagle | Printstream",
+        weapon:"Desert Eagle",
+        wear:"Field-Tested",
+        price:60000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
+    },
+
+    {
+        name:"Desert Eagle | Code Red",
+        weapon:"Desert Eagle",
+        wear:"Minimal Wear",
+        price:95000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/1"
+    },
+
+    {
+        name:"USP-S | Printstream",
+        weapon:"USP-S",
+        wear:"Factory New",
+        price:300000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/61"
+    },
+
+    {
+        name:"Glock-18 | Water Elemental",
+        weapon:"Glock-18",
+        wear:"Minimal Wear",
+        price:95000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/4"
+    },
+
+    {
+        name:"AK-47 | Redline",
+        weapon:"AK-47",
+        wear:"Field-Tested",
+        price:85000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+    },
+
+    {
+        name:"AK-47 | Slate",
+        weapon:"AK-47",
+        wear:"Factory New",
+        price:120000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/7"
+    },
+
+    {
+        name:"M4A4 | Temukau",
+        weapon:"M4A4",
+        wear:"Minimal Wear",
+        price:210000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/16"
+    },
+
+    {
+        name:"M4A1-S | Printstream",
+        weapon:"M4A1-S",
+        wear:"Minimal Wear",
+        price:480000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/60"
+    },
+
+    {
+        name:"AWP | Asiimov",
+        weapon:"AWP",
+        wear:"Field-Tested",
+        price:650000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/9"
+    },
+
+    {
+        name:"AWP | Wildfire",
+        weapon:"AWP",
+        wear:"Minimal Wear",
+        price:720000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/9"
+    },
+
+    {
+        name:"MP9 | Starlight Protector",
+        weapon:"MP9",
+        wear:"Minimal Wear",
+        price:70000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/34"
+    },
+
+    {
+        name:"Karambit | Doppler",
+        weapon:"Karambit",
+        wear:"Factory New",
+        price:8500000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/507"
+    },
+
+    {
+        name:"Butterfly Knife | Doppler",
+        weapon:"Butterfly Knife",
+        wear:"Factory New",
+        price:12000000,
+        image:"https://community.cloudflare.steamstatic.com/economy/image/class/730/515"
+    }
+
+];
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let currentCategory = "Pistols";
+let selectedWeapon = "Desert Eagle";
 let cart = [];
-
-let selectedProduct = null;
-
-let activeCategory = "all";
+let currentProduct = null;
 
 
-/* ================= PRODUCT MODAL ================= */
+/* =========================
+   CATEGORY
+========================= */
 
-function openProduct(button){
+function selectCategory(category, element){
 
- const product = button.closest(".product");
+    currentCategory = category;
 
- const img = product.querySelector("img").src;
+    document.querySelectorAll(".category")
+        .forEach(x => x.classList.remove("active"));
 
- const name = product.dataset.name;
+    element.classList.add("active");
 
- const weapon = product.querySelector(".weapon").innerText;
+    document.getElementById("categoryTitle").textContent = category;
 
- const wear = product.dataset.wear;
+    renderWeapons(category);
+}
 
- const price = Number(product.dataset.price);
 
- selectedProduct = {
-  name,
-  weapon,
-  wear,
-  price,
-  img
- };
+/* =========================
+   WEAPONS
+========================= */
 
- document.getElementById("modalImage").src = img;
+function renderWeapons(category){
 
- document.getElementById("modalName").innerText = name;
+    const list = document.getElementById("weaponList");
 
- document.getElementById("modalWeapon").innerText =
-  "سلاح: " + weapon;
+    list.innerHTML = "";
 
- document.getElementById("modalWear").innerText =
-  "وضعیت: " + wear;
+    weapons[category].forEach((weapon,index)=>{
 
- document.getElementById("modalPrice").innerText =
-  price.toLocaleString("fa-IR") + " تومان";
+        const div = document.createElement("div");
 
- document.getElementById("modalWearSelect").value = wear;
+        div.className =
+            "weapon " +
+            (index === 0 ? "active" : "");
 
- document.getElementById("productModal").classList.add("show");
+        div.innerHTML = `
+
+            <img src="${weapon.image}" alt="${weapon.name}">
+
+            <div class="weapon-name">
+                ${weapon.name}
+            </div>
+
+        `;
+
+        div.onclick = function(){
+
+            document.querySelectorAll(".weapon")
+                .forEach(x => x.classList.remove("active"));
+
+            div.classList.add("active");
+
+            selectedWeapon = weapon.name;
+
+            document.getElementById("selectedWeaponText")
+                .textContent = weapon.name;
+
+            renderProducts();
+
+            document.getElementById("shop")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+        };
+
+        list.appendChild(div);
+
+    });
+
+    selectedWeapon = weapons[category][0].name;
+
+    document.getElementById("selectedWeaponText")
+        .textContent = selectedWeapon;
+
+    renderProducts();
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+function renderProducts(){
+
+    const container =
+        document.getElementById("products");
+
+    const search =
+        document.getElementById("search").value
+        .toLowerCase();
+
+    const wear =
+        document.getElementById("wearFilter").value;
+
+    const sort =
+        document.getElementById("sortFilter").value;
+
+
+    let result = products.filter(product => {
+
+        const weaponMatch =
+            product.weapon === selectedWeapon;
+
+        const searchMatch =
+            product.name.toLowerCase()
+            .includes(search);
+
+        const wearMatch =
+            wear === "all" ||
+            product.wear === wear;
+
+        return weaponMatch &&
+               searchMatch &&
+               wearMatch;
+
+    });
+
+
+    if(sort === "low"){
+
+        result.sort((a,b)=>a.price-b.price);
+
+    }
+
+    if(sort === "high"){
+
+        result.sort((a,b)=>b.price-a.price);
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    if(result.length === 0){
+
+        container.innerHTML = `
+
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:60px;
+                color:#777;
+            ">
+
+                برای این گان هنوز اسکینی ثبت نشده.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    result.forEach(product=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "product";
+
+        card.innerHTML = `
+
+            <div class="product-img">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+                <div class="wear">
+                    ${product.wear}
+                </div>
+
+                <div class="price">
+                    ${product.price.toLocaleString("fa-IR")}
+                    تومان
+                </div>
+
+                <div class="product-actions">
+
+                    <button
+                        class="buy"
+                        onclick="openProduct('${product.name}')"
+                    >
+                        مشاهده و خرید
+                    </button>
+
+                    <button
+                        class="favorite"
+                        onclick="addToCart('${product.name}')"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
 
 }
 
 
-/* ================= ADD CART ================= */
+/* =========================
+   PRODUCT MODAL
+========================= */
 
-function addModalToCart(){
+function openProduct(name){
 
- if(!selectedProduct) return;
+    currentProduct =
+        products.find(x => x.name === name);
 
- const wear =
-  document.getElementById("modalWearSelect").value;
+    if(!currentProduct) return;
 
- cart.push({
-  ...selectedProduct,
-  wear
- });
+    document.getElementById("modalImg").src =
+        currentProduct.image;
 
- updateCart();
+    document.getElementById("modalName").textContent =
+        currentProduct.name;
 
- closeModal("productModal");
+    document.getElementById("modalWear").textContent =
+        currentProduct.wear;
+
+    document.getElementById("modalPrice").textContent =
+        currentProduct.price.toLocaleString("fa-IR")
+        + " تومان";
+
+    document.getElementById("modalWearSelect").value =
+        currentProduct.wear;
+
+    document.getElementById("productModal")
+        .classList.add("show");
 
 }
 
 
-/* ================= CART ================= */
+function addFromModal(){
+
+    if(!currentProduct) return;
+
+    addToCart(currentProduct.name);
+
+    closeModal("productModal");
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function addToCart(name){
+
+    const product =
+        products.find(x => x.name === name);
+
+    if(!product) return;
+
+    cart.push(product);
+
+    updateCart();
+
+}
+
 
 function updateCart(){
 
- document.getElementById("cartCount").innerText = cart.length;
-
- let html = "";
-
- let total = 0;
-
- if(cart.length === 0){
-
-  html =
-  '<div style="text-align:center;padding:40px;color:#777">سبد خرید خالی است.</div>';
-
- }else{
-
-  cart.forEach((item,index)=>{
-
-   total += item.price;
-
-   html += `
-    <div class="cart-item">
-
-     <div>
-      <div class="cart-item-name">
-       ${item.name}
-      </div>
-
-      <div class="cart-item-price">
-       ${item.price.toLocaleString("fa-IR")} تومان
-       • ${item.wear}
-      </div>
-     </div>
-
-     <button class="remove" onclick="removeCart(${index})">
-      حذف
-     </button>
-
-    </div>
-   `;
-
-  });
-
- }
-
- document.getElementById("cartItems").innerHTML = html;
-
- document.getElementById("cartTotal").innerText =
-  total.toLocaleString("fa-IR") + " تومان";
-
-}
-
-
-function removeCart(index){
-
- cart.splice(index,1);
-
- updateCart();
+    document.getElementById("cartCount")
+        .textContent = cart.length;
 
 }
 
 
 function openCart(){
 
- updateCart();
+    const container =
+        document.getElementById("cartItems");
 
- document.getElementById("cartModal").classList.add("show");
+    container.innerHTML = "";
 
-}
-
-
-/* ================= TELEGRAM ================= */
-
-/*
- اینجا آیدی تلگرام خودت را قرار بده.
- مثال:
- https://t.me/WizyyShop
-*/
-
-function prepareTelegram(){
-
- if(cart.length === 0){
-
-  alert("سبد خرید خالی است.");
-
-  return false;
-
- }
-
- let message =
- "سلام، برای خرید از WIZYY SHOP سفارش دارم:%0A%0A";
-
- let total = 0;
-
- cart.forEach((item,index)=>{
-
-  message +=
-  `${index+1}. ${item.name} | ${item.wear} | ${item.price.toLocaleString()} تومان%0A`;
-
-  total += item.price;
-
- });
-
- message +=
- `%0Aمجموع: ${total.toLocaleString()} تومان`;
-
- document.getElementById("telegramOrder").href =
- "https://t.me/WizyyShop?text=" + message;
-
-}
+    let total = 0;
 
 
-/* ================= FILTER ================= */
+    if(cart.length === 0){
 
-function categoryFilter(category,button){
+        container.innerHTML = `
 
- activeCategory = category;
+            <p style="
+                text-align:center;
+                color:#777;
+                padding:30px;
+            ">
+                سبد خرید خالی است.
+            </p>
 
- document.querySelectorAll(".category")
- .forEach(x=>x.classList.remove("active"));
+        `;
 
- button.classList.add("active");
-
- filterProducts();
-
-}
+    }
 
 
-function filterProducts(){
+    cart.forEach((product,index)=>{
 
- const search =
- document.getElementById("search")
- .value
- .trim()
- .toLowerCase();
+        total += product.price;
 
- const wear =
- document.getElementById("wear").value;
+        const item =
+            document.createElement("div");
 
- const min =
- Number(document.getElementById("minPrice").value) || 0;
+        item.className = "cart-item";
 
- const maxInput =
- Number(document.getElementById("maxPrice").value);
+        item.innerHTML = `
 
- const max =
- maxInput > 0 ? maxInput : Infinity;
+            <img src="${product.image}">
 
- let visible = 0;
+            <div class="cart-item-info">
 
- document.querySelectorAll(".product").forEach(product=>{
+                <div>
+                    ${product.name}
+                </div>
 
-  const name =
-   product.dataset.name.toLowerCase();
+                <small style="color:#888">
+                    ${product.wear}
+                </small>
 
-  const category =
-   product.dataset.category;
+                <div style="color:#ff2222;margin-top:5px">
+                    ${product.price.toLocaleString("fa-IR")}
+                    تومان
+                </div>
 
-  const productWear =
-   product.dataset.wear;
+            </div>
 
-  const price =
-   Number(product.dataset.price);
+            <button
+                class="remove"
+                onclick="removeCart(${index})"
+            >
+                حذف
+            </button>
 
-  const matchSearch =
-   name.includes(search);
+        `;
 
-  const matchCategory =
-   activeCategory === "all" ||
-   category === activeCategory;
+        container.appendChild(item);
 
-  const matchWear =
-   wear === "all" ||
-   productWear === wear;
+    });
 
-  const matchPrice =
-   price >= min &&
-   price <= max;
 
-  const show =
-   matchSearch &&
-   matchCategory &&
-   matchWear &&
-   matchPrice;
+    document.getElementById("cartTotal")
+        .textContent =
+        total.toLocaleString("fa-IR");
 
-  product.style.display =
-   show ? "" : "none";
-
-  if(show) visible++;
-
- });
-
- document.getElementById("empty").style.display =
-  visible === 0 ? "block" : "none";
+    document.getElementById("cartModal")
+        .classList.add("show");
 
 }
 
 
-/* ================= SORT ================= */
+function removeCart(index){
 
-function sortProducts(){
+    cart.splice(index,1);
 
- const type =
-  document.getElementById("sort").value;
+    updateCart();
 
- const container =
-  document.getElementById("products");
-
- const products =
-  [...container.querySelectorAll(".product")];
-
- if(type === "low"){
-
-  products.sort((a,b)=>
-   Number(a.dataset.price) -
-   Number(b.dataset.price)
-  );
-
- }
-
- else if(type === "high"){
-
-  products.sort((a,b)=>
-   Number(b.dataset.price) -
-   Number(a.dataset.price)
-  );
-
- }
-
- else if(type === "name"){
-
-  products.sort((a,b)=>
-   a.dataset.name.localeCompare(b.dataset.name)
-  );
-
- }
-
- products.forEach(p=>container.appendChild(p));
+    openCart();
 
 }
 
 
-/* ================= RESET ================= */
+/* =========================
+   TELEGRAM ORDER
+========================= */
 
-function resetFilters(){
+function finalizeOrder(){
 
- document.getElementById("search").value = "";
+    if(cart.length === 0){
 
- document.getElementById("wear").value = "all";
+        alert("سبد خرید خالی است.");
 
- document.getElementById("minPrice").value = "";
+        return;
+    }
 
- document.getElementById("maxPrice").value = "";
 
- document.getElementById("sort").value = "default";
+    let message =
+        "سلام، سفارش از WIZYY SHOP:%0A%0A";
 
- activeCategory = "all";
 
- document.querySelectorAll(".category")
- .forEach(x=>x.classList.remove("active"));
+    let total = 0;
 
- document.querySelector(".category")
- .classList.add("active");
 
- filterProducts();
+    cart.forEach((product,index)=>{
+
+        total += product.price;
+
+        message +=
+            `${index+1}. ${product.name} | ${product.wear} | ${product.price.toLocaleString()} تومان%0A`;
+
+    });
+
+
+    message +=
+        `%0Aمجموع: ${total.toLocaleString()} تومان`;
+
+
+    window.open(
+        "https://t.me/WizyyShop?text=" + message,
+        "_blank"
+    );
 
 }
 
 
-/* ================= MODAL ================= */
+/* =========================
+   MODAL
+========================= */
 
 function closeModal(id){
 
- document.getElementById(id).classList.remove("show");
+    document.getElementById(id)
+        .classList.remove("show");
 
 }
 
 
-window.addEventListener("click",function(e){
+window.onclick = function(event){
 
- if(e.target.classList.contains("modal")){
+    if(event.target.classList.contains("modal")){
 
-  e.target.classList.remove("show");
+        event.target.classList.remove("show");
 
- }
+    }
 
-});
-
-
-/* ================= FAVORITES ================= */
-
-document.addEventListener("click",function(e){
-
- if(e.target.classList.contains("favorite")){
-
-  e.target.innerText =
-   e.target.innerText === "♡" ? "♥" : "♡";
-
- }
-
-});
+};
 
 
-/* ================= START ================= */
+/* =========================
+   START
+========================= */
 
-updateCart();
+renderWeapons("Pistols");
 
 </script>
 
 </body>
 </html>
-```
