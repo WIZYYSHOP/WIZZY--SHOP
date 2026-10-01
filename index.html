@@ -4687,6 +4687,281 @@ transition:.4s;box-shadow:0 0 25px #00c853;
 .profile-success-toast.show{opacity:1;transform:translate(-50%,0);}
 </style>
 <div id="profileSuccessToast" class="profile-success-toast">پروفایل شما با موفقیت سیو شد ✅</div>
+
+
+<!-- FINAL WIZZY FIXES -->
+<style>
+/* support answer area */
+#answerBox, #supportAnswer{
+ background:linear-gradient(135deg,#220000,#ff0000)!important;
+ border:1px solid #ff3333!important;
+ color:white!important;
+ box-shadow:0 0 15px rgba(255,0,0,.35)!important;
+}
+
+/* support close X */
+.close-support,.wizzy-close{
+ font-size:26px!important;
+ line-height:1!important;
+ border-radius:50%!important;
+ width:38px!important;
+ height:38px!important;
+ padding:0!important;
+}
+</style>
+
+<script>
+// profile delete button helper
+function addDeleteProfileButton(){
+ if(document.getElementById('deleteProfileBtn')) return;
+ let btn=document.createElement('button');
+ btn.id='deleteProfileBtn';
+ btn.innerHTML='حذف پروفایل';
+ btn.style.cssText='display:none;margin:15px auto;background:#a00000;color:white;border:1px solid red;padding:12px 25px;border-radius:12px;cursor:pointer;';
+ btn.onclick=function(){
+   localStorage.removeItem('profile');
+   document.querySelectorAll('input').forEach(i=>{if(i.closest('.profile')){i.disabled=false;i.value='';}});
+   btn.style.display='none';
+   alert('پروفایل حذف شد');
+ };
+ let p=document.querySelector('.profile');
+ if(p) p.appendChild(btn);
+}
+window.addEventListener('load',addDeleteProfileButton);
+</script>
+
+<style>
+#deleteProfileBtn{
+display:none;
+margin:15px auto;
+background:#b00000;
+color:white;
+border:1px solid #ff4444;
+padding:12px 28px;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+}
+#deleteProfileBtn:hover{
+background:#ff0000;
+box-shadow:0 0 15px rgba(255,0,0,.5);
+}
+</style>
+
+<script>
+(function(){
+
+function lockSavedProfile(){
+    let box=document.querySelector('.profile');
+    if(!box) return;
+
+    box.querySelectorAll('input,textarea').forEach(function(i){
+        i.disabled=true;
+    });
+
+    let btn=document.getElementById('deleteProfileBtn');
+    if(btn) btn.style.display="block";
+}
+
+function unlockProfile(){
+    let box=document.querySelector('.profile');
+    if(box){
+        box.querySelectorAll('input,textarea').forEach(function(i){
+            i.disabled=false;
+            i.value="";
+        });
+    }
+
+    let btn=document.getElementById('deleteProfileBtn');
+    if(btn) btn.style.display="none";
+
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+
+    let profiles=getProfiles();
+    let old=getCurrentProfile();
+    if(old){
+        profiles=profiles.filter(p=>p.id!==old.id);
+        saveProfiles(profiles);
+    }
+
+    if(typeof generateCaptcha==="function") generateCaptcha();
+}
+
+function addDeleteButtonFixed(){
+    if(document.getElementById('deleteProfileBtn')) return;
+
+    let btn=document.createElement('button');
+    btn.id="deleteProfileBtn";
+    btn.innerHTML="حذف پروفایل";
+    btn.onclick=function(){
+        unlockProfile();
+        alert("پروفایل حذف شد، می‌توانید دوباره وارد کنید");
+    };
+
+    let profile=document.querySelector('.profile');
+    if(profile) profile.appendChild(btn);
+
+    if(getCurrentProfile()) lockSavedProfile();
+}
+
+window.addEventListener("load",function(){
+    addDeleteButtonFixed();
+
+    if(typeof saveProfile==="function" && !saveProfile.__fixed){
+        let oldSave=saveProfile;
+        saveProfile=function(){
+            oldSave();
+            setTimeout(function(){
+                if(getCurrentProfile()) lockSavedProfile();
+            },300);
+        };
+        saveProfile.__fixed=true;
+    }
+});
+
+})();
+</script>
+
+<style id="WIZZY_FINAL_PROFILE_FIX">
+/* FINAL PROFILE LOCK + RED CAPTCHA */
+#profileModal .captcha-code,
+#profileModal .captcha-box,
+.captcha-code,
+.captcha-box{
+  color:#ff1a1a !important;
+  background:#120606 !important;
+  border-color:#ff1a1a !important;
+  text-shadow:0 0 10px rgba(255,0,0,.75);
+  pointer-events:none !important;
+  user-select:none !important;
+  caret-color:transparent !important;
+}
+#wizzyProfileDeleteBtn{
+  width:100%;
+  margin-top:10px;
+  padding:13px;
+  border:1px solid #ff1a1a;
+  border-radius:7px;
+  background:#250606;
+  color:#ff3030;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+#wizzyProfileDeleteBtn:hover{background:#e00000;color:#fff;box-shadow:0 0 18px rgba(224,0,0,.3)}
+#wizzyProfileSavedToast{
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
+  background:#09200f;color:#45ff72;border:1px solid #21c957;
+  padding:12px 20px;border-radius:9px;font-weight:900;font-size:12px;
+  opacity:0;pointer-events:none;z-index:1000000;transition:.25s;
+}
+#wizzyProfileSavedToast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+<script id="WIZZY_FINAL_PROFILE_FIX_SCRIPT">
+(function(){
+  function profileModals(){
+    return Array.from(document.querySelectorAll('.modal')).filter(function(m){
+      return m.querySelector('#profileName') || m.querySelector('#profileTradeLink');
+    });
+  }
+  function toast(msg){
+    var t=document.getElementById('wizzyProfileSavedToast');
+    if(!t){t=document.createElement('div');t.id='wizzyProfileSavedToast';document.body.appendChild(t);}
+    t.textContent=msg;t.classList.add('show');
+    clearTimeout(window.__wizzyToastTimer);
+    window.__wizzyToastTimer=setTimeout(function(){t.classList.remove('show')},2400);
+  }
+  function controls(modal){
+    return modal.querySelectorAll('#profileName,#profileTradeLink,#profilePhone,#profileTelegram,#profileImage,#captchaInput,.profile-file');
+  }
+  function setLocked(locked){
+    profileModals().forEach(function(modal){
+      controls(modal).forEach(function(el){el.disabled=!!locked;el.style.opacity=locked?'0.62':'';});
+      modal.querySelectorAll('button').forEach(function(b){
+        var tx=(b.textContent||'').trim().toUpperCase();
+        if(tx==='REFRESH') b.disabled=!!locked;
+      });
+      var saves=modal.querySelectorAll('.profile-save,.finalize');
+      saves.forEach(function(b){ if((b.getAttribute('onclick')||'').indexOf('saveProfile')!==-1) b.style.display=locked?'none':''; });
+      var old=modal.querySelector('#wizzyProfileDeleteBtn');
+      if(!old){
+        old=document.createElement('button');
+        old.type='button';old.id='wizzyProfileDeleteBtn';old.textContent='حذف پروفایل';
+        old.addEventListener('click',deleteProfile);
+        var anchor=Array.from(saves).find(function(b){return (b.getAttribute('onclick')||'').indexOf('saveProfile')!==-1;});
+        (anchor||modal.querySelector('.modal-content')||modal).parentNode && (anchor||modal.querySelector('.modal-content')||modal).parentNode.insertBefore(old,(anchor||modal.querySelector('.modal-content')||modal).nextSibling);
+      }
+      old.style.display=locked?'block':'none';
+    });
+  }
+  function deleteProfile(){
+    var old=null;
+    try{old=JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)||'null')}catch(e){}
+    if(old && old.id){
+      var ps=[];try{ps=JSON.parse(localStorage.getItem(PROFILES_STORAGE_KEY)||'[]')}catch(e){}
+      localStorage.setItem(PROFILES_STORAGE_KEY,JSON.stringify(ps.filter(function(x){return x.id!==old.id})));
+    }
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
+    window.profileImageData=window.DEFAULT_AVATAR||'';
+    profileModals().forEach(function(modal){
+      controls(modal).forEach(function(el){
+        el.disabled=false;el.style.opacity='';
+        if('value' in el && el.type!=='file') el.value='';
+        if(el.type==='file') el.value='';
+      });
+      var av=modal.querySelector('#profileAvatarPreview');if(av) av.src=window.DEFAULT_AVATAR||av.src;
+      var err=modal.querySelector('#profileError');if(err) err.textContent='';
+      var saves=modal.querySelectorAll('.profile-save,.finalize');saves.forEach(function(b){if((b.getAttribute('onclick')||'').indexOf('saveProfile')!==-1)b.style.display='';});
+      var del=modal.querySelector('#wizzyProfileDeleteBtn');if(del) del.style.display='none';
+    });
+    try{if(typeof updateHeaderAvatar==='function')updateHeaderAvatar()}catch(e){}
+    try{if(typeof generateCaptcha==='function')generateCaptcha()}catch(e){}
+    toast('پروفایل حذف شد');
+  }
+  function afterSave(){
+    var p=null;try{p=JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)||'null')}catch(e){}
+    var err=document.getElementById('profileError');
+    var ok=!!(p&&p.name&&p.tradeLink&&(!err||!err.textContent.trim()));
+    if(ok){setLocked(true);toast('پروفایل شما با موفقیت ذخیره شد');}
+  }
+  function install(){
+    if(window.__wizzyFinalProfileFixInstalled)return;
+    window.__wizzyFinalProfileFixInstalled=true;
+    setLocked(!!(typeof isProfileComplete==='function'&&isProfileComplete()));
+    var original=window.saveProfile;
+    if(typeof original==='function'){
+      window.saveProfile=function(){
+        var phone=document.getElementById('profilePhone');
+        var tg=document.getElementById('profileTelegram');
+        var err=document.getElementById('profileError');
+        /* Phone and Telegram are OPTIONAL. Validate only when the user fills them. */
+        if(phone && phone.value.trim()){
+          if(!/^09\d{9}$/.test(phone.value.trim())){
+            if(err)err.textContent='Please enter a valid mobile number or leave it empty.';
+            return;
+          }
+        }
+        if(tg && tg.value.trim()){
+          var v=tg.value.trim().replace(/^https?:\/\/(www\.)?(t\.me|telegram\.me)\//i,'').replace(/^@/,'');
+          if(!/^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(v)){
+            if(err)err.textContent='Please enter a valid Telegram ID or leave it empty.';
+            return;
+          }
+          tg.value='@'+v;
+        }
+        original.apply(this,arguments);
+        setTimeout(afterSave,30);
+      };
+    }
+    document.addEventListener('click',function(e){
+      var b=e.target.closest && e.target.closest('button');if(!b)return;
+      var tx=(b.textContent||'').trim().toUpperCase();
+      if(tx==='SAVE PROFILE' && (b.getAttribute('onclick')||'').indexOf('saveProfile')!==-1) setTimeout(afterSave,60);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+})();
+</script>
 </body>
 </html>
 <!-- WIZZY SUPPORT -->
@@ -4857,3 +5132,4 @@ window.open(
 }
 
 </script>
+\n<script id="WIZZY_HARD_PROFILE_FIX">\n(function(){\n  function modals(){\n    return Array.from(document.querySelectorAll('.modal')).filter(function(m){\n      return m.querySelector('#profileName') || m.querySelector('#profileTradeLink');\n    });\n  }\n  function profile(){\n    try{return JSON.parse(localStorage.getItem('wizzy_current_profile')||localStorage.getItem('WIZZY_PROFILE')||'null')}catch(e){return null}\n  }\n  function findKey(){\n    var keys=['wizzy_current_profile','WIZZY_PROFILE','wizzyProfile'];\n    for(var i=0;i<keys.length;i++){try{if(localStorage.getItem(keys[i]))return keys[i]}catch(e){}}\n    return 'wizzy_current_profile';\n  }\n  function getP(){\n    try{\n      if(typeof getCurrentProfile==='function'){var p=getCurrentProfile(); if(p)return p;}\n    }catch(e){}\n    return profile();\n  }\n  function toast(msg){\n    var t=document.getElementById('wizzyProfileSavedToast');\n    if(!t){t=document.createElement('div');t.id='wizzyProfileSavedToast';document.body.appendChild(t);}\n    t.textContent=msg;t.classList.add('show');\n    setTimeout(function(){t.classList.remove('show')},2200);\n  }\n  function lock(locked){\n    modals().forEach(function(m){\n      m.querySelectorAll('input,textarea,select').forEach(function(el){\n        if(el.type==='file') el.disabled=locked; else el.disabled=locked;\n      });\n      m.querySelectorAll('button').forEach(function(b){\n        var tx=(b.textContent||'').trim().toUpperCase();\n        if(tx==='SAVE PROFILE' || (b.getAttribute('onclick')||'').indexOf('saveProfile')>=0) b.style.display=locked?'none':'';\n        if(tx==='REFRESH' || tx==='↻') b.disabled=locked;\n      });\n      var del=m.querySelector('#wizzyProfileDeleteBtn');\n      if(!del){\n        del=document.createElement('button');del.type='button';del.id='wizzyProfileDeleteBtn';del.textContent='حذف پروفایل';\n        del.style.cssText='display:none;width:100%;margin-top:10px;padding:13px;border:1px solid #ff1a1a;border-radius:7px;background:#250606;color:#ff3030;font-weight:900;cursor:pointer;';\n        (m.querySelector('.profile-save')||m.querySelector('.modal-content')||m).after(del);\n        del.addEventListener('click',removeProfile);\n      }\n      del.style.display=locked?'block':'none';\n    });\n  }\n  function removeProfile(){\n    try{\n      var p=getP();\n      if(p && p.id && typeof getProfiles==='function' && typeof saveProfiles==='function'){\n        var arr=getProfiles().filter(function(x){return x.id!==p.id});saveProfiles(arr);\n      }\n    }catch(e){}\n    ['wizzy_current_profile','WIZZY_PROFILE','wizzyProfile','currentProfile'].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}});\n    try{if(typeof profileImageData!=='undefined') profileImageData='';}catch(e){}\n    modals().forEach(function(m){\n      m.querySelectorAll('input,textarea,select').forEach(function(el){\n        el.disabled=false;el.style.opacity='';\n        if(el.type==='file') el.value=''; else if(el.id!=='captchaBox') el.value='';\n      });\n      m.querySelectorAll('button').forEach(function(b){\n        var tx=(b.textContent||'').trim().toUpperCase();\n        if(tx==='SAVE PROFILE' || (b.getAttribute('onclick')||'').indexOf('saveProfile')>=0)b.style.display='';\n        if(tx==='REFRESH' || tx==='↻')b.disabled=false;\n      });\n      var d=m.querySelector('#wizzyProfileDeleteBtn');if(d)d.style.display='none';\n      var av=m.querySelector('#profileAvatarPreview');if(av && typeof DEFAULT_AVATAR!=='undefined')av.src=DEFAULT_AVATAR;\n    });\n    try{if(typeof updateHeaderAvatar==='function')updateHeaderAvatar()}catch(e){}\n    try{if(typeof generateCaptcha==='function')generateCaptcha()}catch(e){}\n    toast('پروفایل حذف شد');\n  }\n  function validateOptional(){\n    var err=document.getElementById('profileError');\n    var phone=document.getElementById('profilePhone');\n    var tg=document.getElementById('profileTelegram');\n    if(phone && phone.value.trim() && !/^09\\d{9}$/.test(phone.value.trim())){if(err)err.textContent='شماره موبایل نامعتبر است.';return false;}\n    if(tg && tg.value.trim()){\n      var v=tg.value.trim().replace(/^https?:\\/\\/(www\\.)?(t\\.me|telegram\\.me)\\//i,'').replace(/^@/,'');\n      if(!/^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(v)){if(err)err.textContent='آیدی تلگرام نامعتبر است.';return false;}\n      tg.value='@'+v;\n    }\n    return true;\n  }\n  function install(){\n    if(window.__WIZZY_HARD_PROFILE_FIX)return;\n    window.__WIZZY_HARD_PROFILE_FIX=true;\n    var oldSave=window.saveProfile;\n    window.saveProfile=function(){\n      if(!validateOptional())return;\n      oldSave.apply(this,arguments);\n      setTimeout(function(){\n        var p=getP();\n        if(p && p.name && p.tradeLink){lock(true);toast('پروفایل شما با موفقیت ذخیره شد');}\n      },250);\n    };\n    var p=getP();\n    lock(!!(p && p.name && p.tradeLink));\n    window.deleteWizzyProfile=removeProfile;\n  }\n  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();\n})();\n</script>\n
