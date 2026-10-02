@@ -1737,12 +1737,28 @@ function updateHeaderAvatar(){
 function registerLogoClick(){
     logoClickCount++;
     clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){logoClickCount=0;},900);
+    logoClickTimer=setTimeout(function(){logoClickCount=0;},2200);
     if(logoClickCount>=5){
         logoClickCount=0;
         openAdminLogin();
     }
 }
+
+/* =========================================================
+   CHECKOUT / RECEIPT
+========================================================= */
+.checkout-box{max-width:620px;animation:checkoutIn .28s ease;}
+@keyframes checkoutIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.checkout-order-id{font-size:28px;font-weight:1000;color:#e00000;letter-spacing:2px;text-align:center;margin:10px 0 18px}
+.checkout-name{text-align:center;color:#ddd;font-size:15px;margin-bottom:16px}
+.checkout-note{background:#141414;border:1px solid #343434;border-radius:10px;padding:16px;line-height:1.8;color:#bbb;font-size:12px}
+.checkout-note strong{color:#fff}.checkout-total{margin-top:14px;text-align:center;color:#e00000;font-size:20px;font-weight:1000}
+.checkout-file{width:100%;margin-top:16px;padding:12px;background:#101010;color:#bbb;border:1px dashed #444;border-radius:8px}
+.checkout-upload{width:100%;margin-top:10px;padding:13px;border:0;border-radius:8px;background:#d00000;color:#fff;font-weight:900;cursor:pointer}
+.checkout-upload:disabled{opacity:.55;cursor:not-allowed}.checkout-status{text-align:center;min-height:20px;margin-top:10px;color:#aaa;font-size:11px}.checkout-success{padding:16px;border:1px solid #3b3b3b;border-radius:10px;background:#111;text-align:center;line-height:1.8}.checkout-success strong{color:#fff}.checkout-items{margin:14px 0;padding:12px;background:#0d0d0d;border-radius:8px;color:#aaa;font-size:11px;line-height:1.8}
+.checkout-close{width:100%;margin-top:10px;padding:11px;border:1px solid #444;border-radius:8px;background:#181818;color:#ddd;cursor:pointer}
+.receipt-preview{width:100%;max-height:360px;object-fit:contain;background:#080808;border-radius:8px;margin-top:12px;border:1px solid #333}
+.admin-receipt{margin-top:12px;padding:12px;background:#0d0d0d;border:1px solid #333;border-radius:8px}.admin-receipt img{width:100%;max-height:360px;object-fit:contain;border-radius:7px;background:#080808}.admin-receipt a{display:inline-block;margin-top:8px;color:#fff;text-decoration:none}.admin-finish{margin-top:10px;width:100%;padding:12px;border:0;border-radius:7px;background:#e00000;color:#fff;font-weight:900;cursor:pointer}.admin-finish:disabled{opacity:.5;cursor:not-allowed}
 
 /* =========================================================
    ADMIN PANEL
@@ -2524,6 +2540,16 @@ function registerLogoClick(){
 
 
 <!-- =========================================================
+     CHECKOUT / RECEIPT MODAL
+========================================================= -->
+<div id="checkoutModal" class="modal" onclick="closeCheckoutOutside(event)">
+  <div class="modal-content checkout-box">
+    <div class="modal-header"><h2>FINALIZE ORDER</h2><button class="close" onclick="closeCheckout()">×</button></div>
+    <div id="checkoutBody"></div>
+  </div>
+</div>
+
+<!-- =========================================================
      PROFILE MODAL
 ========================================================= -->
 <div id="profileModal" class="modal" onclick="closeProfileOutside(event)">
@@ -2663,14 +2689,13 @@ function registerLogoClick(){
             Sign in with the WIZZY SHOP administrator account.
         </div>
 
-        <form id="adminLoginForm" autocomplete="on" onsubmit="loginAdmin(event)">
         <input
             id="adminEmail"
             class="admin-password"
             type="email"
             placeholder="Admin email"
             autocomplete="username"
-            required
+            onkeydown="if(event.key==='Enter') loginAdmin()"
         >
 
         <input
@@ -2679,15 +2704,14 @@ function registerLogoClick(){
             type="password"
             placeholder="Admin password"
             autocomplete="current-password"
-            required
+            onkeydown="if(event.key==='Enter') loginAdmin()"
         >
 
         <div id="adminError" class="admin-error"></div>
 
-        <button class="admin-enter" type="submit">
+        <button class="admin-enter" onclick="loginAdmin()">
             ENTER ADMIN PANEL
         </button>
-        </form>
     </div>
 </div>
 
@@ -2736,70 +2760,62 @@ function registerLogoClick(){
 
 
 <script>
-/* WIZZY AUTH: direct Supabase Auth REST connection.
-   This intentionally does not depend on a CDN-loaded Supabase JS library. */
+/* WIZZY SHOP — direct Supabase REST/Auth client. No CDN dependency. */
 const SUPABASE_URL = "https://vsogwimdladgagjoqdst.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_AOwyJvQdNhY0m_dcwGpiPw_DK0LHqjv";
 const WIZZY_AUTH_STORAGE = "wizzy_admin_session";
 
 const wizzySupabase = {
-    auth: {
-        async signInWithPassword({email, password}) {
-            try {
-                const response = await fetch(
-                    SUPABASE_URL + "/auth/v1/token?grant_type=password",
-                    {
-                        method: "POST",
-                        headers: {
-                            "apikey": SUPABASE_PUBLISHABLE_KEY,
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ email, password })
-                    }
-                );
-
-                let payload = null;
-                try { payload = await response.json(); } catch (_) {}
-
-                if (!response.ok) {
-                    return {
-                        data: { session: null },
-                        error: {
-                            message: payload?.error_description || payload?.msg || payload?.message || "ADMIN ACCESS DENIED"
-                        }
-                    };
-                }
-
-                const session = {
-                    access_token: payload.access_token,
-                    refresh_token: payload.refresh_token,
-                    expires_in: payload.expires_in,
-                    expires_at: payload.expires_at,
-                    token_type: payload.token_type,
-                    user: payload.user
-                };
-
-                localStorage.setItem(WIZZY_AUTH_STORAGE, JSON.stringify(session));
-                return { data: { session }, error: null };
-            } catch (error) {
-                return {
-                    data: { session: null },
-                    error: { message: "NETWORK ERROR: SUPABASE AUTH COULD NOT BE REACHED" }
-                };
-            }
-        },
-
-        async getSession() {
-            try {
-                const raw = localStorage.getItem(WIZZY_AUTH_STORAGE);
-                const session = raw ? JSON.parse(raw) : null;
-                return { data: { session }, error: null };
-            } catch (_) {
-                return { data: { session: null }, error: null };
-            }
-        }
+  auth: {
+    async signInWithPassword({email,password}) {
+      try {
+        const r = await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=password", {
+          method:"POST", headers:{"apikey":SUPABASE_PUBLISHABLE_KEY,"Content-Type":"application/json"},
+          body:JSON.stringify({email,password})
+        });
+        const j = await r.json().catch(()=>null);
+        if(!r.ok) return {data:{session:null},error:{message:j?.error_description||j?.msg||j?.message||"ADMIN ACCESS DENIED"}};
+        const session={access_token:j.access_token,refresh_token:j.refresh_token,expires_in:j.expires_in,expires_at:j.expires_at,token_type:j.token_type,user:j.user};
+        localStorage.setItem(WIZZY_AUTH_STORAGE,JSON.stringify(session));
+        return {data:{session},error:null};
+      } catch(e) { return {data:{session:null},error:{message:"NETWORK ERROR: SUPABASE AUTH COULD NOT BE REACHED"}}; }
+    },
+    async getSession(){
+      try { const raw=localStorage.getItem(WIZZY_AUTH_STORAGE); return {data:{session:raw?JSON.parse(raw):null},error:null}; }
+      catch(e){return {data:{session:null},error:null};}
     }
+  }
 };
+window.wizzySupabase=wizzySupabase;
+window.WIZZY_SUPABASE_READY=true;
+
+async function supabaseRest(path, options={}){
+  const headers=Object.assign({
+    "apikey":SUPABASE_PUBLISHABLE_KEY,
+    "Content-Type":"application/json"
+  }, options.headers||{});
+  const session=(await wizzySupabase.auth.getSession()).data.session;
+  if(session?.access_token) headers.Authorization="Bearer "+session.access_token;
+  const r=await fetch(SUPABASE_URL+path,Object.assign({},options,{headers}));
+  const text=await r.text();
+  let data=null; try{data=text?JSON.parse(text):null}catch(e){data=text;}
+  if(!r.ok){ const msg=data?.message||data?.hint||data?.error_description||data?.error||`HTTP ${r.status}`; throw new Error(msg); }
+  return data;
+}
+
+async function supabaseUploadReceipt(path,file){
+  const headers={"apikey":SUPABASE_PUBLISHABLE_KEY,"Content-Type":file.type||"application/octet-stream","x-upsert":"true"};
+  const session=(await wizzySupabase.auth.getSession()).data.session;
+  if(session?.access_token) headers.Authorization="Bearer "+session.access_token;
+  const r=await fetch(SUPABASE_URL+"/storage/v1/object/receipts/"+encodeURIComponent(path),{method:"POST",headers,body:file});
+  const j=await r.json().catch(()=>null);
+  if(!r.ok) throw new Error(j?.message||j?.error||`UPLOAD FAILED (${r.status})`);
+  return j;
+}
+
+function receiptPublicUrl(path){
+  return SUPABASE_URL+"/storage/v1/object/public/receipts/"+path.split("/").map(encodeURIComponent).join("/");
+}
 </script>
 <script>
 
@@ -3777,7 +3793,7 @@ function isProfileComplete(){
 function registerLogoClick(){
     logoClickCount++;
     clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){ logoClickCount=0; },900);
+    logoClickTimer=setTimeout(function(){ logoClickCount=0; },2200);
     if(logoClickCount>=5){
         logoClickCount=0;
         openAdminLogin();
@@ -4198,72 +4214,64 @@ function closeCartOutside(
    TELEGRAM
 ========================================================= */
 
-function finalizeOrder(){
-
-    if(cart.length === 0){
-
-        alert(
-            "Your cart is empty."
-        );
-
-        return;
-
-    }
-
-    let message =
-        "WIZZY SHOP ORDER\n\n";
-
-    let total = 0;
-
-    cart.forEach(
-        (product,index) => {
-
-            total +=
-                product.price;
-
-            message +=
-
-                `${index + 1}. `
-                +
-                `${product.name} - `
-                +
-                `${formatPrice(
-                    product.price
-                )}\n`;
-
-        }
-    );
-
+async function finalizeOrder(){
+    if(cart.length===0){ alert("Your cart is empty."); return; }
+    if(!isProfileComplete()){ closeCart(); openProfileRequired(); return; }
+    closeCart();
     const profile=getCurrentProfile();
-
-    message +=
-        `\nCUSTOMER: ${profile?.name || "-"}`
-        + `\nTRADE LINK: ${profile?.tradeLink || "-"}`
-        + `\nTOTAL: `
-        + formatPrice(total);
-
-    /*
-       Save a local order before opening Telegram.
-       This will later be replaced by the real backend/ZarinPal flow.
-    */
-    createLocalOrder();
-
-    const telegram =
-
-        "https://t.me/WizyyShop?text="
-        +
-        encodeURIComponent(
-            message
-        );
-
-    window.open(
-        telegram,
-        "_blank"
-    );
-
+    const order=await createSupabaseOrder();
+    if(!order) return;
+    openCheckout(order);
 }
 
+function openCheckout(order){
+  const body=document.getElementById("checkoutBody");
+  const items=(order.items||[]).map((x,i)=>`${i+1}. ${escapeHtml(x.name||"-")} — ${formatPrice(x.price)}`).join("<br>");
+  body.innerHTML=`<div class="checkout-order-id">${escapeHtml(order.id)}</div>
+  <div class="checkout-name">Customer: <strong>${escapeHtml(order.profile?.name||"-")}</strong></div>
+  <div class="checkout-items">${items}</div>
+  <div class="checkout-note"><strong>Payment required</strong><br>واریز را انجام دهید و سپس تصویر رسید پرداخت را در همین صفحه آپلود کنید. بعد از آپلود، رسید برای مدیریت WIZZY SHOP ارسال می‌شود.</div>
+  <div class="checkout-total">${formatPrice(order.total)}</div>
+  <input id="receiptFile" class="checkout-file" type="file" accept="image/*,.pdf">
+  <div id="checkoutStatus" class="checkout-status"></div>
+  <button id="receiptUploadBtn" class="checkout-upload" onclick="uploadReceipt('${escapeHtml(order.id)}')">UPLOAD RECEIPT</button>
+  <button class="checkout-close" onclick="closeCheckout()">CLOSE</button>`;
+  document.getElementById("checkoutModal").classList.add("show");
+}
+function closeCheckout(){document.getElementById("checkoutModal").classList.remove("show");}
+function closeCheckoutOutside(e){if(e.target.id==="checkoutModal") closeCheckout();}
 
+async function uploadReceipt(orderId){
+  const input=document.getElementById("receiptFile"); const status=document.getElementById("checkoutStatus"); const btn=document.getElementById("receiptUploadBtn");
+  const file=input?.files?.[0]; if(!file){status.textContent="Please choose your payment receipt first.";return;}
+  if(file.size>8*1024*1024){status.textContent="Receipt must be 8 MB or smaller.";return;}
+  if(!/^image\//.test(file.type) && file.type!=="application/pdf"){status.textContent="Only an image or PDF receipt is allowed.";return;}
+  btn.disabled=true; status.textContent="Uploading receipt...";
+  try{
+    const token=crypto.randomUUID();
+    const path=orderId+"/"+token+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+    await supabaseUploadReceipt(path,file);
+    const url=receiptPublicUrl(path);
+    await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(orderId),{method:"PATCH",headers:{"Prefer":"return=minimal"},body:JSON.stringify({receipt_path:path,receipt_url:url,receipt_uploaded_at:new Date().toISOString(),status:"RECEIPT_UPLOADED"})});
+    status.innerHTML="<span style='color:#fff'>Receipt uploaded successfully.</span>";
+    btn.remove(); input.disabled=true;
+  }catch(err){ console.error(err); status.textContent="Upload failed: "+err.message; btn.disabled=false; }
+}
+
+async function createSupabaseOrder(){
+  let total=0;
+  const items=cart.map(function(product){total+=Number(product.price||0);return{id:product.id,name:product.name,weapon:product.weapon,wear:product.wear,price:Number(product.price||0)};});
+  const profile=getCurrentProfile();
+  const id="WZ-"+Math.random().toString(36).slice(2,8).toUpperCase()+"-"+Date.now().toString(36).slice(-5).toUpperCase();
+  const publicToken=crypto.randomUUID();
+  const order={id,public_token:publicToken,customer_name:profile?.name||"-",trade_link:profile?.tradeLink||"-",phone:profile?.phone||"",telegram:profile?.telegram||"",items,total,status:"PENDING"};
+  try{
+    const rows=await supabaseRest("/rest/v1/orders",{method:"POST",headers:{"Prefer":"return=representation"},body:JSON.stringify(order)});
+    const saved=Array.isArray(rows)?rows[0]:rows;
+    cart=[]; updateCart();
+    return saved||order;
+  }catch(err){console.error(err);alert("Could not create the order in Supabase.\n\n"+err.message);return null;}
+}
 
 /* =========================================================
    ADMIN PANEL
@@ -4272,241 +4280,44 @@ function finalizeOrder(){
 const ADMIN_EMAIL = "wizzyshop1226@gmail.com";
 const ORDERS_STORAGE_KEY = "wizzy_shop_orders";
 
-async function ensureAdminSession(){
-    if(!window.wizzySupabase) return false;
-    const { data } = await wizzySupabase.auth.getSession();
-    return !!data?.session;
+async function ensureAdminSession(){ const {data}=await wizzySupabase.auth.getSession(); return !!data?.session; }
+
+async function getOrders(){
+  try{return await supabaseRest("/rest/v1/orders?select=*&order=created_at.desc");}
+  catch(err){console.error(err);return [];}
 }
+function saveOrders(){ /* Supabase is the source of truth. */ }
 
-function getOrders(){
-    try{
-        return JSON.parse(
-            localStorage.getItem(ORDERS_STORAGE_KEY)
-        ) || [];
-    }catch(error){
-        return [];
-    }
+function openAdminLogin(){document.getElementById("adminError").textContent="";document.getElementById("adminEmail").value=ADMIN_EMAIL;document.getElementById("adminPassword").value="";document.getElementById("adminLoginModal").classList.add("show");setTimeout(()=>document.getElementById("adminPassword").focus(),100);}
+function closeAdminLogin(){document.getElementById("adminLoginModal").classList.remove("show");}
+function closeAdminLoginOutside(event){if(event.target.id==="adminLoginModal")closeAdminLogin();}
+
+async function loginAdmin(){
+ const email=document.getElementById("adminEmail").value.trim().toLowerCase(), password=document.getElementById("adminPassword").value, errorBox=document.getElementById("adminError"); errorBox.textContent="";
+ if(email!==ADMIN_EMAIL){errorBox.textContent="ADMIN ACCESS DENIED";return;} if(!password){errorBox.textContent="ENTER YOUR PASSWORD";return;}
+ const {data,error}=await wizzySupabase.auth.signInWithPassword({email,password}); if(error||!data?.session){console.error(error);errorBox.textContent=error?.message||"ADMIN ACCESS DENIED";return;} closeAdminLogin(); openAdminPanel();
 }
+function openAdminPanel(){renderAdminPanel();document.getElementById("adminPanelModal").classList.add("show");}
+function closeAdminPanel(){document.getElementById("adminPanelModal").classList.remove("show");}
+function closeAdminPanelOutside(event){if(event.target.id==="adminPanelModal")closeAdminPanel();}
 
-function saveOrders(orders){
-    localStorage.setItem(
-        ORDERS_STORAGE_KEY,
-        JSON.stringify(orders)
-    );
+async function updateOrderStatus(orderId,status){
+ try{await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(orderId),{method:"PATCH",headers:{"Prefer":"return=minimal"},body:JSON.stringify({status})});await renderAdminPanel();}
+ catch(err){alert("Could not update order: "+err.message);}
 }
-
-function openAdminLogin(){
-    document.getElementById("adminError").textContent = "";
-    document.getElementById("adminEmail").value = ADMIN_EMAIL;
-    document.getElementById("adminPassword").value = "";
-    document.getElementById("adminLoginModal").classList.add("show");
-
-    setTimeout(function(){
-        document.getElementById("adminPassword").focus();
-    },100);
+async function finishOrder(orderId){
+ const popup=window.open("about:blank","_blank");
+ try{
+   const rows=await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(orderId)+"&select=*"); const order=rows?.[0]; if(!order) throw new Error("Order not found");
+   await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(orderId),{method:"PATCH",headers:{"Prefer":"return=minimal"},body:JSON.stringify({status:"FINISHED",finished_at:new Date().toISOString()})});
+   const message=`سلام، من سفارش ${order.id} را ثبت و پرداخت کردم.\nنام: ${order.customer_name||order.profile?.name||"-"}\nمبلغ: ${formatPrice(order.total)}\nرسید در پنل قابل بررسی است. لطفاً سفارش من را بررسی کنید.`;
+   const url="https://t.me/WizyyShop?text="+encodeURIComponent(message);
+   if(popup) popup.location.href=url; else window.open(url,"_blank");
+   await renderAdminPanel();
+ }catch(err){if(popup)popup.close();alert("Could not finish order: "+err.message);}
 }
-
-function closeAdminLogin(){
-    document.getElementById("adminLoginModal").classList.remove("show");
-}
-
-function closeAdminLoginOutside(event){
-    if(event.target.id === "adminLoginModal"){
-        closeAdminLogin();
-    }
-}
-
-let adminLoginBusy = false;
-
-async function loginAdmin(event){
-    if(event){
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    if(adminLoginBusy) return;
-
-    const emailInput = document.getElementById("adminEmail");
-    const passwordInput = document.getElementById("adminPassword");
-    const errorBox = document.getElementById("adminError");
-    if(!emailInput || !passwordInput || !errorBox) return;
-
-    const email = emailInput.value.trim().toLowerCase();
-    const password = passwordInput.value;
-    errorBox.textContent = "";
-
-    if(email !== ADMIN_EMAIL){
-        errorBox.textContent = "ADMIN ACCESS DENIED";
-        return;
-    }
-    if(!password){
-        errorBox.textContent = "ENTER YOUR PASSWORD";
-        passwordInput.focus();
-        return;
-    }
-    adminLoginBusy = true;
-    const button = document.querySelector("#adminLoginModal .admin-enter");
-    if(button){ button.disabled = true; button.textContent = "SIGNING IN..."; }
-
-    try{
-        const result = await wizzySupabase.auth.signInWithPassword({ email, password });
-        const data = result?.data;
-        const error = result?.error;
-
-        if(error || !data?.session){
-            console.error("WIZZY ADMIN LOGIN ERROR:", error);
-            errorBox.textContent = error?.message || "ADMIN ACCESS DENIED";
-            return;
-        }
-
-        try{
-            renderAdminPanel();
-        }catch(panelError){
-            console.error("WIZZY ADMIN PANEL ERROR:", panelError);
-            errorBox.textContent = "ADMIN PANEL ERROR: " + (panelError?.message || "CHECK CONSOLE");
-            return;
-        }
-
-        const panel = document.getElementById("adminPanelModal");
-        const loginModal = document.getElementById("adminLoginModal");
-        if(panel) panel.classList.add("show");
-        if(loginModal) loginModal.classList.remove("show");
-    }catch(error){
-        console.error("WIZZY ADMIN LOGIN EXCEPTION:", error);
-        errorBox.textContent = error?.message || "ADMIN LOGIN FAILED";
-    }finally{
-        adminLoginBusy = false;
-        if(button){ button.disabled = false; button.textContent = "ENTER ADMIN PANEL"; }
-    }
-}
-
-function openAdminPanel(){
-    renderAdminPanel();
-    document.getElementById("adminPanelModal").classList.add("show");
-}
-
-function closeAdminPanel(){
-    document.getElementById("adminPanelModal").classList.remove("show");
-}
-
-function closeAdminPanelOutside(event){
-    if(event.target.id === "adminPanelModal"){
-        closeAdminPanel();
-    }
-}
-
-function createLocalOrder(){
-    if(cart.length === 0){
-        return null;
-    }
-
-    let total = 0;
-
-    const items = cart.map(function(product){
-        total += product.price;
-
-        return {
-            id: product.id,
-            name: product.name,
-            weapon: product.weapon,
-            wear: product.wear,
-            price: product.price
-        };
-    });
-
-    const profile=getCurrentProfile();
-
-    const order = {
-        id:
-            "WZ-" +
-            Date.now().toString(36).toUpperCase(),
-
-        createdAt:
-            new Date().toLocaleString("en-US"),
-
-        status:"PENDING",
-
-        total:total,
-
-        profile: profile ? {
-            id:profile.id,
-            name:profile.name,
-            tradeLink:profile.tradeLink,
-            phone:profile.phone,
-            telegram:profile.telegram,
-            image:profile.image
-        } : null,
-
-        items:items
-    };
-
-    const orders = getOrders();
-
-    orders.unshift(order);
-
-    saveOrders(orders);
-
-    return order;
-}
-
-function updateOrderStatus(orderId,status){
-    const orders = getOrders();
-
-    const order = orders.find(function(item){
-        return item.id === orderId;
-    });
-
-    if(!order){
-        return;
-    }
-
-    order.status = status;
-
-    saveOrders(orders);
-
-    renderAdminPanel();
-}
-
-function deleteOrder(orderId){
-    const confirmed =
-        confirm("Delete this order?");
-
-    if(!confirmed){
-        return;
-    }
-
-    const orders =
-        getOrders().filter(function(order){
-            return order.id !== orderId;
-        });
-
-    saveOrders(orders);
-
-    renderAdminPanel();
-}
-
-function clearAllOrders(){
-    const orders = getOrders();
-
-    if(orders.length === 0){
-        return;
-    }
-
-    const confirmed =
-        confirm(
-            "Delete ALL orders? This cannot be undone."
-        );
-
-    if(!confirmed){
-        return;
-    }
-
-    localStorage.removeItem(
-        ORDERS_STORAGE_KEY
-    );
-
-    renderAdminPanel();
-}
-
+async function deleteOrder(orderId){if(!confirm("Delete this order?"))return;try{await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(orderId),{method:"DELETE"});await renderAdminPanel();}catch(err){alert("Could not delete order: "+err.message);}}
+async function clearAllOrders(){if(!confirm("Delete ALL orders from Supabase? This cannot be undone."))return;try{await supabaseRest("/rest/v1/orders?id=not.is.null",{method:"DELETE"});await renderAdminPanel();}catch(err){alert("Could not clear orders: "+err.message);}}
 
 function escapeHtml(value){
     return String(value ?? "").replace(/[&<>'"]/g,function(ch){
@@ -4586,133 +4397,29 @@ function clearAllProfiles(){
     renderAdminPanel();
 }
 
-function renderAdminPanel(){
-    renderAdminProfiles();
-    const orders = getOrders();
-
-    const paidOrders =
-        orders.filter(function(order){
-            return order.status === "PAID";
-        });
-
-    const totalSales =
-        paidOrders.reduce(function(sum,order){
-            return sum + Number(order.total || 0);
-        },0);
-
-    document.getElementById("adminOrderCount").textContent =
-        orders.length;
-
-    document.getElementById("adminPaidCount").textContent =
-        paidOrders.length;
-
-    document.getElementById("adminTotalSales").textContent =
-        formatPrice(totalSales);
-
-    renderAdminProfiles();
-
-    const container =
-        document.getElementById("adminOrders");
-
-    container.innerHTML = "";
-
-    if(orders.length === 0){
-        container.innerHTML = `
-            <div class="admin-empty">
-                No orders yet.
-            </div>
-        `;
-        return;
+async function renderAdminPanel(){
+  const container=document.getElementById("adminOrders"); if(!container)return; container.innerHTML='<div class="admin-empty">Loading orders...</div>';
+  const orders=await getOrders();
+  const paidOrders=orders.filter(o=>["PAID","RECEIPT_UPLOADED","FINISHED"].includes(o.status));
+  const totalSales=paidOrders.reduce((sum,o)=>sum+Number(o.total||0),0);
+  document.getElementById("adminOrderCount").textContent=orders.length; document.getElementById("adminPaidCount").textContent=paidOrders.length; document.getElementById("adminTotalSales").textContent=formatPrice(totalSales);
+  renderAdminProfiles(); container.innerHTML="";
+  if(!orders.length){container.innerHTML='<div class="admin-empty">No orders yet.</div>';return;}
+  orders.forEach(function(order){
+    const card=document.createElement("div"); card.className="admin-order";
+    const items=(order.items||[]).map(x=>`${escapeHtml(x.name||"-")} — ${formatPrice(x.price)}`).join("<br>");
+    let receipt="";
+    if(order.receipt_url){
+      const safeUrl=escapeHtml(order.receipt_url);
+      const isPdf=String(order.receipt_url).toLowerCase().includes(".pdf");
+      const viewer=isPdf?`<a href="${safeUrl}" target="_blank" rel="noopener">OPEN RECEIPT PDF</a>`:`<a href="${safeUrl}" target="_blank" rel="noopener"><img src="${safeUrl}" alt="Payment receipt"></a>`;
+      const finish=order.status!=="FINISHED"?`<button class="admin-finish" onclick="finishOrder('${escapeHtml(order.id)}')">FINISH & SEND TO TELEGRAM</button>`:`<div style="margin-top:10px;color:#aaa;font-size:11px;text-align:center">FINISHED</div>`;
+      receipt=`<div class="admin-receipt"><div style="font-size:11px;color:#aaa;margin-bottom:8px">PAYMENT RECEIPT</div>${viewer}${finish}</div>`;
     }
-
-    orders.forEach(function(order){
-
-        const itemText =
-            order.items.map(function(item){
-                return (
-                    item.name +
-                    " — " +
-                    formatPrice(item.price)
-                );
-            }).join("<br>");
-
-        const card =
-            document.createElement("div");
-
-        card.className = "admin-order";
-
-        card.innerHTML = `
-            <div class="admin-order-head">
-                <div class="admin-order-id">
-                    ${order.id}
-                </div>
-
-                <div class="admin-order-date">
-                    ${order.createdAt}
-                </div>
-            </div>
-
-            <div class="admin-order-items">
-                ${itemText}
-            </div>
-
-            ${order.profile ? `
-            <div class="admin-order-profile">
-                <div><b>CUSTOMER:</b> ${escapeHtml(order.profile.name || "-")}</div>
-                <div><b>TRADE:</b> ${escapeHtml(order.profile.tradeLink || "-")}</div>
-                <div><b>PHONE:</b> ${escapeHtml(order.profile.phone || "-")}</div>
-                <div><b>TELEGRAM:</b> ${escapeHtml(order.profile.telegram || "-")}</div>
-            </div>` : ""}
-
-            <div class="admin-order-total">
-                ${formatPrice(order.total)}
-            </div>
-
-            ${order.profile ? `
-            <div class="admin-order-profile">
-                <div><b>CUSTOMER:</b> ${escapeHtml(order.profile.name || "-")}</div>
-                <div><b>TRADE:</b> ${escapeHtml(order.profile.tradeLink || "-")}</div>
-                <div><b>PHONE:</b> ${escapeHtml(order.profile.phone || "-")}</div>
-                <div><b>TELEGRAM:</b> ${escapeHtml(order.profile.telegram || "-")}</div>
-            </div>` : ""}
-
-            <div class="admin-order-actions">
-
-                <select
-                    class="admin-status"
-                    onchange="updateOrderStatus('${order.id}',this.value)"
-                >
-                    <option value="PENDING" ${order.status === "PENDING" ? "selected" : ""}>
-                        PENDING
-                    </option>
-
-                    <option value="PAID" ${order.status === "PAID" ? "selected" : ""}>
-                        PAID
-                    </option>
-
-                    <option value="FAILED" ${order.status === "FAILED" ? "selected" : ""}>
-                        FAILED
-                    </option>
-
-                    <option value="DELIVERED" ${order.status === "DELIVERED" ? "selected" : ""}>
-                        DELIVERED
-                    </option>
-                </select>
-
-                <button
-                    class="admin-delete"
-                    onclick="deleteOrder('${order.id}')"
-                >
-                    DELETE
-                </button>
-
-            </div>
-        `;
-
-        container.appendChild(card);
-    });
+    card.innerHTML=`<div class="admin-order-head"><div class="admin-order-id">${escapeHtml(order.id)}</div><div class="admin-order-date">${escapeHtml(order.created_at||order.createdAt||"-")}</div></div><div class="admin-order-items">${items}</div><div class="admin-order-profile"><div><b>CUSTOMER:</b> ${escapeHtml(order.customer_name||order.profile?.name||"-")}</div><div><b>TRADE:</b> ${escapeHtml(order.trade_link||order.profile?.tradeLink||"-")}</div><div><b>PHONE:</b> ${escapeHtml(order.phone||order.profile?.phone||"-")}</div><div><b>TELEGRAM:</b> ${escapeHtml(order.telegram||order.profile?.telegram||"-")}</div></div><div class="admin-order-total">${formatPrice(order.total)}</div>${receipt}<div class="admin-order-actions"><select class="admin-status" onchange="updateOrderStatus('${escapeHtml(order.id)}',this.value)"><option value="PENDING" ${order.status==="PENDING"?"selected":""}>PENDING</option><option value="RECEIPT_UPLOADED" ${order.status==="RECEIPT_UPLOADED"?"selected":""}>RECEIPT UPLOADED</option><option value="PAID" ${order.status==="PAID"?"selected":""}>PAID</option><option value="FINISHED" ${order.status==="FINISHED"?"selected":""}>FINISHED</option><option value="FAILED" ${order.status==="FAILED"?"selected":""}>FAILED</option></select><button class="admin-delete" onclick="deleteOrder('${escapeHtml(order.id)}')">DELETE</button></div>`;
+    container.appendChild(card);
+  });
 }
-
 
 /* =========================================================
    START
