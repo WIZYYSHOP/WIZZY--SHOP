@@ -1737,7 +1737,7 @@ function updateHeaderAvatar(){
 function registerLogoClick(){
     logoClickCount++;
     clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){logoClickCount=0;},2200);
+    logoClickTimer=setTimeout(function(){logoClickCount=0;},900);
     if(logoClickCount>=5){
         logoClickCount=0;
         openAdminLogin();
@@ -2663,13 +2663,14 @@ function registerLogoClick(){
             Sign in with the WIZZY SHOP administrator account.
         </div>
 
+        <form id="adminLoginForm" autocomplete="on" onsubmit="loginAdmin(event)">
         <input
             id="adminEmail"
             class="admin-password"
             type="email"
             placeholder="Admin email"
             autocomplete="username"
-            onkeydown="if(event.key==='Enter') loginAdmin()"
+            required
         >
 
         <input
@@ -2678,14 +2679,15 @@ function registerLogoClick(){
             type="password"
             placeholder="Admin password"
             autocomplete="current-password"
-            onkeydown="if(event.key==='Enter') loginAdmin()"
+            required
         >
 
         <div id="adminError" class="admin-error"></div>
 
-        <button class="admin-enter" onclick="loginAdmin()">
+        <button class="admin-enter" type="submit">
             ENTER ADMIN PANEL
         </button>
+        </form>
     </div>
 </div>
 
@@ -2734,34 +2736,70 @@ function registerLogoClick(){
 
 
 <script>
-const SUPABASE_URL = "https://crowmfciejumiwrratun.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_zap3lpLjBYwe8OUzJidwaA_k4J_OVMX";
-window.wizzySupabase = null;
-window.WIZZY_SUPABASE_READY = false;
-function initWizzySupabase(){
-  try{
-    if(window.supabase && typeof window.supabase.createClient === "function"){
-      window.wizzySupabase = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-      window.WIZZY_SUPABASE_READY = true;
-      window.wizzySupabaseReady = window.wizzySupabase;
-      return true;
+/* WIZZY AUTH: direct Supabase Auth REST connection.
+   This intentionally does not depend on a CDN-loaded Supabase JS library. */
+const SUPABASE_URL = "https://vsogwimdladgagjoqdst.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_AOwyJvQdNhY0m_dcwGpiPw_DK0LHqjv";
+const WIZZY_AUTH_STORAGE = "wizzy_admin_session";
+
+const wizzySupabase = {
+    auth: {
+        async signInWithPassword({email, password}) {
+            try {
+                const response = await fetch(
+                    SUPABASE_URL + "/auth/v1/token?grant_type=password",
+                    {
+                        method: "POST",
+                        headers: {
+                            "apikey": SUPABASE_PUBLISHABLE_KEY,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ email, password })
+                    }
+                );
+
+                let payload = null;
+                try { payload = await response.json(); } catch (_) {}
+
+                if (!response.ok) {
+                    return {
+                        data: { session: null },
+                        error: {
+                            message: payload?.error_description || payload?.msg || payload?.message || "ADMIN ACCESS DENIED"
+                        }
+                    };
+                }
+
+                const session = {
+                    access_token: payload.access_token,
+                    refresh_token: payload.refresh_token,
+                    expires_in: payload.expires_in,
+                    expires_at: payload.expires_at,
+                    token_type: payload.token_type,
+                    user: payload.user
+                };
+
+                localStorage.setItem(WIZZY_AUTH_STORAGE, JSON.stringify(session));
+                return { data: { session }, error: null };
+            } catch (error) {
+                return {
+                    data: { session: null },
+                    error: { message: "NETWORK ERROR: SUPABASE AUTH COULD NOT BE REACHED" }
+                };
+            }
+        },
+
+        async getSession() {
+            try {
+                const raw = localStorage.getItem(WIZZY_AUTH_STORAGE);
+                const session = raw ? JSON.parse(raw) : null;
+                return { data: { session }, error: null };
+            } catch (_) {
+                return { data: { session: null }, error: null };
+            }
+        }
     }
-  }catch(e){}
-  return false;
-}
-function loadSupabase(){
-  if(initWizzySupabase()) return;
-  var s=document.createElement("script");
-  s.src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js";
-  s.onload=initWizzySupabase;
-  document.head.appendChild(s);
-}
-loadSupabase();
-</script>
-<script>
-const SUPABASE_URL = "https://gneadbhbblwzrakgtwzo.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WDOc16Rn11KCEcnqfE94qg_dAVrniSR";
-const wizzySupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+};
 </script>
 <script>
 
@@ -3739,7 +3777,7 @@ function isProfileComplete(){
 function registerLogoClick(){
     logoClickCount++;
     clearTimeout(logoClickTimer);
-    logoClickTimer=setTimeout(function(){ logoClickCount=0; },2200);
+    logoClickTimer=setTimeout(function(){ logoClickCount=0; },900);
     if(logoClickCount>=5){
         logoClickCount=0;
         openAdminLogin();
@@ -4278,41 +4316,67 @@ function closeAdminLoginOutside(event){
     }
 }
 
-async function loginAdmin(){
-    const email = document.getElementById("adminEmail").value.trim().toLowerCase();
-    const password = document.getElementById("adminPassword").value;
-    const errorBox = document.getElementById("adminError");
+let adminLoginBusy = false;
 
+async function loginAdmin(event){
+    if(event){
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    if(adminLoginBusy) return;
+
+    const emailInput = document.getElementById("adminEmail");
+    const passwordInput = document.getElementById("adminPassword");
+    const errorBox = document.getElementById("adminError");
+    if(!emailInput || !passwordInput || !errorBox) return;
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
     errorBox.textContent = "";
 
     if(email !== ADMIN_EMAIL){
         errorBox.textContent = "ADMIN ACCESS DENIED";
         return;
     }
-
     if(!password){
         errorBox.textContent = "ENTER YOUR PASSWORD";
+        passwordInput.focus();
         return;
     }
+    adminLoginBusy = true;
+    const button = document.querySelector("#adminLoginModal .admin-enter");
+    if(button){ button.disabled = true; button.textContent = "SIGNING IN..."; }
 
-    if(!window.wizzySupabase){
-        errorBox.textContent = "SUPABASE IS STILL LOADING — TRY AGAIN IN A MOMENT.";
-        return;
+    try{
+        const result = await wizzySupabase.auth.signInWithPassword({ email, password });
+        const data = result?.data;
+        const error = result?.error;
+
+        if(error || !data?.session){
+            console.error("WIZZY ADMIN LOGIN ERROR:", error);
+            errorBox.textContent = error?.message || "ADMIN ACCESS DENIED";
+            return;
+        }
+
+        try{
+            renderAdminPanel();
+        }catch(panelError){
+            console.error("WIZZY ADMIN PANEL ERROR:", panelError);
+            errorBox.textContent = "ADMIN PANEL ERROR: " + (panelError?.message || "CHECK CONSOLE");
+            return;
+        }
+
+        const panel = document.getElementById("adminPanelModal");
+        const loginModal = document.getElementById("adminLoginModal");
+        if(panel) panel.classList.add("show");
+        if(loginModal) loginModal.classList.remove("show");
+    }catch(error){
+        console.error("WIZZY ADMIN LOGIN EXCEPTION:", error);
+        errorBox.textContent = error?.message || "ADMIN LOGIN FAILED";
+    }finally{
+        adminLoginBusy = false;
+        if(button){ button.disabled = false; button.textContent = "ENTER ADMIN PANEL"; }
     }
-
-    const { data, error } = await wizzySupabase.auth.signInWithPassword({
-        email,
-        password
-    });
-
-    if(error || !data?.session){
-        console.error("WIZZY ADMIN LOGIN ERROR:", error);
-        errorBox.textContent = error?.message || "ADMIN ACCESS DENIED";
-        return;
-    }
-
-    closeAdminLogin();
-    openAdminPanel();
 }
 
 function openAdminPanel(){
