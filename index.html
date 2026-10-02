@@ -4367,8 +4367,33 @@ async function notifySellerTelegram(id){
     }catch(e){alert("Could not open Telegram: "+e.message)}
 }
 async function finishOrder(id){try{const rows=await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(id)+"&select=*");const o=rows?.[0];if(!o)throw new Error("Order not found.");await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(id),{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({status:"FINISHED",finished_at:new Date().toISOString()})});const msg="سلام، من سفارش "+(o.order_number||o.id)+" را ثبت و پرداخت کردم.\nنام: "+(o.customer_name||"-")+"\nمبلغ: "+formatPrice(o.total)+"\nرسید در پنل قابل بررسی است. لطفاً سفارش من را بررسی کنید.";window.open("https://t.me/WizyyShop?text="+encodeURIComponent(msg),"_blank");await renderAdminPanel()}catch(e){alert("Could not finish order: "+e.message)}}
-async async function deleteOrder(id){if(!confirm("Delete this order?"))return;try{await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(id),{method:"DELETE"});await renderAdminPanel()}catch(e){alert("Could not delete order: "+e.message)}}
-async function clearAllOrders(){if(!confirm("Delete ALL orders from Supabase? This cannot be undone."))return;try{await supabaseRest("/rest/v1/orders?id=not.is.null",{method:"DELETE"});await renderAdminPanel()}catch(e){alert("Could not clear orders: "+e.message)}}
+async function deleteOrder(id){
+    if(!id)return;
+    if(!confirm("Delete this order? This cannot be undone."))return;
+    try{
+        await supabaseRest("/rest/v1/orders?id=eq."+encodeURIComponent(id),{
+            method:"DELETE",
+            headers:{Prefer:"return=minimal"}
+        });
+        await renderAdminPanel();
+    }catch(e){
+        console.error("WIZZY DELETE ORDER ERROR:",e);
+        alert("Could not delete order: "+(e?.message||"Unknown error")+"\n\nMake sure the Supabase DELETE policy has been added.");
+    }
+}
+async function clearAllOrders(){
+    if(!confirm("Delete ALL orders from Supabase? This cannot be undone."))return;
+    try{
+        await supabaseRest("/rest/v1/orders?id=not.is.null",{
+            method:"DELETE",
+            headers:{Prefer:"return=minimal"}
+        });
+        await renderAdminPanel();
+    }catch(e){
+        console.error("WIZZY CLEAR ALL ORDERS ERROR:",e);
+        alert("Could not clear orders: "+(e?.message||"Unknown error")+"\n\nMake sure the Supabase DELETE policy has been added.");
+    }
+}
 function clearAllProfiles(){if(!getProfiles().length)return;if(!confirm("Delete ALL customer profiles? This cannot be undone."))return;localStorage.removeItem(PROFILES_STORAGE_KEY);localStorage.removeItem(PROFILE_STORAGE_KEY);updateHeaderAvatar();renderAdminProfiles()}
 function renderAdminProfiles(){const c=document.getElementById("adminProfiles");if(!c)return;const ps=getProfiles();c.innerHTML="";if(!ps.length){c.innerHTML='<div class="admin-empty">No customer profiles saved on this browser yet.</div>';return}ps.forEach(p=>{const card=document.createElement("div");card.className="admin-profile-card";card.innerHTML=`<img src="${p.image||DEFAULT_AVATAR}" alt="Profile"><div><div class="admin-profile-name">${escapeHtml(p.name||"Unnamed")}</div><div class="admin-profile-line"><b>Trade:</b> ${escapeHtml(p.tradeLink||"-")}</div><div class="admin-profile-line"><b>Phone:</b> ${escapeHtml(p.phone||"-")}</div><div class="admin-profile-line"><b>Telegram:</b> ${escapeHtml(p.telegram||"-")}</div></div>`;c.appendChild(card)})}
 async function renderAdminPanel(){
