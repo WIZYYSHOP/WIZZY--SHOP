@@ -886,6 +886,25 @@ select:focus{
 
 
 /* =========================================================
+   FAST IMAGE LOADER
+========================================================= */
+function fastImage(url, width=700, height=450){
+    if(!url) return "";
+    if(url.startsWith("data:")) return url;
+    if(url.includes("wsrv.nl/?url=")) return url;
+    return "https://wsrv.nl/?url=" + encodeURIComponent(url) +
+           "&w=" + width + "&h=" + height +
+           "&fit=inside&output=webp&q=82&maxage=1y";
+}
+
+function imageFallback(img){
+    if(!img || img.dataset.fallbackDone === "1") return;
+    img.dataset.fallbackDone = "1";
+    const original = img.dataset.original;
+    if(original && img.src !== original) img.src = original;
+}
+
+/* =========================================================
    PRODUCTS
 ========================================================= */
 
@@ -3346,9 +3365,15 @@ function renderProducts(){
                 <div class="product-image">
 
                     <img
-                        src="${product.image}"
+                        src="${fastImage(product.image)}"
+                        data-original="${product.image}"
                         alt="${product.name}"
-                        loading="lazy"
+                        width="700"
+                        height="450"
+                        decoding="async"
+                        loading="${product.id <= 6 ? "eager" : "lazy"}"
+                        fetchpriority="${product.id <= 6 ? "high" : "auto"}"
+                        onerror="imageFallback(this)"
                     >
 
                 </div>
@@ -3576,7 +3601,7 @@ function openProduct(id){
     document.getElementById(
         "modalImage"
     ).src =
-        currentProduct.image;
+        fastImage(currentProduct.image,900,650);
 
 
     document.getElementById(
@@ -3743,8 +3768,13 @@ function renderCart(){
             item.innerHTML = `
 
                 <img
-                    src="${product.image}"
+                    src="${fastImage(product.image,500,350)}"
+                    data-original="${product.image}"
                     alt="${product.name}"
+                    width="500"
+                    height="350"
+                    decoding="async"
+                    onerror="imageFallback(this)"
                 >
 
 
