@@ -886,25 +886,6 @@ select:focus{
 
 
 /* =========================================================
-   FAST IMAGE LOADER
-========================================================= */
-function fastImage(url, width=700, height=450){
-    if(!url) return "";
-    if(url.startsWith("data:")) return url;
-    if(url.includes("wsrv.nl/?url=")) return url;
-    return "https://wsrv.nl/?url=" + encodeURIComponent(url) +
-           "&w=" + width + "&h=" + height +
-           "&fit=inside&output=webp&q=82&maxage=1y";
-}
-
-function imageFallback(img){
-    if(!img || img.dataset.fallbackDone === "1") return;
-    img.dataset.fallbackDone = "1";
-    const original = img.dataset.original;
-    if(original && img.src !== original) img.src = original;
-}
-
-/* =========================================================
    PRODUCTS
 ========================================================= */
 
@@ -3192,6 +3173,25 @@ function selectWeapon(
 /* =========================================================
    RENDER PRODUCTS
 ========================================================= */
+
+/* =========================================================
+   FAST IMAGE LOADER
+========================================================= */
+function fastImage(url, width=700, height=450){
+    if(!url) return "";
+    if(url.startsWith("data:")) return url;
+    if(url.includes("wsrv.nl/?url=")) return url;
+    return "https://wsrv.nl/?url=" + encodeURIComponent(url) +
+           "&w=" + width + "&h=" + height +
+           "&fit=inside&output=webp&q=82&maxage=1y";
+}
+
+function imageFallback(img){
+    if(!img || img.dataset.fallbackDone === "1") return;
+    img.dataset.fallbackDone = "1";
+    const original = img.dataset.original;
+    if(original && img.src !== original) img.src = original;
+}
 
 function renderProducts(){
 
