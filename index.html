@@ -5602,7 +5602,128 @@ generateCaptcha();
 
     }
 
+})(); <script>
+(function () {
+    "use strict";
+
+    function wizzyForceFloat() {
+
+        if (!Array.isArray(window.products)) {
+            return;
+        }
+
+        document.querySelectorAll(".product").forEach(function (card) {
+
+            const button = card.querySelector(".buy-button");
+
+            if (!button) return;
+
+            const onclick =
+                button.getAttribute("onclick") || "";
+
+            const match =
+                onclick.match(/openProduct\s*\(\s*(\d+)/);
+
+            if (!match) return;
+
+            const id = Number(match[1]);
+
+            const product =
+                window.products.find(function (p) {
+                    return Number(p.id) === id;
+                });
+
+            if (!product) return;
+
+            let floatValue =
+                product.float ??
+                product.Float ??
+                product.FLOAT ??
+                product.float_value ??
+                product.floatValue;
+
+            if (
+                floatValue === null ||
+                floatValue === undefined ||
+                floatValue === ""
+            ) {
+                return;
+            }
+
+            const number =
+                Number(floatValue);
+
+            if (!Number.isFinite(number)) {
+                return;
+            }
+
+            const weapon =
+                card.querySelector(".product-weapon");
+
+            if (!weapon) return;
+
+            const old =
+                weapon.querySelector(".wizzy-float");
+
+            if (old) {
+                old.parentElement
+                    .querySelectorAll(".wizzy-float-separator")
+                    .forEach(function (x) {
+                        x.remove();
+                    });
+
+                old.remove();
+            }
+
+            const separator =
+                document.createElement("span");
+
+            separator.className =
+                "wizzy-float-separator";
+
+            separator.textContent = " • ";
+
+            const float =
+                document.createElement("span");
+
+            float.className =
+                "wizzy-float";
+
+            float.textContent =
+                "Float: " + number.toFixed(4);
+
+            weapon.appendChild(separator);
+            weapon.appendChild(float);
+        });
+    }
+
+
+    /* اجرای اولیه */
+    wizzyForceFloat();
+
+
+    /* بعد از رندر شدن محصولات */
+    setTimeout(wizzyForceFloat, 300);
+    setTimeout(wizzyForceFloat, 1000);
+    setTimeout(wizzyForceFloat, 2000);
+
+
+    /* هر بار محصولات دوباره رندر شدند */
+    const observer =
+        new MutationObserver(function () {
+            wizzyForceFloat();
+        });
+
+    observer.observe(
+        document.body,
+        {
+            childList: true,
+            subtree: true
+        }
+    );
+
 })();
+</script>
 </script>
 </script>
 </body>
