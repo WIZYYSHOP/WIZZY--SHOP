@@ -4438,13 +4438,13 @@ generateCaptcha();
 
 </script>
 <div id="wizzyAdminProductToast"></div> <script>
+<script>
 /* =========================================================
    WIZZY SHOP - FINAL FIX PATCH
-   Paste this entire block at the very end of index.html
+   نسخه اصلاح شده و آماده Copy/Paste
 ========================================================= */
 
 (function () {
-
     "use strict";
 
     /* =========================================================
@@ -4454,11 +4454,8 @@ generateCaptcha();
     const WIZZY_SUPPORT_URL = "https://t.me/WIZZY_SHOP2";
     const WIZZY_SUPPORT_USERNAME = "@WIZZY_SHOP2";
 
-
     function fixTelegramLinks() {
-
         document.querySelectorAll("a[href*='t.me/']").forEach(function (link) {
-
             let href = link.getAttribute("href") || "";
 
             if (
@@ -4466,41 +4463,28 @@ generateCaptcha();
                 href.includes("wizyyshop") ||
                 href.includes("WIZZY_SHOP")
             ) {
-
                 if (href.includes("?text=")) {
-
-                    const text = href.substring(
-                        href.indexOf("?text=")
-                    );
-
-                    link.href =
-                        WIZZY_SUPPORT_URL + text;
-
+                    const text = href.substring(href.indexOf("?text="));
+                    link.href = WIZZY_SUPPORT_URL + text;
                 } else {
-
-                    link.href =
-                        WIZZY_SUPPORT_URL;
-
+                    link.href = WIZZY_SUPPORT_URL;
                 }
 
-                link.textContent =
-                    link.textContent
-                        .replace(/@?WizyyShop/gi, WIZZY_SUPPORT_USERNAME);
-
+                link.textContent = link.textContent.replace(
+                    /@?WizyyShop/gi,
+                    WIZZY_SUPPORT_USERNAME
+                );
             }
-
         });
-
     }
 
 
     /* =========================================================
        BUILT-IN PRODUCTS
-       These stay even when Supabase has products.
+       این محصولات حتی با وجود Supabase باقی می‌مانند
     ========================================================= */
 
     const WIZZY_BUILT_IN_PRODUCTS = [
-
         {
             id: 1,
             name: "Dual Berettas | Urban Shock",
@@ -4511,7 +4495,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 2,
             name: "M4A1-S | Emphorosaur-S",
@@ -4522,7 +4505,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 3,
             name: "Tec-9 | Bamboozle",
@@ -4533,7 +4515,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 4,
             name: "Glock-18 | Vogue",
@@ -4544,7 +4525,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 5,
             name: "M4A4 | Evil Daimyo",
@@ -4555,7 +4535,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 6,
             name: "AWP | Atheris",
@@ -4566,7 +4545,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 7,
             name: "Glock-18 | Moonrise",
@@ -4577,7 +4555,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 8,
             name: "MP7 | Just Smile",
@@ -4588,7 +4565,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 9,
             name: "P90 | Wave Breaker",
@@ -4599,7 +4575,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 10,
             name: "SG 553 | Darkwing",
@@ -4610,7 +4585,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 11,
             name: "AK-47 | Midnight Laminate",
@@ -4621,7 +4595,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 12,
             name: "Glock-18 | Nuclear Garden",
@@ -4632,7 +4605,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 13,
             name: "Desert Eagle | Mulberry",
@@ -4643,7 +4615,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 14,
             name: "Ground Rebel | Elite Crew",
@@ -4654,7 +4625,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 15,
             name: "Operator | FBI SWAT",
@@ -4665,7 +4635,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 16,
             name: "SG 553 | Dragon Tech",
@@ -4676,7 +4645,6 @@ generateCaptcha();
             image: "",
             float: null
         },
-
         {
             id: 17,
             name: "USP-S | Silent Shot",
@@ -4687,7 +4655,6 @@ generateCaptcha();
             image: "",
             float: null
         }
-
     ];
 
 
@@ -4696,7 +4663,6 @@ generateCaptcha();
     ========================================================= */
 
     function wizzyNormalizeProduct(product) {
-
         if (!product) {
             return null;
         }
@@ -4708,43 +4674,23 @@ generateCaptcha();
             product.float !== undefined &&
             product.float !== ""
         ) {
-
             const f = Number(product.float);
 
             if (Number.isFinite(f)) {
                 floatValue = f;
             }
-
         }
 
         return {
-
             id: Number(product.id),
-
             name: product.name || "",
-
             weapon: product.weapon || "",
-
-            category:
-                product.category ||
-                "Accessories",
-
-            wear:
-                product.wear ||
-                "N/A",
-
-            price:
-                Number(product.price || 0),
-
-            image:
-                product.image ||
-                "",
-
-            float:
-                floatValue
-
+            category: product.category || "Accessories",
+            wear: product.wear || "N/A",
+            price: Number(product.price || 0),
+            image: product.image || "",
+            float: floatValue
         };
-
     }
 
 
@@ -4758,18 +4704,22 @@ generateCaptcha();
         try {
 
             const builtInProducts =
-                WIZZY_BUILT_IN_PRODUCTS.map(
-                    wizzyNormalizeProduct
-                );
+                WIZZY_BUILT_IN_PRODUCTS
+                    .map(wizzyNormalizeProduct)
+                    .filter(Boolean);
 
+            let rows = [];
 
-            const rows =
-                await supabaseRequest(
+            if (
+                typeof supabaseRequest === "function" &&
+                typeof WIZZY_PRODUCTS_TABLE !== "undefined"
+            ) {
+                rows = await supabaseRequest(
                     "/rest/v1/" +
                     WIZZY_PRODUCTS_TABLE +
                     "?select=*&order=id.asc"
                 );
-
+            }
 
             const databaseProducts =
                 Array.isArray(rows)
@@ -4778,30 +4728,24 @@ generateCaptcha();
                         .filter(Boolean)
                     : [];
 
-
-            const merged =
-                builtInProducts.slice();
-
+            const merged = builtInProducts.slice();
 
             databaseProducts.forEach(function (dbProduct) {
 
-                const index =
-                    merged.findIndex(function (localProduct) {
+                const index = merged.findIndex(function (localProduct) {
 
-                        return Number(localProduct.id) ===
-                            Number(dbProduct.id);
+                    return (
+                        Number(localProduct.id) ===
+                        Number(dbProduct.id)
+                    );
 
-                    });
-
+                });
 
                 if (index !== -1) {
 
                     merged[index] = {
-
                         ...merged[index],
-
                         ...dbProduct
-
                     };
 
                 } else {
@@ -4812,10 +4756,7 @@ generateCaptcha();
 
             });
 
-
-            products =
-                merged.map(wizzyNormalizeProduct);
-
+            window.products = merged.map(wizzyNormalizeProduct);
 
         } catch (error) {
 
@@ -4824,18 +4765,14 @@ generateCaptcha();
                 error
             );
 
-
-            products =
+            window.products =
                 WIZZY_BUILT_IN_PRODUCTS
-                    .map(wizzyNormalizeProduct);
-
+                    .map(wizzyNormalizeProduct)
+                    .filter(Boolean);
         }
-
     }
 
-
-    window.loadShopProducts =
-        wizzyLoadShopProducts;
+    window.loadShopProducts = wizzyLoadShopProducts;
 
 
     /* =========================================================
@@ -4852,32 +4789,28 @@ generateCaptcha();
             return "";
         }
 
-        const number =
-            Number(value);
+        const number = Number(value);
 
         if (!Number.isFinite(number)) {
             return "";
         }
 
         return number.toFixed(4);
-
     }
 
 
     /* =========================================================
-       FLOAT CSS
+       CSS
+       FIXED: CSS MUST BE INSIDE BACKTICKS
     ========================================================= */
 
     if (!document.getElementById("wizzyFinalPatchCSS")) {
 
-        const style =
-            document.createElement("style");
+        const style = document.createElement("style");
 
-        style.id =
-            "wizzyFinalPatchCSS";
+        style.id = "wizzyFinalPatchCSS";
 
         style.textContent = `
-
             .wizzy-float {
                 color: #999 !important;
                 font-size: 11px;
@@ -4903,15 +4836,39 @@ generateCaptcha();
                 display: none;
             }
 
+            #wizzyFinalPatchToast {
+                position: fixed;
+                left: 50%;
+                bottom: 30px;
+                transform: translate(-50%, 20px);
+                background: rgba(20, 20, 20, 0.96);
+                color: white;
+                padding: 12px 22px;
+                border-radius: 12px;
+                border: 1px solid rgba(255,255,255,.12);
+                box-shadow: 0 10px 35px rgba(0,0,0,.35);
+                font-size: 14px;
+                font-weight: 700;
+                z-index: 999999;
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity .25s ease,
+                    transform .25s ease;
+            }
+
+            #wizzyFinalPatchToast.show {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
         `;
 
         document.head.appendChild(style);
-
     }
 
 
     /* =========================================================
-       ADD FLOAT TO PRODUCT CARDS
+       FLOAT ON PRODUCT CARDS
     ========================================================= */
 
     function addFloatToProductCards() {
@@ -4921,116 +4878,73 @@ generateCaptcha();
             .forEach(function (card) {
 
                 const buyButton =
-                    card.querySelector(
-                        ".buy-button"
-                    );
+                    card.querySelector(".buy-button");
 
                 if (!buyButton) {
                     return;
                 }
 
-
                 const onclick =
-                    buyButton.getAttribute(
-                        "onclick"
-                    ) || "";
-
+                    buyButton.getAttribute("onclick") || "";
 
                 const match =
-                    onclick.match(
-                        /openProduct\((\d+)\)/
-                    );
-
+                    onclick.match(/openProduct\((\d+)\)/);
 
                 if (!match) {
                     return;
                 }
 
-
-                const id =
-                    Number(match[1]);
-
+                const id = Number(match[1]);
 
                 const product =
-                    Array.isArray(products)
-                        ? products.find(
-                            function (p) {
-                                return Number(p.id) === id;
-                            }
-                        )
+                    Array.isArray(window.products)
+                        ? window.products.find(function (p) {
+                            return Number(p.id) === id;
+                        })
                         : null;
-
 
                 if (!product) {
                     return;
                 }
 
-
                 const weaponElement =
-                    card.querySelector(
-                        ".product-weapon"
-                    );
-
+                    card.querySelector(".product-weapon");
 
                 if (!weaponElement) {
                     return;
                 }
 
-
                 const oldFloat =
-                    weaponElement.querySelector(
-                        ".wizzy-float"
-                    );
-
+                    weaponElement.querySelector(".wizzy-float");
 
                 if (oldFloat) {
+                    oldFloat.previousSibling?.remove();
                     oldFloat.remove();
                 }
 
-
                 const floatText =
-                    wizzyFormatFloat(
-                        product.float
-                    );
-
+                    wizzyFormatFloat(product.float);
 
                 if (!floatText) {
                     return;
                 }
 
-
                 const separator =
-                    document.createTextNode(
-                        " • "
-                    );
-
+                    document.createTextNode(" • ");
 
                 const floatElement =
-                    document.createElement(
-                        "span"
-                    );
-
+                    document.createElement("span");
 
                 floatElement.className =
                     "wizzy-float";
 
-
                 floatElement.textContent =
-                    "Float: " +
-                    floatText;
+                    "Float: " + floatText;
 
-
-                weaponElement.appendChild(
-                    separator
-                );
-
-
-                weaponElement.appendChild(
-                    floatElement
-                );
+                weaponElement.appendChild(separator);
+                weaponElement.appendChild(floatElement);
 
             });
-
     }
 
 
@@ -5040,70 +4954,51 @@ generateCaptcha();
 
     function addFloatToProductModal() {
 
-        if (
-            typeof currentProduct ===
-            "undefined" ||
-            !currentProduct
-        ) {
+        const product =
+            typeof window.currentProduct !== "undefined"
+                ? window.currentProduct
+                : null;
+
+        if (!product) {
             return;
         }
 
-
         const modalType =
-            document.getElementById(
-                "modalType"
-            );
-
+            document.getElementById("modalType");
 
         if (!modalType) {
             return;
         }
 
-
         const oldFloat =
-            document.getElementById(
-                "wizzyModalFloat"
-            );
-
+            document.getElementById("wizzyModalFloat");
 
         if (oldFloat) {
             oldFloat.remove();
         }
 
-
         const floatText =
-            wizzyFormatFloat(
-                currentProduct.float
-            );
-
+            wizzyFormatFloat(product.float);
 
         if (!floatText) {
             return;
         }
 
-
         const element =
-            document.createElement(
-                "span"
-            );
-
+            document.createElement("span");
 
         element.id =
             "wizzyModalFloat";
 
-
         element.className =
             "wizzy-modal-float";
 
-
         element.innerHTML =
-            "<b>FLOAT:</b> " +
-            floatText;
+            "<b>FLOAT:</b> " + floatText;
 
-
-        modalType.parentElement
-            .appendChild(element);
-
+        if (modalType.parentElement) {
+            modalType.parentElement.appendChild(element);
+        }
     }
 
 
@@ -5128,7 +5023,6 @@ generateCaptcha();
             return null;
 
         }
-
     }
 
 
@@ -5149,7 +5043,6 @@ generateCaptcha();
             );
 
         }
-
     }
 
 
@@ -5158,37 +5051,24 @@ generateCaptcha();
         const image =
             getWizzyProfileImage();
 
-
         if (!image) {
             return;
         }
 
-
         const headerAvatar =
-            document.getElementById(
-                "headerAvatar"
-            );
-
+            document.getElementById("headerAvatar");
 
         if (headerAvatar) {
-
-            headerAvatar.src =
-                image;
-
+            headerAvatar.src = image;
         }
 
-
         document
-            .querySelectorAll(
-                "#profileAvatarPreview"
-            )
+            .querySelectorAll("#profileAvatarPreview")
             .forEach(function (element) {
 
-                element.src =
-                    image;
+                element.src = image;
 
             });
-
     }
 
 
@@ -5198,129 +5078,97 @@ generateCaptcha();
 
     function setupWizzyProfileUpload() {
 
-        const inputs =
-            document.querySelectorAll(
-                "#profileImage"
-            );
+        document
+            .querySelectorAll("#profileImage")
+            .forEach(function (input) {
 
+                if (
+                    input.dataset.wizzyReady === "true"
+                ) {
+                    return;
+                }
 
-        inputs.forEach(function (input) {
+                input.dataset.wizzyReady = "true";
 
-            if (
-                input.dataset.wizzyReady ===
-                "true"
-            ) {
-                return;
-            }
+                input.addEventListener(
+                    "change",
+                    function () {
 
+                        const file =
+                            this.files &&
+                            this.files[0];
 
-            input.dataset.wizzyReady =
-                "true";
+                        if (!file) {
+                            return;
+                        }
 
+                        if (
+                            !file.type ||
+                            !file.type.startsWith("image/")
+                        ) {
 
-            input.addEventListener(
-                "change",
-                function () {
-
-                    const file =
-                        this.files &&
-                        this.files[0];
-
-
-                    if (!file) {
-                        return;
-                    }
-
-
-                    if (
-                        !file.type ||
-                        !file.type.startsWith(
-                            "image/"
-                        )
-                    ) {
-
-                        alert(
-                            "Please select an image file."
-                        );
-
-                        this.value =
-                            "";
-
-                        return;
-
-                    }
-
-
-                    if (
-                        file.size >
-                        5 * 1024 * 1024
-                    ) {
-
-                        alert(
-                            "Profile image must be smaller than 5 MB."
-                        );
-
-                        this.value =
-                            "";
-
-                        return;
-
-                    }
-
-
-                    const reader =
-                        new FileReader();
-
-
-                    reader.onload =
-                        function (event) {
-
-                            const image =
-                                event.target.result;
-
-
-                            saveWizzyProfileImage(
-                                image
+                            alert(
+                                "Please select an image file."
                             );
 
+                            this.value = "";
 
-                            document
-                                .querySelectorAll(
-                                    "#profileAvatarPreview"
-                                )
-                                .forEach(function (img) {
+                            return;
+                        }
 
-                                    img.src =
-                                        image;
+                        if (
+                            file.size >
+                            5 * 1024 * 1024
+                        ) {
 
-                                });
+                            alert(
+                                "Profile image must be smaller than 5 MB."
+                            );
 
+                            this.value = "";
 
-                            const headerAvatar =
-                                document.getElementById(
-                                    "headerAvatar"
+                            return;
+                        }
+
+                        const reader =
+                            new FileReader();
+
+                        reader.onload =
+                            function (event) {
+
+                                const image =
+                                    event.target.result;
+
+                                saveWizzyProfileImage(
+                                    image
                                 );
 
+                                document
+                                    .querySelectorAll(
+                                        "#profileAvatarPreview"
+                                    )
+                                    .forEach(
+                                        function (img) {
+                                            img.src = image;
+                                        }
+                                    );
 
-                            if (headerAvatar) {
+                                const headerAvatar =
+                                    document.getElementById(
+                                        "headerAvatar"
+                                    );
 
-                                headerAvatar.src =
-                                    image;
+                                if (headerAvatar) {
+                                    headerAvatar.src =
+                                        image;
+                                }
+                            };
 
-                            }
+                        reader.readAsDataURL(file);
 
-                        };
-
-
-                    reader.readAsDataURL(
-                        file
-                    );
-
-                }
-            );
-
-        });
-
+                    }
+                );
+            });
     }
 
 
@@ -5328,35 +5176,38 @@ generateCaptcha();
        SAVE PROFILE WRAPPER
     ========================================================= */
 
-    const oldSaveProfile =
-        window.saveProfile;
+    function setupSaveProfileWrapper() {
 
+        if (
+            typeof window.saveProfile !== "function" ||
+            window.saveProfile.__wizzyWrapped
+        ) {
+            return;
+        }
 
-    if (
-        typeof oldSaveProfile ===
-        "function"
-    ) {
+        const oldSaveProfile =
+            window.saveProfile;
 
-        window.saveProfile =
-            function () {
+        function wrappedSaveProfile() {
 
-                const result =
-                    oldSaveProfile.apply(
-                        this,
-                        arguments
-                    );
-
-
-                setTimeout(
-                    updateWizzyProfileImages,
-                    100
+            const result =
+                oldSaveProfile.apply(
+                    this,
+                    arguments
                 );
 
+            setTimeout(
+                updateWizzyProfileImages,
+                100
+            );
 
-                return result;
+            return result;
+        }
 
-            };
+        wrappedSaveProfile.__wizzyWrapped = true;
 
+        window.saveProfile =
+            wrappedSaveProfile;
     }
 
 
@@ -5364,31 +5215,38 @@ generateCaptcha();
        OPEN PRODUCT WRAPPER
     ========================================================= */
 
-    const oldOpenProduct =
-        window.openProduct;
+    function setupOpenProductWrapper() {
 
+        if (
+            typeof window.openProduct !== "function" ||
+            window.openProduct.__wizzyWrapped
+        ) {
+            return;
+        }
 
-    if (
-        typeof oldOpenProduct ===
-        "function"
-    ) {
+        const oldOpenProduct =
+            window.openProduct;
 
-        window.openProduct =
-            function (id) {
+        function wrappedOpenProduct(id) {
 
+            const result =
                 oldOpenProduct.apply(
                     this,
                     arguments
                 );
 
+            setTimeout(
+                addFloatToProductModal,
+                80
+            );
 
-                setTimeout(
-                    addFloatToProductModal,
-                    80
-                );
+            return result;
+        }
 
-            };
+        wrappedOpenProduct.__wizzyWrapped = true;
 
+        window.openProduct =
+            wrappedOpenProduct;
     }
 
 
@@ -5396,35 +5254,38 @@ generateCaptcha();
        RENDER PRODUCTS WRAPPER
     ========================================================= */
 
-    const oldRenderProducts =
-        window.renderProducts;
+    function setupRenderProductsWrapper() {
 
+        if (
+            typeof window.renderProducts !== "function" ||
+            window.renderProducts.__wizzyWrapped
+        ) {
+            return;
+        }
 
-    if (
-        typeof oldRenderProducts ===
-        "function"
-    ) {
+        const oldRenderProducts =
+            window.renderProducts;
 
-        window.renderProducts =
-            function () {
+        function wrappedRenderProducts() {
 
-                const result =
-                    oldRenderProducts.apply(
-                        this,
-                        arguments
-                    );
-
-
-                setTimeout(
-                    addFloatToProductCards,
-                    50
+            const result =
+                oldRenderProducts.apply(
+                    this,
+                    arguments
                 );
 
+            setTimeout(
+                addFloatToProductCards,
+                50
+            );
 
-                return result;
+            return result;
+        }
 
-            };
+        wrappedRenderProducts.__wizzyWrapped = true;
 
+        window.renderProducts =
+            wrappedRenderProducts;
     }
 
 
@@ -5432,58 +5293,57 @@ generateCaptcha();
        ADMIN PRODUCT FLOAT FIX
     ========================================================= */
 
-    const oldReadAdminProduct =
-        window.readAdminProduct;
+    function setupAdminProductWrapper() {
 
+        if (
+            typeof window.readAdminProduct !== "function" ||
+            window.readAdminProduct.__wizzyWrapped
+        ) {
+            return;
+        }
 
-    if (
-        typeof oldReadAdminProduct ===
-        "function"
-    ) {
+        const oldReadAdminProduct =
+            window.readAdminProduct;
 
-        window.readAdminProduct =
-            function (id) {
+        function wrappedReadAdminProduct(id) {
 
-                const product =
-                    oldReadAdminProduct.apply(
-                        this,
-                        arguments
-                    );
+            const product =
+                oldReadAdminProduct.apply(
+                    this,
+                    arguments
+                );
 
+            if (product) {
 
-                if (product) {
+                if (
+                    product.float !== null &&
+                    product.float !== undefined &&
+                    product.float !== ""
+                ) {
 
-                    if (
-                        product.float !== null &&
-                        product.float !== undefined &&
-                        product.float !== ""
-                    ) {
+                    const value =
+                        Number(product.float);
 
-                        const value =
-                            Number(
-                                product.float
-                            );
+                    product.float =
+                        Number.isFinite(value)
+                            ? value
+                            : null;
 
+                } else {
 
-                        product.float =
-                            Number.isFinite(value)
-                                ? value
-                                : null;
-
-                    } else {
-
-                        product.float =
-                            null;
-
-                    }
+                    product.float = null;
 
                 }
+            }
 
+            return product;
+        }
 
-                return product;
+        wrappedReadAdminProduct.__wizzyWrapped =
+            true;
 
-            };
-
+        window.readAdminProduct =
+            wrappedReadAdminProduct;
     }
 
 
@@ -5491,83 +5351,133 @@ generateCaptcha();
        TELEGRAM FINISH ORDER FIX
     ========================================================= */
 
-    const oldFinishOrder =
-        window.finishOrder;
+    function setupFinishOrderWrapper() {
 
+        if (
+            typeof window.finishOrder !== "function" ||
+            window.finishOrder.__wizzyWrapped
+        ) {
+            return;
+        }
 
-    if (
-        typeof oldFinishOrder ===
-        "function"
-    ) {
+        const oldFinishOrder =
+            window.finishOrder;
 
-        window.finishOrder =
-            function () {
+        function wrappedFinishOrder() {
 
-                const oldWindowOpen =
-                    window.open;
+            const originalOpen =
+                window.open;
 
+            window.open =
+                function (url) {
 
-                window.open =
-                    function (url) {
+                    if (
+                        typeof url === "string"
+                    ) {
 
-                        if (
-                            typeof url ===
-                            "string"
-                        ) {
+                        url =
+                            url.replace(
+                                /https:\/\/t\.me\/WizyyShop/gi,
+                                WIZZY_SUPPORT_URL
+                            );
 
-                            url =
-                                url.replace(
-                                    /https:\/\/t\.me\/WizyyShop/gi,
-                                    "https://t.me/WIZZY_SHOP2"
-                                );
+                        url =
+                            url.replace(
+                                /https:\/\/t\.me\/wizyyshop/gi,
+                                WIZZY_SUPPORT_URL
+                            );
 
-                            url =
-                                url.replace(
-                                    /https:\/\/t\.me\/wizyyshop/gi,
-                                    "https://t.me/WIZZY_SHOP2"
-                                );
+                        url =
+                            url.replace(
+                                /https:\/\/t\.me\/WIZZY_SHOP/gi,
+                                WIZZY_SUPPORT_URL
+                            );
+                    }
 
-                        }
-
-
-                        return oldWindowOpen.apply(
-                            this,
-                            arguments.length
-                                ? [url].concat(
-                                    Array.prototype.slice.call(
-                                        arguments,
-                                        1
-                                    )
-                                )
-                                : arguments
+                    const args =
+                        Array.prototype.slice.call(
+                            arguments
                         );
 
-                    };
+                    args[0] = url;
 
-
-                try {
-
-                    return oldFinishOrder.apply(
+                    return originalOpen.apply(
                         this,
-                        arguments
+                        args
+                    );
+                };
+
+            try {
+
+                return oldFinishOrder.apply(
+                    this,
+                    arguments
+                );
+
+            } finally {
+
+                setTimeout(
+                    function () {
+
+                        window.open =
+                            originalOpen;
+
+                    },
+                    0
+                );
+            }
+        }
+
+        wrappedFinishOrder.__wizzyWrapped =
+            true;
+
+        window.finishOrder =
+            wrappedFinishOrder;
+    }
+
+
+    /* =========================================================
+       SMALL SUCCESS TOAST
+    ========================================================= */
+
+    function wizzyShowPatchToast(message) {
+
+        let toast =
+            document.getElementById(
+                "wizzyFinalPatchToast"
+            );
+
+        if (!toast) {
+
+            toast =
+                document.createElement("div");
+
+            toast.id =
+                "wizzyFinalPatchToast";
+
+            document.body.appendChild(toast);
+        }
+
+        toast.textContent =
+            message || "Saved successfully";
+
+        toast.classList.add("show");
+
+        clearTimeout(
+            window.__wizzyPatchToastTimer
+        );
+
+        window.__wizzyPatchToastTimer =
+            setTimeout(
+                function () {
+
+                    toast.classList.remove(
+                        "show"
                     );
 
-                } finally {
-
-                    setTimeout(
-                        function () {
-
-                            window.open =
-                                oldWindowOpen;
-
-                        },
-                        0
-                    );
-
-                }
-
-            };
-
+                },
+                2200
+            );
     }
 
 
@@ -5577,71 +5487,99 @@ generateCaptcha();
 
     async function initializeWizzyPatch() {
 
-        fixTelegramLinks();
+        try {
 
-        updateWizzyProfileImages();
+            /*
+             * First fix the functions that already exist.
+             */
 
-        setupWizzyProfileUpload();
+            setupSaveProfileWrapper();
+            setupOpenProductWrapper();
+            setupRenderProductsWrapper();
+            setupAdminProductWrapper();
+            setupFinishOrderWrapper();
 
 
-        /*
-         * Load built-in + database products.
-         */
+            /*
+             * Telegram
+             */
 
-        await wizzyLoadShopProducts();
+            fixTelegramLinks();
 
 
-        /*
-         * Render everything again.
-         */
+            /*
+             * Profile image
+             */
 
-        if (
-            typeof renderProducts ===
-            "function"
-        ) {
+            updateWizzyProfileImages();
+            setupWizzyProfileUpload();
 
-            renderProducts();
+
+            /*
+             * Load built-in + Supabase products.
+             */
+
+            await wizzyLoadShopProducts();
+
+
+            /*
+             * Render shop.
+             */
+
+            if (
+                typeof window.renderProducts === "function"
+            ) {
+
+                window.renderProducts();
+
+            }
+
+
+            if (
+                typeof window.updateCart === "function"
+            ) {
+
+                window.updateCart();
+
+            }
+
+
+            if (
+                typeof window.updatePriceRange === "function"
+            ) {
+
+                window.updatePriceRange();
+
+            }
+
+
+            /*
+             * Run again after DOM has updated.
+             */
+
+            setTimeout(
+                function () {
+
+                    addFloatToProductCards();
+                    addFloatToProductModal();
+
+                    setupWizzyProfileUpload();
+                    updateWizzyProfileImages();
+
+                    fixTelegramLinks();
+
+                },
+                150
+            );
+
+        } catch (error) {
+
+            console.error(
+                "WIZZY FINAL PATCH ERROR:",
+                error
+            );
 
         }
-
-
-        if (
-            typeof updateCart ===
-            "function"
-        ) {
-
-            updateCart();
-
-        }
-
-
-        if (
-            typeof updatePriceRange ===
-            "function"
-        ) {
-
-            updatePriceRange();
-
-        }
-
-
-        setTimeout(
-            function () {
-
-                addFloatToProductCards();
-
-                addFloatToProductModal();
-
-                setupWizzyProfileUpload();
-
-                updateWizzyProfileImages();
-
-                fixTelegramLinks();
-
-            },
-            100
-        );
-
     }
 
 
@@ -5650,8 +5588,7 @@ generateCaptcha();
     ========================================================= */
 
     if (
-        document.readyState ===
-        "loading"
+        document.readyState === "loading"
     ) {
 
         document.addEventListener(
@@ -5666,6 +5603,7 @@ generateCaptcha();
     }
 
 })();
+</script>
 </script>
 </body>
 </html>
