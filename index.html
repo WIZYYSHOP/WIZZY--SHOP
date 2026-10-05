@@ -4437,6 +4437,1235 @@ updateHeaderAvatar();
 generateCaptcha();
 
 </script>
-<div id="wizzyAdminProductToast"></div>
+<div id="wizzyAdminProductToast"></div> <script>
+/* =========================================================
+   WIZZY SHOP - FINAL FIX PATCH
+   Paste this entire block at the very end of index.html
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    /* =========================================================
+       TELEGRAM
+    ========================================================= */
+
+    const WIZZY_SUPPORT_URL = "https://t.me/WIZZY_SHOP2";
+    const WIZZY_SUPPORT_USERNAME = "@WIZZY_SHOP2";
+
+
+    function fixTelegramLinks() {
+
+        document.querySelectorAll("a[href*='t.me/']").forEach(function (link) {
+
+            let href = link.getAttribute("href") || "";
+
+            if (
+                href.includes("WizyyShop") ||
+                href.includes("wizyyshop") ||
+                href.includes("WIZZY_SHOP")
+            ) {
+
+                if (href.includes("?text=")) {
+
+                    const text = href.substring(
+                        href.indexOf("?text=")
+                    );
+
+                    link.href =
+                        WIZZY_SUPPORT_URL + text;
+
+                } else {
+
+                    link.href =
+                        WIZZY_SUPPORT_URL;
+
+                }
+
+                link.textContent =
+                    link.textContent
+                        .replace(/@?WizyyShop/gi, WIZZY_SUPPORT_USERNAME);
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================================================
+       BUILT-IN PRODUCTS
+       These stay even when Supabase has products.
+    ========================================================= */
+
+    const WIZZY_BUILT_IN_PRODUCTS = [
+
+        {
+            id: 1,
+            name: "Dual Berettas | Urban Shock",
+            weapon: "Dual Berettas",
+            category: "Pistols",
+            wear: "Well-Worn",
+            price: 550000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 2,
+            name: "M4A1-S | Emphorosaur-S",
+            weapon: "M4A1-S",
+            category: "Rifles",
+            wear: "Field-Tested",
+            price: 250000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 3,
+            name: "Tec-9 | Bamboozle",
+            weapon: "Tec-9",
+            category: "Pistols",
+            wear: "Field-Tested",
+            price: 180000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 4,
+            name: "Glock-18 | Vogue",
+            weapon: "Glock-18",
+            category: "Pistols",
+            wear: "Field-Tested",
+            price: 1300000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 5,
+            name: "M4A4 | Evil Daimyo",
+            weapon: "M4A4",
+            category: "Rifles",
+            wear: "Field-Tested",
+            price: 1300000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 6,
+            name: "AWP | Atheris",
+            weapon: "AWP",
+            category: "Snipers",
+            wear: "Field-Tested",
+            price: 1400000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 7,
+            name: "Glock-18 | Moonrise",
+            weapon: "Glock-18",
+            category: "Pistols",
+            wear: "Field-Tested",
+            price: 290000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 8,
+            name: "MP7 | Just Smile",
+            weapon: "MP7",
+            category: "SMGs",
+            wear: "Field-Tested",
+            price: 160000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 9,
+            name: "P90 | Wave Breaker",
+            weapon: "P90",
+            category: "SMGs",
+            wear: "Field-Tested",
+            price: 270000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 10,
+            name: "SG 553 | Darkwing",
+            weapon: "SG 553",
+            category: "Rifles",
+            wear: "Well-Worn",
+            price: 210000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 11,
+            name: "AK-47 | Midnight Laminate",
+            weapon: "AK-47",
+            category: "Rifles",
+            wear: "Field-Tested",
+            price: 1200000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 12,
+            name: "Glock-18 | Nuclear Garden",
+            weapon: "Glock-18",
+            category: "Pistols",
+            wear: "Field-Tested",
+            price: 650000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 13,
+            name: "Desert Eagle | Mulberry",
+            weapon: "Desert Eagle",
+            category: "Pistols",
+            wear: "Field-Tested",
+            price: 950000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 14,
+            name: "Ground Rebel | Elite Crew",
+            weapon: "Ground Rebel",
+            category: "Accessories",
+            wear: "N/A",
+            price: 2900000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 15,
+            name: "Operator | FBI SWAT",
+            weapon: "Operator",
+            category: "Accessories",
+            wear: "N/A",
+            price: 2850000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 16,
+            name: "SG 553 | Dragon Tech",
+            weapon: "SG 553",
+            category: "Rifles",
+            wear: "Minimal Wear",
+            price: 350000,
+            image: "",
+            float: null
+        },
+
+        {
+            id: 17,
+            name: "USP-S | Silent Shot",
+            weapon: "USP-S",
+            category: "Pistols",
+            wear: "Factory New",
+            price: 370000,
+            image: "",
+            float: null
+        }
+
+    ];
+
+
+    /* =========================================================
+       NORMALIZE PRODUCT
+    ========================================================= */
+
+    function wizzyNormalizeProduct(product) {
+
+        if (!product) {
+            return null;
+        }
+
+        let floatValue = null;
+
+        if (
+            product.float !== null &&
+            product.float !== undefined &&
+            product.float !== ""
+        ) {
+
+            const f = Number(product.float);
+
+            if (Number.isFinite(f)) {
+                floatValue = f;
+            }
+
+        }
+
+        return {
+
+            id: Number(product.id),
+
+            name: product.name || "",
+
+            weapon: product.weapon || "",
+
+            category:
+                product.category ||
+                "Accessories",
+
+            wear:
+                product.wear ||
+                "N/A",
+
+            price:
+                Number(product.price || 0),
+
+            image:
+                product.image ||
+                "",
+
+            float:
+                floatValue
+
+        };
+
+    }
+
+
+    /* =========================================================
+       LOAD PRODUCTS
+       BUILT-IN + SUPABASE
+    ========================================================= */
+
+    async function wizzyLoadShopProducts() {
+
+        try {
+
+            const builtInProducts =
+                WIZZY_BUILT_IN_PRODUCTS.map(
+                    wizzyNormalizeProduct
+                );
+
+
+            const rows =
+                await supabaseRequest(
+                    "/rest/v1/" +
+                    WIZZY_PRODUCTS_TABLE +
+                    "?select=*&order=id.asc"
+                );
+
+
+            const databaseProducts =
+                Array.isArray(rows)
+                    ? rows
+                        .map(wizzyNormalizeProduct)
+                        .filter(Boolean)
+                    : [];
+
+
+            const merged =
+                builtInProducts.slice();
+
+
+            databaseProducts.forEach(function (dbProduct) {
+
+                const index =
+                    merged.findIndex(function (localProduct) {
+
+                        return Number(localProduct.id) ===
+                            Number(dbProduct.id);
+
+                    });
+
+
+                if (index !== -1) {
+
+                    merged[index] = {
+
+                        ...merged[index],
+
+                        ...dbProduct
+
+                    };
+
+                } else {
+
+                    merged.push(dbProduct);
+
+                }
+
+            });
+
+
+            products =
+                merged.map(wizzyNormalizeProduct);
+
+
+        } catch (error) {
+
+            console.warn(
+                "WIZZY SHOP: Supabase unavailable. Built-in products loaded.",
+                error
+            );
+
+
+            products =
+                WIZZY_BUILT_IN_PRODUCTS
+                    .map(wizzyNormalizeProduct);
+
+        }
+
+    }
+
+
+    window.loadShopProducts =
+        wizzyLoadShopProducts;
+
+
+    /* =========================================================
+       FLOAT FORMAT
+    ========================================================= */
+
+    function wizzyFormatFloat(value) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+            return "";
+        }
+
+        const number =
+            Number(value);
+
+        if (!Number.isFinite(number)) {
+            return "";
+        }
+
+        return number.toFixed(4);
+
+    }
+
+
+    /* =========================================================
+       FLOAT CSS
+    ========================================================= */
+
+    if (!document.getElementById("wizzyFinalPatchCSS")) {
+
+        const style =
+            document.createElement("style");
+
+        style.id =
+            "wizzyFinalPatchCSS";
+
+        style.textContent = `
+
+            .wizzy-float {
+                color: #999 !important;
+                font-size: 11px;
+                margin-left: 2px;
+            }
+
+            .wizzy-modal-float {
+                display: block;
+                margin-top: 8px;
+                color: #aaa;
+                font-size: 12px;
+            }
+
+            .profile-upload-label {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                cursor: pointer;
+            }
+
+            .profile-upload-label input[type="file"] {
+                display: none;
+            }
+
+        `;
+
+        document.head.appendChild(style);
+
+    }
+
+
+    /* =========================================================
+       ADD FLOAT TO PRODUCT CARDS
+    ========================================================= */
+
+    function addFloatToProductCards() {
+
+        document
+            .querySelectorAll(".product")
+            .forEach(function (card) {
+
+                const buyButton =
+                    card.querySelector(
+                        ".buy-button"
+                    );
+
+                if (!buyButton) {
+                    return;
+                }
+
+
+                const onclick =
+                    buyButton.getAttribute(
+                        "onclick"
+                    ) || "";
+
+
+                const match =
+                    onclick.match(
+                        /openProduct\((\d+)\)/
+                    );
+
+
+                if (!match) {
+                    return;
+                }
+
+
+                const id =
+                    Number(match[1]);
+
+
+                const product =
+                    Array.isArray(products)
+                        ? products.find(
+                            function (p) {
+                                return Number(p.id) === id;
+                            }
+                        )
+                        : null;
+
+
+                if (!product) {
+                    return;
+                }
+
+
+                const weaponElement =
+                    card.querySelector(
+                        ".product-weapon"
+                    );
+
+
+                if (!weaponElement) {
+                    return;
+                }
+
+
+                const oldFloat =
+                    weaponElement.querySelector(
+                        ".wizzy-float"
+                    );
+
+
+                if (oldFloat) {
+                    oldFloat.remove();
+                }
+
+
+                const floatText =
+                    wizzyFormatFloat(
+                        product.float
+                    );
+
+
+                if (!floatText) {
+                    return;
+                }
+
+
+                const separator =
+                    document.createTextNode(
+                        " • "
+                    );
+
+
+                const floatElement =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                floatElement.className =
+                    "wizzy-float";
+
+
+                floatElement.textContent =
+                    "Float: " +
+                    floatText;
+
+
+                weaponElement.appendChild(
+                    separator
+                );
+
+
+                weaponElement.appendChild(
+                    floatElement
+                );
+
+            });
+
+    }
+
+
+    /* =========================================================
+       FLOAT IN PRODUCT MODAL
+    ========================================================= */
+
+    function addFloatToProductModal() {
+
+        if (
+            typeof currentProduct ===
+            "undefined" ||
+            !currentProduct
+        ) {
+            return;
+        }
+
+
+        const modalType =
+            document.getElementById(
+                "modalType"
+            );
+
+
+        if (!modalType) {
+            return;
+        }
+
+
+        const oldFloat =
+            document.getElementById(
+                "wizzyModalFloat"
+            );
+
+
+        if (oldFloat) {
+            oldFloat.remove();
+        }
+
+
+        const floatText =
+            wizzyFormatFloat(
+                currentProduct.float
+            );
+
+
+        if (!floatText) {
+            return;
+        }
+
+
+        const element =
+            document.createElement(
+                "span"
+            );
+
+
+        element.id =
+            "wizzyModalFloat";
+
+
+        element.className =
+            "wizzy-modal-float";
+
+
+        element.innerHTML =
+            "<b>FLOAT:</b> " +
+            floatText;
+
+
+        modalType.parentElement
+            .appendChild(element);
+
+    }
+
+
+    /* =========================================================
+       PROFILE IMAGE STORAGE
+    ========================================================= */
+
+    const WIZZY_PROFILE_IMAGE_KEY =
+        "wizzy_shop_profile_image";
+
+
+    function getWizzyProfileImage() {
+
+        try {
+
+            return localStorage.getItem(
+                WIZZY_PROFILE_IMAGE_KEY
+            );
+
+        } catch (error) {
+
+            return null;
+
+        }
+
+    }
+
+
+    function saveWizzyProfileImage(image) {
+
+        try {
+
+            localStorage.setItem(
+                WIZZY_PROFILE_IMAGE_KEY,
+                image
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "WIZZY: Could not save profile image.",
+                error
+            );
+
+        }
+
+    }
+
+
+    function updateWizzyProfileImages() {
+
+        const image =
+            getWizzyProfileImage();
+
+
+        if (!image) {
+            return;
+        }
+
+
+        const headerAvatar =
+            document.getElementById(
+                "headerAvatar"
+            );
+
+
+        if (headerAvatar) {
+
+            headerAvatar.src =
+                image;
+
+        }
+
+
+        document
+            .querySelectorAll(
+                "#profileAvatarPreview"
+            )
+            .forEach(function (element) {
+
+                element.src =
+                    image;
+
+            });
+
+    }
+
+
+    /* =========================================================
+       PROFILE IMAGE UPLOAD
+    ========================================================= */
+
+    function setupWizzyProfileUpload() {
+
+        const inputs =
+            document.querySelectorAll(
+                "#profileImage"
+            );
+
+
+        inputs.forEach(function (input) {
+
+            if (
+                input.dataset.wizzyReady ===
+                "true"
+            ) {
+                return;
+            }
+
+
+            input.dataset.wizzyReady =
+                "true";
+
+
+            input.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files &&
+                        this.files[0];
+
+
+                    if (!file) {
+                        return;
+                    }
+
+
+                    if (
+                        !file.type ||
+                        !file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        alert(
+                            "Please select an image file."
+                        );
+
+                        this.value =
+                            "";
+
+                        return;
+
+                    }
+
+
+                    if (
+                        file.size >
+                        5 * 1024 * 1024
+                    ) {
+
+                        alert(
+                            "Profile image must be smaller than 5 MB."
+                        );
+
+                        this.value =
+                            "";
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            const image =
+                                event.target.result;
+
+
+                            saveWizzyProfileImage(
+                                image
+                            );
+
+
+                            document
+                                .querySelectorAll(
+                                    "#profileAvatarPreview"
+                                )
+                                .forEach(function (img) {
+
+                                    img.src =
+                                        image;
+
+                                });
+
+
+                            const headerAvatar =
+                                document.getElementById(
+                                    "headerAvatar"
+                                );
+
+
+                            if (headerAvatar) {
+
+                                headerAvatar.src =
+                                    image;
+
+                            }
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =========================================================
+       SAVE PROFILE WRAPPER
+    ========================================================= */
+
+    const oldSaveProfile =
+        window.saveProfile;
+
+
+    if (
+        typeof oldSaveProfile ===
+        "function"
+    ) {
+
+        window.saveProfile =
+            function () {
+
+                const result =
+                    oldSaveProfile.apply(
+                        this,
+                        arguments
+                    );
+
+
+                setTimeout(
+                    updateWizzyProfileImages,
+                    100
+                );
+
+
+                return result;
+
+            };
+
+    }
+
+
+    /* =========================================================
+       OPEN PRODUCT WRAPPER
+    ========================================================= */
+
+    const oldOpenProduct =
+        window.openProduct;
+
+
+    if (
+        typeof oldOpenProduct ===
+        "function"
+    ) {
+
+        window.openProduct =
+            function (id) {
+
+                oldOpenProduct.apply(
+                    this,
+                    arguments
+                );
+
+
+                setTimeout(
+                    addFloatToProductModal,
+                    80
+                );
+
+            };
+
+    }
+
+
+    /* =========================================================
+       RENDER PRODUCTS WRAPPER
+    ========================================================= */
+
+    const oldRenderProducts =
+        window.renderProducts;
+
+
+    if (
+        typeof oldRenderProducts ===
+        "function"
+    ) {
+
+        window.renderProducts =
+            function () {
+
+                const result =
+                    oldRenderProducts.apply(
+                        this,
+                        arguments
+                    );
+
+
+                setTimeout(
+                    addFloatToProductCards,
+                    50
+                );
+
+
+                return result;
+
+            };
+
+    }
+
+
+    /* =========================================================
+       ADMIN PRODUCT FLOAT FIX
+    ========================================================= */
+
+    const oldReadAdminProduct =
+        window.readAdminProduct;
+
+
+    if (
+        typeof oldReadAdminProduct ===
+        "function"
+    ) {
+
+        window.readAdminProduct =
+            function (id) {
+
+                const product =
+                    oldReadAdminProduct.apply(
+                        this,
+                        arguments
+                    );
+
+
+                if (product) {
+
+                    if (
+                        product.float !== null &&
+                        product.float !== undefined &&
+                        product.float !== ""
+                    ) {
+
+                        const value =
+                            Number(
+                                product.float
+                            );
+
+
+                        product.float =
+                            Number.isFinite(value)
+                                ? value
+                                : null;
+
+                    } else {
+
+                        product.float =
+                            null;
+
+                    }
+
+                }
+
+
+                return product;
+
+            };
+
+    }
+
+
+    /* =========================================================
+       TELEGRAM FINISH ORDER FIX
+    ========================================================= */
+
+    const oldFinishOrder =
+        window.finishOrder;
+
+
+    if (
+        typeof oldFinishOrder ===
+        "function"
+    ) {
+
+        window.finishOrder =
+            function () {
+
+                const oldWindowOpen =
+                    window.open;
+
+
+                window.open =
+                    function (url) {
+
+                        if (
+                            typeof url ===
+                            "string"
+                        ) {
+
+                            url =
+                                url.replace(
+                                    /https:\/\/t\.me\/WizyyShop/gi,
+                                    "https://t.me/WIZZY_SHOP2"
+                                );
+
+                            url =
+                                url.replace(
+                                    /https:\/\/t\.me\/wizyyshop/gi,
+                                    "https://t.me/WIZZY_SHOP2"
+                                );
+
+                        }
+
+
+                        return oldWindowOpen.apply(
+                            this,
+                            arguments.length
+                                ? [url].concat(
+                                    Array.prototype.slice.call(
+                                        arguments,
+                                        1
+                                    )
+                                )
+                                : arguments
+                        );
+
+                    };
+
+
+                try {
+
+                    return oldFinishOrder.apply(
+                        this,
+                        arguments
+                    );
+
+                } finally {
+
+                    setTimeout(
+                        function () {
+
+                            window.open =
+                                oldWindowOpen;
+
+                        },
+                        0
+                    );
+
+                }
+
+            };
+
+    }
+
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================= */
+
+    async function initializeWizzyPatch() {
+
+        fixTelegramLinks();
+
+        updateWizzyProfileImages();
+
+        setupWizzyProfileUpload();
+
+
+        /*
+         * Load built-in + database products.
+         */
+
+        await wizzyLoadShopProducts();
+
+
+        /*
+         * Render everything again.
+         */
+
+        if (
+            typeof renderProducts ===
+            "function"
+        ) {
+
+            renderProducts();
+
+        }
+
+
+        if (
+            typeof updateCart ===
+            "function"
+        ) {
+
+            updateCart();
+
+        }
+
+
+        if (
+            typeof updatePriceRange ===
+            "function"
+        ) {
+
+            updatePriceRange();
+
+        }
+
+
+        setTimeout(
+            function () {
+
+                addFloatToProductCards();
+
+                addFloatToProductModal();
+
+                setupWizzyProfileUpload();
+
+                updateWizzyProfileImages();
+
+                fixTelegramLinks();
+
+            },
+            100
+        );
+
+    }
+
+
+    /* =========================================================
+       START
+    ========================================================= */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeWizzyPatch
+        );
+
+    } else {
+
+        initializeWizzyPatch();
+
+    }
+
+})();
+</script>
 </body>
 </html>
