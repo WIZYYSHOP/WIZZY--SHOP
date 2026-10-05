@@ -4412,6 +4412,1646 @@ updateHeaderAvatar();
 generateCaptcha();
 
 </script>
+<!-- =========================================================
+     WIZZY SHOP - PRODUCT MANAGER
+     Add this whole block before </body>
+========================================================= -->
 
+<style>
+  #wizzy-admin-products {
+    width: min(1200px, calc(100% - 30px));
+    margin: 40px auto;
+    padding: 24px;
+    background:
+      radial-gradient(circle at top right, rgba(255, 0, 60, .13), transparent 35%),
+      #090909;
+    border: 1px solid rgba(255, 0, 60, .28);
+    border-radius: 18px;
+    box-shadow:
+      0 0 35px rgba(255, 0, 60, .08),
+      inset 0 0 30px rgba(255, 0, 60, .02);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+
+  #wizzy-admin-products * {
+    box-sizing: border-box;
+  }
+
+  .wizzy-pm-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+
+  .wizzy-pm-title {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+
+  .wizzy-pm-title span {
+    color: #ff174f;
+  }
+
+  .wizzy-pm-subtitle {
+    color: #888;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .wizzy-pm-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .wizzy-pm-btn {
+    border: none;
+    outline: none;
+    padding: 12px 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 800;
+    color: white;
+    transition: .2s;
+    font-size: 13px;
+  }
+
+  .wizzy-pm-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .wizzy-add-btn {
+    background: linear-gradient(135deg, #ff174f, #b90035);
+    box-shadow: 0 8px 25px rgba(255, 23, 79, .2);
+  }
+
+  .wizzy-save-all {
+    background: #151515;
+    border: 1px solid #333;
+  }
+
+  .wizzy-save-all:hover {
+    border-color: #ff174f;
+  }
+
+  #wizzy-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .wizzy-product-card {
+    position: relative;
+    background: #101010;
+    border: 1px solid #242424;
+    border-radius: 14px;
+    padding: 18px;
+    transition: .2s;
+  }
+
+  .wizzy-product-card:hover {
+    border-color: rgba(255, 23, 79, .45);
+    box-shadow: 0 0 25px rgba(255, 23, 79, .06);
+  }
+
+  .wizzy-product-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .wizzy-product-number {
+    font-size: 14px;
+    color: #ff174f;
+    font-weight: 900;
+  }
+
+  .wizzy-product-id {
+    color: #666;
+    font-size: 11px;
+  }
+
+  .wizzy-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .wizzy-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .wizzy-field.full {
+    grid-column: span 2;
+  }
+
+  .wizzy-field label {
+    color: #999;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .wizzy-field input,
+  .wizzy-field select {
+    width: 100%;
+    height: 42px;
+    border-radius: 9px;
+    border: 1px solid #292929;
+    background: #080808;
+    color: white;
+    padding: 0 11px;
+    outline: none;
+    transition: .2s;
+  }
+
+  .wizzy-field input:focus,
+  .wizzy-field select:focus {
+    border-color: #ff174f;
+    box-shadow: 0 0 0 2px rgba(255, 23, 79, .08);
+  }
+
+  .wizzy-product-image-preview {
+    margin-top: 14px;
+    min-height: 130px;
+    border-radius: 10px;
+    background: #080808;
+    border: 1px dashed #292929;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .wizzy-product-image-preview img {
+    max-width: 100%;
+    max-height: 130px;
+    object-fit: contain;
+  }
+
+  .wizzy-no-image {
+    color: #555;
+    font-size: 12px;
+  }
+
+  .wizzy-product-bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 14px;
+  }
+
+  .wizzy-card-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    transition: .2s;
+  }
+
+  .wizzy-card-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .wizzy-save-btn {
+    background: #16803c;
+  }
+
+  .wizzy-delete-btn {
+    background: #7e102b;
+  }
+
+  .wizzy-status {
+    margin-bottom: 15px;
+    padding: 10px 13px;
+    border-radius: 9px;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    color: #888;
+    font-size: 12px;
+  }
+
+  .wizzy-status.success {
+    color: #49e58a;
+    border-color: rgba(73, 229, 138, .25);
+  }
+
+  .wizzy-status.error {
+    color: #ff5577;
+    border-color: rgba(255, 85, 119, .25);
+  }
+
+  .wizzy-empty {
+    padding: 45px 20px;
+    text-align: center;
+    color: #666;
+    border: 1px dashed #292929;
+    border-radius: 14px;
+  }
+
+  /* Toast */
+  #wizzy-product-toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 999999;
+    min-width: 280px;
+    max-width: 420px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: #111;
+    border: 1px solid #ff174f;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 15px 50px rgba(0,0,0,.55);
+    transform: translateY(30px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+  }
+
+  #wizzy-product-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  #wizzy-product-toast.success {
+    border-color: #20d66b;
+  }
+
+  #wizzy-product-toast.error {
+    border-color: #ff174f;
+  }
+
+  @media (max-width: 900px) {
+    .wizzy-product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wizzy-field.full {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #wizzy-admin-products {
+      width: calc(100% - 16px);
+      padding: 15px;
+    }
+
+    .wizzy-product-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .wizzy-field.full {
+      grid-column: span 1;
+    }
+
+    .wizzy-product-bottom {
+      flex-direction: column;
+    }
+
+    .wizzy-card-btn {
+      width: 100%;
+    }
+
+    #wizzy-product-toast {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      min-width: 0;
+    }
+  }
+</style>
+
+<section id="wizzy-admin-products">
+
+  <div class="wizzy-pm-head">
+
+    <div>
+      <div class="wizzy-pm-title">
+        PRODUCT <span>MANAGER</span>
+      </div>
+
+      <div class="wizzy-pm-subtitle">
+        Manage your CS2 skins, prices, images and product information.
+      </div>
+    </div>
+
+    <div class="wizzy-pm-actions">
+
+      <button
+        type="button"
+        class="wizzy-pm-btn wizzy-add-btn"
+        id="wizzy-add-product-btn">
+        + ADD PRODUCT
+      </button>
+
+      <button
+        type="button"
+        class="wizzy-pm-btn wizzy-save-all"
+        id="wizzy-save-all-btn">
+        SAVE ALL
+      </button>
+
+    </div>
+
+  </div>
+
+  <div id="wizzy-product-status" class="wizzy-status">
+    Loading products...
+  </div>
+
+  <div id="wizzy-product-list"></div>
+
+</section>
+
+<div id="wizzy-product-toast"></div>
+
+<script>
+(function () {
+
+  "use strict";
+
+  /* =========================================================
+     SETTINGS
+  ========================================================= */
+
+  const TABLE_NAME = "shop_products";
+
+  let wizzyProducts = [];
+
+  let toastTimer = null;
+
+
+  /* =========================================================
+     HELPERS
+  ========================================================= */
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function showToast(message, type = "success") {
+
+    const toast = document.getElementById("wizzy-product-toast");
+
+    if (!toast) return;
+
+    clearTimeout(toastTimer);
+
+    toast.className = "";
+    toast.textContent = message;
+
+    requestAnimationFrame(function () {
+      toast.classList.add("show", type);
+    });
+
+    toastTimer = setTimeout(function () {
+      toast.classList.remove("show");
+    }, 3000);
+
+  }
+
+
+  function setStatus(message, type = "") {
+
+    const box = document.getElementById("wizzy-product-status");
+
+    if (!box) return;
+
+    box.textContent = message;
+
+    box.className = "wizzy-status";
+
+    if (type) {
+      box.classList.add(type);
+    }
+
+  }
+
+
+  function getNextID() {
+
+    if (!wizzyProducts.length) {
+      return "WZ001";
+    }
+
+    let max = 0;
+
+    wizzyProducts.forEach(function (product) {
+
+      const match = String(product.id || "").match(/\d+/);
+
+      if (match) {
+        max = Math.max(max, Number(match[0]));
+      }
+
+    });
+
+    return "WZ" + String(max + 1).padStart(3, "0");
+
+  }
+
+
+  function normalizeProduct(product) {
+
+    product = product || {};
+
+    return {
+
+      id: product.id || getNextID(),
+
+      name:
+        product.name ||
+        product.title ||
+        product.market_hash_name ||
+        "New CS2 Skin",
+
+      price:
+        product.price ??
+        product.price_toman ??
+        0,
+
+      weapon:
+        product.weapon ||
+        product.model ||
+        product.type ||
+        "AK-47",
+
+      wear:
+        product.wear ||
+        product.condition ||
+        "Factory New",
+
+      category:
+        product.category ||
+        "Rifles",
+
+      float:
+        product.float ??
+        product.float_value ??
+        "",
+
+      image:
+        product.image ||
+        product.image_url ||
+        product.img ||
+        ""
+
+    };
+
+  }
+
+
+  /* =========================================================
+     SUPABASE
+  ========================================================= */
+
+  async function supabaseFetch(url, options) {
+
+    if (typeof window.supabaseRest === "function") {
+
+      return await window.supabaseRest(url, options);
+
+    }
+
+    throw new Error(
+      "supabaseRest() was not found. Make sure your Supabase code is loaded before this Product Manager."
+    );
+
+  }
+
+
+  async function loadProducts() {
+
+    setStatus("Loading products...");
+
+    try {
+
+      const result = await supabaseFetch(
+        TABLE_NAME + "?select=*",
+        {
+          method: "GET"
+        }
+      );
+
+      let data = result;
+
+      if (result && Array.isArray(result.data)) {
+        data = result.data;
+      }
+
+      if (!Array.isArray(data)) {
+        data = [];
+      }
+
+      wizzyProducts = data.map(normalizeProduct);
+
+      renderProducts();
+
+      setStatus(
+        wizzyProducts.length +
+        " product" +
+        (wizzyProducts.length === 1 ? "" : "s") +
+        " loaded.",
+        "success"
+      );
+
+    } catch (error) {
+
+      console.error("WIZZY PRODUCT LOAD ERROR:", error);
+
+      wizzyProducts = [];
+
+      renderProducts();
+
+      setStatus(
+        "Could not load products: " +
+        (error.message || error),
+        "error"
+      );
+
+      showToast(
+        "PRODUCT LOAD FAILED",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     RENDER
+  ========================================================= */
+
+  function renderProducts() {
+
+    const container =
+      document.getElementById("wizzy-product-list");
+
+    if (!container) return;
+
+    if (!wizzyProducts.length) {
+
+      container.innerHTML = `
+        <div class="wizzy-empty">
+          No products found.<br>
+          Press <b>+ ADD PRODUCT</b> to create one.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML = wizzyProducts
+      .map(function (product, index) {
+
+        return `
+
+          <div
+            class="wizzy-product-card"
+            data-index="${index}"
+          >
+
+            <div class="wizzy-product-top">
+
+              <div class="wizzy-product-number">
+                PRODUCT #${index + 1}
+              </div>
+
+              <div class="wizzy-product-id">
+                ID: ${escapeHTML(product.id)}
+              </div>
+
+            </div>
+
+
+            <div class="wizzy-product-grid">
+
+              <div class="wizzy-field full">
+
+                <label>PRODUCT NAME</label>
+
+                <input
+                  type="text"
+                  data-field="name"
+                  value="${escapeHTML(product.name)}"
+                  placeholder="AK-47 | Redline"
+                >
+
+              </div>
+
+
+              <div class="wizzy-field">
+
+                <label>PRICE (TOMAN)</label>
+
+                <input
+                  type="number"
+                  data-field="price"
+                  value="${escapeHTML(product.price)}"
+                  min="0"
+                  placeholder="60000"
+                >
+
+              </div>
+
+
+              <div class="wizzy-field">
+
+                <label>WEAPON</label>
+
+                <select data-field="weapon">
+
+                  ${weaponOptions(product.weapon)}
+
+                </select>
+
+              </div>
+
+
+              <div class="wizzy-field">
+
+                <label>WEAR</label>
+
+                <select data-field="wear">
+
+                  ${wearOptions(product.wear)}
+
+                </select>
+
+              </div>
+
+
+              <div class="wizzy-field">
+
+                <label>CATEGORY</label>
+
+                <select data-field="category">
+
+                  ${categoryOptions(product.category)}
+
+                </select>
+
+              </div>
+
+
+              <div class="wizzy-field">
+
+                <label>FLOAT</label>
+
+                <input
+                  type="text"
+                  data-field="float"
+                  value="${escapeHTML(product.float)}"
+                  placeholder="0.123456"
+                >
+
+              </div>
+
+
+              <div class="wizzy-field full">
+
+                <label>IMAGE URL</label>
+
+                <input
+                  type="url"
+                  data-field="image"
+                  value="${escapeHTML(product.image)}"
+                  placeholder="https://example.com/skin.png"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="wizzy-product-image-preview">
+
+              ${
+                product.image
+                ?
+                `
+                  <img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+                  >
+
+                  <div
+                    class="wizzy-no-image"
+                    style="display:none;"
+                  >
+                    IMAGE COULD NOT LOAD
+                  </div>
+                `
+                :
+                `
+                  <div class="wizzy-no-image">
+                    NO IMAGE
+                  </div>
+                `
+              }
+
+            </div>
+
+
+            <div class="wizzy-product-bottom">
+
+              <button
+                type="button"
+                class="wizzy-card-btn wizzy-delete-btn"
+                data-action="delete"
+              >
+                DELETE
+              </button>
+
+              <button
+                type="button"
+                class="wizzy-card-btn wizzy-save-btn"
+                data-action="save"
+              >
+                SAVE PRODUCT
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+  }
+
+
+  function weaponOptions(selected) {
+
+    const weapons = [
+
+      "AK-47",
+      "M4A4",
+      "M4A1-S",
+      "AWP",
+      "USP-S",
+      "Glock-18",
+      "Desert Eagle",
+      "Five-SeveN",
+      "P250",
+      "Tec-9",
+      "CZ75-Auto",
+      "Dual Berettas",
+      "P2000",
+      "MP9",
+      "MP7",
+      "MAC-10",
+      "UMP-45",
+      "P90",
+      "PP-Bizon",
+      "FAMAS",
+      "Galil AR",
+      "AUG",
+      "SG 553",
+      "SSG 08",
+      "SCAR-20",
+      "G3SG1",
+      "Nova",
+      "XM1014",
+      "MAG-7",
+      "Sawed-Off",
+      "Negev",
+      "M249",
+      "Knife",
+      "Gloves"
+
+    ];
+
+    return weapons.map(function (weapon) {
+
+      return `
+        <option
+          value="${escapeHTML(weapon)}"
+          ${weapon === selected ? "selected" : ""}
+        >
+          ${escapeHTML(weapon)}
+        </option>
+      `;
+
+    }).join("");
+
+  }
+
+
+  function wearOptions(selected) {
+
+    const wears = [
+
+      "Factory New",
+      "Minimal Wear",
+      "Field-Tested",
+      "Well-Worn",
+      "Battle-Scarred"
+
+    ];
+
+    return wears.map(function (wear) {
+
+      return `
+        <option
+          value="${escapeHTML(wear)}"
+          ${wear === selected ? "selected" : ""}
+        >
+          ${escapeHTML(wear)}
+        </option>
+      `;
+
+    }).join("");
+
+  }
+
+
+  function categoryOptions(selected) {
+
+    const categories = [
+
+      "Pistols",
+      "Rifles",
+      "SMGs",
+      "Heavy",
+      "Knives",
+      "Gloves",
+      "Accessories"
+
+    ];
+
+    return categories.map(function (category) {
+
+      return `
+        <option
+          value="${escapeHTML(category)}"
+          ${category === selected ? "selected" : ""}
+        >
+          ${escapeHTML(category)}
+        </option>
+      `;
+
+    }).join("");
+
+  }
+
+
+  /* =========================================================
+     READ CARD
+  ========================================================= */
+
+  function readCard(card) {
+
+    const index = Number(card.dataset.index);
+
+    const product = wizzyProducts[index];
+
+    if (!product) {
+      throw new Error("Product was not found.");
+    }
+
+    card
+      .querySelectorAll("[data-field]")
+      .forEach(function (input) {
+
+        const field = input.dataset.field;
+
+        if (field === "price") {
+
+          product[field] =
+            Number(input.value || 0);
+
+        } else {
+
+          product[field] =
+            input.value.trim();
+
+        }
+
+      });
+
+    return product;
+
+  }
+
+
+  /* =========================================================
+     SAVE ONE PRODUCT
+  ========================================================= */
+
+  async function saveProduct(index) {
+
+    const cards =
+      document.querySelectorAll(".wizzy-product-card");
+
+    const card = cards[index];
+
+    if (!card) return;
+
+    let product;
+
+    try {
+
+      product = readCard(card);
+
+    } catch (error) {
+
+      showToast(
+        "INVALID PRODUCT DATA",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!product.name.trim()) {
+
+      showToast(
+        "PRODUCT NAME IS REQUIRED",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    setStatus(
+      "Saving " + product.name + "..."
+    );
+
+
+    try {
+
+      await supabaseFetch(
+        TABLE_NAME +
+        "?on_conflict=id",
+        {
+          method: "POST",
+
+          headers: {
+            "Prefer": "resolution=merge-duplicates,return=representation"
+          },
+
+          body: JSON.stringify(product)
+
+        }
+      );
+
+
+      /*
+       * Update main site's product array if it exists.
+       */
+
+      if (Array.isArray(window.products)) {
+
+        const existingIndex =
+          window.products.findIndex(function (item) {
+
+            return String(item.id) === String(product.id);
+
+          });
+
+
+        if (existingIndex >= 0) {
+
+          window.products[existingIndex] =
+            Object.assign(
+              {},
+              window.products[existingIndex],
+              product
+            );
+
+        } else {
+
+          window.products.push(product);
+
+        }
+
+      }
+
+
+      /*
+       * Refresh normal shop.
+       */
+
+      if (typeof window.renderProducts === "function") {
+
+        try {
+          window.renderProducts();
+        } catch (e) {
+          console.warn(e);
+        }
+
+      }
+
+
+      setStatus(
+        "Product saved successfully.",
+        "success"
+      );
+
+      showToast(
+        "ITEM SAVED SUCCESSFULLY",
+        "success"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "WIZZY SAVE ERROR:",
+        error
+      );
+
+      setStatus(
+        "Save failed: " +
+        (error.message || error),
+        "error"
+      );
+
+      showToast(
+        "ITEM SAVE FAILED",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     ADD PRODUCT
+  ========================================================= */
+
+  function addProduct() {
+
+    const newProduct = {
+
+      id: getNextID(),
+
+      name: "New CS2 Skin",
+
+      price: 0,
+
+      weapon: "AK-47",
+
+      wear: "Factory New",
+
+      category: "Rifles",
+
+      float: "",
+
+      image: ""
+
+    };
+
+
+    wizzyProducts.unshift(newProduct);
+
+    renderProducts();
+
+
+    setStatus(
+      "New product created. Fill the fields and press SAVE PRODUCT.",
+      "success"
+    );
+
+
+    showToast(
+      "NEW PRODUCT ADDED",
+      "success"
+    );
+
+
+    const firstCard =
+      document.querySelector(".wizzy-product-card");
+
+
+    if (firstCard) {
+
+      const nameInput =
+        firstCard.querySelector('[data-field="name"]');
+
+      if (nameInput) {
+
+        nameInput.focus();
+
+        nameInput.select();
+
+      }
+
+    }
+
+  }
+
+
+  /* =========================================================
+     DELETE PRODUCT
+  ========================================================= */
+
+  async function deleteProduct(index) {
+
+    const product =
+      wizzyProducts[index];
+
+    if (!product) return;
+
+
+    const confirmed =
+      confirm(
+        'Delete "' +
+        product.name +
+        '" permanently?'
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    setStatus(
+      "Deleting " + product.name + "..."
+    );
+
+
+    try {
+
+      await supabaseFetch(
+        TABLE_NAME +
+        "?id=eq." +
+        encodeURIComponent(product.id),
+        {
+          method: "DELETE"
+        }
+      );
+
+
+      wizzyProducts.splice(index, 1);
+
+      renderProducts();
+
+
+      if (Array.isArray(window.products)) {
+
+        const mainIndex =
+          window.products.findIndex(function (item) {
+
+            return String(item.id) ===
+              String(product.id);
+
+          });
+
+
+        if (mainIndex >= 0) {
+
+          window.products.splice(
+            mainIndex,
+            1
+          );
+
+        }
+
+      }
+
+
+      if (typeof window.renderProducts === "function") {
+
+        try {
+          window.renderProducts();
+        } catch (e) {
+          console.warn(e);
+        }
+
+      }
+
+
+      setStatus(
+        "Product deleted successfully.",
+        "success"
+      );
+
+
+      showToast(
+        "ITEM DELETED SUCCESSFULLY",
+        "success"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "WIZZY DELETE ERROR:",
+        error
+      );
+
+
+      setStatus(
+        "Delete failed: " +
+        (error.message || error),
+        "error"
+      );
+
+
+      showToast(
+        "ITEM DELETE FAILED",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     SAVE ALL
+  ========================================================= */
+
+  async function saveAll() {
+
+    const cards =
+      Array.from(
+        document.querySelectorAll(
+          ".wizzy-product-card"
+        )
+      );
+
+
+    if (!cards.length) {
+
+      showToast(
+        "NO PRODUCTS TO SAVE",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    setStatus(
+      "Saving all products..."
+    );
+
+
+    try {
+
+      const productsToSave =
+        cards.map(function (card) {
+
+          return readCard(card);
+
+        });
+
+
+      for (const product of productsToSave) {
+
+        if (!product.name.trim()) {
+
+          throw new Error(
+            "Every product must have a name."
+          );
+
+        }
+
+
+        await supabaseFetch(
+          TABLE_NAME +
+          "?on_conflict=id",
+          {
+            method: "POST",
+
+            headers: {
+              "Prefer":
+                "resolution=merge-duplicates,return=representation"
+            },
+
+            body:
+              JSON.stringify(product)
+
+          }
+        );
+
+      }
+
+
+      wizzyProducts =
+        productsToSave.map(normalizeProduct);
+
+
+      setStatus(
+        "All products saved successfully.",
+        "success"
+      );
+
+
+      showToast(
+        "ALL ITEMS SAVED SUCCESSFULLY",
+        "success"
+      );
+
+
+      if (typeof window.renderProducts === "function") {
+
+        try {
+          window.renderProducts();
+        } catch (e) {
+          console.warn(e);
+        }
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "WIZZY SAVE ALL ERROR:",
+        error
+      );
+
+
+      setStatus(
+        "Save all failed: " +
+        (error.message || error),
+        "error"
+      );
+
+
+      showToast(
+        "SAVE ALL FAILED",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     EVENTS
+  ========================================================= */
+
+  document.addEventListener(
+    "click",
+    function (event) {
+
+      const addButton =
+        event.target.closest(
+          "#wizzy-add-product-btn"
+        );
+
+
+      if (addButton) {
+
+        event.preventDefault();
+
+        addProduct();
+
+        return;
+
+      }
+
+
+      const saveAllButton =
+        event.target.closest(
+          "#wizzy-save-all-btn"
+        );
+
+
+      if (saveAllButton) {
+
+        event.preventDefault();
+
+        saveAll();
+
+        return;
+
+      }
+
+
+      const saveButton =
+        event.target.closest(
+          '[data-action="save"]'
+        );
+
+
+      if (saveButton) {
+
+        event.preventDefault();
+
+        const card =
+          saveButton.closest(
+            ".wizzy-product-card"
+          );
+
+
+        if (!card) return;
+
+
+        saveProduct(
+          Number(card.dataset.index)
+        );
+
+        return;
+
+      }
+
+
+      const deleteButton =
+        event.target.closest(
+          '[data-action="delete"]'
+        );
+
+
+      if (deleteButton) {
+
+        event.preventDefault();
+
+        const card =
+          deleteButton.closest(
+            ".wizzy-product-card"
+          );
+
+
+        if (!card) return;
+
+
+        deleteProduct(
+          Number(card.dataset.index)
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     IMAGE PREVIEW
+  ========================================================= */
+
+  document.addEventListener(
+    "input",
+    function (event) {
+
+      if (
+        !event.target.matches(
+          '[data-field="image"]'
+        )
+      ) {
+        return;
+      }
+
+
+      const card =
+        event.target.closest(
+          ".wizzy-product-card"
+        );
+
+
+      if (!card) return;
+
+
+      const preview =
+        card.querySelector(
+          ".wizzy-product-image-preview"
+        );
+
+
+      if (!preview) return;
+
+
+      const url =
+        event.target.value.trim();
+
+
+      if (!url) {
+
+        preview.innerHTML = `
+          <div class="wizzy-no-image">
+            NO IMAGE
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      preview.innerHTML = `
+
+        <img
+          src="${escapeHTML(url)}"
+          alt="Preview"
+          onerror="
+            this.style.display='none';
+            this.nextElementSibling.style.display='block';
+          "
+        >
+
+        <div
+          class="wizzy-no-image"
+          style="display:none;"
+        >
+          IMAGE COULD NOT LOAD
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  /* =========================================================
+     PUBLIC API
+  ========================================================= */
+
+  window.wizzyProductManager = {
+
+    load: loadProducts,
+
+    render: renderProducts,
+
+    add: addProduct,
+
+    save: saveAll
+
+  };
+
+
+  /* =========================================================
+     START
+  ========================================================= */
+
+  function start() {
+
+    /*
+     * Wait a little so the existing WIZZY SHOP
+     * Supabase functions have time to load.
+     */
+
+    setTimeout(function () {
+
+      loadProducts();
+
+    }, 700);
+
+  }
+
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      start
+    );
+
+  } else {
+
+    start();
+
+  }
+
+})();
+</script>
+
+<!-- =========================================================
+     END WIZZY PRODUCT MANAGER
+========================================================= -->
 </body>
 </html>
